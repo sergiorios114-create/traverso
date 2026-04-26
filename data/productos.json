@@ -1,0 +1,98 @@
+[
+    {
+        "id": "prod_1",
+        "orden": 1,
+        "imagen": "assets/producto-1.webp",
+        "tag_es": "Abastecimiento industrial",
+        "tag_en": "Industrial supply",
+        "titulo_es": "Vinagres a granel para alimentos",
+        "titulo_en": "Bulk vinegars for food applications",
+        "descripcion_es": "Vinagres de Alcohol, Manzana, Vino y de Mosto de Vino, producidos bajo estándares internacionales. Nuestra capacidad productiva permite abastecer distintos volúmenes con consistencia y continuidad, para uso como producto final, preservante, ingrediente o insumo en procesos productivos de distintas industrias.",
+        "descripcion_en": "Alcohol, Apple, Wine and Wine Must vinegars, produced under international standards. Our production capacity allows us to supply different volumes with consistency and continuity, for use as final product, preservative, ingredient or input in production processes across different industries.",
+        "variantes_es": [
+            "Alcohol (kosher)",
+            "Manzana",
+            "Vino",
+            "Mosto de Vino"
+        ],
+        "variantes_en": [
+            "Alcohol (kosher)",
+            "Apple",
+            "Wine",
+            "Wine Must"
+        ],
+        "formatos_es": [
+            "Producto final",
+            "Preservante",
+            "Ingrediente industrial",
+            "Envasado en destino"
+        ],
+        "formatos_en": [
+            "Final product",
+            "Preservative",
+            "Industrial ingredient",
+            "Packaged at destination"
+        ],
+        "destacado_home": true
+    },
+    {
+        "id": "prod_2",
+        "orden": 2,
+        "imagen": "assets/producto-2.webp",
+        "tag_es": "Marca privada",
+        "tag_en": "Private label",
+        "titulo_es": "Desarrollo de productos (Marca privada)",
+        "titulo_en": "Product development (Private label)",
+        "descripcion_es": "Fabricamos productos envasados bajo marca privada, adaptándonos a especificaciones técnicas, formatos y requerimientos comerciales de cada cliente. Orientado a distribuidores internacionales, cadenas de retail y operadores del canal food service.",
+        "descripcion_en": "We manufacture packaged products under private label, adapting to technical specifications, formats and commercial requirements of each client. Oriented to international distributors, retail chains and food service channel operators.",
+        "variantes_es": [
+            "Distribuidores internacionales",
+            "Cadenas de retail",
+            "Canal food service"
+        ],
+        "variantes_en": [
+            "International distributors",
+            "Retail chains",
+            "Food service channel"
+        ],
+        "formatos_es": [
+            "Especificaciones a medida",
+            "Diseño personalizado",
+            "Etiquetado propio"
+        ],
+        "formatos_en": [
+            "Custom specifications",
+            "Custom design",
+            "Own labeling"
+        ],
+        "destacado_home": true
+    },
+    {
+        "id": "prod_3",
+        "orden": 3,
+        "imagen": "assets/producto-3.webp",
+        "tag_es": "Marca Traverso",
+        "tag_en": "Traverso Brand",
+        "titulo_es": "Productos marca Traverso",
+        "titulo_en": "Traverso brand products",
+        "descripcion_es": "Contamos con una línea de productos bajo marca Traverso, cuya comercialización internacional dependerá de las condiciones regulatorias y oportunidades específicas de cada mercado.",
+        "descripcion_en": "We have a line of products under the Traverso brand, whose international commercialization will depend on the regulatory conditions and specific opportunities of each market.",
+        "variantes_es": [
+            "Línea propia",
+            "Producto terminado"
+        ],
+        "variantes_en": [
+            "Own line",
+            "Finished product"
+        ],
+        "formatos_es": [
+            "Envasado",
+            "Según mercado destino"
+        ],
+        "formatos_en": [
+            "Packaged",
+            "Per destination market"
+        ],
+        "destacado_home": true
+    }
+]

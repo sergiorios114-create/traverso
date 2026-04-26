@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Traverso International Foods</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fafafa;color:#222;line-height:1.5;font-size:14px}
+a{color:inherit}
+.container{max-width:980px;margin:0 auto;padding:24px 20px 140px}
+
+.topnav{position:sticky;top:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid #e0e0e0;z-index:100}
+.topnav-inner{max-width:980px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.topnav .brand{font-size:13px;font-weight:700;flex-shrink:0}
+.topnav .brand span{color:#888;font-weight:400;margin-left:6px}
+.topnav .anchors{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;font-size:11px}
+.topnav .anchors a{padding:4px 9px;border-radius:12px;text-decoration:none;color:#666;border:1px solid transparent}
+.topnav .anchors a:hover{background:#f0f0f0;color:#222;border-color:#e0e0e0}
+
+.hero{padding:56px 0 28px;border-bottom:1px solid #e0e0e0;margin-bottom:32px}
+.hero .kicker{font-size:11px;font-weight:700;letter-spacing:.8px;color:#888;text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-size:clamp(34px,6vw,60px);line-height:1;letter-spacing:-.025em;font-weight:800;margin-bottom:16px}
+.hero .lead{font-size:16px;color:#555;max-width:680px;margin-bottom:20px}
+.hero .meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px}
+.hero .meta span{padding:4px 10px;border-radius:12px;background:#222;color:#fff}
+.hero .meta span.alt{background:#fff;color:#222;border:1px solid #ccc}
+
+.sh{margin:56px 0 14px;border-top:2px solid #222;padding-top:18px}
+.sh .n{font-size:11px;font-weight:700;color:#888;letter-spacing:.8px;text-transform:uppercase}
+.sh h2{font-size:28px;font-weight:800;letter-spacing:-.01em;margin-top:4px;line-height:1.1}
+.sh p{font-size:14px;color:#666;margin-top:6px;max-width:680px}
+
+.sub{margin:28px 0 10px;padding-top:6px}
+.sub .n{font-size:10px;font-weight:700;color:#aaa;letter-spacing:.6px;text-transform:uppercase}
+.sub h3{font-size:19px;font-weight:700;letter-spacing:-.005em;margin-top:2px}
+.sub p{font-size:13px;color:#666;margin-top:4px;max-width:640px}
+
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;margin:10px 0;overflow:hidden;position:relative}
+.card-h{padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f0f0f0;flex-wrap:wrap}
+.card-t{font-size:13px;font-weight:700;flex:1;min-width:180px}
+.card-t .sub{color:#999;font-weight:400;font-size:12px}
+.card-b{padding:14px}
+
+.tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 7px;border-radius:4px;color:#fff;white-space:nowrap}
+.tag-ctx{background:#455a64}
+.tag-vis{background:#e65100}
+.tag-copy{background:#00838f}
+.tag-anti{background:#b71c1c}
+.tag-rec{background:#ff6f00}
+.tag-stack{background:#2e7d32}
+.tag-bench{background:#6a1b9a}
+.tag-photo{background:#0d47a1}
+.tag-narr{background:#212121}
+.tag-hybrid{background:#00695c}
+.tag-editor{background:#212121}
+
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 10px}
+.chip{font-size:11px;background:#f5f5f5;border:1px solid #e0e0e0;border-radius:12px;padding:2px 9px;color:#555}
+.chip-dark{background:#222;color:#fff;border-color:#222}
+.chip-warn{background:#fff3e0;border-color:#ffb74d;color:#e65100;font-weight:600}
+.chip-ok{background:#e8f5e9;border-color:#81c784;color:#2e7d32;font-weight:600}
+.chip-err{background:#fce4ec;border-color:#ef9a9a;color:#c62828;font-weight:600}
+
+.sec{margin-bottom:12px}
+.sec:last-child{margin-bottom:0}
+.sec-t{font-size:10px;font-weight:700;color:#888;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+
+.quote{background:#fdf6e3;border-left:3px solid #d4a017;padding:10px 14px;margin:8px 0;border-radius:0 4px 4px 0;font-size:13px}
+.quote em{font-style:italic;color:#222}
+.note{background:#e3f2fd;border-left:3px solid #1565c0;padding:10px 14px;margin:8px 0;border-radius:0 4px 4px 0;font-size:13px}
+.warn{background:#fce4ec;border-left:3px solid #c62828;padding:10px 14px;margin:8px 0;border-radius:0 4px 4px 0;font-size:13px}
+.success{background:#e8f5e9;border-left:3px solid #2e7d32;padding:10px 14px;margin:8px 0;border-radius:0 4px 4px 0;font-size:13px}
+
+ul.bl{list-style:none}
+ul.bl li{font-size:13px;color:#555;padding:3px 0;padding-left:16px;position:relative}
+ul.bl li::before{content:"→";position:absolute;left:0;color:#bbb}
+ul.pl{list-style:none;margin:4px 0}
+ul.pl li{font-size:12px;color:#666;padding:2px 0 2px 14px;position:relative}
+ul.pl li::before{content:"·";position:absolute;left:4px;color:#ccc;font-weight:700}
+
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:10px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+
+.mock{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:12px;margin:10px 0;overflow:hidden;position:relative}
+.mock-l{font-size:9px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
+
+/* palette swatches */
+.sw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin:10px 0}
+.sw{border:1px solid #e0e0e0;border-radius:6px;overflow:hidden;background:#fff}
+.sw-col{height:58px;display:block}
+.sw-info{padding:6px 9px;font-size:10px;line-height:1.3;font-family:monospace}
+.sw-info b{display:block;font-size:11px;color:#222;font-family:inherit;margin-bottom:1px}
+.sw-info span{color:#888}
+
+/* type sample */
+.typ{border:1px solid #e0e0e0;border-radius:6px;padding:14px 18px;margin:8px 0;background:#fff}
+.typ .baskerville{font-family:'Libre Baskerville',Georgia,serif;font-size:24px;font-weight:700;line-height:1.1;color:#0b1e6b;margin-bottom:4px}
+.typ .source{font-family:'Source Sans 3',system-ui,sans-serif;font-size:14px;color:#555;line-height:1.6}
+.typ .mono{font-family:'Courier New',monospace;font-size:10px;color:#c9a227;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:8px}
+
+/* hero option mockup */
+.herom{border:1px solid #e0e0e0;border-radius:6px;padding:10px;background:#fff;margin:8px 0}
+.herom-l{font-size:10px;font-weight:700;color:#c94a2a;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.herom-body{aspect-ratio:16/7;background:#0b1e6b;border-radius:4px;position:relative;overflow:hidden;padding:18px;color:#fff}
+.herom-body .mono{font-family:'Courier New',monospace;font-size:8px;letter-spacing:.15em;color:#c9a227;text-transform:uppercase;margin-bottom:4px}
+.herom-body h4{font-family:'Libre Baskerville',Georgia,serif;font-size:clamp(15px,3vw,22px);font-weight:700;line-height:1.1;margin-bottom:6px}
+.herom-body h4 span{color:rgba(255,255,255,.25)}
+.herom-body .img{position:absolute;inset:44% 0 12% 0;background:#444;border-radius:3px;background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:4px 6px}
+.herom-body .img span{font-size:7px;color:rgba(255,255,255,.8);font-family:monospace}
+.herom-body .btn{display:inline-block;background:#c5a55a;color:#0b1e6b;font-size:7px;padding:3px 7px;border-radius:2px;font-weight:700;position:absolute;bottom:8px;right:12px;letter-spacing:.5px;text-transform:uppercase}
+.herom-foot{margin-top:8px;font-size:11px;color:#666;line-height:1.45}
+.herom-foot b{color:#222;font-size:11px}
+
+/* photo ref */
+.ph-ref{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center;padding:8px 10px;border-bottom:1px solid #f0f0f0;font-size:12px}
+.ph-ref:last-child{border:none}
+.ph-num{width:36px;height:36px;background:#0b1e6b;color:#c5a55a;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;font-family:monospace}
+.ph-ref .ph-t{font-weight:700;color:#222;font-size:12px}
+.ph-ref .ph-d{font-size:11px;color:#777;margin-top:1px}
+.ph-ref .ph-use{font-size:10px;background:#e8f5e9;color:#2e7d32;padding:2px 8px;border-radius:10px;font-weight:700;white-space:nowrap}
+.ph-ref .ph-use.alt{background:#e3f2fd;color:#1565c0}
+.ph-ref .ph-use.dec{background:#fff3e0;color:#e65100}
+
+/* decision matrix */
+.mx{border:1px solid #222;border-radius:6px;overflow:hidden;margin:10px 0;font-size:12px}
+.mx-h{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1fr;background:#222;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.mx-h div{padding:10px 12px;border-right:1px solid #444}
+.mx-h div:last-child{border-right:none}
+.mx-r{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1fr;border-bottom:1px solid #eee}
+.mx-r:last-child{border-bottom:none}
+.mx-r div{padding:10px 12px;border-right:1px solid #eee;font-size:11px}
+.mx-r div:last-child{border-right:none}
+.mx-r .q{background:#f8f8f8;font-weight:700;font-size:11px}
+.mx-r .win{background:#e8f5e9;font-weight:700}
+
+/* punch list */
+.punch{border:1px solid #e0e0e0;border-radius:6px;margin:10px 0;overflow:hidden;background:#fff}
+.punch-r{display:grid;grid-template-columns:24px 1fr 100px 80px;gap:10px;align-items:center;padding:9px 12px;border-bottom:1px solid #f0f0f0;font-size:12px}
+.punch-r:last-child{border:none}
+.punch-r input[type=checkbox]{transform:scale(1.1)}
+.punch-r .p-t{font-weight:600;color:#333}
+.punch-r .p-w{font-size:10px;color:#888;font-family:monospace}
+.punch-r .p-p{font-size:9px;padding:3px 7px;border-radius:10px;text-align:center;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+.p-p.hi{background:#fce4ec;color:#c62828;border:1px solid #f48fb1}
+.p-p.md{background:#fff3e0;color:#e65100;border:1px solid #ffb74d}
+.p-p.lo{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+
+/* FEEDBACK SYSTEM */
+.fb{position:absolute;top:8px;right:8px;display:flex;gap:3px;z-index:5;opacity:.55;transition:opacity .2s}
+.fb:hover{opacity:1}
+.card,.mock,.herom,.punch{position:relative}
+.fb button{width:22px;height:22px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;padding:0;color:#666;font-weight:700;transition:all .15s}
+.fb button:hover{transform:scale(1.08);border-color:#222;color:#222}
+.fb button.on[data-s="ok"]{background:#2e7d32;border-color:#2e7d32;color:#fff}
+.fb button.on[data-s="more"]{background:#f57c00;border-color:#f57c00;color:#fff}
+.fb button.on[data-s="drop"]{background:#c62828;border-color:#c62828;color:#fff}
+.fb button[data-s="note"]{font-size:10px}
+.fb button.on[data-s="note"]{background:#1565c0;border-color:#1565c0;color:#fff}
+
+.note-panel{background:#f5f9ff;border-top:1px solid #bbd6ed;padding:10px 14px;display:none}
+.note-panel.open{display:block}
+.note-panel label{display:block;font-size:10px;font-weight:700;color:#1565c0;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.note-panel textarea{width:100%;border:1px solid #bbd6ed;border-radius:4px;padding:8px 10px;font-family:inherit;font-size:13px;line-height:1.5;color:#222;background:#fff;resize:vertical;min-height:60px;outline:none}
+.note-panel textarea:focus{border-color:#1565c0}
+.note-panel .hint{font-size:10px;color:#888;margin-top:4px;display:flex;justify-content:space-between}
+.note-pill{display:flex;align-items:flex-start;gap:8px;padding:8px 12px;background:#e3f2fd;border-top:1px solid #bbd6ed;font-size:12px;color:#0d47a1;cursor:pointer}
+.note-pill b{font-weight:700;margin-right:4px}
+.note-pill span{flex:1;line-height:1.45}
+.mock .note-panel,.mock .note-pill,.herom .note-panel,.herom .note-pill{margin:8px -12px -12px;border-radius:0 0 5px 5px}
+.card .note-panel,.card .note-pill{margin:0}
+.fbsum .n.note{background:#e3f2fd;color:#0d47a1}
+.fbsum .author{display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 9px;border-radius:12px;background:#fff3e0;color:#c94a2a;font-weight:700;border:1px solid #ffb74d;font-size:11px;position:relative}
+.fbsum .author::before{content:"💬 Como";opacity:.7;font-size:10px;font-weight:600;margin-right:2px}
+.fbsum .author select{border:none;background:transparent;font-weight:700;color:#c94a2a;cursor:pointer;appearance:none;-webkit-appearance:none;padding:0 14px 0 0;font-size:12px;font-family:inherit;outline:none}
+.fbsum .author::after{content:"▾";position:absolute;right:7px;pointer-events:none;font-size:9px;color:#c94a2a}
+.note-panel .author-tag{display:inline-block;background:#fff3e0;color:#c94a2a;padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;text-transform:none;letter-spacing:0;margin-left:4px;border:1px solid #ffb74d}
+.note-pill .by{font-weight:800;color:#c94a2a;margin-right:5px}
+.note-pill .by::after{content:":";margin-left:1px;color:#1565c0;font-weight:400}
+
+.card.fb-ok,.mock.fb-ok,.herom.fb-ok,.punch.fb-ok{border-color:#81c784;box-shadow:0 0 0 1px #81c784 inset}
+.card.fb-more,.mock.fb-more,.herom.fb-more,.punch.fb-more{border-color:#ffb74d;box-shadow:0 0 0 1px #ffb74d inset;background:#fff9ec}
+.card.fb-drop,.mock.fb-drop,.herom.fb-drop,.punch.fb-drop{opacity:.35;filter:grayscale(.7)}
+.card.fb-drop::after,.mock.fb-drop::after,.herom.fb-drop::after,.punch.fb-drop::after{content:"MARCADO PARA DESCARTAR · clic en ✕ para revertir";position:absolute;inset:0;background:rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;letter-spacing:.8px;color:#c62828;text-transform:uppercase;pointer-events:none;border-radius:8px}
+
+.fbsum{position:sticky;top:50px;background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px 14px;margin:10px 0 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.fbsum b{font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#888}
+.fbsum .n{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:12px;font-weight:700}
+.fbsum .n.ok{background:#e8f5e9;color:#2e7d32}
+.fbsum .n.more{background:#fff3e0;color:#e65100}
+.fbsum .n.drop{background:#fce4ec;color:#c62828}
+.fbsum .n.tot{background:#f5f5f5;color:#555}
+.fbsum .act{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.fbsum .act button{font-size:11px;padding:4px 10px;border:1px solid #ccc;background:#fff;border-radius:12px;cursor:pointer;color:#555;font-weight:600}
+.fbsum .act button:hover{border-color:#222;color:#222}
+.fbsum .act button.danger:hover{border-color:#c62828;color:#c62828}
+
+body.filter-more .card:not(.fb-more),body.filter-more .mock:not(.fb-more),body.filter-more .herom:not(.fb-more),body.filter-more .punch:not(.fb-more){display:none}
+body.filter-more .sh,body.filter-more .sub{opacity:.25}
+
+.foot{margin-top:72px;padding:32px 0 10px;border-top:2px solid #222;font-size:13px;color:#666}
+.foot h4{color:#222;font-size:15px;margin-bottom:10px;font-weight:800}
+
+@media (max-width:680px){
+  .topnav .anchors{width:100%;margin:6px 0 0;justify-content:flex-start;overflow-x:auto}
+  .mx-h,.mx-r{grid-template-columns:1fr}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .punch-r{grid-template-columns:24px 1fr;row-gap:4px}
+  .punch-r .p-w,.punch-r .p-p{grid-column:2}
+}
+
+.ob-overlay{position:fixed;inset:0;background:rgba(20,20,20,.74);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.ob-overlay.show{opacity:1;pointer-events:auto}
+.ob-box{background:#fff;border-radius:14px;padding:32px 28px;max-width:480px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.3);transform:translateY(10px);transition:transform .25s}
+.ob-overlay.show .ob-box{transform:translateY(0)}
+.ob-box .k{font-size:10px;font-weight:800;color:#c94a2a;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.ob-box h2{font-size:24px;font-weight:800;line-height:1.15;letter-spacing:-.01em;margin-bottom:8px}
+.ob-box p.lead{font-size:13px;color:#666;line-height:1.55;margin-bottom:18px}
+.ob-box input{width:100%;padding:12px 14px;border:2px solid #e0e0e0;border-radius:8px;font-size:15px;font-family:inherit;outline:none;transition:border-color .15s;background:#fafafa;color:#222}
+.ob-box input:focus{border-color:#c94a2a;background:#fff}
+.ob-box .err{font-size:11px;color:#c62828;margin-top:6px;min-height:14px}
+.ob-box .row{display:flex;gap:8px;margin-top:14px;align-items:center;flex-wrap:wrap}
+.ob-box .presets{display:flex;gap:5px;flex-wrap:wrap;flex:1;min-width:180px}
+.ob-box .presets button{font-size:11px;padding:5px 10px;background:#f5f5f5;border:1px solid #e0e0e0;border-radius:12px;cursor:pointer;color:#666;font-family:inherit;font-weight:600}
+.ob-box .presets button:hover{background:#fff3e0;border-color:#c94a2a;color:#c94a2a}
+.ob-box .go{background:#222;color:#fff;border:none;padding:12px 22px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.ob-box .go:hover{background:#c94a2a}
+.ob-box .go:disabled{background:#ccc;cursor:not-allowed}
+.ob-box .foot-note{font-size:11px;color:#999;margin-top:16px;line-height:1.5;padding-top:14px;border-top:1px solid #f0f0f0}
+
+.toast{position:fixed;bottom:24px;right:24px;background:#222;color:#fff;padding:12px 18px;border-radius:8px;font-size:13px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:9998;transform:translateY(80px);opacity:0;transition:all .25s;display:flex;align-items:center;gap:8px;max-width:340px;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1;pointer-events:auto}
+.toast.ok{background:#2e7d32}
+.toast.warn{background:#e65100}
+.toast.err{background:#c62828}
+
+.save-chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;border:1px solid transparent;cursor:pointer;user-select:none}
+.save-chip.idle{background:#f5f5f5;color:#888;border-color:#e0e0e0}
+.save-chip.active{background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7}
+.save-chip.dirty{background:#fff3e0;color:#e65100;border-color:#ffb74d}
+.save-chip.saving{background:#e3f2fd;color:#1565c0;border-color:#bbd6ed}
+.save-chip .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+
+.send-cta{margin:60px 0 20px;padding:30px 24px;background:linear-gradient(135deg,#0b1e6b 0%,#081450 100%);border-radius:14px;color:#fff;text-align:center;position:relative;overflow:hidden}
+.send-cta::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(197,165,90,.18) 0%,transparent 40%);pointer-events:none}
+.send-cta h3{font-size:22px;font-weight:800;margin-bottom:10px;letter-spacing:-.005em;position:relative}
+.send-cta p.desc{font-size:13px;opacity:.92;max-width:540px;margin:0 auto 20px;line-height:1.55;position:relative}
+.send-cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative}
+.send-cta .btn-primary{background:#c5a55a;color:#0b1e6b;padding:13px 26px;border:none;border-radius:8px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:8px}
+.send-cta .btn-primary:hover{background:#d4b96e;transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.send-cta .btn-secondary{background:transparent;color:#fff;padding:13px 20px;border:1px solid rgba(255,255,255,.45);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.send-cta .btn-secondary:hover{background:rgba(255,255,255,.12);border-color:#fff}
+.send-cta .who{font-size:11px;opacity:.78;margin-top:16px;position:relative}
+.send-cta .who b{font-weight:800}
+
+.cmp-overlay{position:fixed;inset:0;background:rgba(20,20,20,.78);backdrop-filter:blur(6px);z-index:9500;display:none;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto}
+.cmp-overlay.show{display:flex}
+.cmp-box{background:#fff;border-radius:12px;width:100%;max-width:1180px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.4);display:flex;flex-direction:column;max-height:calc(100vh - 48px)}
+.cmp-head{padding:16px 22px;border-bottom:1px solid #e0e0e0;display:flex;align-items:center;gap:12px}
+.cmp-head h2{font-size:17px;font-weight:800;margin:0}
+.cmp-head p{font-size:12px;color:#666;margin:0}
+.cmp-head .close{margin-left:auto;background:#f5f5f5;border:1px solid #e0e0e0;border-radius:6px;padding:6px 12px;cursor:pointer;font-size:12px;font-weight:700;color:#555;font-family:inherit}
+.cmp-drop{margin:16px 22px;padding:24px;border:2px dashed #c0c0c0;border-radius:10px;text-align:center;font-size:13px;color:#888;cursor:pointer;background:#fafafa;display:block}
+.cmp-drop:hover,.cmp-drop.drag{border-color:#0b1e6b;background:#f0f4ff;color:#0b1e6b}
+.cmp-drop b{display:block;font-size:14px;color:#444;margin-bottom:4px;font-weight:800}
+.cmp-drop input{display:none}
+.cmp-loaded{margin:0 22px 4px;display:flex;flex-wrap:wrap;gap:6px;font-size:11px;min-height:4px}
+.cmp-loaded .tag-author{background:#fff3e0;border:1px solid #ffb74d;color:#c94a2a;padding:4px 6px 4px 10px;border-radius:12px;font-weight:700;display:inline-flex;align-items:center;gap:8px}
+.cmp-loaded .tag-author .rm{cursor:pointer;color:#c62828;font-weight:800;padding:0 4px;border-radius:8px}
+.cmp-loaded .tag-mine{background:#e3f2fd;border-color:#bbd6ed;color:#1565c0}
+.cmp-filters{display:flex;gap:6px;flex-wrap:wrap;padding:8px 22px 12px;font-size:11px;align-items:center}
+.cmp-filters label{color:#888;font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-size:10px;margin-right:4px}
+.cmp-filters button{background:#f5f5f5;border:1px solid #e0e0e0;color:#555;padding:5px 12px;border-radius:12px;cursor:pointer;font-weight:600;font-family:inherit;font-size:11px}
+.cmp-filters button.on{background:#222;color:#fff;border-color:#222}
+.cmp-body{flex:1;overflow-y:auto;padding:0 22px 22px}
+.cmp-empty{text-align:center;font-size:13px;color:#999;padding:40px 20px;background:#fafafa;border-radius:8px;margin:8px 0}
+.cmp-table{width:100%;border-collapse:collapse;font-size:12px}
+.cmp-table th,.cmp-table td{text-align:left;padding:8px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+.cmp-table th{background:#fafafa;font-size:10px;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:.5px;position:sticky;top:0;z-index:2}
+.cmp-table tr.row-consensus{background:#f1f8e9}
+.cmp-table tr.row-conflict{background:#fff8e1}
+.cmp-table .cell-state{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:10px;font-weight:700;font-size:11px;white-space:nowrap}
+.cmp-table .s-ok{background:#e8f5e9;color:#2e7d32}
+.cmp-table .s-more{background:#fff3e0;color:#e65100}
+.cmp-table .s-drop{background:#fce4ec;color:#c62828}
+.cmp-table .s-none{color:#ccc;font-style:italic;font-size:10px;background:transparent}
+.cmp-table .cell-note{font-size:11px;color:#444;margin-top:4px;line-height:1.4;max-width:280px;white-space:pre-wrap}
+.cmp-table .cell-id{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;color:#666}
+.cmp-table .cell-title{font-size:11px;color:#444;font-weight:600;margin-top:2px;line-height:1.35}
+.cmp-table .sec-hd td{background:#0b1e6b;color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.6px;font-size:10px;padding:6px 10px}
+.cmp-badge{display:inline-block;padding:1px 7px;border-radius:8px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+.cmp-badge.consensus{background:#c8e6c9;color:#1b5e20}
+.cmp-badge.conflict{background:#ffe082;color:#8d6e00}
+</style>
+</head>
+<body>
+
+<!-- ONBOARDING modal -->
+<div class="ob-overlay" id="ob-overlay" aria-hidden="true" role="dialog">
+  <div class="ob-box">
+    <div class="k">Antes de empezar</div>
+    <h2>¿Quién está dejando los comentarios?</h2>
+    <p class="lead">Tu nombre va a aparecer en cada nota y en el archivo JSON que devuelvas. Si sos del equipo, elegí abajo.</p>
+    <input type="text" id="ob-name" placeholder="Tu nombre completo" autocomplete="off" maxlength="60">
+    <div class="err" id="ob-err"></div>
+    <div class="row">
+      <div class="presets">
+        <button data-name="Axel">Axel</button>
+        <button data-name="Sergio">Sergio</button>
+        <button data-name="Rodrigo">Rodrigo</button>
+        <button data-name="Gonzalo">Gonzalo</button>
+        <button data-name="Victor">Victor (cliente)</button>
+      </div>
+      <button class="go" id="ob-go" disabled>Empezar →</button>
+    </div>
+    <div class="foot-note">El doc <b>guarda tus comentarios automáticamente</b> en tu navegador. Al terminar, usá <b>Descargar y enviar</b> al final del doc para bajar el JSON.</div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- COMPARE modal -->
+<div class="cmp-overlay" id="cmp-overlay" role="dialog">
+  <div class="cmp-box">
+    <div class="cmp-head">
+      <div>
+        <h2>Comparar feedbacks</h2>
+        <p>Cargá los JSON que recibiste · podés sumar varios a la vez</p>
+      </div>
+      <button class="close" id="cmp-close" type="button">Cerrar</button>
+    </div>
+    <label class="cmp-drop" id="cmp-drop">
+      <b>⬇ Arrastrá los JSON acá o hacé clic para elegir</b>
+      <span>Aceptamos varios archivos a la vez</span>
+      <input type="file" id="cmp-file" accept=".json,application/json" multiple>
+    </label>
+    <div class="cmp-loaded" id="cmp-loaded"></div>
+    <div class="cmp-filters" id="cmp-filters" style="display:none">
+      <label>Filtrar:</label>
+      <button class="on" data-f="all" type="button">Todo</button>
+      <button data-f="any" type="button">Con marca</button>
+      <button data-f="consensus" type="button">Consensos</button>
+      <button data-f="conflict" type="button">Discrepancias</button>
+    </div>
+    <div class="cmp-body" id="cmp-body">
+      <div class="cmp-empty">Todavía no cargaste ningún archivo. Soltá uno o varios JSON arriba para empezar a comparar.</div>
+    </div>
+  </div>
+</div>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">Research Traverso Int'l Foods<span>— v1</span></div>
+    <div class="anchors">
+      <a href="#brief">Brief</a>
+      <a href="#sistema">Sistema visual</a>
+      <a href="#inicio">Inicio</a>
+      <a href="#nosotros">Quiénes Somos</a>
+      <a href="#productos">Productos</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#bench">Benchmark</a>
+      <a href="#foto">Curaduría foto</a>
+      <a href="#punch">1 de mayo</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="kicker">Investigación · 23 abril 2026 · Deadline 1 de mayo</div>
+    <h1>¿Nuestro sitio calza con una exportadora internacional seria?</h1>
+    <p class="lead">Traverso International Foods está a 8 días de entrega. Textos, colores, fotografía, logo y sistema UI ya están en juego. Este doc audita sección por sección qué queda firme, qué ajustar, y qué cerrar antes del 1 de mayo — comparándolo con los referentes europeos que el cliente fijó como norte (jrsabater, acetomilano).</p>
+    <div class="meta">
+      <span>Deadline · 1 mayo 2026</span>
+      <span class="alt">Cliente · Victor Velasquez</span>
+      <span class="alt">PM · Axel Melendez</span>
+      <span class="alt">Arte/Dev · Sergio Rios</span>
+      <span class="alt">Fotografía · Sebastian Dominguez</span>
+      <span class="alt">Dominio · traversointernational.com</span>
+    </div>
+  </div>
+
+  <div class="fbsum">
+    <b>Feedback</b>
+    <span class="n tot" id="fb-tot">0 módulos</span>
+    <span class="n ok" id="fb-ok">0 ✓ bien</span>
+    <span class="n more" id="fb-more">0 ↻ seguir</span>
+    <span class="n drop" id="fb-drop">0 ✕ descartar</span>
+    <span class="n note" id="fb-note">0 💬 notas</span>
+    <span class="author">
+      <select id="fb-author" title="Cambiar autor">
+        <option value="__custom__">+ Otro…</option>
+      </select>
+    </span>
+    <div class="act">
+      <button id="fb-filter" type="button">Ver solo ↻ seguir</button>
+      <button id="fb-export" type="button">Copiar JSON</button>
+      <button id="fb-save" type="button">💾 Autoguardar</button>
+      <span class="save-chip idle" id="save-chip">
+        <span class="dot" id="save-chip-ico">📄</span>
+        <span id="save-chip-txt">Sin archivo</span>
+      </span>
+      <button id="fb-compare" type="button">Comparar</button>
+      <button id="fb-reset" type="button" class="danger">Reset</button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SECCION 1: BRIEF
+  ============================================================ -->
+  <div class="sh" id="brief">
+    <div class="n">01 · Punto de partida</div>
+    <h2>Brief y tensión</h2>
+    <p>De dónde venimos, qué hay en juego y qué se va a evaluar en este doc. Todo lo que viene después se lee con este marco.</p>
+  </div>
+
+  <div class="card" data-fb="brief-proyecto">
+    <div class="card-h"><span class="tag tag-ctx">Contexto</span><div class="card-t">El proyecto <span class="sub">qué es y dónde estamos parados</span></div></div>
+    <div class="card-b">
+      <p>Traverso International Foods es la <b>unidad internacional de Traverso SA</b>, fábrica chilena de vinagre en San Bernardo con más de 130 años de historia. El sitio es la cara visible para mercados LATAM y globales — funciona como <b>brochure B2B</b> para industriales, distribuidores, retail y canal horeca. Paginas definidas: Inicio, Quiénes Somos, Productos, Contacto.</p>
+      <div class="chips">
+        <span class="chip chip-dark">Estado · activo</span>
+        <span class="chip chip-ok">Textos aprobados por Víctor</span>
+        <span class="chip chip-ok">Sesión planta hecha (15/04)</span>
+        <span class="chip chip-ok">Paleta + tipografía definidas</span>
+        <span class="chip chip-warn">Logo esperando aprobación</span>
+        <span class="chip chip-warn">Falta sesión producto + corporativa</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="brief-tension">
+    <div class="card-h"><span class="tag tag-narr">Tensión</span><div class="card-t">La pregunta central <span class="sub">qué queremos resolver</span></div></div>
+    <div class="card-b">
+      <div class="quote"><em>¿El sistema visual que construimos (paleta + hero + fotografía + narrativa) está a la altura de una exportadora internacional B2B seria, comparable a jrsabater.com o acetomilano.it? ¿O todavía huele a marca local chilena en algunos puntos?</em></div>
+      <p>El sitio técnicamente está avanzado. Hay 4 propuestas de hero, textos oficiales, fotos de planta, carousel de productos funcionando, sistema de botones definido. Pero la pregunta no es si "funciona" — es si <b>compite</b> con las referencias europeas que el mismo cliente puso como norte.</p>
+    </div>
+  </div>
+
+  <div class="card" data-fb="brief-objetivos">
+    <div class="card-h"><span class="tag tag-rec">Objetivos</span><div class="card-t">Qué sale de este doc <span class="sub">outputs concretos</span></div></div>
+    <div class="card-b">
+      <ul class="bl">
+        <li>Diagnóstico del <b>sistema visual transversal</b>: paleta, tipografía, fotografía, sistema de botones</li>
+        <li>Decisión por sección del sitio: <b>Inicio, Quiénes Somos, Productos, Contacto</b></li>
+        <li>Recomendación de <b>hero definitivo</b> entre las 4 opciones</li>
+        <li><b>Curaduría fotográfica</b>: qué fotos van a qué sección</li>
+        <li>3 aprendizajes concretos del <b>benchmark competencia</b></li>
+        <li><b>Punch list priorizada</b> hasta el 1 de mayo</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SECCION 2: SISTEMA VISUAL
+  ============================================================ -->
+  <div class="sh" id="sistema">
+    <div class="n">02 · Transversal</div>
+    <h2>Sistema visual</h2>
+    <p>Lo que corta todo el sitio: colores, tipografía, fotografía, sistema de botones, logo. Si alguna de estas piezas falla, falla en todas las secciones a la vez.</p>
+  </div>
+
+  <div class="sub"><div class="n">2.1</div><h3>Paleta de color</h3><p>Lo que está declarado hoy en el CSS y cómo se compara con la pauta oficial del cliente.</p></div>
+
+  <div class="card" data-fb="sv-paleta-actual">
+    <div class="card-h"><span class="tag tag-vis">Paleta actual</span><div class="card-t">Colores declarados en el CSS <span class="sub">:root variables</span></div></div>
+    <div class="card-b">
+      <div class="sw-grid">
+        <div class="sw"><span class="sw-col" style="background:#0b1e6b"></span><div class="sw-info"><b>Primary</b>#0b1e6b<span>azul traverso · uso principal</span></div></div>
+        <div class="sw"><span class="sw-col" style="background:#081450"></span><div class="sw-info"><b>Primary dark</b>#081450<span>fondos oscuros / footer</span></div></div>
+        <div class="sw"><span class="sw-col" style="background:#1a2d8a"></span><div class="sw-info"><b>Primary light</b>#1a2d8a<span>hovers, acentos azules</span></div></div>
+        <div class="sw"><span class="sw-col" style="background:#c5a55a"></span><div class="sw-info"><b>Gold</b>#c5a55a<span>CTAs sobre oscuro · botones hero</span></div></div>
+        <div class="sw"><span class="sw-col" style="background:#c9a227"></span><div class="sw-info"><b>Gold accent</b>#c9a227<span>section-labels · eyebrows</span></div></div>
+        <div class="sw"><span class="sw-col" style="background:#7eb4ae"></span><div class="sw-info"><b>Secondary</b>#7eb4ae<span>verde agua · declarado pero casi sin uso</span></div></div>
+        <div class="sw"><span class="sw-col" style="background:#de8b73"></span><div class="sw-info"><b>Accent</b>#de8b73<span>coral · declarado pero sin uso visible</span></div></div>
+        <div class="sw"><span class="sw-col" style="background:#fbf9fa"></span><div class="sw-info"><b>Bg</b>#fbf9fa<span>fondo neutro crema</span></div></div>
+        <div class="sw"><span class="sw-col" style="background:#f2f4f8"></span><div class="sw-info"><b>Bg alt</b>#f2f4f8<span>fondo secciones alternas</span></div></div>
+        <div class="sw"><span class="sw-col" style="background:#1a1a2e"></span><div class="sw-info"><b>Text</b>#1a1a2e<span>texto primario</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="sv-paleta-diag">
+    <div class="card-h"><span class="tag tag-anti">Diagnóstico</span><div class="card-t">Inconsistencia detectada <span class="sub">variables declaradas sin uso</span></div></div>
+    <div class="card-b">
+      <div class="warn">El CSS tiene <code>--color-secondary: #7eb4ae</code> (verde agua) y <code>--color-accent: #de8b73</code> (coral) declaradas, pero <b>el sistema real usa dorado</b> (<code>#c5a55a</code>, <code>#c9a227</code>) en todos los acentos visibles (botones, eyebrows, section-labels). Parece que quedaron residuos de una iteración anterior.</div>
+      <p><b>Riesgo:</b> un dev nuevo que llegue a tocar el código puede creer que esos colores son parte del sistema y meterlos en nuevas secciones, rompiendo la coherencia.</p>
+      <p><b>Recomendación:</b> limpiar esas dos variables del <code>:root</code> o reemplazarlas por tonos neutros que sí usamos (gris acero, crema cálida). Dejar el sistema con 3 ejes claros: <b>Azul Traverso</b> (#0b1e6b) + <b>Dorado</b> (#c5a55a) + <b>Neutros</b> (crema/blanco/gris).</p>
+    </div>
+  </div>
+
+  <div class="card" data-fb="sv-paleta-pauta">
+    <div class="card-h"><span class="tag tag-editor">Pauta oficial</span><div class="card-t">Qué pidió el cliente <span class="sub">del documento de pauta fotográfica</span></div></div>
+    <div class="card-b">
+      <div class="quote"><em>"Priorizar azules, blancos, neutros. Integrar amarillo solo sutilmente (marca). Tonos fríos (azul dominante). Contraste limpio. Sensación de orden."</em></div>
+      <div class="sec">
+        <div class="sec-t">Alineación actual con la pauta</div>
+        <ul class="bl">
+          <li><b>Azul dominante:</b> ✅ #0b1e6b es el color principal del hero y headers</li>
+          <li><b>Blancos y neutros:</b> ✅ fondos #fbf9fa y #f2f4f8</li>
+          <li><b>Amarillo sutil:</b> ✅ dorado (#c5a55a / #c9a227) usado solo en CTAs y eyebrows — no invasivo</li>
+          <li><b>Contraste limpio:</b> ✅ jerarquía tipográfica clara</li>
+          <li><b>Residuos problemáticos:</b> ⚠️ coral y verde agua declarados sin uso — inconsistencia con la pauta</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub"><div class="n">2.2</div><h3>Tipografía</h3><p>Las dos familias que el proyecto usa, cómo se combinan y si calzan con "editorial corporativo serio".</p></div>
+
+  <div class="card" data-fb="sv-tipo">
+    <div class="card-h"><span class="tag tag-copy">Tipografía</span><div class="card-t">Stack tipográfico actual</div></div>
+    <div class="card-b">
+      <div class="typ">
+        <div class="mono">Eyebrow · Courier New · #c9a227</div>
+        <div class="baskerville">Calidad que cruza fronteras</div>
+        <div class="source">Vinagres, salsas y condimentos desde Chile. Más de 130 años de experiencia productiva para la industria alimentaria global. Certificación BRC GS "AA".</div>
+      </div>
+      <div class="sec">
+        <div class="sec-t">Análisis</div>
+        <ul class="bl">
+          <li><b>Libre Baskerville</b> en títulos — serif editorial. Aporta heritage, aire gourmet, premium. Bien alineada con "130 años" y exportación internacional.</li>
+          <li><b>Source Sans 3</b> en cuerpo — sans moderna, legible, corporativa. Bien.</li>
+          <li><b>Courier New</b> en eyebrows/mono — aporta textura técnica/industrial. Útil para "BRC AA", stats, certificaciones.</li>
+          <li><b>Playfair Display</b> mencionada en las notas del vault pero <b>no se usa</b> en el código actual. Limpiar esa referencia o decidirla.</li>
+        </ul>
+      </div>
+      <div class="success">El combo <b>serif editorial + sans moderna + mono técnica</b> es exactamente lo que Acetomilano logra y lo que Sabater no alcanza (Sabater se queda en sans corporativa y por eso se lee más commodity). Traverso está bien posicionado.</div>
+    </div>
+  </div>
+
+  <div class="sub"><div class="n">2.3</div><h3>Sistema de botones</h3><p>4 tiers implementados el 15/04 y aplicados en todo el sitio. Validar que el tier correcto esté en cada lugar.</p></div>
+
+  <div class="card" data-fb="sv-btn-sistema">
+    <div class="card-h"><span class="tag tag-stack">Sistema</span><div class="card-t">Los 4 tiers de botones <span class="sub">ref: test-boton.html</span></div></div>
+    <div class="card-b">
+      <ul class="bl">
+        <li><b>Tier 1 — Primary CTA (36px):</b> Gold (sobre oscuro), Primary dark (sobre claro), Outline, Ghost, Slate</li>
+        <li><b>Tier 2 — Secondary underline:</b> Gold, Light, Dark — con flecha</li>
+        <li><b>Tier 3 — Download/Accent line:</b> para descargas y secundarios fuertes</li>
+        <li><b>Tier 4 — Chips filtros:</b> botones de categoría en productos</li>
+      </ul>
+      <div class="success">Sistema sólido. Aplicado coherentemente en hero (gold + secondary light), navbar (gold), form (dark), footer (gold + secondary), productos CTA (dark).</div>
+      <div class="note">Pendiente validar: Cuando llegue el módulo <b>"Solicitar muestra"</b> (recomendado más abajo), usar Tier 1 Primary dark con icono de descarga.</div>
+    </div>
+  </div>
+
+  <div class="sub"><div class="n">2.4</div><h3>Fotografía — pauta aplicada</h3><p>Cómo traducir la pauta oficial del cliente en decisiones concretas de dirección de arte.</p></div>
+
+  <div class="card" data-fb="sv-foto-reglas">
+    <div class="card-h"><span class="tag tag-photo">Reglas</span><div class="card-t">Las 6 reglas fotográficas no-negociables</div></div>
+    <div class="card-b">
+      <div class="grid-2">
+        <div>
+          <div class="sec-t">✅ Sí</div>
+          <ul class="bl">
+            <li>Industrial elegante, corporativo, limpio</li>
+            <li>Luz natural o industrial controlada</li>
+            <li>Sensación de escala y orden</li>
+            <li>Personas reales en acción (no posadas)</li>
+            <li>Packaging de exportación (cajas, pallets, códigos)</li>
+            <li>Tonos fríos: azul dominante, blancos, neutros</li>
+          </ul>
+        </div>
+        <div>
+          <div class="sec-t">❌ No</div>
+          <ul class="bl">
+            <li>Fotos "artesanales" o retoque IA excesivo</li>
+            <li>Estética retail local o foodie</li>
+            <li>Personas posadas tipo banco de imágenes</li>
+            <li>Estilo "Instagram" o lifestyle emocional</li>
+            <li>Abuso del amarillo/dorado (solo acentos)</li>
+            <li>Fotos de producto en manos "de cocinero"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="sv-foto-disponible">
+    <div class="card-h"><span class="tag tag-photo">Material</span><div class="card-t">Qué tenemos hoy <span class="sub">sesión 15/04 Sebastián Domínguez</span></div></div>
+    <div class="card-b">
+      <div class="chips">
+        <span class="chip chip-ok">~80 fotos planta</span>
+        <span class="chip chip-ok">7 cámara + 3 drone DJI</span>
+        <span class="chip chip-ok">Exterior + Interior + Detalle</span>
+        <span class="chip chip-ok">Líneas de producción activas</span>
+        <span class="chip chip-warn">Falta sesión producto</span>
+        <span class="chip chip-warn">Falta sesión corporativa</span>
+      </div>
+      <p>Carpeta: <code>C:/Users/WBA/Documents/the WBA - trabajos/Traverso/Selección imagenes pagina web oficial/</code></p>
+      <p>Videos: <code>C:/Users/WBA/Documents/the WBA - trabajos/Traverso/SELECCION VIDEOS/</code></p>
+      <div class="note">Ver sección <b>Curaduría foto</b> más abajo para el mapeo puntual foto ↔ sección.</div>
+    </div>
+  </div>
+
+  <div class="sub"><div class="n">2.5</div><h3>Logo + Marca Chile</h3><p>Dos piezas visuales obligatorias en el sistema.</p></div>
+
+  <div class="card" data-fb="sv-logo">
+    <div class="card-h"><span class="tag tag-stack">Logo</span><div class="card-t">Logo Traverso International + Marca Chile</div></div>
+    <div class="card-b">
+      <ul class="bl">
+        <li><b>Logo Traverso International:</b> continuidad del logo Traverso actual, no disruptivo. 3 propuestas enviadas 08/04 a Víctor. <span class="chip chip-warn">Pendiente aprobación</span></li>
+        <li><b>Marca Chile:</b> autorización formal de ProChile recibida 09/04. Brand Book con lineamientos de uso. Incorporar al sitio según reglas del Brand Book.</li>
+        <li><b>En el hero:</b> logo blanco 53px centrado, desaparece al scroll (via GSAP ScrollTrigger) y aparece el del header.</li>
+        <li><b>Propuesta:</b> Marca Chile va en footer como endoso institucional + opcionalmente en "Quiénes Somos" junto a certificaciones BRC.</li>
+      </ul>
+      <div class="warn">Riesgo cronograma: si Víctor no aprueba el logo esta semana, se traba la papelería y la versión final del sitio. Agendar confirmación antes del 25/04.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SECCION 3: INICIO
+  ============================================================ -->
+  <div class="sh" id="inicio">
+    <div class="n">03 · Página</div>
+    <h2>Inicio (Home)</h2>
+    <p>La primera impresión — hero, propuesta de valor, trust bar, carousel de productos, mini-contacto. Es la sección con 4 propuestas en curso y la que decide el tono del resto.</p>
+  </div>
+
+  <div class="sub"><div class="n">3.1</div><h3>Elección de hero</h3><p>Tenemos 4 heros desarrollados. Uno tiene que quedar.</p></div>
+
+  <div class="herom" data-fb="home-hero-cinema">
+    <div class="herom-l">★ ACTUAL · index.html — #40 Cinema Full Width</div>
+    <div class="herom-body">
+      <div class="mono">— Exportadores desde Chile · Est. 1893 —</div>
+      <h4>Calidad que cruza <span>fronteras</span></h4>
+      <div class="img" style="background:linear-gradient(135deg,#3a4e6e 0%,#1a2d4a 100%);">
+        <span>foto planta wide cinema 3.5:1</span>
+      </div>
+      <div class="btn">Explorar productos</div>
+    </div>
+    <div class="herom-foot">
+      <b>Qué tiene:</b> eyebrow dorado + título serif con "fronteras" difuminado + foto cinemática ancha + trust pills (BRC AA, HACCP, Granel) + CTAs dorado + stats (130+ años, BRC AA, MDD). <br>
+      <b>Pro:</b> elegancia editorial, acomoda foto como pieza central, tensión visual del "fronteras" difuminado. <br>
+      <b>Contra:</b> abajo del hero queda denso con pills + stats + 2 CTAs; puede saturarse.
+    </div>
+  </div>
+
+  <div class="herom" data-fb="home-hero-photo">
+    <div class="herom-l">inicio1.html — #15 Full Photo</div>
+    <div class="herom-body" style="background:#0a0a0a">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,.8) 100%);"></div>
+      <h4 style="position:absolute;bottom:18px;left:18px;right:18px">Sabor chileno para el mundo</h4>
+      <div class="btn">Ver productos</div>
+    </div>
+    <div class="herom-foot">
+      <b>Qué tiene:</b> foto a pantalla completa + título sobre gradient oscuro + CTAs.<br>
+      <b>Pro:</b> alto impacto, protagonista es la foto, sensación de escala.<br>
+      <b>Contra:</b> depende 100% de que la foto sea perfecta. Menos espacio para trust-pills/certificaciones sin saturar.
+    </div>
+  </div>
+
+  <div class="herom" data-fb="home-hero-modern">
+    <div class="herom-l">inicio2.html — V31 Modern B2B</div>
+    <div class="herom-body" style="background:#fff;color:#0b1e6b">
+      <div class="mono" style="color:#c9a227">— Exportación B2B · desde 1893 —</div>
+      <h4 style="color:#0b1e6b">Vinagres, jugo de limón y salsas <span style="color:#aab">desde Chile</span></h4>
+      <div class="img" style="background:linear-gradient(135deg,#4a5a7a,#2a3a5a);inset:48% 30% 10% 0">
+        <span>foto planta</span>
+      </div>
+      <div class="btn">Contacto comercial</div>
+    </div>
+    <div class="herom-foot">
+      <b>Qué tiene:</b> fondo blanco/crema, tipografía oscura, foto lateral compacta, trust bar textual.<br>
+      <b>Pro:</b> más corporativo, más "europeo" (tipo Milano/Sabater). Más aire, menos saturación.<br>
+      <b>Contra:</b> pierde el impacto visual del azul profundo. Menos "wow" en primera carga.
+    </div>
+  </div>
+
+  <div class="herom" data-fb="home-hero-centered">
+    <div class="herom-l">inicio3.html — #17 Centered Elegant</div>
+    <div class="herom-body" style="background:#0b1e6b">
+      <div style="position:absolute;top:40%;left:0;right:0;text-align:center;color:#fff">
+        <div class="mono" style="color:#c9a227;text-align:center;margin-bottom:8px">— Est. 1893 · Exportación global —</div>
+        <h4 style="text-align:center">Calidad que cruza fronteras</h4>
+      </div>
+      <div class="btn">Explorar</div>
+    </div>
+    <div class="herom-foot">
+      <b>Qué tiene:</b> fondo oscuro, título centrado, sin foto.<br>
+      <b>Pro:</b> máxima elegancia editorial, tipo manifiesto.<br>
+      <b>Contra:</b> sin foto = desperdicio del activo más fuerte que tenemos (sesión Sebastián). No calza con pauta "escala, confianza, internacionalización desde el primer impacto" que pide foto de planta.
+    </div>
+  </div>
+
+  <div class="card" data-fb="home-hero-matriz">
+    <div class="card-h"><span class="tag tag-rec">Matriz</span><div class="card-t">Comparación rápida · criterios de pauta</div></div>
+    <div class="card-b">
+      <div class="mx">
+        <div class="mx-h"><div>Criterio</div><div>Cinema (actual)</div><div>Full Photo</div><div>Modern B2B</div><div>Centered</div></div>
+        <div class="mx-r"><div class="q">Escala/planta visible</div><div class="win">Sí, cinemática</div><div class="win">Sí, máxima</div><div>Lateral, compacta</div><div>No</div></div>
+        <div class="mx-r"><div class="q">Aire editorial</div><div class="win">Alto</div><div>Medio</div><div class="win">Alto</div><div class="win">Muy alto</div></div>
+        <div class="mx-r"><div class="q">Corporativo B2B</div><div>Medio</div><div>Medio</div><div class="win">Alto</div><div>Medio</div></div>
+        <div class="mx-r"><div class="q">Aprovecha foto Sebastián</div><div class="win">Muy bien</div><div class="win">Máximo</div><div>Bien</div><div>No</div></div>
+        <div class="mx-r"><div class="q">Tolera trust pills + stats</div><div class="win">Sí</div><div>Justo</div><div class="win">Sí</div><div>No</div></div>
+        <div class="mx-r"><div class="q">Riesgo técnico</div><div>Bajo</div><div>Medio (foto debe ser perfecta)</div><div>Bajo</div><div>Bajo</div></div>
+      </div>
+      <div class="success"><b>Recomendación:</b> mantener <b>Cinema Full Width (actual)</b> como hero definitivo. Es el que mejor balancea elegancia editorial + foto de planta + trust signals sin saturar. Alternativa: versión híbrida Cinema + tipografía Modern B2B si Victor pide algo más "corporativo clásico".</div>
+    </div>
+  </div>
+
+  <div class="sub"><div class="n">3.2</div><h3>Headline y subhead</h3><p>El copy del hero actual vs. alternativas.</p></div>
+
+  <div class="card" data-fb="home-headline">
+    <div class="card-h"><span class="tag tag-copy">Copy</span><div class="card-t">Headline del hero <span class="sub">qué dice y qué podría decir</span></div></div>
+    <div class="card-b">
+      <div class="sec">
+        <div class="sec-t">Actual</div>
+        <div class="quote"><em>"Calidad que cruza fronteras"</em></div>
+        <p><b>Diagnóstico:</b> cumple, suena serio. Pero es genérico — podría ser de cualquier exportadora. No capitaliza ni Chile, ni 130 años, ni el portafolio específico.</p>
+      </div>
+      <div class="sec">
+        <div class="sec-t">Alternativas para considerar</div>
+        <ul class="bl">
+          <li><b>Opción A (origen):</b> "Sabor de Chile para el mundo" — calza con aprendizaje del benchmark (ningún referente capitaliza origen)</li>
+          <li><b>Opción B (portafolio):</b> "Vinagres, jugo de limón y salsas desde Chile desde 1893" — concreto, sin misterio, B2B puro</li>
+          <li><b>Opción C (actual + ajuste):</b> "Calidad chilena que cruza fronteras" — mínimo cambio, suma origen</li>
+          <li><b>Opción D (heritage):</b> "130 años de experiencia alimentaria, ahora para el mundo"</li>
+        </ul>
+      </div>
+      <div class="note"><b>Subhead actual OK:</b> "Vinagres, salsas y condimentos desde Chile. Más de 130 años de experiencia productiva para la industria alimentaria global." — concreto, específico, menciona categoría + heritage + audiencia. <b>Ajustar:</b> agregar "jugo de limón" (es categoría oficial en el texto aprobado).</div>
+    </div>
+  </div>
+
+  <div class="sub"><div class="n">3.3</div><h3>Propuesta de valor (4 pilares)</h3><p>Sección después del hero: los 4 argumentos comerciales aprobados por Víctor.</p></div>
+
+  <div class="card" data-fb="home-valor">
+    <div class="card-h"><span class="tag tag-editor">Contenido</span><div class="card-t">Los 4 pilares del texto oficial</div></div>
+    <div class="card-b">
+      <ul class="bl">
+        <li><b>Productos con estándares internacionales</b> — BRC GS "AA", inocuidad, trazabilidad. <i>Requiere mostrar logos de certificaciones.</i></li>
+        <li><b>Respaldo de una marca con trayectoria</b> — 130 años, evolución internacional de Traverso SA</li>
+        <li><b>Enfoque en exportación y mercados globales</b> — industrias, comercializadores, importadores, distribuidores</li>
+        <li><b>Procesos confiables y escalables</b> — estandarizados, adaptables a distintos niveles de demanda</li>
+      </ul>
+      <div class="success">Los 4 pilares están bien construidos y aprobados. Cada uno con título corto + descripción ~40 palabras. Layout de 2 columnas funciona bien.</div>
+      <div class="note"><b>Acción:</b> conseguir logos oficiales de <b>BRC GS "AA", HACCP, y cualquier otra certificación</b> de Traverso. El texto oficial lo pide explícitamente: <i>"*Poner logos de certificaciones mencionadas."</i> Ir a Víctor / Jaime San Martín (TI).</div>
+    </div>
+  </div>
+
+  <div class="sub"><div class="n">3.4</div><h3>Trust bar y certificaciones</h3><p>Banda de certificaciones que da legitimidad B2B en pocos segundos.</p></div>
+
+  <div class="card" data-fb="home-trust">
+    <div class="card-h"><span class="tag tag-stack">Trust</span><div class="card-t">Trust bar · estado actual</div></div>
+    <div class="card-b">
+      <div class="chips">
+        <span class="chip chip-dark">BRC AA</span>
+        <span class="chip chip-dark">HACCP</span>
+        <span class="chip chip-dark">Granel &amp; Envasado</span>
+      </div>
+      <ul class="bl">
+        <li>Actualmente son "pills" textuales (sin logo oficial)</li>
+        <li>Reemplazar por logos reales cuando Víctor los envíe</li>
+        <li>Agregar: <b>Marca Chile</b> (ProChile) como 4to elemento — refuerza origen + endoso gubernamental</li>
+        <li>Ubicación: al final del hero (hoy) + repetir mini-versión en Quiénes Somos + footer</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub"><div class="n">3.5</div><h3>Carousel de productos en home</h3><p>5 líneas implementadas con navegación horizontal.</p></div>
+
+  <div class="card" data-fb="home-carousel">
+    <div class="card-h"><span class="tag tag-stack">Componente</span><div class="card-t">Carousel de 5 categorías <span class="sub">implementado 15/04</span></div></div>
+    <div class="card-b">
+      <div class="chips">
+        <span class="chip">Vinagres</span>
+        <span class="chip">Jugo de Limón</span>
+        <span class="chip">Salsas y Aderezos</span>
+        <span class="chip">Condimentos</span>
+        <span class="chip">Marca Propia (MDD)</span>
+      </div>
+      <div class="success">Correspondencia con texto oficial: ✓ Vinagres, ✓ Jugo de limón, ✓ Salsas. "Condimentos" y "Otras líneas" están como espacios abiertos ("editable a la espera de información enviada por Víctor"). MDD (Marca Propia) es un agregado B2B inteligente — aprendizaje del benchmark (Sabater tiene "Private Label", Castelo tiene "Marcas Próprias").</div>
+      <div class="note"><b>Pendiente:</b> conseguir de Víctor detalle de subcategorías por línea (Vinagres: Manzana / Alcohol / Vino está en el texto; Jugo de limón: Natural / Sustituto está en el texto; Salsas: Ketchup / Mostaza / Ajíes está en el texto).</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SECCION 4: QUIÉNES SOMOS
+  ============================================================ -->
+  <div class="sh" id="nosotros">
+    <div class="n">04 · Página</div>
+    <h2>Quiénes Somos</h2>
+    <p>La sección que construye credibilidad. Historia + diferenciación + equipo. Aquí se gana o se pierde la sensación de "proveedor serio con el que vale la pena hablar".</p>
+  </div>
+
+  <div class="card" data-fb="about-narr">
+    <div class="card-h"><span class="tag tag-narr">Narrativa</span><div class="card-t">Texto oficial aprobado</div></div>
+    <div class="card-b">
+      <div class="quote"><em>"Traverso International Foods nace como la evolución internacional de Traverso, una empresa chilena con trayectoria en el desarrollo, producción y comercialización de alimentos. Esta nueva unidad tiene como propósito proyectar esa experiencia hacia mercados globales..."</em></div>
+      <p><b>Diagnóstico:</b> tono serio, enfocado en B2B, bien calibrado. Mensajes clave que funcionan: "relaciones comerciales de largo plazo", "socio confiable", "continuidad, cumplimiento, solidez".</p>
+      <div class="note">Aprendizaje de Acetomilano: el arte editorial del home se inicia con una frase fuerte ("L'arte dell'aceto"). Acá el equivalente podría ser un "lema" destacado al empezar Quiénes Somos, tipo: <b>"130 años haciendo alimentos. Ahora, para el mundo."</b> — algo corto y memorable antes del párrafo largo.</div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="about-diff">
+    <div class="card-h"><span class="tag tag-editor">Diferenciación</span><div class="card-t">Los 4 pilares de diferenciación <span class="sub">del texto oficial</span></div></div>
+    <div class="card-b">
+      <ul class="bl">
+        <li><b>Experiencia en múltiples categorías</b> de productos alimentarios</li>
+        <li><b>Conocimiento del mercado alimentario</b> — dinámicas, estándares, factores de decisión</li>
+        <li><b>Capacidad de adaptación a distintos mercados</b> — flexibilidad, canales, necesidades</li>
+        <li><b>Compromiso con la calidad y el servicio</b> — cumplimiento, comunicación, respaldo</li>
+      </ul>
+      <div class="success">Layout sugerido (alineado con index): 4 cards con número (01, 02, 03, 04) en mono dorado + título serif + descripción sans. Coherente con sección de valor del home.</div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="about-foto">
+    <div class="card-h"><span class="tag tag-photo">Fotografía</span><div class="card-t">Foto hero sugerida para Quiénes Somos</div></div>
+    <div class="card-b">
+      <div class="grid-2">
+        <div>
+          <div class="sec-t">Opción A · Historia + Moderno</div>
+          <p><code>Traverso international foods-108.jpg</code></p>
+          <p>Interior fábrica: <b>tanque de roble gigante (antiguo)</b> + tanques de acero inoxidable + tuberías rojas industriales. Escala impresionante, luz cálida arriba.</p>
+          <span class="chip chip-ok">Perfecta: comunica 130 años + modernidad en una sola imagen</span>
+        </div>
+        <div>
+          <div class="sec-t">Opción B · Fachada icónica</div>
+          <p><code>Traverso international foods-2.jpg</code></p>
+          <p>Fachada de la planta moderna: arquitectura contemporánea + tanques de acero + cielo azul + paisaje verde. Wide shot limpio.</p>
+          <span class="chip chip-ok">Excelente: escala + "parque industrial" + cielo chileno</span>
+        </div>
+      </div>
+      <div class="note"><b>Sugerencia:</b> usar Opción A (tanque de roble) como hero de Quiénes Somos por el simbolismo heritage + moderno. Opción B puede ir como segunda foto en la sección de procesos o como hero del home si cambiamos estrategia.</div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="about-equipo">
+    <div class="card-h"><span class="tag tag-rec">Propuesta</span><div class="card-t">¿Incluir equipo directivo?</div></div>
+    <div class="card-b">
+      <p>La pauta dice: <em>"Reunión ejecutiva (B2B realista): en el caso de que no sea práctico, utilizar imagen extraída de banco de imágenes o IA, o descartar"</em>. Hoy no tenemos foto de equipo.</p>
+      <div class="sec">
+        <div class="sec-t">Decisión</div>
+        <ul class="bl">
+          <li><b>Opción 1:</b> agendar mini-sesión corporativa (2h, oficina Traverso) la próxima semana</li>
+          <li><b>Opción 2:</b> usar foto de planta con trabajadores "en acción" como sustituto — hay material</li>
+          <li><b>Opción 3:</b> sin foto de equipo, sustituir por ilustración/diagrama del proceso exportación</li>
+        </ul>
+      </div>
+      <div class="warn">Dado el deadline, <b>Opción 2</b> es la más realista. Opción 1 si Víctor accede y se agenda antes del 26/04.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SECCION 5: PRODUCTOS
+  ============================================================ -->
+  <div class="sh" id="productos">
+    <div class="n">05 · Página</div>
+    <h2>Productos</h2>
+    <p>La sección comercial del sitio. Tiene que exhibir profundidad de portafolio sin abrumar, y dejar en claro que Traverso no es un productor de nicho — es un exportador con escala.</p>
+  </div>
+
+  <div class="card" data-fb="prod-cat">
+    <div class="card-h"><span class="tag tag-editor">Categorías</span><div class="card-t">5 líneas oficiales</div></div>
+    <div class="card-b">
+      <div class="mx">
+        <div class="mx-h"><div>Línea</div><div>Subcategorías (texto oficial)</div><div>Estado contenido</div><div>Foto disponible</div><div>Prioridad</div></div>
+        <div class="mx-r"><div class="q">Vinagres</div><div>Manzana, Alcohol, Vino</div><div>✓ Definido</div><div>⚠️ Falta foto producto</div><div>HI</div></div>
+        <div class="mx-r"><div class="q">Jugo de Limón</div><div>Natural, Sustituto</div><div>✓ Definido</div><div>✓ Hay línea envasado</div><div>HI</div></div>
+        <div class="mx-r"><div class="q">Salsas y Aderezos</div><div>Ketchup, Mostaza, Ajíes</div><div>✓ Definido</div><div>⚠️ Falta foto producto</div><div>MED</div></div>
+        <div class="mx-r"><div class="q">Condimentos</div><div>Pendiente Víctor</div><div>⚠️ Esperando info</div><div>⚠️ Falta</div><div>MED</div></div>
+        <div class="mx-r"><div class="q">Marca Propia (MDD)</div><div>Servicio B2B</div><div>Texto a redactar</div><div>Packaging exportación</div><div>HI · diferencial</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="prod-pauta">
+    <div class="card-h"><span class="tag tag-photo">Pauta</span><div class="card-t">Estilo fotográfico de producto</div></div>
+    <div class="card-b">
+      <div class="quote"><em>"Productos sobre fondo limpio (blanco o neutro) · iluminación tipo catálogo internacional · enfoque funcional no emocional · escala productiva: grandes volúmenes, líneas completas, pallets organizados."</em></div>
+      <div class="warn"><b>Brecha actual:</b> No tenemos fotos "tipo catálogo" de los productos terminados sobre fondo limpio. Tenemos fotos en línea de producción (buenas para "escala productiva") pero no para la ficha de producto individual.</div>
+      <div class="sec">
+        <div class="sec-t">Opciones para cubrir la brecha</div>
+        <ul class="bl">
+          <li><b>A:</b> Agendar mini-sesión producto con Sebastián (1 día, estudio) — idealmente esta semana</li>
+          <li><b>B:</b> Foto de cada producto individual tomada por Jaime o alguien en Traverso con iluminación decente + post-proceso nuestro</li>
+          <li><b>C:</b> Pedirle a Víctor packshots existentes (¿tiene catálogos previos?)</li>
+          <li><b>D:</b> IA con referencia — pauta lo permite para "contexto de uso" pero no para producto principal</li>
+        </ul>
+      </div>
+      <div class="note"><b>Recomendación:</b> B + C en paralelo. Si en 3 días no llega nada decente, disparar A aunque apriete cronograma.</div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="prod-modulo-usos">
+    <div class="card-h"><span class="tag tag-rec">Propuesta</span><div class="card-t">Módulo "Aplicaciones / Uses" <span class="sub">aprendizaje de acetomilano</span></div></div>
+    <div class="card-b">
+      <p>Acetomilano tiene una sección "<b>Abbinamenti</b>" (maridajes: platos fríos, calientes, drinks) dirigida a chefs y distribuidores. Agrega valor educativo y posiciona el producto en uso, no solo en ficha.</p>
+      <div class="sec">
+        <div class="sec-t">Versión Traverso simplificada (bajo esfuerzo, alto valor)</div>
+        <ul class="bl">
+          <li><b>Jugo de limón:</b> Bebidas industriales · Conservas · Limpieza · Cosmética</li>
+          <li><b>Vinagres:</b> Salsas industriales · Conservas · Condimentos · Aliños para retail</li>
+          <li><b>Salsas:</b> Foodservice · Retail · Horeca · Marca propia</li>
+        </ul>
+      </div>
+      <div class="success">Formato: accordion o tabla simple, sin imágenes nuevas necesarias. Suma valor B2B para compradores que están evaluando si Traverso encaja en su aplicación específica.</div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="prod-sample-kit">
+    <div class="card-h"><span class="tag tag-rec">Propuesta</span><div class="card-t">Sample kit · "Solicitar muestra" <span class="sub">aprendizaje de castelo</span></div></div>
+    <div class="card-b">
+      <p>CTA adicional en productos: <b>"Solicitar muestra / Request sample"</b>. Formulario corto (empresa, cargo, país, producto de interés, volumen estimado). Convierte el sitio de brochure a lead-gen.</p>
+      <ul class="bl">
+        <li>Botón Tier 1 Primary dark, con icono de descarga/envío</li>
+        <li>Formulario embebido via Formspree (ya está implementado)</li>
+        <li>Campo <b>volumen estimado</b> es clave — filtra compradores serios</li>
+        <li>Respuesta automática al lead: "Gracias, Rodrigo te contactará en 24h"</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SECCION 6: CONTACTO
+  ============================================================ -->
+  <div class="sh" id="contacto">
+    <div class="n">06 · Página</div>
+    <h2>Contacto</h2>
+    <p>El último paso del funnel. Aquí la diferencia entre "me escribió alguien serio" y "puro spam" está en qué campos pide el formulario y qué tan rápido responde Rodrigo.</p>
+  </div>
+
+  <div class="card" data-fb="contact-copy">
+    <div class="card-h"><span class="tag tag-editor">Copy</span><div class="card-t">Texto oficial aprobado</div></div>
+    <div class="card-b">
+      <div class="quote"><em>"Estamos disponibles para generar nuevas oportunidades comerciales y alianzas estratégicas en mercados internacionales. Si estás interesado en conocer nuestros productos o establecer una relación comercial, te invitamos a contactarnos."</em></div>
+      <p><b>Cierre aprobado:</b> <em>"Traverso International Foods — conectando productos de calidad con mercados globales."</em></p>
+      <div class="success">Tono calibrado: formal, B2B, directo. No hay problema acá.</div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="contact-form">
+    <div class="card-h"><span class="tag tag-stack">Formulario</span><div class="card-t">Campos del formulario B2B</div></div>
+    <div class="card-b">
+      <div class="sec">
+        <div class="sec-t">Campos mínimos recomendados</div>
+        <ul class="bl">
+          <li><b>Nombre completo</b> (required)</li>
+          <li><b>Empresa</b> (required) — filtro principal B2B</li>
+          <li><b>Cargo / Posición</b> (required) — calificación del lead</li>
+          <li><b>Email corporativo</b> (required)</li>
+          <li><b>Teléfono / WhatsApp</b> (opcional)</li>
+          <li><b>País de operación</b> (required, dropdown) — segmenta por mercado</li>
+          <li><b>Tipo de empresa</b> (required, dropdown): Industria / Distribuidor / Importador / Retail / Horeca / Otro</li>
+          <li><b>Producto de interés</b> (multi-select): Vinagres / Jugo Limón / Salsas / Condimentos / MDD / Todo el portafolio</li>
+          <li><b>Volumen estimado anual</b> (dropdown): &lt;10 tn / 10-50 / 50-200 / 200+</li>
+          <li><b>Mensaje</b> (textarea, opcional)</li>
+        </ul>
+      </div>
+      <div class="note">10 campos es alto para un formulario, pero para B2B exportación industrial es esperado. Los dropdowns/select bajan fricción vs. free text.</div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="contact-foto">
+    <div class="card-h"><span class="tag tag-photo">Fotografía</span><div class="card-t">Foto para contacto</div></div>
+    <div class="card-b">
+      <p>Pauta oficial: <em>"Equipo en oficina (natural, no posado) · Reunión comercial · Imagen de logística/exportación + mensaje contacto"</em>.</p>
+      <div class="grid-2">
+        <div>
+          <div class="sec-t">Si hay sesión corporativa</div>
+          <p>Foto de reunión o escritorio + laptop + contenedor al fondo. Cercanía profesional.</p>
+        </div>
+        <div>
+          <div class="sec-t">Alternativa inmediata</div>
+          <p>Foto de <b>pallets listos para exportación + caja/contenedor</b> (foto -57 o similar, línea envasado). Refuerza "negocio internacional" y está disponible hoy.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="contact-cross">
+    <div class="card-h"><span class="tag tag-rec">Cross-link</span><div class="card-t">Botón a traverso.cl <span class="sub">requerido por cliente</span></div></div>
+    <div class="card-b">
+      <p>Notas del proyecto piden: <em>"Web debe tener botón que conecte con traverso.cl (sitio principal)."</em></p>
+      <div class="sec">
+        <div class="sec-t">Propuesta de ubicación y copy</div>
+        <ul class="bl">
+          <li><b>En contacto:</b> sección final "¿Buscás productos para Chile?" → botón <b>"Visitá traverso.cl"</b></li>
+          <li><b>En footer (global):</b> línea discreta "Empresa matriz: traverso.cl" con enlace</li>
+          <li><b>En Quiénes Somos:</b> párrafo con enlace natural a "nuestra matriz en Chile"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SECCION 7: BENCHMARK
+  ============================================================ -->
+  <div class="sh" id="bench">
+    <div class="n">07 · Competencia</div>
+    <h2>Benchmark puntual</h2>
+    <p>Los 3 referentes que fijó el cliente (pauta oficial). Analizados en vivo el 23/04 para sacar aprendizajes aplicables antes del 1 de mayo.</p>
+  </div>
+
+  <div class="card" data-fb="bench-jrs">
+    <div class="card-h"><span class="tag tag-bench">jrsabater.com</span><div class="card-t">Exportadora española <span class="sub">vinagres, salsas, siropes</span></div></div>
+    <div class="card-b">
+      <div class="sec">
+        <div class="sec-t">Ficha rápida</div>
+        <ul class="pl">
+          <li><b>Hero:</b> tipográfico seco, fondo crema, sin foto ni video</li>
+          <li><b>Paleta:</b> blanco/crema, marrón tierra, verde apagado</li>
+          <li><b>Tono:</b> pragmático-industrial · <em>"Esfuerzo y superación desde hace más de 40 años"</em></li>
+          <li><b>Tipografía:</b> sans serif moderna, sin serif editorial</li>
+          <li><b>Menú:</b> Sobre nosotros / Productos (6 subcategorías) / Calidad / Noticias / Contacto</li>
+          <li><b>Fotografía:</b> producto con packaging, sin gente ni campo</li>
+        </ul>
+      </div>
+      <div class="sec">
+        <div class="sec-t">✅ 3 aprendizajes para Traverso</div>
+        <ol class="bl" style="list-style:decimal;padding-left:22px;list-style-position:inside">
+          <li>Subcategorizar productos con tiles visibles desde el home — escaneable en 5 segundos</li>
+          <li>Destacar <b>"Soluciones a medida / MDD"</b> como CTA propio</li>
+          <li><b>Política de Calidad</b> como sección propia en menú — no enterrarlo en footer</li>
+        </ol>
+      </div>
+      <div class="sec">
+        <div class="sec-t">❌ Qué evitar</div>
+        <ul class="bl">
+          <li>Hero tipográfico sin foto — pierde oportunidad de comunicar escala y origen</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="bench-milano">
+    <div class="card-h"><span class="tag tag-bench">acetomilano.it</span><div class="card-t">Acetificio Andrea Milano · Italia <span class="sub">vinagre balsámico desde 1889</span></div></div>
+    <div class="card-b">
+      <div class="sec">
+        <div class="sec-t">Ficha rápida</div>
+        <ul class="pl">
+          <li><b>Hero:</b> editorial con monograma SVG + headline <em>"L'arte dell'aceto"</em></li>
+          <li><b>Paleta:</b> blanco/crema, negro/carbón, dorado/terracota sutil</li>
+          <li><b>Tono:</b> artesanal-premium · <em>"Tramandiamo passione, esplorando nuovi mondi"</em></li>
+          <li><b>Tipografía:</b> sans editorial con jerarquía tipo revista</li>
+          <li><b>Menú:</b> Historia / Productos (9 subcategorías) / <b>Maridajes</b> / News / Contacto / Shop</li>
+          <li><b>Fotografía:</b> bodegón premium, materia prima, texturas — sin gente</li>
+        </ul>
+      </div>
+      <div class="sec">
+        <div class="sec-t">✅ 3 aprendizajes para Traverso</div>
+        <ol class="bl" style="list-style:decimal;padding-left:22px;list-style-position:inside">
+          <li>Abrir con <b>categoría narrativa fuerte</b> ("El arte del vinagre"). Levantar marca sobre el commodity.</li>
+          <li>Sección <b>Maridajes / Aplicaciones</b> dirigida a chefs y distribuidores → valor educativo + posicionamiento en uso</li>
+          <li>Subcategorización ambiciosa (9 tipos) comunica profundidad de portafolio</li>
+        </ol>
+      </div>
+      <div class="sec">
+        <div class="sec-t">❌ Qué evitar</div>
+        <ul class="bl">
+          <li>Casi nula foto de planta/equipo → narrativa se siente de marketing hueco</li>
+          <li>Traverso SÍ tiene ventaja real de origen (Chile, valles) — no la escondas detrás de minimalismo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="bench-castelo">
+    <div class="card-h"><span class="tag tag-bench">casteloalimentos.com.br</span><div class="card-t">Castelo · Brasil <span class="sub">vinagres, salsas, condimentos</span></div></div>
+    <div class="card-b">
+      <div class="sec">
+        <div class="sec-t">Ficha rápida</div>
+        <ul class="pl">
+          <li><b>Hero:</b> banner promocional con producto físico + tagline <em>"Alegria do Sabor!"</em></li>
+          <li><b>Paleta:</b> blanco, rojo/borgoña, dorado, gris</li>
+          <li><b>Tono:</b> heritage + proximidad familiar · <em>"120 años de tradição, inovação, tecnologia"</em></li>
+          <li><b>Tipografía:</b> sans corporativa tipo Arial — funcional, poco editorial</li>
+          <li><b>Menú:</b> Vinagres / Sumo limão / Molhos / Conservas / Azeites / Paté / Tempero / Kits / Promoção</li>
+          <li><b>Fotografía:</b> packaging y producto sobre fondo limpio</li>
+        </ul>
+      </div>
+      <div class="sec">
+        <div class="sec-t">✅ 3 aprendizajes para Traverso</div>
+        <ol class="bl" style="list-style:decimal;padding-left:22px;list-style-position:inside">
+          <li>Explicitar <b>años de historia + liderazgo regional</b> en el hero (Castelo dice "120 años, mayor en LATAM")</li>
+          <li>Separar claramente <b>Institucional</b> (para importadores: gobernanza, certificaciones, trazabilidad) de <b>Catálogo</b> (para retail)</li>
+          <li><b>Kits / Sample</b> como categoría propia — útil para compradores que arman muestrarios</li>
+        </ol>
+      </div>
+      <div class="sec">
+        <div class="sec-t">❌ Qué evitar</div>
+        <ul class="bl">
+          <li>Mezclar e-commerce B2C doméstico con sitio institucional B2B — genera ruido para comprador internacional</li>
+          <li>Paleta rojo-institucional: envejece y no comunica premium internacional</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="bench-sintesis">
+    <div class="card-h"><span class="tag tag-rec">Síntesis</span><div class="card-t">5 decisiones que Traverso debería tomar</div></div>
+    <div class="card-b">
+      <ol style="list-style:decimal;padding-left:22px;font-size:13px;color:#333;line-height:1.65">
+        <li style="margin-bottom:8px"><b>Hero con origen visible, no tipográfico seco.</b> Ni Sabater ni Milano capitalizan origen. Traverso tiene activo único: planta San Bernardo, valles, limones centro. Usar foto de planta + headline con "Chile". <span class="chip chip-ok">✓ Alineado con Cinema actual</span></li>
+        <li style="margin-bottom:8px"><b>Paleta cálida-sobria tipo Milano, no corporativa tipo Castelo.</b> Azul profundo + blanco/crema + dorado sutil. Evitar rojo-institucional. <span class="chip chip-ok">✓ Alineado</span></li>
+        <li style="margin-bottom:8px"><b>Tipografía mixta: serif editorial + sans + mono.</b> Milano logra premium con serif editorial; Sabater se ve commodity por usar solo sans. <span class="chip chip-ok">✓ Libre Baskerville + Source Sans 3 + Courier</span></li>
+        <li style="margin-bottom:8px"><b>Menú B2B-first con 3 vías claras:</b> (a) Productos con subniveles, (b) <b>Marca Propia/MDD</b> como CTA propio, (c) Quiénes Somos/Calidad visible en top-nav. <span class="chip chip-warn">⚠️ Revisar menú actual</span></li>
+        <li style="margin-bottom:8px"><b>Módulo Aplicaciones/Uses + Sample kit descargable.</b> Convertir brochure en lead-gen. <span class="chip chip-err">✗ No implementado todavía</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SECCION 8: CURADURIA FOTO
+  ============================================================ -->
+  <div class="sh" id="foto">
+    <div class="n">08 · Assets</div>
+    <h2>Curaduría fotográfica</h2>
+    <p>~80 fotos de sesión planta (Sebastián Domínguez, 15/04) + 10 videos cámara + drone. Asignación puntual foto ↔ sección del sitio.</p>
+  </div>
+
+  <div class="card" data-fb="foto-hero-candidatas">
+    <div class="card-h"><span class="tag tag-photo">Hero</span><div class="card-t">Candidatas para hero del Home</div></div>
+    <div class="card-b">
+      <div class="ph-ref">
+        <div class="ph-num">-2</div>
+        <div>
+          <div class="ph-t">Fachada planta moderna + tanques</div>
+          <div class="ph-d">Wide shot exterior: arquitectura contemporánea, tanques acero, cielo azul, paisajismo verde. Composición limpia, muy editorial.</div>
+        </div>
+        <div class="ph-use">★ HERO #1</div>
+      </div>
+      <div class="ph-ref">
+        <div class="ph-num">-108</div>
+        <div>
+          <div class="ph-t">Interior: tanque roble + acero + tuberías</div>
+          <div class="ph-d">Impacto visual alto. Comunica 130 años (roble) + modernidad (acero) + proceso industrial en una sola imagen.</div>
+        </div>
+        <div class="ph-use">★ HERO #2 o Quiénes Somos</div>
+      </div>
+      <div class="ph-ref">
+        <div class="ph-num">-84</div>
+        <div>
+          <div class="ph-t">Mar de botellas con tapa verde</div>
+          <div class="ph-d">Decenas de botellas con líquido ámbar y tapa verde. Comunica <b>escala productiva</b> de forma contundente.</div>
+        </div>
+        <div class="ph-use alt">Propuesta de valor · Productos</div>
+      </div>
+      <div class="ph-ref">
+        <div class="ph-num">-57</div>
+        <div>
+          <div class="ph-t">Línea de envasado PET 5L</div>
+          <div class="ph-d">Botellas plásticas transparentes en la línea, packaging verde al fondo. Proceso industrial activo.</div>
+        </div>
+        <div class="ph-use alt">Productos · línea industrial</div>
+      </div>
+      <div class="ph-ref">
+        <div class="ph-num">-46</div>
+        <div>
+          <div class="ph-t">Barril madera antiguo + válvula</div>
+          <div class="ph-d">Close-up artístico. Textura madera + metal plateado. Heritage visual.</div>
+        </div>
+        <div class="ph-use alt">Quiénes Somos · historia</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="foto-asignacion">
+    <div class="card-h"><span class="tag tag-rec">Mapeo</span><div class="card-t">Asignación tentativa por sección</div></div>
+    <div class="card-b">
+      <div class="mx">
+        <div class="mx-h" style="grid-template-columns:1fr 1fr 1fr 1fr"><div>Sección</div><div>Foto principal</div><div>Fotos apoyo</div><div>Estado</div></div>
+        <div class="mx-r" style="grid-template-columns:1fr 1fr 1fr 1fr"><div class="q">Home · Hero</div><div>-2 (fachada) o -108 (interior heritage)</div><div>-84 en carousel productos</div><div class="win">✓ Disponible</div></div>
+        <div class="mx-r" style="grid-template-columns:1fr 1fr 1fr 1fr"><div class="q">Home · Propuesta valor</div><div>Composición 4 fotos iconográficas</div><div>-57, -84, -46, fachada</div><div class="win">✓ Disponible</div></div>
+        <div class="mx-r" style="grid-template-columns:1fr 1fr 1fr 1fr"><div class="q">Quiénes Somos · Hero</div><div>-108 (tanque roble + acero)</div><div>-46 (detalle barril)</div><div class="win">✓ Disponible</div></div>
+        <div class="mx-r" style="grid-template-columns:1fr 1fr 1fr 1fr"><div class="q">Quiénes Somos · Diferenciación</div><div>Fotos de proceso y línea</div><div>-57, -84</div><div class="win">✓ Disponible</div></div>
+        <div class="mx-r" style="grid-template-columns:1fr 1fr 1fr 1fr"><div class="q">Productos · Catálogo</div><div>Packshot producto fondo limpio</div><div>—</div><div>✗ FALTA sesión producto</div></div>
+        <div class="mx-r" style="grid-template-columns:1fr 1fr 1fr 1fr"><div class="q">Productos · Escala</div><div>-84 (mar de botellas) o -108</div><div>-57</div><div class="win">✓ Disponible</div></div>
+        <div class="mx-r" style="grid-template-columns:1fr 1fr 1fr 1fr"><div class="q">Contacto</div><div>Foto pallets/contenedor exportación</div><div>—</div><div>⚠️ Revisar selección</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="foto-videos">
+    <div class="card-h"><span class="tag tag-photo">Video</span><div class="card-t">Videos disponibles <span class="sub">sesión 15/04 + drone</span></div></div>
+    <div class="card-b">
+      <ul class="bl">
+        <li><b>7 clips cámara:</b> C0058, C0062, C0065 (x2), C0068, C0069, C0074 — líneas producción activas</li>
+        <li><b>3 clips drone DJI:</b> DJI_0697, 0698, 0704 — aéreas planta</li>
+      </ul>
+      <div class="sec">
+        <div class="sec-t">Sugerencias de uso</div>
+        <ul class="bl">
+          <li><b>Hero home (opcional):</b> clip drone 8-10 seg en loop silencioso, sobre fondo azul, muy sutil (0.15 opacity como overlay)</li>
+          <li><b>Módulo "Nuestros procesos":</b> 1 clip cámara de línea activa, autoplay muted loop</li>
+          <li><b>NO usar como hero principal:</b> carga pesada, complica mobile, no aporta más que una foto estática bien elegida</li>
+        </ul>
+      </div>
+      <div class="note"><b>Decisión:</b> mantener hero con foto estática (Cinema #40). Videos como piezas auxiliares en secciones más bajas del scroll. Cronograma no da para integración pesada de video.</div>
+    </div>
+  </div>
+
+  <div class="card" data-fb="foto-faltantes">
+    <div class="card-h"><span class="tag tag-anti">Brecha</span><div class="card-t">Qué falta fotografiar antes del 1 de mayo</div></div>
+    <div class="card-b">
+      <ul class="bl">
+        <li><b>Sesión producto (crítica):</b> cada referencia sobre fondo neutro, iluminación catálogo. Sin esto la página Productos queda coja.</li>
+        <li><b>Sesión corporativa (nice to have):</b> reunión ejecutiva, oficina, interacción profesional. Sustituible por foto existente de planta con trabajadores.</li>
+        <li><b>Packshots logística:</b> cajas con códigos, pallets con etiquetas, contenedor. Puede pedirse a Traverso como "fotos de despacho" para la sección contacto.</li>
+      </ul>
+      <div class="warn"><b>Riesgo:</b> si no se cubre la sesión producto esta semana, hay que tomar atajo: packshots de celular bien iluminados o renders neutros. No es ideal pero evita que Productos quede vacío.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SECCION 9: PUNCH LIST
+  ============================================================ -->
+  <div class="sh" id="punch">
+    <div class="n">09 · Cierre</div>
+    <h2>Punch list · hasta el 1 de mayo</h2>
+    <p>Pendientes ordenados por prioridad y responsable. 8 días hábiles restantes. Todo lo marcado HI es bloqueante.</p>
+  </div>
+
+  <div class="punch" data-fb="punch-cliente">
+    <div class="card-h" style="padding:12px 14px;border-bottom:1px solid #eee"><div class="card-t">Pendientes con el cliente (Víctor)</div></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Aprobación de logo (3 propuestas enviadas 08/04)</div><div class="p-w">Rodrigo → Víctor</div><span class="p-p hi">HI</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Logos oficiales certificaciones (BRC AA, HACCP)</div><div class="p-w">Jaime San Martín</div><span class="p-p hi">HI</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Detalle subcategorías Condimentos + otras líneas</div><div class="p-w">Víctor</div><span class="p-p md">MED</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Packshots / catálogo existente de productos</div><div class="p-w">Víctor / Jaime</div><span class="p-p hi">HI</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Confirmar si se agenda mini-sesión corporativa</div><div class="p-w">Rodrigo → Víctor</div><span class="p-p lo">LO</span></div>
+  </div>
+
+  <div class="punch" data-fb="punch-sergio">
+    <div class="card-h" style="padding:12px 14px;border-bottom:1px solid #eee"><div class="card-t">Pendientes Sergio (frontend / diseño)</div></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Limpiar variables <code>--color-secondary</code> y <code>--color-accent</code> sin uso del CSS</div><div class="p-w">Sergio · 30 min</div><span class="p-p md">MED</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Decidir hero definitivo (recomendado: Cinema Full Width actual)</div><div class="p-w">Sergio + Rodrigo</div><span class="p-p hi">HI</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Integrar logo aprobado en header, hero, footer, favicon</div><div class="p-w">Sergio · post aprobación</div><span class="p-p hi">HI</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Integrar logo Marca Chile en footer + Quiénes Somos según Brand Book</div><div class="p-w">Sergio · 1-2h</div><span class="p-p md">MED</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Reemplazar trust pills textuales por logos certificaciones reales</div><div class="p-w">Sergio · post Jaime</div><span class="p-p md">MED</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Curaduría foto: asignar y optimizar (webp, srcset) según matriz</div><div class="p-w">Sergio · 3-4h</div><span class="p-p hi">HI</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Implementar módulo "Aplicaciones / Uses" en Productos</div><div class="p-w">Sergio · 2-3h</div><span class="p-p lo">LO</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Implementar CTA "Solicitar muestra" + formulario B2B extendido</div><div class="p-w">Sergio · 2-3h</div><span class="p-p md">MED</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Ajustar subhead del hero: sumar "jugo de limón" al listado</div><div class="p-w">Sergio · 5 min</div><span class="p-p lo">LO</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Footer con enlace a traverso.cl + Marca Chile</div><div class="p-w">Sergio · 30 min</div><span class="p-p md">MED</span></div>
+  </div>
+
+  <div class="punch" data-fb="punch-axel">
+    <div class="card-h" style="padding:12px 14px;border-bottom:1px solid #eee"><div class="card-t">Pendientes Axel (backend / infra)</div></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Accesos cpanel confirmados para sergio@wba.cl y axel@wba.cl</div><div class="p-w">Axel + Infra Traverso</div><span class="p-p hi">HI</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Formspree configurado con IDs reales + auto-respuesta al lead</div><div class="p-w">Axel · 1h</div><span class="p-p hi">HI</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Panel admin funcional: brand, productos, pilares, leads</div><div class="p-w">Axel · test QA</div><span class="p-p md">MED</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Migración a servidor cliente (última semana abril)</div><div class="p-w">Axel + Nicolás Pérez (infra)</div><span class="p-p hi">HI</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">SEO on-page: meta, og, sitemap, robots, keywords</div><div class="p-w">Axel · 2h</div><span class="p-p md">MED</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Traducciones ES/EN revisadas en todas las páginas</div><div class="p-w">Axel · 2-3h</div><span class="p-p md">MED</span></div>
+  </div>
+
+  <div class="punch" data-fb="punch-rodrigo">
+    <div class="card-h" style="padding:12px 14px;border-bottom:1px solid #eee"><div class="card-t">Pendientes Rodrigo (comercial)</div></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Seguimiento aprobación logo (agendar llamada antes del 25/04)</div><div class="p-w">Rodrigo</div><span class="p-p hi">HI</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Gestionar logos certificaciones + packshots con Víctor/Jaime</div><div class="p-w">Rodrigo</div><span class="p-p hi">HI</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Revisión final de textos y ajustes de copy si aplica</div><div class="p-w">Rodrigo · 2h</div><span class="p-p md">MED</span></div>
+    <div class="punch-r"><input type="checkbox"><div class="p-t">Presentación propuestas al cliente (hero + sistema)</div><div class="p-w">Rodrigo</div><span class="p-p hi">HI</span></div>
+  </div>
+
+  <div class="card" data-fb="punch-riesgos">
+    <div class="card-h"><span class="tag tag-anti">Riesgos</span><div class="card-t">Riesgos de cronograma</div></div>
+    <div class="card-b">
+      <ul class="bl">
+        <li><b>Riesgo 1 — Logo no aprobado esta semana:</b> bloquea header, papelería, favicon. <i>Mitigación:</i> Rodrigo agenda llamada con Víctor 23-25 abril.</li>
+        <li><b>Riesgo 2 — Sesión producto no se hace:</b> página Productos queda sin fotos tipo catálogo. <i>Mitigación:</i> packshots internos + celular + post-proceso, o plan B con renders neutros.</li>
+        <li><b>Riesgo 3 — Migración a servidor cliente se traba:</b> si cpanel/DNS no están el 28/04, no se entrega en traversointernational.com el 01/05. <i>Mitigación:</i> Axel confirma accesos antes del 24/04, plan B mantener en servidor WBA con DNS apuntando.</li>
+        <li><b>Riesgo 4 — Certificaciones BRC no llegan:</b> trust bar queda con pills textuales. <i>Mitigación:</i> Rodrigo pide explícitamente a Jaime, fecha tope 28/04.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" data-fb="punch-cronograma">
+    <div class="card-h"><span class="tag tag-rec">Cronograma</span><div class="card-t">Propuesta semanal</div></div>
+    <div class="card-b">
+      <div class="mx">
+        <div class="mx-h" style="grid-template-columns:120px 1fr 1fr"><div>Semana</div><div>Producción</div><div>Cliente</div></div>
+        <div class="mx-r" style="grid-template-columns:120px 1fr 1fr"><div class="q">23-25 abril</div><div>Curaduría foto + limpieza CSS + logo Marca Chile + módulos Aplicaciones/Sample</div><div>Llamada aprobación logo · pedir certificaciones + packshots</div></div>
+        <div class="mx-r" style="grid-template-columns:120px 1fr 1fr"><div class="q">26-28 abril</div><div>Integración logo aprobado · SEO · traducciones · testing · ajustes copy</div><div>Presentación propuesta final · feedback</div></div>
+        <div class="mx-r" style="grid-template-columns:120px 1fr 1fr"><div class="q">29-30 abril</div><div>Ajustes de feedback · QA cross-browser · performance · migración a servidor</div><div>Victor revisa en staging</div></div>
+        <div class="mx-r" style="grid-template-columns:120px 1fr 1fr"><div class="q">1 mayo</div><div>Entrega final · DNS apuntando · handoff admin panel</div><div>Aprobación entrega</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEND CTA -->
+  <div class="send-cta">
+    <h3>Dejá tu feedback y mandanoslo</h3>
+    <p class="desc">Marcá cada módulo con ✓ (ok), ↻ (seguir) o ✕ (descartar). Agregá notas en los que tengan duda. Al terminar, descargá el JSON y mandalo por WhatsApp o email.</p>
+    <div class="btns">
+      <button class="btn-primary" id="send-download" type="button">⬇ Descargar y enviar <span id="send-count"></span></button>
+      <button class="btn-secondary" id="send-open-compare" type="button">Comparar con otros</button>
+    </div>
+    <div class="who">Mandanoslo a <b>Axel Meléndez · axel@wba.cl</b> · Autor: <b id="send-who">—</b></div>
+  </div>
+
+  <div class="foot">
+    <h4>Research Traverso International Foods · v1</h4>
+    <p>Doc vivo — iterable con el sistema de feedback (✓ / ↻ / ✕ / 💬). Generado 2026-04-23. Para iterar volver con <code>/investigar seguir</code> + JSON exportado.</p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  const SK='traverso-research-fb-v1';
+  const AK='traverso-research-fb-v1-author';
+  const HANDLE_KEY='fileHandle';
+  const DOC_VERSION='traverso-research-v1';
+  const DOC_TITLE='Research Traverso International Foods';
+  const DEBOUNCE_MS=1200;
+
+  let st={};
+  try{st=JSON.parse(localStorage.getItem(SK)||'{}')}catch(e){st={}}
+  Object.keys(st).forEach(k=>{
+    if(typeof st[k]==='string')st[k]={state:st[k]};
+    else if(!st[k]||typeof st[k]!=='object')st[k]={};
+  });
+  let activeAuthor=localStorage.getItem(AK)||'';
+  let fileHandle=null;
+  let saveStatus='idle';
+  let saveTimer=null;
+  let hasUnsavedChanges=false;
+
+  function idbOpen(){
+    return new Promise((res,rej)=>{
+      const r=indexedDB.open(SK+'-fb',1);
+      r.onupgradeneeded=()=>{r.result.createObjectStore('kv');};
+      r.onsuccess=()=>res(r.result);
+      r.onerror=()=>rej(r.error);
+    });
+  }
+  async function idbGet(key){try{const db=await idbOpen();return await new Promise((res,rej)=>{const tx=db.transaction('kv','readonly');const r=tx.objectStore('kv').get(key);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}catch(e){return null}}
+  async function idbSet(key,val){try{const db=await idbOpen();await new Promise((res,rej)=>{const tx=db.transaction('kv','readwrite');tx.objectStore('kv').put(val,key);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);});}catch(e){}}
+  async function idbDel(key){try{const db=await idbOpen();await new Promise((res,rej)=>{const tx=db.transaction('kv','readwrite');tx.objectStore('kv').delete(key);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);});}catch(e){}}
+
+  const toastEl=document.getElementById('toast');
+  let toastTimer=null;
+  function toast(msg,kind,ms){ms=ms||2400;toastEl.className='toast show '+(kind||'');toastEl.textContent=msg;clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.className='toast '+(kind||''),ms);}
+
+  const saveChip=document.getElementById('save-chip');
+  const saveChipIco=document.getElementById('save-chip-ico');
+  const saveChipTxt=document.getElementById('save-chip-txt');
+  function renderSaveChip(){
+    if(!saveChip)return;
+    let info;
+    if(autoDLEnabled&&!fileHandle){
+      if(saveStatus==='saving')info=['saving','⬇','Autodescargando…','Bajando '+suggestedName()+' a tu carpeta'];
+      else info=['active','⬇','Autodescarga','Baja '+suggestedName()+' cada 45s · clic para desactivar'];
+    }else{
+      const map={
+        idle:['idle','📄','Sin archivo','Clic para activar autoguardado'],
+        active:['active','💾','Autoguardado','Autoguardando en '+(fileHandle&&fileHandle.name||'archivo')],
+        dirty:['dirty','●','Sin guardar','Hay cambios sin guardar · clic para reactivar'],
+        saving:['saving','…','Guardando','Escribiendo en archivo'],
+        error:['dirty','⚠','Error','Error al guardar · clic para reintentar']
+      };
+      info=map[saveStatus]||map.idle;
+      if(fileHandle&&saveStatus==='active')info=[info[0],info[1],info[2]+' · '+fileHandle.name,info[3]];
+    }
+    saveChip.className='save-chip '+info[0];
+    saveChipIco.textContent=info[1];
+    saveChipTxt.textContent=info[2];
+    saveChip.title=info[3];
+  }
+
+  function buildExport(){return{_meta:{author:activeAuthor||'anónimo',exportedAt:new Date().toISOString(),version:DOC_VERSION,sourceDoc:DOC_TITLE},entries:JSON.parse(JSON.stringify(st))};}
+  function serialize(){return JSON.stringify(buildExport(),null,2)}
+  function suggestedName(){
+    const n=(activeAuthor||'anonimo').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'anonimo';
+    return 'traverso-research-'+n+'.json';
+  }
+
+  const inIframe=(function(){try{return window.self!==window.top}catch(e){return true}})();
+  const isFileProtocol=window.location.protocol==='file:';
+  const hasFSA=('showSaveFilePicker' in window)&&!inIframe;
+  const ADK=SK+'-autodl';
+  const AUTODL_DEBOUNCE=45000;
+  let autoDLEnabled=localStorage.getItem(ADK)==='on';
+  let autoDLTimer=null;
+
+  async function verifyHandlePerm(handle,mode){mode=mode||'readwrite';try{const opts={mode};if((await handle.queryPermission(opts))==='granted')return true;if((await handle.requestPermission(opts))==='granted')return true;return false;}catch(e){return false}}
+  async function writeToHandle(handle){const w=await handle.createWritable();await w.write(serialize());await w.close();}
+  async function pickSaveFile(){
+    if(!hasFSA){
+      let why;
+      if(inIframe)why='Este doc está en una vista previa (iframe). Abrilo en pestaña nueva.';
+      else if(isFileProtocol)why='Tu navegador bloquea autoguardar cuando el HTML está abierto como archivo local.';
+      else why='Tu navegador no soporta autoguardar directo al archivo.';
+      if(autoDLEnabled){if(confirm(why+'\n\n✅ Autodescarga ACTIVA.\n\n¿Desactivarla?'))disableAutoDownload();return false;}
+      if(confirm(why+'\n\n¿Activar AUTODESCARGA cada 45s?\n\n[Aceptar] Activar\n[Cancelar] Descargar sólo al terminar'))enableAutoDownload();
+      return false;
+    }
+    try{
+      const h=await window.showSaveFilePicker({suggestedName:suggestedName(),types:[{description:'JSON',accept:{'application/json':['.json']}}]});
+      fileHandle=h;await idbSet(HANDLE_KEY,h);await writeToHandle(h);
+      saveStatus='active';hasUnsavedChanges=false;renderSaveChip();
+      toast('Autoguardado activo → '+h.name,'ok',2800);
+      return true;
+    }catch(e){if(e.name!=='AbortError')toast('No se pudo abrir el archivo','err');return false;}
+  }
+  function enableAutoDownload(){autoDLEnabled=true;localStorage.setItem(ADK,'on');saveStatus='active';renderSaveChip();toast('Autodescarga activa','ok',3600);scheduleAutoDL();}
+  function disableAutoDownload(){autoDLEnabled=false;localStorage.removeItem(ADK);clearTimeout(autoDLTimer);saveStatus='idle';hasUnsavedChanges=false;renderSaveChip();toast('Autodescarga desactivada','ok');}
+  function doAutoDownload(){triggerDownload();hasUnsavedChanges=false;saveStatus='active';renderSaveChip();}
+  function scheduleAutoDL(){if(!autoDLEnabled)return;clearTimeout(autoDLTimer);autoDLTimer=setTimeout(doAutoDownload,AUTODL_DEBOUNCE);}
+  async function tryRestoreHandle(){if(!hasFSA)return;const h=await idbGet(HANDLE_KEY);if(!h)return;fileHandle=h;try{const p=await h.queryPermission({mode:'readwrite'});if(p==='granted'){saveStatus='active';renderSaveChip();}else{saveStatus='dirty';renderSaveChip();}}catch(e){saveStatus='dirty';renderSaveChip();}}
+  async function doSave(){if(!fileHandle){hasUnsavedChanges=true;if(saveStatus!=='active')saveStatus='dirty';renderSaveChip();return;}saveStatus='saving';renderSaveChip();const ok=await verifyHandlePerm(fileHandle);if(!ok){saveStatus='dirty';hasUnsavedChanges=true;renderSaveChip();toast('Necesitamos permiso. Clic en 💾','warn',3800);return;}try{await writeToHandle(fileHandle);saveStatus='active';hasUnsavedChanges=false;renderSaveChip();}catch(e){saveStatus='error';renderSaveChip();toast('Error al guardar','err',3600);}}
+  function scheduleSave(){clearTimeout(saveTimer);hasUnsavedChanges=true;if(fileHandle)saveStatus='saving';else if(autoDLEnabled)saveStatus='saving';else if(saveStatus!=='active')saveStatus='dirty';renderSaveChip();saveTimer=setTimeout(()=>doSave(),DEBOUNCE_MS);if(autoDLEnabled&&!fileHandle)scheduleAutoDL();}
+
+  const save=()=>{localStorage.setItem(SK,JSON.stringify(st));scheduleSave();};
+  const get=(id)=>st[id]||(st[id]={});
+  const clean=(id)=>{if(st[id]&&!st[id].state&&!st[id].note)delete st[id]};
+
+  const ob=document.getElementById('ob-overlay');
+  const obName=document.getElementById('ob-name');
+  const obGo=document.getElementById('ob-go');
+  const obErr=document.getElementById('ob-err');
+  function showOnboarding(force){ob.classList.add('show');ob.setAttribute('aria-hidden','false');obName.value=force&&activeAuthor?activeAuthor:'';validateName();setTimeout(()=>obName.focus(),100);}
+  function hideOnboarding(){ob.classList.remove('show');ob.setAttribute('aria-hidden','true');}
+  function validateName(){const v=obName.value.trim();obGo.disabled=v.length<2;obErr.textContent=(v.length>0&&v.length<2)?'Al menos 2 caracteres':'';}
+  function commitName(){const v=obName.value.trim();if(v.length<2)return;const first=!activeAuthor;activeAuthor=v;localStorage.setItem(AK,activeAuthor);syncAuthorUI();hideOnboarding();toast('Listo, '+activeAuthor+'.','ok',3000);if(first){document.querySelectorAll('[data-fb]').forEach(el=>{const ab=el.querySelector('.note-panel .author-tag b');if(ab&&!ab.textContent.replace('—',''))ab.textContent=activeAuthor;});}}
+  obName.addEventListener('input',validateName);
+  obName.addEventListener('keydown',e=>{if(e.key==='Enter'&&!obGo.disabled)commitName()});
+  obGo.addEventListener('click',commitName);
+  ob.querySelectorAll('.presets button').forEach(b=>b.addEventListener('click',()=>{obName.value=b.getAttribute('data-name');validateName();obName.focus();}));
+
+  const authorSel=document.getElementById('fb-author');
+  function syncAuthorUI(){if(activeAuthor&&![...authorSel.options].some(o=>o.value===activeAuthor||o.textContent===activeAuthor)){const opt=document.createElement('option');opt.textContent=activeAuthor;opt.value=activeAuthor;authorSel.insertBefore(opt,authorSel.querySelector('option[value="__custom__"]'));}if(activeAuthor)authorSel.value=activeAuthor;const sw=document.getElementById('send-who');if(sw)sw.textContent=activeAuthor||'—';}
+  authorSel.addEventListener('change',()=>{if(authorSel.value==='__custom__'){showOnboarding(true);authorSel.value=activeAuthor||'';return;}activeAuthor=authorSel.value;localStorage.setItem(AK,activeAuthor);syncAuthorUI();});
+
+  document.querySelectorAll('[data-fb]').forEach(el=>{
+    const id=el.getAttribute('data-fb');
+    const w=document.createElement('div');
+    w.className='fb';
+    w.innerHTML='<button data-s="ok" title="Está bien">✓</button><button data-s="more" title="Seguir">↻</button><button data-s="drop" title="Descartar">✕</button><button data-s="note" title="Comentario">💬</button>';
+    el.appendChild(w);
+    const panel=document.createElement('div');
+    panel.className='note-panel';
+    panel.innerHTML='<label>Comentario <span class="author-tag">de <b>—</b></span></label><textarea placeholder="Por qué lo marcaste así, qué querés expandir..."></textarea><div class="hint"><span>Se guarda al salir del campo</span><span class="char-count">0 chars</span></div>';
+    const pill=document.createElement('div');
+    pill.className='note-pill';
+    pill.innerHTML='<b>💬</b><span class="by"></span><span class="text"></span>';
+    el.appendChild(panel);
+    el.appendChild(pill);
+    const ta=panel.querySelector('textarea');
+    const authorBox=panel.querySelector('.author-tag b');
+    const pillBy=pill.querySelector('.by');
+    const pillText=pill.querySelector('.text');
+    const charCount=panel.querySelector('.char-count');
+    const applyState=()=>{
+      const d=st[id]||{};
+      el.classList.remove('fb-ok','fb-more','fb-drop','fb-has-note');
+      w.querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+      if(d.state){el.classList.add('fb-'+d.state);w.querySelector('[data-s="'+d.state+'"]').classList.add('on')}
+      const who=d.author||activeAuthor;
+      authorBox.textContent=who||'—';
+      if(d.note&&d.note.trim()){el.classList.add('fb-has-note');w.querySelector('[data-s="note"]').classList.add('on');ta.value=d.note;pillBy.textContent=d.author||'—';pillText.textContent=d.note.length>110?d.note.slice(0,110)+'…':d.note;pill.style.display='flex';charCount.textContent=d.note.length+' chars';}
+      else{ta.value='';pill.style.display='none';charCount.textContent='0 chars';}
+    };
+    w.querySelectorAll('button[data-s="ok"],button[data-s="more"],button[data-s="drop"]').forEach(b=>{
+      b.addEventListener('click',e=>{e.stopPropagation();if(!activeAuthor){showOnboarding();return;}const s=b.getAttribute('data-s');const d=get(id);if(d.state===s){delete d.state;if(!d.note)delete d.author;}else{d.state=s;d.author=activeAuthor;}clean(id);save();applyState();sum();});
+    });
+    w.querySelector('[data-s="note"]').addEventListener('click',e=>{e.stopPropagation();if(!activeAuthor){showOnboarding();return;}panel.classList.toggle('open');if(panel.classList.contains('open')){authorBox.textContent=activeAuthor;setTimeout(()=>ta.focus(),50)}});
+    pill.addEventListener('click',()=>{panel.classList.add('open');setTimeout(()=>ta.focus(),50)});
+    ta.addEventListener('input',()=>charCount.textContent=ta.value.length+' chars');
+    ta.addEventListener('blur',()=>{const d=get(id);const v=ta.value.trim();if(v){d.note=v;d.author=activeAuthor;}else{delete d.note;if(!d.state)delete d.author;}clean(id);save();applyState();sum();});
+    applyState();
+  });
+
+  function sum(){
+    const all=document.querySelectorAll('[data-fb]').length;
+    let ok=0,more=0,drop=0,note=0;
+    Object.values(st).forEach(d=>{if(d.state==='ok')ok++;else if(d.state==='more')more++;else if(d.state==='drop')drop++;if(d.note&&d.note.trim())note++;});
+    document.getElementById('fb-tot').textContent=all+' módulos';
+    document.getElementById('fb-ok').textContent=ok+' ✓ bien';
+    document.getElementById('fb-more').textContent=more+' ↻ seguir';
+    document.getElementById('fb-drop').textContent=drop+' ✕ descartar';
+    document.getElementById('fb-note').textContent=note+' 💬 notas';
+    const sc=document.getElementById('send-count');
+    if(sc)sc.textContent=(ok+more+drop)+' marcas / '+note+' notas';
+  }
+
+  document.getElementById('fb-filter').addEventListener('click',()=>{document.body.classList.toggle('filter-more');const b=document.getElementById('fb-filter');b.textContent=document.body.classList.contains('filter-more')?'Ver todo':'Ver solo ↻ seguir';});
+  document.getElementById('fb-export').addEventListener('click',()=>{const data=serialize();if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(data).then(()=>toast('JSON copiado','ok')).catch(()=>fallbackShow(data));}else{fallbackShow(data)}});
+  function fallbackShow(data){const w=window.open('','_blank');if(w)w.document.write('<pre style="font:12px monospace;padding:20px;white-space:pre-wrap">'+data.replace(/</g,'&lt;')+'</pre>');}
+
+  const fbSave=document.getElementById('fb-save');
+  if(fbSave){if(!hasFSA){fbSave.textContent='⬇ Autodescarga';fbSave.title='Tu navegador usa autodescarga cada 45s';}fbSave.addEventListener('click',async()=>{if(!activeAuthor){showOnboarding();return;}await pickSaveFile();});}
+  saveChip.addEventListener('click',async()=>{if(!activeAuthor){showOnboarding();return;}if(autoDLEnabled&&!fileHandle){if(confirm('¿Desactivar autodescarga?'))disableAutoDownload();return;}if(!fileHandle){await pickSaveFile();return;}if(saveStatus==='dirty'||saveStatus==='error'){await doSave();}});
+
+  function triggerDownload(){const blob=new Blob([serialize()],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=suggestedName();document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+  const sendBtn=document.getElementById('send-download');
+  if(sendBtn)sendBtn.addEventListener('click',()=>{if(!activeAuthor){showOnboarding();return;}const cnt=Object.values(st).filter(d=>d.state||d.note).length;if(cnt===0&&!confirm('Sin marcas. ¿Descargar igual?'))return;triggerDownload();toast('Descargado · mandanoslo por email','ok',4000);});
+  const sendCmp=document.getElementById('send-open-compare');
+  if(sendCmp)sendCmp.addEventListener('click',()=>openCompare());
+
+  document.getElementById('fb-reset').addEventListener('click',async()=>{if(!confirm('¿Borrar todas las marcas y notas?'))return;st={};localStorage.removeItem(SK);document.querySelectorAll('[data-fb]').forEach(el=>{el.classList.remove('fb-ok','fb-more','fb-drop','fb-has-note');el.querySelectorAll('.fb button').forEach(b=>b.classList.remove('on'));const ta=el.querySelector('.note-panel textarea');if(ta)ta.value='';const p=el.querySelector('.note-panel');if(p)p.classList.remove('open');const pill=el.querySelector('.note-pill');if(pill)pill.style.display='none';});sum();if(fileHandle){if(confirm('¿También desvincular archivo de autoguardado?')){await idbDel(HANDLE_KEY);fileHandle=null;saveStatus='idle';hasUnsavedChanges=false;renderSaveChip();}else{scheduleSave();}}});
+
+  // COMPARE
+  const cmpOverlay=document.getElementById('cmp-overlay');
+  const cmpBody=document.getElementById('cmp-body');
+  const cmpLoaded=document.getElementById('cmp-loaded');
+  const cmpFile=document.getElementById('cmp-file');
+  const cmpDrop=document.getElementById('cmp-drop');
+  const cmpFilters=document.getElementById('cmp-filters');
+  let cmpDatasets=[];
+  let cmpFilter='all';
+  function openCompare(){cmpOverlay.classList.add('show');if(activeAuthor&&Object.keys(st).length>0){const mineIdx=cmpDatasets.findIndex(d=>d.mine);if(mineIdx>=0)cmpDatasets.splice(mineIdx,1);cmpDatasets.unshift({author:activeAuthor+' (vos)',entries:JSON.parse(JSON.stringify(st)),mine:true});}renderCompare();}
+  document.getElementById('cmp-close').addEventListener('click',()=>cmpOverlay.classList.remove('show'));
+  cmpOverlay.addEventListener('click',e=>{if(e.target===cmpOverlay)cmpOverlay.classList.remove('show')});
+  document.getElementById('fb-compare').addEventListener('click',openCompare);
+  cmpDrop.addEventListener('click',e=>{if(e.target.tagName!=='INPUT'){cmpFile.click();}});
+  cmpDrop.addEventListener('dragover',e=>{e.preventDefault();cmpDrop.classList.add('drag')});
+  cmpDrop.addEventListener('dragleave',()=>cmpDrop.classList.remove('drag'));
+  cmpDrop.addEventListener('drop',e=>{e.preventDefault();cmpDrop.classList.remove('drag');handleCmpFiles(e.dataTransfer.files);});
+  cmpFile.addEventListener('change',()=>{handleCmpFiles(cmpFile.files);cmpFile.value=''});
+  function handleCmpFiles(files){const arr=Array.from(files);if(arr.length===0)return;let ok=0,fail=0;const readers=arr.map(f=>new Promise(res=>{const r=new FileReader();r.onload=()=>{try{const obj=JSON.parse(r.result);let author=null,entries=null;if(obj&&obj._meta&&obj.entries){author=obj._meta.author||f.name.replace(/\.json$/i,'');entries=obj.entries;}else if(obj&&typeof obj==='object'){entries=obj;const m=f.name.match(/traverso-research[\s_-]+([^.]+)/i);author=m?m[1].replace(/[-_]+/g,' ').trim():f.name.replace(/\.json$/i,'');if(author)author=author.charAt(0).toUpperCase()+author.slice(1);}if(entries){cmpDatasets.push({author:author||'anónimo',entries,fileName:f.name});ok++;}else fail++;}catch(e){fail++}res();};r.onerror=()=>{fail++;res()};r.readAsText(f);}));Promise.all(readers).then(()=>{if(ok>0)toast('Cargados '+ok+' archivos','ok');else toast('No se pudo leer ningún archivo','err');renderCompare();});}
+  cmpFilters.querySelectorAll('button').forEach(b=>{b.addEventListener('click',()=>{cmpFilters.querySelectorAll('button').forEach(o=>o.classList.remove('on'));b.classList.add('on');cmpFilter=b.getAttribute('data-f');renderCompare();});});
+  function renderCompare(){
+    cmpLoaded.innerHTML='';
+    cmpDatasets.forEach((d,i)=>{const tag=document.createElement('span');tag.className='tag-author'+(d.mine?' tag-mine':'');tag.innerHTML='<span>'+escapeHtml(d.author)+'</span><span class="rm" title="Quitar">✕</span>';tag.querySelector('.rm').addEventListener('click',(e)=>{e.stopPropagation();cmpDatasets.splice(i,1);renderCompare();});cmpLoaded.appendChild(tag);});
+    if(cmpDatasets.length===0){cmpBody.innerHTML='<div class="cmp-empty">Todavía no cargaste ningún archivo.</div>';cmpFilters.style.display='none';return;}
+    cmpFilters.style.display='flex';
+    const domIds=[...document.querySelectorAll('[data-fb]')].map(el=>({id:el.getAttribute('data-fb'),section:findSectionTitle(el),title:findBlockTitle(el)}));
+    const knownSet=new Set(domIds.map(x=>x.id));
+    cmpDatasets.forEach(d=>Object.keys(d.entries).forEach(id=>{if(!knownSet.has(id)){domIds.push({id,section:'Otros',title:id});knownSet.add(id);}}));
+    let html='<table class="cmp-table"><thead><tr><th style="min-width:180px">Bloque</th>';
+    cmpDatasets.forEach(d=>{html+='<th>'+escapeHtml(d.author)+'</th>';});
+    html+='<th style="width:100px">Señal</th></tr></thead><tbody>';
+    let currentSection=null;let rowsShown=0;
+    domIds.forEach(item=>{
+      const cells=cmpDatasets.map(d=>d.entries[item.id]||null);
+      const states=cells.map(c=>c&&c.state||null);
+      const nonNull=states.filter(Boolean);
+      const unique=new Set(nonNull);
+      let rowKind='partial';
+      if(nonNull.length>=2&&nonNull.length===cmpDatasets.length&&unique.size===1)rowKind='consensus';
+      else if(unique.size>1)rowKind='conflict';
+      if(cmpFilter==='conflict'&&rowKind!=='conflict')return;
+      if(cmpFilter==='consensus'&&rowKind!=='consensus')return;
+      if(cmpFilter==='any'&&nonNull.length===0&&!cells.some(c=>c&&c.note))return;
+      if(item.section!==currentSection){currentSection=item.section;html+='<tr class="sec-hd"><td colspan="'+(2+cmpDatasets.length)+'">'+escapeHtml(currentSection||'Sin sección')+'</td></tr>';}
+      rowsShown++;
+      html+='<tr class="row-'+rowKind+'">';
+      html+='<td><div class="cell-id">'+escapeHtml(item.id)+'</div><div class="cell-title">'+escapeHtml(item.title||'')+'</div></td>';
+      cells.forEach(c=>{html+='<td>';if(c&&c.state)html+='<div class="cell-state s-'+c.state+'">'+stateIcon(c.state)+' '+stateLabel(c.state)+'</div>';else if(c&&c.note)html+='<div class="cell-state s-none">sólo nota</div>';else html+='<div class="cell-state s-none">—</div>';if(c&&c.note)html+='<div class="cell-note">'+escapeHtml(c.note)+'</div>';html+='</td>';});
+      html+='<td>';if(rowKind==='consensus')html+='<span class="cmp-badge consensus">Consenso</span>';else if(rowKind==='conflict')html+='<span class="cmp-badge conflict">Discrepa</span>';html+='</td></tr>';
+    });
+    html+='</tbody></table>';
+    if(rowsShown===0)html='<div class="cmp-empty">Ningún bloque coincide con el filtro.</div>';
+    cmpBody.innerHTML=html;
+  }
+  function stateIcon(s){return s==='ok'?'✓':s==='more'?'↻':s==='drop'?'✕':'·'}
+  function stateLabel(s){return s==='ok'?'bien':s==='more'?'seguir':s==='drop'?'descartar':'-'}
+  function escapeHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c])}
+  function findSectionTitle(el){let cur=el;while(cur&&cur!==document.body){let prev=cur.previousElementSibling;while(prev){if(prev.classList&&prev.classList.contains('sh')){const h=prev.querySelector('h2');if(h)return h.textContent.trim();const n=prev.querySelector('.n');return n?n.textContent.trim():'';}prev=prev.previousElementSibling;}cur=cur.parentElement;}return 'Sin sección';}
+  function findBlockTitle(el){const t=el.querySelector('.card-t');if(t){const clone=t.cloneNode(true);const s=clone.querySelector('.sub');if(s)s.remove();return clone.textContent.trim();}const ml=el.querySelector('.herom-l');if(ml)return ml.textContent.trim();const h=el.querySelector('h4,h3');if(h)return h.textContent.trim();return '';}
+
+  window.addEventListener('beforeunload',e=>{if(autoDLEnabled&&hasUnsavedChanges){clearTimeout(autoDLTimer);try{triggerDownload()}catch(err){}}if(hasUnsavedChanges&&!fileHandle&&!autoDLEnabled){const hasAnyEntry=Object.values(st).some(d=>d.state||d.note);if(hasAnyEntry){const msg='Tenés comentarios sin descargar. ¿Salir igual?';e.returnValue=msg;return msg;}}});
+
+  sum();
+  syncAuthorUI();
+  renderSaveChip();
+  tryRestoreHandle();
+  if(!activeAuthor)setTimeout(()=>showOnboarding(),300);
+})();
+</script>
+</body>
+</html>

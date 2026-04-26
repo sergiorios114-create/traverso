@@ -1,0 +1,42 @@
+[
+  {
+    "id": "trust_1",
+    "orden": 1,
+    "icono": "certificate",
+    "numero": "AA",
+    "texto_es": "BRC Global Standard",
+    "texto_en": "BRC Global Standard",
+    "subtexto_es": "Certificación internacional",
+    "subtexto_en": "International certification"
+  },
+  {
+    "id": "trust_2",
+    "orden": 2,
+    "icono": "calendar",
+    "numero": "130+",
+    "texto_es": "Años de trayectoria",
+    "texto_en": "Years of experience",
+    "subtexto_es": "De trayectoria productiva",
+    "subtexto_en": "Of production experience"
+  },
+  {
+    "id": "trust_3",
+    "orden": 3,
+    "icono": "package",
+    "numero": "2",
+    "texto_es": "Formatos de exportación",
+    "texto_en": "Export formats",
+    "subtexto_es": "Granel & Envasado",
+    "subtexto_en": "Bulk & Packaged"
+  },
+  {
+    "id": "trust_4",
+    "orden": 4,
+    "icono": "tag",
+    "numero": "MDD",
+    "texto_es": "Marca propia disponible",
+    "texto_en": "Private label available",
+    "subtexto_es": "Para tu mercado",
+    "subtexto_en": "For your market"
+  }
+]

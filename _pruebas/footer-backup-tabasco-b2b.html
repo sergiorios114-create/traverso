@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Footer backup · Tabasco B2B Style (vigente hasta 2026-04-23)</title>
+<meta name="description" content="Respaldo del footer Tabasco B2B de Traverso. Template restaurable: CSS + HTML + data-attrs listos para re-inyectar en index.html.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════════════════════
+   TOKENS (copia del index.html — solo los que usa el footer)
+════════════════════════════════════════════════════════════════ */
+:root{
+  --color-primary:#0B1E6B;
+  --color-primary-dark:#081450;
+  --color-accent:#C5A55A;
+  --color-accent-saturated:#C9A227;
+  --color-bg:#FBF9FA;
+  --color-text:#19212F;
+  --color-text-muted:#4A5362;
+  --color-text-on-dark:#FFFFFF;
+
+  --font-heading:'Libre Baskerville',Georgia,serif;
+  --font-body:'Source Sans 3',system-ui,sans-serif;
+
+  --text-xs:clamp(0.75rem,1vw,0.875rem);
+  --text-sm:clamp(0.875rem,1.2vw,1rem);
+
+  --container-width:1200px;
+  --container-padding:0 clamp(1.5rem,5vw,3rem);
+
+  --transition:0.3s ease;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);background:var(--color-bg);color:var(--color-text);line-height:1.7}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+img{max-width:100%;display:block}
+.container{max-width:var(--container-width);margin:0 auto;padding:var(--container-padding)}
+
+/* botones mínimos usados por el footer (extraídos del index) */
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-body);font-weight:700;padding:.7rem 1.4rem;border-radius:3px;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;transition:var(--transition);cursor:pointer;border:none}
+.btn--gold{background:var(--color-accent);color:var(--color-primary-dark)}
+.btn--gold:hover{background:#D4B96E}
+.btn-secondary{position:relative;font-family:var(--font-body);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;padding:.4rem 0;transition:var(--transition);cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;background:none;border:none}
+.btn-secondary--gold{color:var(--color-accent)}
+.btn-secondary::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--color-accent);transition:width .3s ease}
+.btn-secondary:hover::after{width:100%}
+.arrow{transition:transform .3s ease}
+.btn-secondary:hover .arrow{transform:translateX(4px)}
+
+/* ════════════════════════════════════════════════════════════════
+   FOOTER — Tabasco B2B Style (vigente hasta 2026-04-23)
+   Reemplazado por footer editorial v09 (Hybrid · Instrument/Ueno)
+════════════════════════════════════════════════════════════════ */
+.footer {
+  background: #050e33;
+  padding: clamp(3.5rem, 7vw, 5rem) 0 0;
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: clamp(2.5rem, 4vw, 3rem);
+}
+
+.footer__brand-sub {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.footer__social {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.footer__social-link {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.footer__social-link:hover {
+  border-color: var(--color-accent-saturated);
+  background: rgba(201,162,39,0.1);
+}
+
+.footer__social-link svg {
+  width: 13px;
+  height: 13px;
+  fill: rgba(255,255,255,0.5);
+}
+
+.footer__col-title {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 1rem;
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer__link {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  transition: color 0.3s ease;
+}
+
+.footer__link:hover { color: var(--color-accent-saturated); }
+
+.footer__contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.footer__contact-item svg { display: none; }
+
+.footer__contact-item span {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ── B2B Export Column ── */
+.footer__b2b {
+  background: rgba(201,162,39,0.06);
+  border: 1px solid rgba(201,162,39,0.15);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.footer__b2b-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-accent-saturated);
+  margin-bottom: 0.5rem;
+}
+
+.footer__b2b-desc {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.footer__b2b-targets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.footer__b2b-target {
+  font-size: 0.6rem;
+  font-weight: 500;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.6);
+}
+
+.footer__b2b-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer__bottom {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: center;
+}
+
+.footer__copy {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.25);
+}
+
+.footer__brand { grid-column: span 2; }
+
+@media (min-width: 640px) {
+  .footer__bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+}
+
+@media (min-width: 1024px) {
+  .footer__inner { grid-template-columns: 1.5fr 1fr 1fr 1.3fr; }
+  .footer__brand { grid-column: span 1; }
+}
+
+@media (max-width: 767px) {
+  .footer__b2b { grid-column: 1 / -1; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════
+     FOOTER HTML — Tabasco B2B Style (vigente hasta 2026-04-23)
+     Nota: .footer__social se rellena dinámicamente en el sitio
+     con collections-loader.js desde data/redes_sociales.json.
+     Este backup incluye el markup estático para referencia visual.
+════════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+
+      <div class="footer__brand">
+        <img src="../assets/logo-traverso.png" alt="Traverso International Foods" style="height:32px;filter:brightness(0) invert(1);margin-bottom:1rem;" />
+        <p class="footer__brand-sub" data-content="footer.brand_tagline">
+          Conectando calidad chilena con mercados globales desde hace más de 130 años.
+        </p>
+        <div class="footer__social" data-collection="redes_sociales">
+          <!-- Renderizado dinámico desde data/redes_sociales.json -->
+          <a class="footer__social-link" href="https://www.facebook.com/TraversoChileSA" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.378 14.192 5 15.115 5H18V0h-3.808C10.596 0 9 1.583 9 4.615V8z"/></svg>
+          </a>
+          <a class="footer__social-link" href="https://www.instagram.com/traversochile" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.897 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.897-.422-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+          </a>
+          <a class="footer__social-link" href="https://wa.me/56985150056" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer__col-title" data-content="footer.nav_title">Navegación</h4>
+        <ul class="footer__links">
+          <li><a href="index.html"         class="footer__link">Inicio</a></li>
+          <li><a href="quienes-somos.html" class="footer__link">Quiénes somos</a></li>
+          <li><a href="productos.html"     class="footer__link">Productos</a></li>
+          <li><a href="contacto.html"      class="footer__link">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer__col-title" data-content="footer.products_title">Productos</h4>
+        <ul class="footer__links">
+          <li><a href="productos.html" class="footer__link">Vinagres a granel</a></li>
+          <li><a href="productos.html" class="footer__link">Marca privada</a></li>
+          <li><a href="productos.html" class="footer__link">Marca Traverso</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__b2b">
+        <div class="footer__b2b-title">Exportación &amp; B2B</div>
+        <p class="footer__b2b-desc">Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+        <div class="footer__b2b-targets">
+          <span class="footer__b2b-target">Industriales</span>
+          <span class="footer__b2b-target">Distribuidores</span>
+          <span class="footer__b2b-target">Importadores</span>
+          <span class="footer__b2b-target">Retail</span>
+          <span class="footer__b2b-target">HORECA</span>
+        </div>
+        <div class="footer__b2b-actions">
+          <a href="contacto.html" class="btn btn--gold">Contactar</a>
+          <a href="productos.html" class="btn-secondary btn-secondary--gold">Solicitar Catalogo <span class="arrow">&rarr;</span></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy" data-content="footer.copyright">© 2026 Traverso International Foods. Todos los derechos reservados.</p>
+      <p class="footer__copy" data-content="footer.parent_company">Una empresa de Traverso S.A. · Chile</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

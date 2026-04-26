@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>About Traverso · Backup pre-V12 (Grid 2x2 + full · reveal cruzado adyacencia geométrica) — 2026-04-26</title>
+<style>
+:root{
+  --color-primary:#0B1E6B;--color-primary-dark:#081450;
+  --color-accent:#C5A55A;--color-accent-saturated:#C9A227;
+  --color-text:#19212F;--color-text-muted:#4A5362;--color-text-light:#6B7280;
+  --color-border-light:#EEF0F5;
+  --font-heading:"Libre Baskerville",Georgia,serif;
+  --font-body:"Source Sans 3",system-ui,sans-serif;
+  --section-padding:5rem 0;--container-padding:1.5rem;
+  --text-3xl:2rem;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);min-height:100vh;background:#fff;color:var(--color-text);line-height:1.6}
+
+/* ============================================================
+   QUIÉNES SOMOS · estado pre-V12 (reveal cruzado adyacencia geométrica)
+   Backup creado 2026-04-26
+   Mecánica: hover en card → activa background videos en cards adyacentes
+   Mapa: 1→{3,4} · 2→{1,4} · 3→{1,2} · 4→{2,3} · 5→{3,4}
+============================================================ */
+.about{padding:var(--section-padding);background:#fff}
+.container{max-width:1200px;margin:0 auto;padding:0 var(--container-padding)}
+.about__layout{display:grid;grid-template-columns:1fr 1.3fr;gap:4rem}
+@media(max-width:1024px){.about__layout{grid-template-columns:1fr;gap:2.5rem}}
+.about__title{font-family:var(--font-heading);font-size:var(--text-3xl);font-weight:700;color:var(--color-primary);line-height:1.15;margin:.75rem 0 1.25rem}
+.about__title em{font-style:normal;color:var(--color-text-light)}
+.about__lead{font-size:.95rem;color:var(--color-text-muted);line-height:1.7;margin-bottom:1.25rem}
+.section-label{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--color-accent-saturated);margin-bottom:1rem}
+
+/* Pilares con efecto hover: cada card revela imágenes en los adyacentes */
+.about__pillars{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--color-border-light);margin-top:1rem}
+@media(max-width:600px){.about__pillars{grid-template-columns:1fr}}
+.about__pillar{background:#fff;padding:2.5rem 2rem 2.25rem;transition:background .35s ease,color .35s ease;cursor:default;position:relative;overflow:hidden;min-height:200px}
+.about__pillar--full{grid-column:1/-1}
+.about__pillar--full .about__pillar-num{display:inline-block;margin-right:1rem;vertical-align:middle}
+.about__pillar--full .about__pillar-title{display:inline-block;vertical-align:middle}
+.about__pillar-img{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.06);transition:opacity .4s ease,transform .6s ease;pointer-events:none;z-index:1;overflow:hidden}
+.about__pillar-img > video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.about__pillar-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(11,30,107,0.25),rgba(8,20,80,0.15));z-index:2}
+.about__pillar-img--flat::after{content:none}
+.about__pillar-content{position:relative;z-index:2;transition:opacity .3s ease}
+.about__pillar:hover{background:var(--color-primary);color:#fff}
+.about__pillar:hover .about__pillar-num{color:var(--color-accent)}
+.about__pillar:hover .about__pillar-title,.about__pillar:hover .about__pillar-desc{color:#fff}
+.about__pillar-num{font-family:'Courier New',monospace;font-size:2rem;color:var(--color-accent-saturated);font-weight:400;line-height:1;margin-bottom:1rem;transition:color .3s ease}
+.about__pillar-title{font-family:var(--font-heading);font-weight:700;font-size:1.1rem;line-height:1.25;color:var(--color-primary);margin-bottom:.6rem;transition:color .3s ease}
+.about__pillar-desc{font-size:.85rem;color:var(--color-text-muted);line-height:1.65;transition:color .3s ease}
+
+@media(max-width:1023px){.about__pillar-img{display:none}}
+@media(hover:hover) and (min-width:1024px){
+  .about__pillars:has(.about__pillar--1:hover) .about__pillar-img[data-from="1"],
+  .about__pillars:has(.about__pillar--2:hover) .about__pillar-img[data-from="2"],
+  .about__pillars:has(.about__pillar--3:hover) .about__pillar-img[data-from="3"],
+  .about__pillars:has(.about__pillar--4:hover) .about__pillar-img[data-from="4"],
+  .about__pillars:has(.about__pillar--5:hover) .about__pillar-img[data-from="5"]{opacity:1;transform:scale(1)}
+  .about__pillars:has(.about__pillar--1:hover) .about__pillar--3 .about__pillar-content,
+  .about__pillars:has(.about__pillar--1:hover) .about__pillar--4 .about__pillar-content,
+  .about__pillars:has(.about__pillar--2:hover) .about__pillar--1 .about__pillar-content,
+  .about__pillars:has(.about__pillar--2:hover) .about__pillar--4 .about__pillar-content,
+  .about__pillars:has(.about__pillar--3:hover) .about__pillar--1 .about__pillar-content,
+  .about__pillars:has(.about__pillar--3:hover) .about__pillar--2 .about__pillar-content,
+  .about__pillars:has(.about__pillar--4:hover) .about__pillar--2 .about__pillar-content,
+  .about__pillars:has(.about__pillar--4:hover) .about__pillar--3 .about__pillar-content,
+  .about__pillars:has(.about__pillar--5:hover) .about__pillar--3 .about__pillar-content,
+  .about__pillars:has(.about__pillar--5:hover) .about__pillar--4 .about__pillar-content{opacity:0}
+}
+</style>
+</head>
+<body>
+
+<section class="about" id="nosotros">
+  <div class="container">
+    <div class="about__layout">
+      <div class="about__intro">
+        <span class="section-label">Quiénes somos</span>
+        <h2 class="about__title">La evolución internacional de <em>Traverso</em></h2>
+        <p class="about__lead">Nos especializamos en la fabricación de vinagres, siendo líderes en el mercado, con variedades de Sidra de Manzana, Vino, Alcohol (con certificación kosher) y vinagres especiales como balsámicos o condimentos balsámicos.</p>
+      </div>
+
+      <div class="about__pillars">
+        <div class="about__pillar about__pillar--1">
+          <div class="about__pillar-img" data-from="2"><video src="../assets/videos/video-02card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+          <div class="about__pillar-img" data-from="3"><video src="../assets/videos/video-01card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+          <div class="about__pillar-content">
+            <div class="about__pillar-num">01</div>
+            <h4 class="about__pillar-title">Experiencia en producción alimentaria</h4>
+            <p class="about__pillar-desc">Trayectoria consolidada en la fabricación de alimentos.</p>
+          </div>
+        </div>
+        <div class="about__pillar about__pillar--2">
+          <div class="about__pillar-img about__pillar-img--flat" data-from="3" style="background-color:var(--color-primary)"></div>
+          <div class="about__pillar-img" data-from="4"><video src="../assets/videos/video-02card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+          <div class="about__pillar-content">
+            <div class="about__pillar-num">02</div>
+            <h4 class="about__pillar-title">Especialización en soluciones industriales</h4>
+            <p class="about__pillar-desc">Vinagres a granel para distintas industrias.</p>
+          </div>
+        </div>
+        <div class="about__pillar about__pillar--3">
+          <div class="about__pillar-img" data-from="1"><video src="../assets/videos/video-01card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+          <div class="about__pillar-img" data-from="4"><video src="../assets/videos/video-01card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+          <div class="about__pillar-img" data-from="5"><video src="../assets/videos/video-02card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+          <div class="about__pillar-content">
+            <div class="about__pillar-num">03</div>
+            <h4 class="about__pillar-title">Capacidad de desarrollo para terceros</h4>
+            <p class="about__pillar-desc">Productos bajo marca privada.</p>
+          </div>
+        </div>
+        <div class="about__pillar about__pillar--4">
+          <div class="about__pillar-img about__pillar-img--flat" data-from="1" style="background-color:var(--color-primary)"></div>
+          <div class="about__pillar-img about__pillar-img--flat" data-from="2" style="background-color:var(--color-primary)"></div>
+          <div class="about__pillar-img" data-from="5"><video src="../assets/videos/video-01card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+          <div class="about__pillar-content">
+            <div class="about__pillar-num">04</div>
+            <h4 class="about__pillar-title">Flexibilidad y adaptación</h4>
+            <p class="about__pillar-desc">Diferencias regulatorias por país.</p>
+          </div>
+        </div>
+        <div class="about__pillar about__pillar--full about__pillar--5">
+          <div class="about__pillar-content">
+            <div class="about__pillar-num">05</div>
+            <h4 class="about__pillar-title">Compromiso con el servicio y la continuidad operativa</h4>
+            <p class="about__pillar-desc">Relaciones comerciales estables.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Snapshot del módulo Quiénes Somos antes de aplicar V12 (Sidebar + Viewer).
+     Estado: 2026-04-26 · grid 2x2 + full con reveal cruzado por adyacencia geométrica.
+     Reemplazado por V12 según research-layouts-cards-b2b.html del vault. -->
+
+</body>
+</html>

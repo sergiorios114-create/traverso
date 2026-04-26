@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Traverso — Pruebas Certificaciones & Estándares (10 variantes)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════ TOKENS TRAVERSO oficiales ═══════════════ */
+:root{
+  --primary:#0B1E6B;
+  --primary-dark:#081450;
+  --primary-deepest:#050E33;
+  --accent:#C5A55A;
+  --accent-saturated:#C9A227;
+  --neutral:#FBF9FA;
+  --neutral-alt:#F2F4F8;
+  --text:#19212F;
+  --text-muted:#4A5362;
+  --text-subtle:#6B7280;
+  --on-dark:#FFFFFF;
+  --border:#DDE2EC;
+  --border-light:#EEF0F5;
+  --ff-serif:"Libre Baskerville",Georgia,serif;
+  --ff-sans:"Source Sans 3",system-ui,sans-serif;
+  --ff-mono:"Courier New",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:68px}
+body{font-family:var(--ff-sans);background:#e9ecf3;color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+img{max-width:100%;display:block}
+em{font-style:italic}
+
+/* ═══════════════ SHELL ═══════════════ */
+.shell-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.shell-nav__inner{max-width:1280px;margin:0 auto;padding:10px 24px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.shell-nav__brand{font-family:var(--ff-serif);font-size:14px;font-weight:700;color:var(--primary-dark);margin-right:auto}
+.shell-nav__brand span{font-family:var(--ff-mono);font-size:10px;font-weight:400;color:var(--text-subtle);letter-spacing:.14em;text-transform:uppercase;margin-left:12px}
+.shell-nav__links{display:flex;gap:2px;flex-wrap:wrap}
+.shell-nav__link{font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);padding:5px 9px;border:1px solid transparent;border-radius:14px;transition:all .15s}
+.shell-nav__link:hover{background:var(--neutral-alt);color:var(--primary-dark);border-color:var(--border)}
+.variant-label{max-width:1280px;margin:72px auto 18px;padding:0 32px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.variant-label__n{font-family:var(--ff-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);border:1px solid var(--accent-saturated);padding:4px 10px;border-radius:3px}
+.variant-label__t{font-family:var(--ff-serif);font-size:22px;font-weight:700;color:var(--primary-dark);letter-spacing:-.005em}
+.variant-label__d{font-family:var(--ff-sans);font-size:13px;color:var(--text-muted);margin-left:auto;max-width:420px;text-align:right}
+.variant-frame{width:100%}
+.t-container{max-width:1200px;margin:0 auto;padding:0 clamp(24px,5vw,48px)}
+
+/* ═══════════════ V01 · EDITORIAL SWISS ═══════════════ */
+.v01{background:var(--neutral);padding:clamp(4rem,8vw,6rem) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.v01__label{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent-saturated);text-align:center;margin-bottom:3rem;display:flex;align-items:center;justify-content:center;gap:1rem}
+.v01__label::before,.v01__label::after{content:"";flex:0 0 40px;height:1px;background:rgba(201,162,39,.4)}
+.v01__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,3vw,2.5rem)}
+.v01__item{text-align:left;padding-top:1.25rem;border-top:1px solid var(--primary-dark);position:relative}
+.v01__item-num{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:.5rem}
+.v01__item-n{font-family:var(--ff-serif);font-size:clamp(2rem,3.5vw,2.75rem);font-weight:700;color:var(--primary-dark);line-height:1;letter-spacing:-.02em;margin-bottom:.65rem}
+.v01__item-t{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text);margin-bottom:.3rem}
+.v01__item-s{font-size:.82rem;color:var(--text-muted);line-height:1.5}
+
+/* ═══════════════ V02 · MARQUEE TIPOGRÁFICO ═══════════════ */
+.v02{background:var(--primary-deepest);color:#fff;padding:2.5rem 0;overflow:hidden;position:relative}
+.v02__label{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent-saturated);text-align:center;margin-bottom:1.5rem}
+.v02__marquee{white-space:nowrap;overflow:hidden}
+.v02__track{display:inline-flex;gap:3rem;font-family:var(--ff-serif);font-size:clamp(2.5rem,5vw,4rem);font-weight:700;letter-spacing:-.02em;color:#fff;animation:v02-scroll 45s linear infinite;padding-right:3rem}
+.v02__track em{font-style:italic;color:var(--accent);font-weight:400}
+.v02__track .dot{color:var(--accent-saturated);margin:0 .4rem}
+.v02__track .meta{font-family:var(--ff-mono);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);align-self:flex-end;padding-bottom:.6rem}
+@keyframes v02-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.v02__track{animation:none}}
+
+/* ═══════════════ V03 · SPLIT-SCREEN ═══════════════ */
+.v03{display:grid;grid-template-columns:1fr 1fr;min-height:360px}
+.v03__left{background:var(--primary-dark);color:#fff;padding:clamp(2.5rem,5vw,4rem) clamp(1.5rem,4vw,3rem);display:flex;flex-direction:column;justify-content:center;gap:1rem}
+.v03__right{background:var(--neutral-alt);color:var(--text);padding:clamp(2.5rem,5vw,4rem) clamp(1.5rem,4vw,3rem);display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3vw,2.5rem);align-content:center}
+.v03__eyebrow{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent-saturated)}
+.v03__title{font-family:var(--ff-serif);font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;line-height:1.1;letter-spacing:-.02em}
+.v03__title em{font-style:italic;color:var(--accent);font-weight:400}
+.v03__lead{font-family:var(--ff-serif);font-style:italic;font-size:.95rem;line-height:1.6;color:rgba(255,255,255,.75);max-width:320px;margin-top:.5rem}
+.v03__item{border-left:1px solid var(--primary-dark);padding-left:1rem}
+.v03__item-n{font-family:var(--ff-serif);font-size:2rem;font-weight:700;color:var(--primary-dark);line-height:1;letter-spacing:-.02em}
+.v03__item-t{font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted);margin-top:.4rem}
+.v03__item-s{font-size:.78rem;color:var(--text-subtle);margin-top:.15rem}
+@media (max-width:768px){.v03{grid-template-columns:1fr}.v03__right{grid-template-columns:1fr 1fr}}
+
+/* ═══════════════ V04 · CINEMÁTICO FULL-BLEED ═══════════════ */
+.v04{position:relative;min-height:360px;overflow:hidden;color:#fff}
+.v04__bg{position:absolute;inset:0;background:url("assets/interior-fabrica-1.jpg") center/cover no-repeat}
+.v04__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,14,51,.5) 0%,rgba(8,20,80,.92) 100%)}
+.v04__bg::before{content:"";position:absolute;inset:0;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"/></filter><rect width="200" height="200" filter="url(%23n)" opacity="0.15"/></svg>');mix-blend-mode:overlay;z-index:1}
+.v04__inner{position:relative;z-index:2;padding:clamp(3rem,6vw,5rem) 0 2rem}
+.v04__meta{font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:1.25rem;text-align:center}
+.v04__title{font-family:var(--ff-serif);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.02em;line-height:1.1;color:#fff;text-align:center;margin-bottom:3rem}
+.v04__title em{font-style:italic;color:var(--accent);font-weight:400}
+.v04__row{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2vw,1.75rem);padding-top:2rem;border-top:1px solid rgba(255,255,255,.2)}
+.v04__item{text-align:left}
+.v04__item-n{font-family:var(--ff-serif);font-size:clamp(1.75rem,3vw,2.25rem);font-weight:700;color:var(--accent);line-height:1;letter-spacing:-.02em}
+.v04__item-t{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.9);margin-top:.5rem}
+.v04__item-s{font-size:.72rem;color:rgba(255,255,255,.55);margin-top:.15rem}
+
+/* ═══════════════ V05 · HOVER REVEAL EDITORIAL ═══════════════ */
+.v05{background:var(--neutral);padding:clamp(3rem,5vw,4rem) 0;border-top:2px solid var(--primary-dark)}
+.v05__label{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:2rem}
+.v05__row{display:grid;grid-template-columns:60px 130px 1fr auto;gap:1.5rem;align-items:baseline;padding:1.4rem 0;border-bottom:1px solid var(--border-light);cursor:pointer;transition:padding-left .3s ease,background .3s ease;position:relative}
+.v05__row:last-child{border-bottom:none}
+.v05__row:hover{background:rgba(201,162,39,.04);padding-left:.75rem}
+.v05__row:hover .v05__row-arr{transform:translateX(6px);color:var(--accent-saturated)}
+.v05__row:hover .v05__row-s{opacity:1}
+.v05__row-n{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.14em;color:var(--text-subtle);text-transform:uppercase}
+.v05__row-big{font-family:var(--ff-serif);font-size:clamp(1.75rem,3vw,2.35rem);font-weight:700;color:var(--primary-dark);line-height:1;letter-spacing:-.02em}
+.v05__row-big em{font-style:italic;font-weight:400;color:var(--accent-saturated)}
+.v05__row-t{font-family:var(--ff-serif);font-size:1.05rem;font-weight:400;color:var(--primary-dark);line-height:1.25}
+.v05__row-s{display:block;font-family:var(--ff-sans);font-size:.78rem;color:var(--text-muted);margin-top:.3rem;opacity:.55;transition:opacity .3s ease}
+.v05__row-arr{font-family:var(--ff-mono);font-size:1rem;color:var(--text-subtle);transition:transform .3s ease,color .3s ease}
+
+/* ═══════════════ V06 · BENTO EDITORIAL ═══════════════ */
+.v06{background:var(--primary-dark);color:#fff;padding:clamp(3rem,5vw,4rem) 0}
+.v06__label{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);text-align:center;margin-bottom:2rem}
+.v06__grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1)}
+.v06__cell{background:var(--primary-dark);padding:1.75rem 2rem;display:flex;flex-direction:column;justify-content:space-between;min-height:140px}
+.v06__cell-hero{grid-column:1;grid-row:1/-1;padding:2.5rem 2.25rem;background:linear-gradient(135deg,rgba(197,165,90,.08) 0%,transparent 60%)}
+.v06__cell-n{font-family:var(--ff-serif);font-weight:700;color:var(--accent);line-height:.9;letter-spacing:-.025em}
+.v06__cell-hero .v06__cell-n{font-size:clamp(4rem,8vw,6.5rem)}
+.v06__cell:not(.v06__cell-hero) .v06__cell-n{font-size:clamp(1.75rem,3vw,2.5rem)}
+.v06__cell-t{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-top:.5rem}
+.v06__cell-s{font-size:.75rem;color:rgba(255,255,255,.55);margin-top:.25rem;line-height:1.45}
+.v06__cell-hero .v06__cell-t{font-size:.7rem;letter-spacing:.22em;margin-top:1rem}
+.v06__cell-hero .v06__cell-s{font-size:.85rem;max-width:280px}
+@media (max-width:768px){.v06__grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.v06__cell-hero{grid-column:1/-1;grid-row:auto}}
+
+/* ═══════════════ V07 · TICKER LIVE ═══════════════ */
+.v07{background:var(--primary-deepest);color:#fff;padding:2rem 0}
+.v07__wrap{display:flex;justify-content:center;align-items:center;gap:clamp(1rem,3vw,2.5rem);flex-wrap:wrap;padding:1.5rem 0;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}
+.v07__item{display:flex;align-items:center;gap:.75rem;font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.v07__item strong{color:var(--accent);font-family:var(--ff-serif);font-size:1.1rem;font-weight:700;letter-spacing:-.01em;text-transform:none}
+.v07__dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:v07-pulse 2s ease-in-out infinite;flex-shrink:0}
+@keyframes v07-pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(197,165,90,.6)}50%{opacity:.4;box-shadow:0 0 0 8px rgba(197,165,90,0)}}
+@media (prefers-reduced-motion:reduce){.v07__dot{animation:none}}
+.v07__label{text-align:center;margin-bottom:.5rem;font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--accent-saturated)}
+.v07__divider{width:1px;height:22px;background:rgba(255,255,255,.18);align-self:center}
+
+/* ═══════════════ V08 · QUOTE EDITORIAL ═══════════════ */
+.v08{background:var(--neutral);padding:clamp(4rem,7vw,5.5rem) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.v08__label{font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent-saturated);text-align:center;margin-bottom:2rem}
+.v08__hero{text-align:center;font-family:var(--ff-serif);font-size:clamp(5rem,14vw,10rem);font-weight:400;font-style:italic;color:var(--primary-dark);line-height:.95;letter-spacing:-.035em;margin-bottom:1rem}
+.v08__hero-sup{font-family:var(--ff-mono);font-size:.25em;vertical-align:super;color:var(--accent-saturated);font-style:normal;margin-left:.2em;letter-spacing:.1em;top:.3em;position:relative}
+.v08__hero-caption{text-align:center;font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-muted);margin-bottom:3rem}
+.v08__footnotes{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,3vw,2.5rem);max-width:800px;margin:0 auto;padding-top:1.5rem;border-top:1px solid var(--border)}
+.v08__fn{display:flex;gap:.6rem;align-items:baseline}
+.v08__fn-mark{font-family:var(--ff-mono);font-size:.6rem;color:var(--accent-saturated);font-weight:700;flex-shrink:0}
+.v08__fn-text{font-size:.8rem;color:var(--text);line-height:1.5}
+.v08__fn-text strong{font-family:var(--ff-serif);font-size:1.1rem;font-weight:700;color:var(--primary-dark);letter-spacing:-.01em}
+.v08__fn-text small{display:block;font-size:.72rem;color:var(--text-subtle);margin-top:.2rem}
+@media (max-width:640px){.v08__footnotes{grid-template-columns:1fr}}
+
+/* ═══════════════ V09 · TABLA SUMARIO EDITORIAL ═══════════════ */
+.v09{background:var(--neutral-alt);padding:clamp(3rem,5vw,4rem) 0}
+.v09__head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:1rem;margin-bottom:0;border-bottom:2px solid var(--primary-dark);flex-wrap:wrap;gap:1rem}
+.v09__title{font-family:var(--ff-serif);font-size:clamp(1.5rem,2.5vw,2rem);font-weight:700;color:var(--primary-dark);letter-spacing:-.02em}
+.v09__title em{font-style:italic;font-weight:400}
+.v09__sumario{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-saturated)}
+.v09__row{display:grid;grid-template-columns:60px 160px 1fr 80px auto;gap:1rem;align-items:baseline;padding:1.15rem 0;border-bottom:1px solid var(--border);font-family:var(--ff-serif);color:var(--primary-dark)}
+.v09__row:last-child{border-bottom:none}
+.v09__row-n{font-family:var(--ff-mono);font-size:.68rem;color:var(--text-subtle);letter-spacing:.1em}
+.v09__row-cat{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted)}
+.v09__row-title{font-size:1.05rem;line-height:1.3}
+.v09__row-title em{font-style:italic}
+.v09__row-key{font-family:var(--ff-serif);font-size:1.35rem;font-weight:700;color:var(--accent-saturated);letter-spacing:-.01em}
+.v09__row-arr{font-family:var(--ff-mono);font-size:.95rem;color:var(--text-subtle);opacity:.4}
+@media (max-width:700px){.v09__row{grid-template-columns:40px 1fr auto;gap:.75rem}.v09__row-cat,.v09__row-arr{display:none}}
+
+/* ═══════════════ V10 · BADGE POSTAL MINIMAL ═══════════════ */
+.v10{background:var(--primary-dark);padding:clamp(3rem,5vw,4rem) 0;color:#fff}
+.v10__frame{border:1px solid rgba(197,165,90,.4);padding:clamp(2rem,4vw,3rem) clamp(1.5rem,3vw,2.5rem);position:relative}
+.v10__frame::before,.v10__frame::after{content:"";position:absolute;width:20px;height:20px;border:2px solid var(--accent)}
+.v10__frame::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+.v10__frame::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+.v10__stamp{display:flex;justify-content:center;align-items:center;gap:1.25rem;margin-bottom:1.75rem}
+.v10__stamp::before,.v10__stamp::after{content:"";flex:0 0 clamp(40px,10vw,90px);height:1px;background:rgba(197,165,90,.5)}
+.v10__stamp img{height:clamp(28px,3.5vw,40px);width:auto;filter:brightness(0) invert(1);opacity:.9;display:block}
+.v10__hero{text-align:center;font-family:var(--ff-serif);font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:400;letter-spacing:-.02em;line-height:1.15;color:#fff;margin-bottom:2rem;max-width:640px;margin-left:auto;margin-right:auto}
+.v10__hero em{font-style:italic;color:var(--accent)}
+.v10__items{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12)}
+.v10__item{text-align:center;position:relative}
+.v10__item:not(:last-child)::after{content:"·";position:absolute;right:-.75rem;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.25);font-size:1.5rem;line-height:0}
+.v10__item-n{font-family:var(--ff-serif);font-size:clamp(1.4rem,2.5vw,1.85rem);font-weight:700;color:var(--accent);line-height:1;letter-spacing:-.02em}
+.v10__item-t{font-family:var(--ff-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:.4rem}
+.v10__item-s{font-size:.72rem;color:rgba(255,255,255,.5);margin-top:.15rem;line-height:1.3}
+@media (max-width:640px){.v10__items{grid-template-columns:1fr 1fr}.v10__item:not(:last-child)::after{display:none}}
+
+/* Responsive generales */
+@media (max-width:900px){
+  .v01__grid,.v04__row,.v08__footnotes{grid-template-columns:1fr 1fr}
+  .v05__row{grid-template-columns:40px 90px 1fr auto;gap:.9rem}
+}
+@media (max-width:560px){
+  .v01__grid,.v04__row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="shell-nav">
+  <div class="shell-nav__inner">
+    <div class="shell-nav__brand">Traverso <span>Pruebas Certificaciones · 10 variantes</span></div>
+    <div class="shell-nav__links">
+      <a href="#v01" class="shell-nav__link">01 Swiss</a>
+      <a href="#v02" class="shell-nav__link">02 Marquee</a>
+      <a href="#v03" class="shell-nav__link">03 Split</a>
+      <a href="#v04" class="shell-nav__link">04 Cinema</a>
+      <a href="#v05" class="shell-nav__link">05 Hover</a>
+      <a href="#v06" class="shell-nav__link">06 Bento</a>
+      <a href="#v07" class="shell-nav__link">07 Ticker</a>
+      <a href="#v08" class="shell-nav__link">08 Quote</a>
+      <a href="#v09" class="shell-nav__link">09 Tabla</a>
+      <a href="#v10" class="shell-nav__link">10 Badge</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═════════════ V01 · EDITORIAL SWISS ═════════════ -->
+<div class="variant-label" id="v01">
+  <span class="variant-label__n">01</span>
+  <span class="variant-label__t">Editorial Swiss / Brutalismo</span>
+  <span class="variant-label__d">Grid estricto 4-col, numeración § 01-04, rules hairline, serif number + mono label. Fondo neutral claro.</span>
+</div>
+<div class="variant-frame">
+<section class="v01">
+  <div class="t-container">
+    <div class="v01__label">Certificaciones &amp; Estándares</div>
+    <div class="v01__grid">
+      <div class="v01__item">
+        <div class="v01__item-num">§ 01</div>
+        <div class="v01__item-n">AA</div>
+        <div class="v01__item-t">BRC Global Standard</div>
+        <div class="v01__item-s">Certificación internacional</div>
+      </div>
+      <div class="v01__item">
+        <div class="v01__item-num">§ 02</div>
+        <div class="v01__item-n">130+</div>
+        <div class="v01__item-t">Años de trayectoria</div>
+        <div class="v01__item-s">De trayectoria productiva</div>
+      </div>
+      <div class="v01__item">
+        <div class="v01__item-num">§ 03</div>
+        <div class="v01__item-n">2</div>
+        <div class="v01__item-t">Formatos de exportación</div>
+        <div class="v01__item-s">Granel &amp; Envasado</div>
+      </div>
+      <div class="v01__item">
+        <div class="v01__item-num">§ 04</div>
+        <div class="v01__item-n">MDD</div>
+        <div class="v01__item-t">Marca propia disponible</div>
+        <div class="v01__item-s">Para tu mercado</div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ═════════════ V02 · MARQUEE TIPOGRÁFICO ═════════════ -->
+<div class="variant-label" id="v02">
+  <span class="variant-label__n">02</span>
+  <span class="variant-label__t">Marquee tipográfico</span>
+  <span class="variant-label__d">Los 4 items deslizándose en loop infinito. Patrón peak 2026 para franja inter-secciones — bajo costo técnico, alto impacto.</span>
+</div>
+<div class="variant-frame">
+<section class="v02">
+  <div class="v02__label">— Certificaciones &amp; Estándares</div>
+  <div class="v02__marquee">
+    <div class="v02__track">
+      <span>AA</span><span class="meta">BRC Global Standard</span><span class="dot">·</span>
+      <span>130<em>+</em></span><span class="meta">Años de trayectoria</span><span class="dot">·</span>
+      <span>2</span><span class="meta">Formatos de exportación</span><span class="dot">·</span>
+      <span>MDD</span><span class="meta">Marca propia disponible</span><span class="dot">·</span>
+      <span>AA</span><span class="meta">BRC Global Standard</span><span class="dot">·</span>
+      <span>130<em>+</em></span><span class="meta">Años de trayectoria</span><span class="dot">·</span>
+      <span>2</span><span class="meta">Formatos de exportación</span><span class="dot">·</span>
+      <span>MDD</span><span class="meta">Marca propia disponible</span><span class="dot">·</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ═════════════ V03 · SPLIT-SCREEN ═════════════ -->
+<div class="variant-label" id="v03">
+  <span class="variant-label__n">03</span>
+  <span class="variant-label__t">Split-screen · contraste</span>
+  <span class="variant-label__d">Mitad navy con heading editorial, mitad neutral con grid 2×2 de stats. Patrón D del research — dos realidades juntas.</span>
+</div>
+<div class="variant-frame">
+<section class="v03">
+  <div class="v03__left">
+    <span class="v03__eyebrow">— Certificaciones &amp; Estándares</span>
+    <h3 class="v03__title">Infraestructura con <em>estándar global</em>.</h3>
+    <p class="v03__lead">Nuestras plantas productivas operan bajo certificación BRC GS "AA" — estándar reconocido internacionalmente en seguridad y calidad alimentaria.</p>
+  </div>
+  <div class="v03__right">
+    <div class="v03__item">
+      <div class="v03__item-n">AA</div>
+      <div class="v03__item-t">BRC Global Standard</div>
+      <div class="v03__item-s">Certificación internacional</div>
+    </div>
+    <div class="v03__item">
+      <div class="v03__item-n">130+</div>
+      <div class="v03__item-t">Años de trayectoria</div>
+      <div class="v03__item-s">De trayectoria productiva</div>
+    </div>
+    <div class="v03__item">
+      <div class="v03__item-n">2</div>
+      <div class="v03__item-t">Formatos de exportación</div>
+      <div class="v03__item-s">Granel &amp; Envasado</div>
+    </div>
+    <div class="v03__item">
+      <div class="v03__item-n">MDD</div>
+      <div class="v03__item-t">Marca propia disponible</div>
+      <div class="v03__item-s">Para tu mercado</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ═════════════ V04 · CINEMÁTICO FULL-BLEED ═════════════ -->
+<div class="variant-label" id="v04">
+  <span class="variant-label__n">04</span>
+  <span class="variant-label__t">Cinemático full-bleed</span>
+  <span class="variant-label__d">Foto de fábrica con overlay navy + grain SVG (anti-stock). Stats tipo créditos de cine al pie.</span>
+</div>
+<div class="variant-frame">
+<section class="v04">
+  <div class="v04__bg" aria-hidden="true"></div>
+  <div class="v04__inner">
+    <div class="t-container">
+      <div class="v04__meta">— Santiago · Chile · 2026</div>
+      <h3 class="v04__title">Operación con <em>estándar internacional</em>.</h3>
+      <div class="v04__row">
+        <div class="v04__item"><div class="v04__item-n">AA</div><div class="v04__item-t">BRC Global Standard</div><div class="v04__item-s">Certificación internacional</div></div>
+        <div class="v04__item"><div class="v04__item-n">130+</div><div class="v04__item-t">Años de trayectoria</div><div class="v04__item-s">De trayectoria productiva</div></div>
+        <div class="v04__item"><div class="v04__item-n">2</div><div class="v04__item-t">Formatos de exportación</div><div class="v04__item-s">Granel &amp; Envasado</div></div>
+        <div class="v04__item"><div class="v04__item-n">MDD</div><div class="v04__item-t">Marca propia disponible</div><div class="v04__item-s">Para tu mercado</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ═════════════ V05 · HOVER REVEAL EDITORIAL ═════════════ -->
+<div class="variant-label" id="v05">
+  <span class="variant-label__n">05</span>
+  <span class="variant-label__t">Hover reveal editorial</span>
+  <span class="variant-label__d">Filas grandes tipo lista de portafolio. Hover expande el subtexto y desliza la flecha. Patrón tier premium (Basic, Locomotive).</span>
+</div>
+<div class="variant-frame">
+<section class="v05">
+  <div class="t-container">
+    <div class="v05__label">— Certificaciones &amp; Estándares / 04 items</div>
+    <div class="v05__row">
+      <div class="v05__row-n">01 —</div>
+      <div class="v05__row-big">AA</div>
+      <div>
+        <div class="v05__row-t">BRC Global Standard</div>
+        <div class="v05__row-s">Certificación internacional en seguridad y calidad alimentaria</div>
+      </div>
+      <div class="v05__row-arr">→</div>
+    </div>
+    <div class="v05__row">
+      <div class="v05__row-n">02 —</div>
+      <div class="v05__row-big">130<em>+</em></div>
+      <div>
+        <div class="v05__row-t">Años de trayectoria</div>
+        <div class="v05__row-s">De trayectoria productiva continua</div>
+      </div>
+      <div class="v05__row-arr">→</div>
+    </div>
+    <div class="v05__row">
+      <div class="v05__row-n">03 —</div>
+      <div class="v05__row-big">2</div>
+      <div>
+        <div class="v05__row-t">Formatos de exportación</div>
+        <div class="v05__row-s">Granel &amp; Envasado · adaptables al canal</div>
+      </div>
+      <div class="v05__row-arr">→</div>
+    </div>
+    <div class="v05__row">
+      <div class="v05__row-n">04 —</div>
+      <div class="v05__row-big">MDD</div>
+      <div>
+        <div class="v05__row-t">Marca propia disponible</div>
+        <div class="v05__row-s">Private label para tu mercado y canal</div>
+      </div>
+      <div class="v05__row-arr">→</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ═════════════ V06 · BENTO EDITORIAL ═════════════ -->
+<div class="variant-label" id="v06">
+  <span class="variant-label__n">06</span>
+  <span class="variant-label__t">Bento editorial asimétrico</span>
+  <span class="variant-label__d">Celda hero grande con BRC AA + 3 stats menores. Research: bento declining pero OK en "capabilities", no en home.</span>
+</div>
+<div class="variant-frame">
+<section class="v06">
+  <div class="t-container">
+    <div class="v06__label">— Certificaciones &amp; Estándares</div>
+    <div class="v06__grid">
+      <div class="v06__cell v06__cell-hero">
+        <div>
+          <div class="v06__cell-n">AA</div>
+          <div class="v06__cell-t">BRC Global Standard</div>
+          <div class="v06__cell-s">Certificación internacional en seguridad y calidad alimentaria. Estándar reconocido por cadenas de retail e importadores globales.</div>
+        </div>
+      </div>
+      <div class="v06__cell">
+        <div>
+          <div class="v06__cell-n">130+</div>
+          <div class="v06__cell-t">Años de trayectoria</div>
+          <div class="v06__cell-s">De trayectoria productiva</div>
+        </div>
+      </div>
+      <div class="v06__cell">
+        <div>
+          <div class="v06__cell-n">2</div>
+          <div class="v06__cell-t">Formatos</div>
+          <div class="v06__cell-s">Granel &amp; Envasado</div>
+        </div>
+      </div>
+      <div class="v06__cell">
+        <div>
+          <div class="v06__cell-n">MDD</div>
+          <div class="v06__cell-t">Marca propia</div>
+          <div class="v06__cell-s">Para tu mercado</div>
+        </div>
+      </div>
+      <div class="v06__cell" style="grid-column:2/-1">
+        <div>
+          <div class="v06__cell-t" style="color:var(--accent)">— Planta productiva Santiago</div>
+          <div class="v06__cell-s" style="font-family:var(--ff-serif);font-style:italic;font-size:.95rem;color:rgba(255,255,255,.75);margin-top:.5rem;line-height:1.5">Proyectamos más de 130 años de experiencia hacia mercados internacionales con seriedad y continuidad.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ═════════════ V07 · TICKER LIVE CON DOTS ═════════════ -->
+<div class="variant-label" id="v07">
+  <span class="variant-label__n">07</span>
+  <span class="variant-label__t">Ticker live · dots pulsantes</span>
+  <span class="variant-label__d">Franja horizontal compacta tipo "status operativo" con dots pulsantes. Señal de "live" / estabilidad industrial. Para inter-secciones.</span>
+</div>
+<div class="variant-frame">
+<section class="v07">
+  <div class="t-container">
+    <div class="v07__label">— Certificaciones &amp; Estándares</div>
+    <div class="v07__wrap">
+      <div class="v07__item"><span class="v07__dot"></span><strong>AA</strong><span>BRC Global Standard</span></div>
+      <div class="v07__divider"></div>
+      <div class="v07__item"><span class="v07__dot"></span><strong>130+</strong><span>Años de trayectoria</span></div>
+      <div class="v07__divider"></div>
+      <div class="v07__item"><span class="v07__dot"></span><strong>2</strong><span>Formatos de exportación</span></div>
+      <div class="v07__divider"></div>
+      <div class="v07__item"><span class="v07__dot"></span><strong>MDD</strong><span>Marca propia disponible</span></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ═════════════ V08 · QUOTE EDITORIAL ═════════════ -->
+<div class="variant-label" id="v08">
+  <span class="variant-label__n">08</span>
+  <span class="variant-label__t">Quote editorial · hero único</span>
+  <span class="variant-label__d">Un solo dato gigante serif italic (130+) como manifesto. Los otros 3 como footnotes con superscript. Micro-patrones §3.12.</span>
+</div>
+<div class="variant-frame">
+<section class="v08">
+  <div class="t-container">
+    <div class="v08__label">— Certificaciones &amp; Estándares</div>
+    <div class="v08__hero">130<span class="v08__hero-sup">+</span></div>
+    <div class="v08__hero-caption">Años de trayectoria · De trayectoria productiva</div>
+    <div class="v08__footnotes">
+      <div class="v08__fn">
+        <span class="v08__fn-mark">¹</span>
+        <span class="v08__fn-text"><strong>AA</strong> BRC Global Standard<small>Certificación internacional</small></span>
+      </div>
+      <div class="v08__fn">
+        <span class="v08__fn-mark">²</span>
+        <span class="v08__fn-text"><strong>2</strong> Formatos de exportación<small>Granel &amp; Envasado</small></span>
+      </div>
+      <div class="v08__fn">
+        <span class="v08__fn-mark">³</span>
+        <span class="v08__fn-text"><strong>MDD</strong> Marca propia disponible<small>Para tu mercado</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ═════════════ V09 · TABLA SUMARIO EDITORIAL ═════════════ -->
+<div class="variant-label" id="v09">
+  <span class="variant-label__n">09</span>
+  <span class="variant-label__t">Tabla sumario editorial</span>
+  <span class="variant-label__d">Sumario tipo libro con columnas # / categoría / título / dato / flecha. Serif + mono. Escaneable como índice editorial.</span>
+</div>
+<div class="variant-frame">
+<section class="v09">
+  <div class="t-container">
+    <div class="v09__head">
+      <h3 class="v09__title">Certificaciones <em>&amp; Estándares</em></h3>
+      <span class="v09__sumario">— § Sumario · 04 items</span>
+    </div>
+    <div class="v09__row">
+      <span class="v09__row-n">01 —</span>
+      <span class="v09__row-cat">Certificación</span>
+      <span class="v09__row-title">BRC Global Standard <em>internacional</em></span>
+      <span class="v09__row-key">AA</span>
+      <span class="v09__row-arr">→</span>
+    </div>
+    <div class="v09__row">
+      <span class="v09__row-n">02 —</span>
+      <span class="v09__row-cat">Trayectoria</span>
+      <span class="v09__row-title">Años de <em>trayectoria productiva</em></span>
+      <span class="v09__row-key">130+</span>
+      <span class="v09__row-arr">→</span>
+    </div>
+    <div class="v09__row">
+      <span class="v09__row-n">03 —</span>
+      <span class="v09__row-cat">Producción</span>
+      <span class="v09__row-title">Formatos de exportación · <em>Granel &amp; Envasado</em></span>
+      <span class="v09__row-key">2</span>
+      <span class="v09__row-arr">→</span>
+    </div>
+    <div class="v09__row">
+      <span class="v09__row-n">04 —</span>
+      <span class="v09__row-cat">Comercial</span>
+      <span class="v09__row-title">Marca propia <em>disponible para tu mercado</em></span>
+      <span class="v09__row-key">MDD</span>
+      <span class="v09__row-arr">→</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ═════════════ V10 · BADGE POSTAL MINIMAL ═════════════ -->
+<div class="variant-label" id="v10">
+  <span class="variant-label__n">10</span>
+  <span class="variant-label__t">Badge postal minimal</span>
+  <span class="variant-label__d">Frame con corner rules tipo sello/estampa editorial. Heading centrado + stats en fila. Aire premium, acento dorado perimetral.</span>
+</div>
+<div class="variant-frame" style="margin-bottom:64px">
+<section class="v10">
+  <div class="t-container">
+    <div class="v10__frame">
+      <div class="v10__stamp"><img src="../assets/logo-traverso.png" alt="Traverso International Foods"></div>
+      <h3 class="v10__hero">Traverso es una empresa chilena con más de 130 años de historia. <em>Proyectamos esa experiencia hacia mercados internacionales</em> con seriedad y continuidad.</h3>
+      <div class="v10__items">
+        <div class="v10__item">
+          <div class="v10__item-n">AA</div>
+          <div class="v10__item-t">BRC Global Standard</div>
+          <div class="v10__item-s">Certificación internacional</div>
+        </div>
+        <div class="v10__item">
+          <div class="v10__item-n">130+</div>
+          <div class="v10__item-t">Años de trayectoria</div>
+          <div class="v10__item-s">De trayectoria productiva</div>
+        </div>
+        <div class="v10__item">
+          <div class="v10__item-n">2</div>
+          <div class="v10__item-t">Formatos de exportación</div>
+          <div class="v10__item-s">Granel &amp; Envasado</div>
+        </div>
+        <div class="v10__item">
+          <div class="v10__item-n">MDD</div>
+          <div class="v10__item-t">Marca propia disponible</div>
+          <div class="v10__item-s">Para tu mercado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+</body>
+</html>

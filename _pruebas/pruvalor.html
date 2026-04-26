@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pruebas · Propuesta de Valor — Traverso International</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1E6B;
+    --navy-dark:#081450;
+    --gold:#C5A55A;
+    --gold-sat:#C9A227;
+    --neutral:#FBF9FA;
+    --neutral-alt:#F2F4F8;
+    --text:#19212F;
+    --line:#E5E7EE;
+    --muted:#6B7280;
+    --serif:'Libre Baskerville',Georgia,serif;
+    --sans:'Source Sans 3',system-ui,sans-serif;
+    --mono:'Courier New',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--text);background:var(--neutral);line-height:1.6;-webkit-font-smoothing:antialiased}
+  em{font-style:italic;color:var(--gold-sat)}
+
+  /* ─── Page chrome ─── */
+  .page-nav{position:sticky;top:0;z-index:50;background:var(--neutral);border-bottom:1px solid var(--line);padding:.9rem 1.5rem;display:flex;gap:1rem;align-items:center;overflow-x:auto;white-space:nowrap}
+  .page-nav__brand{font-family:var(--serif);font-weight:700;font-size:.95rem;color:var(--navy);margin-right:1rem;flex-shrink:0}
+  .page-nav a{color:var(--muted);text-decoration:none;font-size:.78rem;font-family:var(--mono);letter-spacing:.05em;padding:.3rem .6rem;border-radius:2px;flex-shrink:0}
+  .page-nav a:hover{background:var(--navy);color:#fff}
+
+  /* ─── Module header (común a todas las variantes) ─── */
+  .vp-header{margin:0 auto 3rem;max-width:760px;text-align:center}
+  .vp-eyebrow{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-sat);margin-bottom:1.25rem;padding:.4rem .9rem;border:1px solid var(--gold);border-radius:2px}
+  .vp-title{font-family:var(--serif);font-size:clamp(2rem,3.4vw,2.85rem);font-weight:400;line-height:1.18;color:var(--navy);margin-bottom:1.1rem;letter-spacing:-.01em}
+  .vp-lead{font-size:1.05rem;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.65}
+
+  /* ─── Variant frame ─── */
+  .variant{padding:6rem 2rem;border-bottom:1px solid var(--line)}
+  .variant:nth-child(even){background:var(--neutral-alt)}
+  .variant__tag{position:relative;display:flex;justify-content:center;margin-bottom:2.5rem}
+  .variant__tag span{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding:.35rem .85rem;background:#fff;border:1px solid var(--line);border-radius:99px}
+  .variant__container{max-width:1200px;margin:0 auto}
+  .variant__container--wide{max-width:1400px}
+
+  /* ═════════════════════════════════════════════════════════════
+     FAMILIA A · SIMÉTRICO
+  ═════════════════════════════════════════════════════════════ */
+
+  /* V01 · Grid 3x2 sobrio */
+  .v01-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .v01-card{background:#fff;border:1px solid var(--line);padding:2.2rem 2rem;transition:all .35s cubic-bezier(.22,.61,.36,1);position:relative}
+  .v01-card:hover{border-color:var(--navy);transform:translateY(-3px);box-shadow:0 12px 28px rgba(11,30,107,.08)}
+  .v01-num{font-family:var(--mono);font-size:.78rem;letter-spacing:.18em;color:var(--gold-sat);margin-bottom:1rem}
+  .v01-ttl{font-family:var(--serif);font-size:1.15rem;color:var(--navy);font-weight:700;margin-bottom:.85rem;line-height:1.3}
+  .v01-txt{font-size:.92rem;color:var(--muted);line-height:1.65}
+
+  /* V02 · Grid 3x2 número postal */
+  .v02-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);background:var(--line)}
+  .v02-card{background:#fff;padding:2.4rem 2rem;position:relative;min-height:260px}
+  .v02-num{font-family:var(--serif);font-size:3.4rem;font-weight:400;color:var(--gold);font-style:italic;line-height:1;margin-bottom:1rem;opacity:.85}
+  .v02-ttl{font-family:var(--serif);font-size:1.1rem;color:var(--navy);font-weight:700;margin-bottom:.8rem;line-height:1.3}
+  .v02-txt{font-size:.9rem;color:var(--muted);line-height:1.65}
+  .v02-card:hover .v02-num{color:var(--navy);opacity:1;transition:.4s}
+
+  /* V03 · Grid 2x3 vertical */
+  .v03-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+  .v03-card{display:grid;grid-template-columns:90px 1fr;gap:1.5rem;background:#fff;border-left:3px solid var(--gold);padding:2rem 2.2rem;align-items:start}
+  .v03-num{font-family:var(--serif);font-size:2.6rem;font-weight:400;color:var(--navy);line-height:1;letter-spacing:-.02em}
+  .v03-ttl{font-family:var(--serif);font-size:1.15rem;color:var(--navy);font-weight:700;margin-bottom:.7rem;line-height:1.3}
+  .v03-txt{font-size:.92rem;color:var(--muted);line-height:1.65}
+
+  /* V04 · Bento simétrico con central destacada */
+  .v04-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .v04-card{background:#fff;padding:2.4rem 2rem;position:relative;min-height:240px;display:flex;flex-direction:column;justify-content:flex-end}
+  .v04-card.is-feature{background:var(--navy);color:#fff;grid-row:span 1}
+  .v04-card.is-feature .v04-num{color:var(--gold)}
+  .v04-card.is-feature .v04-ttl{color:#fff}
+  .v04-card.is-feature .v04-txt{color:rgba(255,255,255,.78)}
+  .v04-num{font-family:var(--mono);font-size:.78rem;letter-spacing:.18em;color:var(--gold-sat);margin-bottom:1rem}
+  .v04-ttl{font-family:var(--serif);font-size:1.1rem;color:var(--navy);font-weight:700;margin-bottom:.7rem;line-height:1.3}
+  .v04-txt{font-size:.88rem;color:var(--muted);line-height:1.65}
+
+  /* ═════════════════════════════════════════════════════════════
+     FAMILIA B · ASIMÉTRICO
+  ═════════════════════════════════════════════════════════════ */
+
+  /* V05 · Hero card (1 grande + 5 chicas) */
+  .v05-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;grid-template-rows:auto auto;gap:1.5rem}
+  .v05-hero{grid-column:1;grid-row:1/3;background:var(--navy);color:#fff;padding:3rem 2.5rem;display:flex;flex-direction:column;justify-content:space-between;min-height:420px;position:relative;overflow:hidden}
+  .v05-hero::after{content:"";position:absolute;right:-40px;bottom:-40px;width:200px;height:200px;border:1px solid var(--gold);opacity:.25;transform:rotate(15deg)}
+  .v05-hero .v05-num{color:var(--gold);font-family:var(--mono);font-size:.78rem;letter-spacing:.2em;margin-bottom:1rem}
+  .v05-hero .v05-ttl{font-family:var(--serif);font-size:1.85rem;color:#fff;margin-bottom:1.2rem;line-height:1.2;font-weight:400}
+  .v05-hero .v05-txt{color:rgba(255,255,255,.82);font-size:1rem;line-height:1.7}
+  .v05-card{background:#fff;border:1px solid var(--line);padding:1.6rem 1.5rem}
+  .v05-card .v05-num{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--gold-sat);margin-bottom:.7rem}
+  .v05-card .v05-ttl{font-family:var(--serif);font-size:1rem;color:var(--navy);font-weight:700;margin-bottom:.6rem;line-height:1.3}
+  .v05-card .v05-txt{font-size:.85rem;color:var(--muted);line-height:1.6}
+
+  /* V06 · Magazine — 2 grandes arriba, 4 chicas abajo */
+  .v06-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+  .v06-card{background:#fff;border-top:2px solid var(--navy);padding:2rem 1.6rem}
+  .v06-card.is-large{grid-column:span 2;border-top-color:var(--gold);padding:2.6rem 2.2rem;background:linear-gradient(180deg,#fff,var(--neutral-alt))}
+  .v06-card.is-large .v06-ttl{font-size:1.45rem}
+  .v06-card.is-large .v06-txt{font-size:1rem}
+  .v06-num{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;color:var(--gold-sat);margin-bottom:.85rem;text-transform:uppercase}
+  .v06-ttl{font-family:var(--serif);font-size:1.05rem;color:var(--navy);font-weight:700;margin-bottom:.7rem;line-height:1.3}
+  .v06-txt{font-size:.88rem;color:var(--muted);line-height:1.65}
+
+  /* V07 · Mosaic alturas variadas 3-col */
+  .v07-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(140px,auto);gap:1rem}
+  .v07-card{background:#fff;border:1px solid var(--line);padding:1.8rem 1.6rem;display:flex;flex-direction:column;justify-content:flex-end}
+  .v07-card:nth-child(1){grid-row:span 2;background:var(--navy);color:#fff;border:none}
+  .v07-card:nth-child(1) .v07-ttl{color:#fff}
+  .v07-card:nth-child(1) .v07-txt{color:rgba(255,255,255,.78)}
+  .v07-card:nth-child(1) .v07-num{color:var(--gold)}
+  .v07-card:nth-child(4){grid-row:span 2}
+  .v07-card:nth-child(5){background:var(--neutral-alt)}
+  .v07-num{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--gold-sat);margin-bottom:.7rem}
+  .v07-ttl{font-family:var(--serif);font-size:1.05rem;color:var(--navy);font-weight:700;margin-bottom:.6rem;line-height:1.3}
+  .v07-txt{font-size:.85rem;color:var(--muted);line-height:1.6}
+
+  /* V08 · Split half · 3 gold + 3 navy */
+  .v08-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .v08-card{padding:2.4rem 2rem;min-height:240px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid rgba(0,0,0,.06)}
+  .v08-card:nth-child(3),.v08-card:nth-child(6){border-right:none}
+  .v08-card:nth-child(-n+3){background:var(--navy);color:#fff}
+  .v08-card:nth-child(-n+3) .v08-ttl{color:#fff}
+  .v08-card:nth-child(-n+3) .v08-txt{color:rgba(255,255,255,.78)}
+  .v08-card:nth-child(-n+3) .v08-num{color:var(--gold)}
+  .v08-card:nth-child(-n+3){border-right-color:rgba(255,255,255,.12)}
+  .v08-card:nth-child(n+4){background:var(--neutral);border-top:1px solid var(--line)}
+  .v08-num{font-family:var(--mono);font-size:.78rem;letter-spacing:.2em;color:var(--gold-sat);margin-bottom:1rem}
+  .v08-ttl{font-family:var(--serif);font-size:1.1rem;color:var(--navy);font-weight:700;margin-bottom:.7rem;line-height:1.3}
+  .v08-txt{font-size:.88rem;color:var(--muted);line-height:1.65}
+
+  /* ═════════════════════════════════════════════════════════════
+     FAMILIA C · LISTA / INDEX EDITORIAL
+  ═════════════════════════════════════════════════════════════ */
+
+  /* V09 · Lista numerada con hairlines (índice) */
+  .v09-list{max-width:880px;margin:0 auto}
+  .v09-row{display:grid;grid-template-columns:60px 1fr 1.2fr;gap:2rem;padding:2rem 0;border-bottom:1px solid var(--line);align-items:start;transition:.3s}
+  .v09-row:first-child{border-top:1px solid var(--line)}
+  .v09-row:hover{background:#fff;padding-left:1rem;padding-right:1rem}
+  .v09-num{font-family:var(--mono);font-size:.85rem;letter-spacing:.18em;color:var(--gold-sat);padding-top:.3rem}
+  .v09-ttl{font-family:var(--serif);font-size:1.2rem;color:var(--navy);font-weight:700;line-height:1.3}
+  .v09-txt{font-size:.95rem;color:var(--muted);line-height:1.7}
+
+  /* V10 · Acordeón silencioso */
+  .v10-list{max-width:920px;margin:0 auto;background:#fff;border:1px solid var(--line)}
+  .v10-row{border-bottom:1px solid var(--line);transition:.3s;cursor:pointer}
+  .v10-row:last-child{border-bottom:none}
+  .v10-head{display:grid;grid-template-columns:80px 1fr auto;align-items:center;padding:1.6rem 2rem;gap:1.5rem}
+  .v10-num{font-family:var(--mono);font-size:.78rem;letter-spacing:.2em;color:var(--gold-sat)}
+  .v10-ttl{font-family:var(--serif);font-size:1.15rem;color:var(--navy);font-weight:700}
+  .v10-arrow{font-family:var(--mono);color:var(--muted);font-size:1.1rem;transition:.3s}
+  .v10-body{padding:0 2rem 1.6rem 6.5rem;font-size:.95rem;color:var(--muted);line-height:1.7;max-height:0;overflow:hidden;opacity:0;transition:.4s ease}
+  .v10-row:hover{background:var(--neutral-alt)}
+  .v10-row:hover .v10-arrow{transform:rotate(45deg);color:var(--gold-sat)}
+  .v10-row:hover .v10-body{max-height:200px;opacity:1}
+
+  /* V11 · Tabla 2-col tipo prospecto */
+  .v11-table{max-width:1000px;margin:0 auto;background:#fff;border:1px solid var(--line)}
+  .v11-row{display:grid;grid-template-columns:1fr 2fr;border-bottom:1px solid var(--line)}
+  .v11-row:last-child{border-bottom:none}
+  .v11-cell-l{padding:2rem 2rem;background:var(--neutral-alt);border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+  .v11-cell-r{padding:2rem}
+  .v11-num{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;color:var(--gold-sat);margin-bottom:.6rem;text-transform:uppercase}
+  .v11-ttl{font-family:var(--serif);font-size:1.1rem;color:var(--navy);font-weight:700;line-height:1.3}
+  .v11-txt{font-size:.95rem;color:var(--muted);line-height:1.7}
+
+  /* V12 · Stack vertical con marker dorado */
+  .v12-list{max-width:780px;margin:0 auto;position:relative;padding-left:3rem}
+  .v12-list::before{content:"";position:absolute;left:1rem;top:.5rem;bottom:.5rem;width:1px;background:var(--line)}
+  .v12-row{position:relative;padding:1.6rem 0 2.2rem;border-bottom:1px dotted var(--line)}
+  .v12-row:last-child{border-bottom:none;padding-bottom:0}
+  .v12-marker{position:absolute;left:-2.5rem;top:1.9rem;width:14px;height:14px;border:2px solid var(--gold);background:var(--neutral);border-radius:50%}
+  .v12-row:hover .v12-marker{background:var(--gold);transform:scale(1.15);transition:.3s}
+  .v12-num{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;color:var(--gold-sat);margin-bottom:.5rem;text-transform:uppercase}
+  .v12-ttl{font-family:var(--serif);font-size:1.25rem;color:var(--navy);font-weight:700;margin-bottom:.6rem;line-height:1.3}
+  .v12-txt{font-size:.95rem;color:var(--muted);line-height:1.7}
+
+  /* ═════════════════════════════════════════════════════════════
+     FAMILIA D · SCROLL / HORIZONTAL
+  ═════════════════════════════════════════════════════════════ */
+
+  /* V13 · Carrusel snap horizontal */
+  .v13-rail{display:grid;grid-auto-flow:column;grid-auto-columns:340px;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:1rem 1rem 2rem;margin:0 -2rem;scrollbar-width:thin}
+  .v13-rail::-webkit-scrollbar{height:6px}
+  .v13-rail::-webkit-scrollbar-track{background:var(--line)}
+  .v13-rail::-webkit-scrollbar-thumb{background:var(--gold)}
+  .v13-card{scroll-snap-align:start;background:#fff;border:1px solid var(--line);padding:2.4rem 2rem;display:flex;flex-direction:column;justify-content:space-between;min-height:320px;position:relative;transition:.3s}
+  .v13-card:hover{border-color:var(--navy);box-shadow:0 12px 32px rgba(11,30,107,.08)}
+  .v13-card:nth-child(1){padding-left:2.5rem}
+  .v13-num{font-family:var(--serif);font-size:2.2rem;color:var(--gold);font-style:italic;line-height:1;margin-bottom:1.2rem}
+  .v13-ttl{font-family:var(--serif);font-size:1.2rem;color:var(--navy);font-weight:700;margin-bottom:.85rem;line-height:1.3}
+  .v13-txt{font-size:.92rem;color:var(--muted);line-height:1.65}
+
+  /* V14 · Scroll natural con fade edges */
+  .v14-wrap{position:relative;margin:0 -2rem;padding:0 2rem}
+  .v14-wrap::before,.v14-wrap::after{content:"";position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+  .v14-wrap::before{left:0;background:linear-gradient(90deg,var(--neutral),transparent)}
+  .v14-wrap::after{right:0;background:linear-gradient(270deg,var(--neutral),transparent)}
+  .v14-rail{display:grid;grid-auto-flow:column;grid-auto-columns:280px;gap:0;overflow-x:auto;padding:1rem 0 2rem;scrollbar-width:none}
+  .v14-rail::-webkit-scrollbar{display:none}
+  .v14-card{padding:2rem 2rem 2rem 0;border-right:1px solid var(--line);margin-right:2rem}
+  .v14-card:last-child{border-right:none}
+  .v14-num{font-family:var(--mono);font-size:.78rem;letter-spacing:.2em;color:var(--gold-sat);margin-bottom:.85rem;text-transform:uppercase}
+  .v14-ttl{font-family:var(--serif);font-size:1.15rem;color:var(--navy);font-weight:700;margin-bottom:.85rem;line-height:1.3}
+  .v14-txt{font-size:.92rem;color:var(--muted);line-height:1.65}
+
+  /* V15 · Stack diagonal */
+  .v15-rail{display:grid;grid-auto-flow:column;grid-auto-columns:300px;gap:1rem;overflow-x:auto;padding:3rem 2rem;margin:0 -2rem;perspective:1200px;scrollbar-width:thin}
+  .v15-card{scroll-snap-align:center;background:#fff;border:1px solid var(--line);padding:2.2rem 2rem;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;transform:rotate(-1.2deg);transition:.4s;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+  .v15-card:nth-child(even){transform:rotate(1.2deg)}
+  .v15-card:hover{transform:rotate(0deg) scale(1.04);box-shadow:0 16px 40px rgba(11,30,107,.15);z-index:2}
+  .v15-num{font-family:var(--mono);font-size:.78rem;letter-spacing:.2em;color:var(--gold-sat);margin-bottom:1rem}
+  .v15-ttl{font-family:var(--serif);font-size:1.1rem;color:var(--navy);font-weight:700;margin-bottom:.7rem;line-height:1.3}
+  .v15-txt{font-size:.88rem;color:var(--muted);line-height:1.6}
+
+  /* V16 · Sticky pillars (sidebar fija + contenido scroll) */
+  .v16-grid{display:grid;grid-template-columns:280px 1fr;gap:3rem;align-items:start}
+  .v16-side{position:sticky;top:7rem}
+  .v16-side h3{font-family:var(--serif);font-size:1.05rem;color:var(--navy);font-weight:700;margin-bottom:1rem;padding-bottom:.7rem;border-bottom:1px solid var(--line)}
+  .v16-side ul{list-style:none}
+  .v16-side li{font-family:var(--mono);font-size:.78rem;color:var(--muted);padding:.55rem 0;letter-spacing:.05em;border-bottom:1px dotted var(--line);transition:.3s;cursor:pointer}
+  .v16-side li:hover{color:var(--gold-sat);padding-left:.5rem}
+  .v16-side li::before{content:"§ ";color:var(--gold)}
+  .v16-content{display:flex;flex-direction:column;gap:1.5rem}
+  .v16-card{background:#fff;border-left:3px solid var(--gold);padding:2rem 2.2rem}
+  .v16-num{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;color:var(--gold-sat);margin-bottom:.7rem;text-transform:uppercase}
+  .v16-ttl{font-family:var(--serif);font-size:1.25rem;color:var(--navy);font-weight:700;margin-bottom:.8rem;line-height:1.3}
+  .v16-txt{font-size:.95rem;color:var(--muted);line-height:1.7}
+
+  /* ═════════════════════════════════════════════════════════════
+     FAMILIA E · CONCEPTUAL / EXPRESIVO
+  ═════════════════════════════════════════════════════════════ */
+
+  /* V17 · Numéricas gigantes display */
+  .v17-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--navy);border-bottom:1px solid var(--navy)}
+  .v17-card{padding:3rem 2rem;border-right:1px solid var(--line);position:relative;overflow:hidden;min-height:320px;display:flex;flex-direction:column;justify-content:flex-end}
+  .v17-card:nth-child(3),.v17-card:nth-child(6){border-right:none}
+  .v17-card:nth-child(n+4){border-top:1px solid var(--line)}
+  .v17-num{position:absolute;top:-.4rem;right:1.5rem;font-family:var(--serif);font-size:9rem;font-weight:400;font-style:italic;color:var(--gold);opacity:.18;line-height:1;pointer-events:none;transition:.5s}
+  .v17-card:hover .v17-num{opacity:.4;transform:scale(1.06)}
+  .v17-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:.85rem}
+  .v17-ttl{font-family:var(--serif);font-size:1.35rem;color:var(--navy);font-weight:700;margin-bottom:.85rem;line-height:1.25;position:relative;z-index:2}
+  .v17-txt{font-size:.92rem;color:var(--muted);line-height:1.7;position:relative;z-index:2}
+
+  /* V18 · Sello postal · marca de archivo */
+  .v18-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem}
+  .v18-card{background:#fff;border:1px solid var(--line);padding:2.4rem 2rem 2rem;position:relative;transition:.3s}
+  .v18-card::before{content:"";position:absolute;top:1rem;right:1rem;width:48px;height:48px;border:1.5px solid var(--gold);border-radius:50%;background:radial-gradient(circle,transparent 60%,rgba(197,165,90,.08) 60%)}
+  .v18-card::after{content:attr(data-stamp);position:absolute;top:1.4rem;right:1rem;width:48px;text-align:center;font-family:var(--mono);font-size:.55rem;color:var(--gold-sat);letter-spacing:.06em;line-height:1.2;padding-top:.85rem}
+  .v18-card:hover{border-color:var(--navy);transform:translateY(-3px)}
+  .v18-num{font-family:var(--serif);font-size:1.8rem;color:var(--navy);font-style:italic;line-height:1;margin-bottom:1rem;font-weight:400}
+  .v18-ttl{font-family:var(--serif);font-size:1.1rem;color:var(--navy);font-weight:700;margin-bottom:.75rem;line-height:1.3;padding-right:3rem}
+  .v18-txt{font-size:.9rem;color:var(--muted);line-height:1.65}
+
+  /* V19 · Carta archivo · papel courier */
+  .v19-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;max-width:1100px;margin:0 auto}
+  .v19-card{background:#FDFBF6;border:1px solid #E8E0D0;padding:2.2rem 2rem;font-family:var(--mono);position:relative;box-shadow:0 1px 0 #E8E0D0,0 8px 24px rgba(0,0,0,.04)}
+  .v19-card::before{content:"";position:absolute;top:0;left:0;right:0;height:30px;background:repeating-linear-gradient(90deg,#E8E0D0 0,#E8E0D0 1px,transparent 1px,transparent 8px);opacity:.4}
+  .v19-head{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem;padding-top:.6rem}
+  .v19-num{color:var(--gold-sat);font-weight:700}
+  .v19-ttl{font-family:var(--serif);font-size:1.2rem;color:var(--navy);font-weight:700;margin-bottom:.85rem;line-height:1.3}
+  .v19-txt{font-family:var(--sans);font-size:.92rem;color:var(--text);line-height:1.7}
+  .v19-foot{margin-top:1.5rem;padding-top:1rem;border-top:1px dashed #C9BFA8;font-size:.65rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+
+  /* ═════════════════════════════════════════════════════════════
+     V16 DERIVADAS · STICKY SIDEBAR + SCROLL · MINIMAL SIN BORDES
+     Mismo funcionamiento, lenguaje limpio, blanco, sin contenedores
+  ═════════════════════════════════════════════════════════════ */
+
+  /* Common — todas con fondo blanco puro y sticky sidebar */
+  .v16x-section{background:#fff}
+  .v16x-grid{display:grid;grid-template-columns:340px 1fr;gap:5rem;align-items:start;max-width:1280px;margin:0 auto}
+  .v16x-side{position:sticky;top:6rem}
+
+  /* V16a · Solo número grande serif italic + título · sin border-left, espacio como divisor */
+  .v16a-side h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:1.4rem}
+  .v16a-side ul{list-style:none}
+  .v16a-side li{font-family:var(--serif);font-size:.95rem;color:var(--text);padding:.7rem 0;line-height:1.4;cursor:pointer;transition:.3s;display:grid;grid-template-columns:30px 1fr;gap:.8rem;align-items:baseline}
+  .v16a-side li span{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.05em}
+  .v16a-side li:hover{color:var(--navy)}
+  .v16a-side li:hover span{color:var(--gold-sat)}
+  .v16a-content{display:flex;flex-direction:column;gap:4rem}
+  .v16a-card{padding:0}
+  .v16a-num{font-family:var(--serif);font-size:5.5rem;font-style:italic;font-weight:400;color:var(--gold);line-height:.9;margin-bottom:1.4rem;letter-spacing:-.04em}
+  .v16a-ttl{font-family:var(--serif);font-size:1.8rem;color:var(--navy);font-weight:400;margin-bottom:1.1rem;line-height:1.2;letter-spacing:-.01em;max-width:540px}
+  .v16a-txt{font-size:1rem;color:var(--text);line-height:1.75;max-width:560px;opacity:.78}
+
+  /* V16b · Hairline 1px arriba + espacio puro · sin contenedores */
+  .v16b-side h3{font-family:var(--serif);font-size:1.05rem;color:var(--navy);font-weight:700;margin-bottom:1.6rem;padding-bottom:1rem;border-bottom:1px solid var(--text)}
+  .v16b-side ul{list-style:none}
+  .v16b-side li{font-family:var(--sans);font-size:.88rem;color:var(--muted);padding:.65rem 0;letter-spacing:0;cursor:pointer;transition:.3s;display:grid;grid-template-columns:38px 1fr;gap:.6rem}
+  .v16b-side li span{font-family:var(--mono);color:var(--gold-sat);font-size:.78rem}
+  .v16b-side li:hover{color:var(--navy);transform:translateX(3px)}
+  .v16b-content{display:flex;flex-direction:column}
+  .v16b-card{padding:3.5rem 0;border-top:1px solid #E5E7EE}
+  .v16b-card:first-child{padding-top:0;border-top:none}
+  .v16b-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem}
+  .v16b-eyebrow::after{content:"";flex:1;height:1px;background:var(--line);max-width:60px}
+  .v16b-ttl{font-family:var(--serif);font-size:1.65rem;color:var(--navy);font-weight:400;margin-bottom:1rem;line-height:1.25;letter-spacing:-.01em}
+  .v16b-txt{font-size:1rem;color:var(--text);line-height:1.75;max-width:580px;opacity:.78}
+
+  /* V16c · Stack puro tipográfico · sin nada visual fuera de letras */
+  .v16c-side{font-family:var(--serif)}
+  .v16c-side h3{font-family:var(--mono);font-size:.7rem;letter-spacing:.25em;color:var(--muted);text-transform:uppercase;margin-bottom:1.8rem}
+  .v16c-side ol{list-style:none;counter-reset:pillars}
+  .v16c-side li{counter-increment:pillars;font-size:1.05rem;color:var(--navy);padding:.55rem 0;line-height:1.45;cursor:pointer;transition:.3s;font-weight:400;font-style:italic}
+  .v16c-side li::before{content:counter(pillars,decimal-leading-zero)" — ";color:var(--gold-sat);font-family:var(--mono);font-style:normal;font-size:.85rem;font-weight:400;letter-spacing:.05em;margin-right:.3rem}
+  .v16c-side li:hover{color:var(--gold-sat)}
+  .v16c-content{display:flex;flex-direction:column;gap:5rem}
+  .v16c-card{padding:0}
+  .v16c-eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:1.4rem}
+  .v16c-ttl{font-family:var(--serif);font-size:2.2rem;color:var(--navy);font-weight:400;margin-bottom:1.4rem;line-height:1.15;letter-spacing:-.02em;max-width:600px}
+  .v16c-ttl em{font-style:italic;color:var(--gold-sat)}
+  .v16c-txt{font-size:1.05rem;color:var(--text);line-height:1.8;max-width:560px;opacity:.8}
+  .v16c-txt::first-letter{font-family:var(--serif);font-size:2.6em;float:left;line-height:.9;margin:.1em .15em 0 0;color:var(--navy);font-weight:400}
+
+  /* V16d · Two-col con baseline grid · label mono izquierda + body derecha */
+  .v16d-side h3{font-family:var(--mono);font-size:.7rem;letter-spacing:.25em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:1.4rem}
+  .v16d-side ul{list-style:none;font-family:var(--sans)}
+  .v16d-side li{font-size:.92rem;color:var(--text);padding:.7rem 0;line-height:1.4;cursor:pointer;transition:.3s;display:grid;grid-template-columns:46px 1fr;gap:.6rem;align-items:baseline}
+  .v16d-side li span{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--muted)}
+  .v16d-side li:hover{color:var(--navy)}
+  .v16d-side li:hover span{color:var(--gold-sat)}
+  .v16d-content{display:flex;flex-direction:column;gap:3.5rem}
+  .v16d-card{display:grid;grid-template-columns:120px 1fr;gap:2rem;padding:2.5rem 0;border-top:1px solid var(--line)}
+  .v16d-card:first-child{padding-top:0;border-top:none}
+  .v16d-meta{display:flex;flex-direction:column;gap:.4rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--gold-sat);text-transform:uppercase;padding-top:.4rem}
+  .v16d-meta-tag{color:var(--muted);letter-spacing:.12em}
+  .v16d-body .v16d-ttl{font-family:var(--serif);font-size:1.5rem;color:var(--navy);font-weight:700;margin-bottom:1rem;line-height:1.25;letter-spacing:-.005em}
+  .v16d-body .v16d-txt{font-size:.98rem;color:var(--text);line-height:1.75;max-width:580px;opacity:.78}
+
+  /* V16e · Indent editorial · número fuera del bloque como nota al margen */
+  .v16e-section{background:#FDFDFD;padding:6rem 2rem}
+  .v16e-grid{grid-template-columns:280px 1fr}
+  .v16e-side h3{font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--navy);font-weight:400;margin-bottom:1.6rem}
+  .v16e-side ul{list-style:none}
+  .v16e-side li{font-size:.88rem;color:var(--text);padding:.6rem 0;line-height:1.4;cursor:pointer;transition:.3s;font-family:var(--sans);opacity:.7}
+  .v16e-side li:hover{opacity:1;color:var(--navy);padding-left:.4rem}
+  .v16e-side li::before{content:"— ";color:var(--gold-sat)}
+  .v16e-content{display:flex;flex-direction:column;gap:4.5rem}
+  .v16e-card{position:relative;padding-left:0}
+  .v16e-num{position:absolute;left:-90px;top:.3rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--gold-sat);text-transform:uppercase;writing-mode:horizontal-tb}
+  .v16e-ttl{font-family:var(--serif);font-size:1.85rem;color:var(--navy);font-weight:400;margin-bottom:1.2rem;line-height:1.2;letter-spacing:-.015em;max-width:580px}
+  .v16e-ttl strong{font-weight:700}
+  .v16e-txt{font-size:1rem;color:var(--text);line-height:1.8;max-width:580px;opacity:.78;column-count:1}
+  .v16e-foot{margin-top:1.2rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+
+  /* V20 · Modular hexagonal corner clip art deco */
+  .v20-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--navy)}
+  .v20-card{background:var(--neutral);padding:2.4rem 2rem;position:relative;clip-path:polygon(0 0,calc(100% - 24px) 0,100% 24px,100% 100%,24px 100%,0 calc(100% - 24px));min-height:260px;display:flex;flex-direction:column;justify-content:space-between;transition:.4s}
+  .v20-card:hover{background:#fff;transform:translateY(-2px)}
+  .v20-card::before{content:"";position:absolute;top:0;right:0;width:24px;height:24px;background:var(--gold);clip-path:polygon(0 0,100% 0,100% 100%)}
+  .v20-card::after{content:"";position:absolute;bottom:0;left:0;width:24px;height:24px;background:var(--gold);clip-path:polygon(0 0,0 100%,100% 100%)}
+  .v20-num{font-family:var(--serif);font-size:1.6rem;color:var(--gold-sat);font-style:italic;font-weight:400;line-height:1;margin-bottom:1rem}
+  .v20-ttl{font-family:var(--serif);font-size:1.15rem;color:var(--navy);font-weight:700;margin-bottom:.8rem;line-height:1.3;padding-right:1.5rem}
+  .v20-txt{font-size:.9rem;color:var(--muted);line-height:1.65;padding-left:1.5rem}
+</style>
+</head>
+<body>
+
+<nav class="page-nav">
+  <span class="page-nav__brand">Pruebas · Propuesta de Valor</span>
+  <a href="#v01">V01</a><a href="#v02">V02</a><a href="#v03">V03</a><a href="#v04">V04</a>
+  <a href="#v05">V05</a><a href="#v06">V06</a><a href="#v07">V07</a><a href="#v08">V08</a>
+  <a href="#v09">V09</a><a href="#v10">V10</a><a href="#v11">V11</a><a href="#v12">V12</a>
+  <a href="#v13">V13</a><a href="#v14">V14</a><a href="#v15">V15</a><a href="#v16">V16</a>
+  <a href="#v17">V17</a><a href="#v18">V18</a><a href="#v19">V19</a><a href="#v20">V20</a>
+  <span style="color:var(--line);padding:0 .4rem">·</span>
+  <a href="#v16a" style="color:var(--gold-sat)">V16a</a><a href="#v16b" style="color:var(--gold-sat)">V16b</a><a href="#v16c" style="color:var(--gold-sat)">V16c</a><a href="#v16d" style="color:var(--gold-sat)">V16d</a><a href="#v16e" style="color:var(--gold-sat)">V16e</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FAMILIA A · SIMÉTRICO (V01-V04)
+     Cuadrículas regulares, ritmo previsible, registro institucional.
+═══════════════════════════════════════════════════════════ -->
+
+<!-- V01 · Grid 3x2 sobrio editorial -->
+<section class="variant" id="v01">
+  <div class="variant__tag"><span>V01 · Familia A · Grid 3×2 sobrio</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v01-grid">
+      <article class="v01-card"><div class="v01-num">01 · Estándar</div><h4 class="v01-ttl">Estándares internacionales</h4><p class="v01-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p></article>
+      <article class="v01-card"><div class="v01-num">02 · Trayectoria</div><h4 class="v01-ttl">Respaldo de una marca con trayectoria</h4><p class="v01-txt">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p></article>
+      <article class="v01-card"><div class="v01-num">03 · Especialización</div><h4 class="v01-ttl">Especialización en vinagres a granel</h4><p class="v01-txt">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</p></article>
+      <article class="v01-card"><div class="v01-num">04 · Marca privada</div><h4 class="v01-ttl">Desarrollo de productos para terceros</h4><p class="v01-txt">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</p></article>
+      <article class="v01-card"><div class="v01-num">05 · Exportación</div><h4 class="v01-ttl">Enfoque en exportación y mercados globales</h4><p class="v01-txt">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística con socios en diversos países.</p></article>
+      <article class="v01-card"><div class="v01-num">06 · Operación</div><h4 class="v01-ttl">Procesos confiables y escalables</h4><p class="v01-txt">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- V02 · Grid 3x2 número postal italic -->
+<section class="variant" id="v02">
+  <div class="variant__tag"><span>V02 · Familia A · Número serif italic gigante</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v02-grid">
+      <article class="v02-card"><div class="v02-num">01</div><h4 class="v02-ttl">Estándares internacionales</h4><p class="v02-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad.</p></article>
+      <article class="v02-card"><div class="v02-num">02</div><h4 class="v02-ttl">Respaldo de una marca con trayectoria</h4><p class="v02-txt">Evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p></article>
+      <article class="v02-card"><div class="v02-num">03</div><h4 class="v02-ttl">Especialización en vinagres a granel</h4><p class="v02-txt">Experiencia en la producción de vinagre de alcohol para uso industrial: insumo productivo, preservante y agente de sanitización.</p></article>
+      <article class="v02-card"><div class="v02-num">04</div><h4 class="v02-ttl">Desarrollo de productos para terceros</h4><p class="v02-txt">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares y objetivos comerciales de cada cliente.</p></article>
+      <article class="v02-card"><div class="v02-num">05</div><h4 class="v02-ttl">Enfoque en exportación y mercados globales</h4><p class="v02-txt">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, con consistencia y eficiencia logística.</p></article>
+      <article class="v02-card"><div class="v02-num">06</div><h4 class="v02-ttl">Procesos confiables y escalables</h4><p class="v02-txt">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento, capaz de adaptarse a distintos niveles de demanda.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- V03 · Grid 2x3 vertical con número grande izquierda -->
+<section class="variant" id="v03">
+  <div class="variant__tag"><span>V03 · Familia A · 2×3 vertical · número izquierda</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v03-grid">
+      <article class="v03-card"><div class="v03-num">01</div><div><h4 class="v03-ttl">Estándares internacionales</h4><p class="v03-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p></div></article>
+      <article class="v03-card"><div class="v03-num">02</div><div><h4 class="v03-ttl">Respaldo de una marca con trayectoria</h4><p class="v03-txt">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p></div></article>
+      <article class="v03-card"><div class="v03-num">03</div><div><h4 class="v03-ttl">Especialización en vinagres a granel</h4><p class="v03-txt">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</p></div></article>
+      <article class="v03-card"><div class="v03-num">04</div><div><h4 class="v03-ttl">Desarrollo de productos para terceros</h4><p class="v03-txt">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</p></div></article>
+      <article class="v03-card"><div class="v03-num">05</div><div><h4 class="v03-ttl">Enfoque en exportación y mercados globales</h4><p class="v03-txt">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística.</p></div></article>
+      <article class="v03-card"><div class="v03-num">06</div><div><h4 class="v03-ttl">Procesos confiables y escalables</h4><p class="v03-txt">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- V04 · Bento simétrico con feature card -->
+<section class="variant" id="v04">
+  <div class="variant__tag"><span>V04 · Familia A · Bento con card destacada navy</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v04-grid">
+      <article class="v04-card"><div class="v04-num">01</div><h4 class="v04-ttl">Estándares internacionales</h4><p class="v04-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad.</p></article>
+      <article class="v04-card is-feature"><div class="v04-num">02 · Destacado</div><h4 class="v04-ttl">Respaldo de una marca con trayectoria</h4><p class="v04-txt">Evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p></article>
+      <article class="v04-card"><div class="v04-num">03</div><h4 class="v04-ttl">Especialización en vinagres a granel</h4><p class="v04-txt">Vinagre de alcohol para uso industrial: insumo productivo, preservante y agente de sanitización en múltiples industrias.</p></article>
+      <article class="v04-card"><div class="v04-num">04</div><h4 class="v04-ttl">Desarrollo de productos para terceros</h4><p class="v04-txt">Productos envasados bajo marca privada (Private Label), adaptándonos a estándares, requerimientos y objetivos de cada cliente.</p></article>
+      <article class="v04-card"><div class="v04-num">05</div><h4 class="v04-ttl">Enfoque en exportación y mercados globales</h4><p class="v04-txt">Visión internacional que adapta la oferta a distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística.</p></article>
+      <article class="v04-card"><div class="v04-num">06</div><h4 class="v04-ttl">Procesos confiables y escalables</h4><p class="v04-txt">Operación estandarizada y eficiente, capaz de adaptarse a distintos niveles de demanda con cumplimiento en cada entrega.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FAMILIA B · ASIMÉTRICO (V05-V08)
+     Jerarquía visible, una pieza protagonista, ritmo editorial.
+═══════════════════════════════════════════════════════════ -->
+
+<!-- V05 · Hero card asimétrico -->
+<section class="variant" id="v05">
+  <div class="variant__tag"><span>V05 · Familia B · Hero card + 5 satélites</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v05-grid">
+      <article class="v05-hero"><div><div class="v05-num">01 · Pilar fundacional</div><h4 class="v05-ttl">Estándares internacionales</h4></div><p class="v05-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p></article>
+      <article class="v05-card"><div class="v05-num">02</div><h4 class="v05-ttl">Respaldo de una marca con trayectoria</h4><p class="v05-txt">Evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva.</p></article>
+      <article class="v05-card"><div class="v05-num">03</div><h4 class="v05-ttl">Especialización en vinagres a granel</h4><p class="v05-txt">Vinagre de alcohol industrial: insumo productivo, preservante y agente de sanitización.</p></article>
+      <article class="v05-card"><div class="v05-num">04</div><h4 class="v05-ttl">Desarrollo de productos para terceros</h4><p class="v05-txt">Productos envasados bajo marca privada, adaptados a estándares y objetivos de cada cliente.</p></article>
+      <article class="v05-card"><div class="v05-num">05</div><h4 class="v05-ttl">Enfoque en exportación y mercados globales</h4><p class="v05-txt">Visión internacional con consistencia, cumplimiento y eficiencia logística.</p></article>
+      <article class="v05-card" style="grid-column:2/4"><div class="v05-num">06</div><h4 class="v05-ttl">Procesos confiables y escalables</h4><p class="v05-txt">Operación estandarizada y eficiente, capaz de adaptarse a distintos niveles de demanda con cumplimiento en cada entrega.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- V06 · Magazine layout 2 grandes + 4 chicas -->
+<section class="variant" id="v06">
+  <div class="variant__tag"><span>V06 · Familia B · Magazine 2 grandes + 4 chicas</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v06-grid">
+      <article class="v06-card is-large"><div class="v06-num">01 · Norma</div><h4 class="v06-ttl">Estándares internacionales</h4><p class="v06-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p></article>
+      <article class="v06-card is-large"><div class="v06-num">02 · Marca</div><h4 class="v06-ttl">Respaldo de una marca con trayectoria</h4><p class="v06-txt">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p></article>
+      <article class="v06-card"><div class="v06-num">03</div><h4 class="v06-ttl">Especialización en vinagres a granel</h4><p class="v06-txt">Vinagre de alcohol industrial: insumo, preservante y agente de sanitización en múltiples industrias.</p></article>
+      <article class="v06-card"><div class="v06-num">04</div><h4 class="v06-ttl">Desarrollo de productos para terceros</h4><p class="v06-txt">Productos envasados bajo marca privada, adaptados a estándares y objetivos comerciales de cada cliente.</p></article>
+      <article class="v06-card"><div class="v06-num">05</div><h4 class="v06-ttl">Enfoque en exportación y mercados globales</h4><p class="v06-txt">Visión internacional con consistencia, cumplimiento y eficiencia logística en diversos países.</p></article>
+      <article class="v06-card"><div class="v06-num">06</div><h4 class="v06-ttl">Procesos confiables y escalables</h4><p class="v06-txt">Operación estandarizada y eficiente, capaz de adaptarse a distintos niveles de demanda.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- V07 · Mosaic alturas variadas -->
+<section class="variant" id="v07">
+  <div class="variant__tag"><span>V07 · Familia B · Mosaic alturas variadas</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v07-grid">
+      <article class="v07-card"><div class="v07-num">01</div><h4 class="v07-ttl">Estándares internacionales</h4><p class="v07-txt">Plantas productivas con certificación BRC GS "AA". Inocuidad, calidad y trazabilidad alineadas con exigencias de mercados internacionales.</p></article>
+      <article class="v07-card"><div class="v07-num">02</div><h4 class="v07-ttl">Respaldo de una marca con trayectoria</h4><p class="v07-txt">Evolución internacional de Traverso S.A., 130+ años proyectados a mercados globales.</p></article>
+      <article class="v07-card"><div class="v07-num">03</div><h4 class="v07-ttl">Especialización en vinagres a granel</h4><p class="v07-txt">Vinagre de alcohol industrial.</p></article>
+      <article class="v07-card"><div class="v07-num">04</div><h4 class="v07-ttl">Desarrollo de productos para terceros</h4><p class="v07-txt">Productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente. Flexibilidad operativa real.</p></article>
+      <article class="v07-card"><div class="v07-num">05</div><h4 class="v07-ttl">Enfoque en exportación</h4><p class="v07-txt">Visión internacional con consistencia y eficiencia logística.</p></article>
+      <article class="v07-card"><div class="v07-num">06</div><h4 class="v07-ttl">Procesos confiables y escalables</h4><p class="v07-txt">Operación eficiente, capaz de adaptarse a distintos niveles de demanda.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- V08 · Split half navy/neutral -->
+<section class="variant" id="v08">
+  <div class="variant__tag"><span>V08 · Familia B · Split half navy/neutral</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v08-grid">
+      <article class="v08-card"><div class="v08-num">01</div><h4 class="v08-ttl">Estándares internacionales</h4><p class="v08-txt">Plantas con certificación BRC GS "AA", inocuidad, calidad y trazabilidad alineadas con mercados internacionales.</p></article>
+      <article class="v08-card"><div class="v08-num">02</div><h4 class="v08-ttl">Respaldo de una marca con trayectoria</h4><p class="v08-txt">Evolución internacional de Traverso S.A., 130+ años de historia productiva.</p></article>
+      <article class="v08-card"><div class="v08-num">03</div><h4 class="v08-ttl">Especialización en vinagres a granel</h4><p class="v08-txt">Vinagre de alcohol industrial: insumo productivo, preservante y agente de sanitización.</p></article>
+      <article class="v08-card"><div class="v08-num">04</div><h4 class="v08-ttl">Desarrollo de productos para terceros</h4><p class="v08-txt">Productos envasados bajo marca privada (Private Label), adaptados a estándares y objetivos comerciales de cada cliente.</p></article>
+      <article class="v08-card"><div class="v08-num">05</div><h4 class="v08-ttl">Enfoque en exportación y mercados globales</h4><p class="v08-txt">Visión internacional con consistencia, cumplimiento y eficiencia logística en diversos países.</p></article>
+      <article class="v08-card"><div class="v08-num">06</div><h4 class="v08-ttl">Procesos confiables y escalables</h4><p class="v08-txt">Operación estandarizada y eficiente, capaz de adaptarse a distintos niveles de demanda.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FAMILIA C · LISTA / INDEX EDITORIAL (V09-V12)
+     Ritmo de lectura, jerarquía tipográfica, sobriedad institucional.
+═══════════════════════════════════════════════════════════ -->
+
+<!-- V09 · Lista numerada hairlines -->
+<section class="variant" id="v09">
+  <div class="variant__tag"><span>V09 · Familia C · Índice editorial 3-col</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v09-list">
+      <div class="v09-row"><div class="v09-num">§ 01</div><h4 class="v09-ttl">Estándares internacionales</h4><p class="v09-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p></div>
+      <div class="v09-row"><div class="v09-num">§ 02</div><h4 class="v09-ttl">Respaldo de una marca con trayectoria</h4><p class="v09-txt">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p></div>
+      <div class="v09-row"><div class="v09-num">§ 03</div><h4 class="v09-ttl">Especialización en vinagres a granel</h4><p class="v09-txt">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</p></div>
+      <div class="v09-row"><div class="v09-num">§ 04</div><h4 class="v09-ttl">Desarrollo de productos para terceros</h4><p class="v09-txt">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</p></div>
+      <div class="v09-row"><div class="v09-num">§ 05</div><h4 class="v09-ttl">Enfoque en exportación y mercados globales</h4><p class="v09-txt">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística.</p></div>
+      <div class="v09-row"><div class="v09-num">§ 06</div><h4 class="v09-ttl">Procesos confiables y escalables</h4><p class="v09-txt">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- V10 · Acordeón silencioso CSS-only -->
+<section class="variant" id="v10">
+  <div class="variant__tag"><span>V10 · Familia C · Acordeón silencioso (hover-expand)</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v10-list">
+      <div class="v10-row"><div class="v10-head"><span class="v10-num">01</span><span class="v10-ttl">Estándares internacionales</span><span class="v10-arrow">+</span></div><div class="v10-body">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</div></div>
+      <div class="v10-row"><div class="v10-head"><span class="v10-num">02</span><span class="v10-ttl">Respaldo de una marca con trayectoria</span><span class="v10-arrow">+</span></div><div class="v10-body">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</div></div>
+      <div class="v10-row"><div class="v10-head"><span class="v10-num">03</span><span class="v10-ttl">Especialización en vinagres a granel</span><span class="v10-arrow">+</span></div><div class="v10-body">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</div></div>
+      <div class="v10-row"><div class="v10-head"><span class="v10-num">04</span><span class="v10-ttl">Desarrollo de productos para terceros</span><span class="v10-arrow">+</span></div><div class="v10-body">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</div></div>
+      <div class="v10-row"><div class="v10-head"><span class="v10-num">05</span><span class="v10-ttl">Enfoque en exportación y mercados globales</span><span class="v10-arrow">+</span></div><div class="v10-body">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística con socios en diversos países.</div></div>
+      <div class="v10-row"><div class="v10-head"><span class="v10-num">06</span><span class="v10-ttl">Procesos confiables y escalables</span><span class="v10-arrow">+</span></div><div class="v10-body">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- V11 · Tabla 2-col tipo prospecto -->
+<section class="variant" id="v11">
+  <div class="variant__tag"><span>V11 · Familia C · Tabla prospecto 2-col</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v11-table">
+      <div class="v11-row"><div class="v11-cell-l"><div class="v11-num">Pilar 01</div><h4 class="v11-ttl">Estándares internacionales</h4></div><div class="v11-cell-r"><p class="v11-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p></div></div>
+      <div class="v11-row"><div class="v11-cell-l"><div class="v11-num">Pilar 02</div><h4 class="v11-ttl">Respaldo de una marca con trayectoria</h4></div><div class="v11-cell-r"><p class="v11-txt">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p></div></div>
+      <div class="v11-row"><div class="v11-cell-l"><div class="v11-num">Pilar 03</div><h4 class="v11-ttl">Especialización en vinagres a granel</h4></div><div class="v11-cell-r"><p class="v11-txt">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</p></div></div>
+      <div class="v11-row"><div class="v11-cell-l"><div class="v11-num">Pilar 04</div><h4 class="v11-ttl">Desarrollo de productos para terceros</h4></div><div class="v11-cell-r"><p class="v11-txt">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</p></div></div>
+      <div class="v11-row"><div class="v11-cell-l"><div class="v11-num">Pilar 05</div><h4 class="v11-ttl">Enfoque en exportación y mercados globales</h4></div><div class="v11-cell-r"><p class="v11-txt">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística con socios en diversos países.</p></div></div>
+      <div class="v11-row"><div class="v11-cell-l"><div class="v11-num">Pilar 06</div><h4 class="v11-ttl">Procesos confiables y escalables</h4></div><div class="v11-cell-r"><p class="v11-txt">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- V12 · Stack vertical timeline marker dorado -->
+<section class="variant" id="v12">
+  <div class="variant__tag"><span>V12 · Familia C · Timeline vertical · marker dorado</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v12-list">
+      <div class="v12-row"><div class="v12-marker"></div><div class="v12-num">Pilar 01</div><h4 class="v12-ttl">Estándares internacionales</h4><p class="v12-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p></div>
+      <div class="v12-row"><div class="v12-marker"></div><div class="v12-num">Pilar 02</div><h4 class="v12-ttl">Respaldo de una marca con trayectoria</h4><p class="v12-txt">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p></div>
+      <div class="v12-row"><div class="v12-marker"></div><div class="v12-num">Pilar 03</div><h4 class="v12-ttl">Especialización en vinagres a granel</h4><p class="v12-txt">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</p></div>
+      <div class="v12-row"><div class="v12-marker"></div><div class="v12-num">Pilar 04</div><h4 class="v12-ttl">Desarrollo de productos para terceros</h4><p class="v12-txt">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</p></div>
+      <div class="v12-row"><div class="v12-marker"></div><div class="v12-num">Pilar 05</div><h4 class="v12-ttl">Enfoque en exportación y mercados globales</h4><p class="v12-txt">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística.</p></div>
+      <div class="v12-row"><div class="v12-marker"></div><div class="v12-num">Pilar 06</div><h4 class="v12-ttl">Procesos confiables y escalables</h4><p class="v12-txt">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FAMILIA D · SCROLL / HORIZONTAL (V13-V16)
+     Cinta editorial, scroll-snap, recorrido lineal.
+═══════════════════════════════════════════════════════════ -->
+
+<!-- V13 · Carrusel snap -->
+<section class="variant" id="v13">
+  <div class="variant__tag"><span>V13 · Familia D · Carrusel snap horizontal</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v13-rail">
+      <article class="v13-card"><div class="v13-num">01</div><div><h4 class="v13-ttl">Estándares internacionales</h4><p class="v13-txt">Plantas con certificación BRC GS "AA". Inocuidad, calidad y trazabilidad alineadas con mercados internacionales.</p></div></article>
+      <article class="v13-card"><div class="v13-num">02</div><div><h4 class="v13-ttl">Respaldo de una marca con trayectoria</h4><p class="v13-txt">Evolución internacional de Traverso S.A., 130+ años proyectados a mercados globales.</p></div></article>
+      <article class="v13-card"><div class="v13-num">03</div><div><h4 class="v13-ttl">Especialización en vinagres a granel</h4><p class="v13-txt">Vinagre de alcohol industrial: insumo, preservante y agente de sanitización.</p></div></article>
+      <article class="v13-card"><div class="v13-num">04</div><div><h4 class="v13-ttl">Desarrollo de productos para terceros</h4><p class="v13-txt">Productos envasados bajo marca privada (Private Label), adaptados a estándares y objetivos de cada cliente.</p></div></article>
+      <article class="v13-card"><div class="v13-num">05</div><div><h4 class="v13-ttl">Enfoque en exportación y mercados globales</h4><p class="v13-txt">Visión internacional con consistencia, cumplimiento y eficiencia logística en diversos países.</p></div></article>
+      <article class="v13-card"><div class="v13-num">06</div><div><h4 class="v13-ttl">Procesos confiables y escalables</h4><p class="v13-txt">Operación estandarizada y eficiente, capaz de adaptarse a distintos niveles de demanda.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- V14 · Scroll natural fade edges -->
+<section class="variant" id="v14">
+  <div class="variant__tag"><span>V14 · Familia D · Tira con fade edges</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v14-wrap">
+      <div class="v14-rail">
+        <article class="v14-card"><div class="v14-num">01 · Norma</div><h4 class="v14-ttl">Estándares internacionales</h4><p class="v14-txt">Plantas con certificación BRC GS "AA", garantizando inocuidad, calidad y trazabilidad para mercados internacionales.</p></article>
+        <article class="v14-card"><div class="v14-num">02 · Marca</div><h4 class="v14-ttl">Respaldo de una marca con trayectoria</h4><p class="v14-txt">Evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva.</p></article>
+        <article class="v14-card"><div class="v14-num">03 · Vinagre</div><h4 class="v14-ttl">Especialización en vinagres a granel</h4><p class="v14-txt">Vinagre de alcohol industrial: insumo productivo, preservante y agente de sanitización.</p></article>
+        <article class="v14-card"><div class="v14-num">04 · MDD</div><h4 class="v14-ttl">Desarrollo de productos para terceros</h4><p class="v14-txt">Productos envasados bajo marca privada, adaptados a estándares y objetivos comerciales de cada cliente.</p></article>
+        <article class="v14-card"><div class="v14-num">05 · Export</div><h4 class="v14-ttl">Enfoque en exportación y mercados globales</h4><p class="v14-txt">Visión internacional con consistencia, cumplimiento y eficiencia logística.</p></article>
+        <article class="v14-card"><div class="v14-num">06 · Operación</div><h4 class="v14-ttl">Procesos confiables y escalables</h4><p class="v14-txt">Operación estandarizada y eficiente, capaz de adaptarse a distintos niveles de demanda.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- V15 · Stack diagonal -->
+<section class="variant" id="v15">
+  <div class="variant__tag"><span>V15 · Familia D · Stack diagonal · scroll lúdico</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v15-rail">
+      <article class="v15-card"><div class="v15-num">01</div><div><h4 class="v15-ttl">Estándares internacionales</h4><p class="v15-txt">Plantas con certificación BRC GS "AA", inocuidad, calidad y trazabilidad alineadas con mercados internacionales.</p></div></article>
+      <article class="v15-card"><div class="v15-num">02</div><div><h4 class="v15-ttl">Respaldo de una marca con trayectoria</h4><p class="v15-txt">Evolución internacional de Traverso S.A., 130+ años de historia productiva.</p></div></article>
+      <article class="v15-card"><div class="v15-num">03</div><div><h4 class="v15-ttl">Especialización en vinagres a granel</h4><p class="v15-txt">Vinagre de alcohol industrial: insumo productivo, preservante y agente de sanitización.</p></div></article>
+      <article class="v15-card"><div class="v15-num">04</div><div><h4 class="v15-ttl">Desarrollo de productos para terceros</h4><p class="v15-txt">Productos envasados bajo marca privada (Private Label), adaptados a cada cliente.</p></div></article>
+      <article class="v15-card"><div class="v15-num">05</div><div><h4 class="v15-ttl">Enfoque en exportación y mercados globales</h4><p class="v15-txt">Visión internacional con consistencia, cumplimiento y eficiencia logística.</p></div></article>
+      <article class="v15-card"><div class="v15-num">06</div><div><h4 class="v15-ttl">Procesos confiables y escalables</h4><p class="v15-txt">Operación estandarizada y eficiente, capaz de adaptarse a distintos niveles de demanda.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- V16 · Sticky pillars sidebar -->
+<section class="variant" id="v16">
+  <div class="variant__tag"><span>V16 · Familia D · Sticky sidebar + contenido scroll</span></div>
+  <div class="variant__container">
+    <header class="vp-header" style="text-align:left;max-width:none">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title" style="font-size:2.4rem">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead" style="margin-left:0">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v16-grid">
+      <aside class="v16-side">
+        <h3>Índice de pilares</h3>
+        <ul>
+          <li>01 — Estándares internacionales</li>
+          <li>02 — Marca con trayectoria</li>
+          <li>03 — Vinagres a granel</li>
+          <li>04 — Productos para terceros</li>
+          <li>05 — Exportación global</li>
+          <li>06 — Procesos escalables</li>
+        </ul>
+      </aside>
+      <div class="v16-content">
+        <article class="v16-card"><div class="v16-num">Pilar 01</div><h4 class="v16-ttl">Estándares internacionales</h4><p class="v16-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p></article>
+        <article class="v16-card"><div class="v16-num">Pilar 02</div><h4 class="v16-ttl">Respaldo de una marca con trayectoria</h4><p class="v16-txt">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p></article>
+        <article class="v16-card"><div class="v16-num">Pilar 03</div><h4 class="v16-ttl">Especialización en vinagres a granel</h4><p class="v16-txt">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</p></article>
+        <article class="v16-card"><div class="v16-num">Pilar 04</div><h4 class="v16-ttl">Desarrollo de productos para terceros</h4><p class="v16-txt">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</p></article>
+        <article class="v16-card"><div class="v16-num">Pilar 05</div><h4 class="v16-ttl">Enfoque en exportación y mercados globales</h4><p class="v16-txt">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística.</p></article>
+        <article class="v16-card"><div class="v16-num">Pilar 06</div><h4 class="v16-ttl">Procesos confiables y escalables</h4><p class="v16-txt">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FAMILIA E · CONCEPTUAL / EXPRESIVO (V17-V20)
+     Tipográfico, postal, archivo, art-deco. Carácter editorial.
+═══════════════════════════════════════════════════════════ -->
+
+<!-- V17 · Numéricas gigantes display -->
+<section class="variant" id="v17">
+  <div class="variant__tag"><span>V17 · Familia E · Numéricas display gigantes</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v17-grid">
+      <article class="v17-card"><div class="v17-num">01</div><div class="v17-eyebrow">Norma</div><h4 class="v17-ttl">Estándares internacionales</h4><p class="v17-txt">Plantas con certificación BRC GS "AA". Inocuidad, calidad y trazabilidad alineadas con mercados internacionales.</p></article>
+      <article class="v17-card"><div class="v17-num">02</div><div class="v17-eyebrow">Marca</div><h4 class="v17-ttl">Respaldo de una marca con trayectoria</h4><p class="v17-txt">Evolución internacional de Traverso S.A., 130+ años de historia productiva proyectada al mundo.</p></article>
+      <article class="v17-card"><div class="v17-num">03</div><div class="v17-eyebrow">Producto</div><h4 class="v17-ttl">Especialización en vinagres a granel</h4><p class="v17-txt">Vinagre de alcohol industrial: insumo productivo, preservante y agente de sanitización.</p></article>
+      <article class="v17-card"><div class="v17-num">04</div><div class="v17-eyebrow">Servicio</div><h4 class="v17-ttl">Desarrollo de productos para terceros</h4><p class="v17-txt">Productos envasados bajo marca privada (Private Label), adaptados a estándares y objetivos de cada cliente.</p></article>
+      <article class="v17-card"><div class="v17-num">05</div><div class="v17-eyebrow">Mercado</div><h4 class="v17-ttl">Enfoque en exportación y mercados globales</h4><p class="v17-txt">Visión internacional con consistencia, cumplimiento y eficiencia logística.</p></article>
+      <article class="v17-card"><div class="v17-num">06</div><div class="v17-eyebrow">Operación</div><h4 class="v17-ttl">Procesos confiables y escalables</h4><p class="v17-txt">Operación estandarizada y eficiente, capaz de adaptarse a distintos niveles de demanda.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- V18 · Sello postal -->
+<section class="variant" id="v18">
+  <div class="variant__tag"><span>V18 · Familia E · Sello postal · marca de archivo</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v18-grid">
+      <article class="v18-card" data-stamp="TIF · 01"><div class="v18-num">01</div><h4 class="v18-ttl">Estándares internacionales</h4><p class="v18-txt">Plantas con certificación BRC GS "AA". Inocuidad, calidad y trazabilidad alineadas con exigencias internacionales.</p></article>
+      <article class="v18-card" data-stamp="TIF · 02"><div class="v18-num">02</div><h4 class="v18-ttl">Respaldo de una marca con trayectoria</h4><p class="v18-txt">Evolución internacional de Traverso S.A., 130+ años de historia productiva proyectada a mercados globales.</p></article>
+      <article class="v18-card" data-stamp="TIF · 03"><div class="v18-num">03</div><h4 class="v18-ttl">Especialización en vinagres a granel</h4><p class="v18-txt">Vinagre de alcohol industrial: insumo productivo, preservante y agente de sanitización en múltiples industrias.</p></article>
+      <article class="v18-card" data-stamp="TIF · 04"><div class="v18-num">04</div><h4 class="v18-ttl">Desarrollo de productos para terceros</h4><p class="v18-txt">Productos envasados bajo marca privada, adaptados a los estándares y objetivos comerciales de cada cliente.</p></article>
+      <article class="v18-card" data-stamp="TIF · 05"><div class="v18-num">05</div><h4 class="v18-ttl">Enfoque en exportación y mercados globales</h4><p class="v18-txt">Visión internacional con consistencia, cumplimiento y eficiencia logística en diversos países.</p></article>
+      <article class="v18-card" data-stamp="TIF · 06"><div class="v18-num">06</div><h4 class="v18-ttl">Procesos confiables y escalables</h4><p class="v18-txt">Operación estandarizada y eficiente, capaz de adaptarse a distintos niveles de demanda.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- V19 · Carta archivo papel -->
+<section class="variant" id="v19">
+  <div class="variant__tag"><span>V19 · Familia E · Carta archivo · papel courier</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v19-grid">
+      <article class="v19-card"><div class="v19-head"><span class="v19-num">DOC · 01</span><span>Norma</span></div><h4 class="v19-ttl">Estándares internacionales</h4><p class="v19-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p><div class="v19-foot">Archivo · Traverso International Foods</div></article>
+      <article class="v19-card"><div class="v19-head"><span class="v19-num">DOC · 02</span><span>Marca</span></div><h4 class="v19-ttl">Respaldo de una marca con trayectoria</h4><p class="v19-txt">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p><div class="v19-foot">Archivo · Traverso International Foods</div></article>
+      <article class="v19-card"><div class="v19-head"><span class="v19-num">DOC · 03</span><span>Producto</span></div><h4 class="v19-ttl">Especialización en vinagres a granel</h4><p class="v19-txt">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</p><div class="v19-foot">Archivo · Traverso International Foods</div></article>
+      <article class="v19-card"><div class="v19-head"><span class="v19-num">DOC · 04</span><span>Servicio</span></div><h4 class="v19-ttl">Desarrollo de productos para terceros</h4><p class="v19-txt">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</p><div class="v19-foot">Archivo · Traverso International Foods</div></article>
+      <article class="v19-card"><div class="v19-head"><span class="v19-num">DOC · 05</span><span>Mercado</span></div><h4 class="v19-ttl">Enfoque en exportación y mercados globales</h4><p class="v19-txt">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística.</p><div class="v19-foot">Archivo · Traverso International Foods</div></article>
+      <article class="v19-card"><div class="v19-head"><span class="v19-num">DOC · 06</span><span>Operación</span></div><h4 class="v19-ttl">Procesos confiables y escalables</h4><p class="v19-txt">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</p><div class="v19-foot">Archivo · Traverso International Foods</div></article>
+    </div>
+  </div>
+</section>
+
+<!-- V20 · Modular hexagonal corner clip -->
+<section class="variant" id="v20">
+  <div class="variant__tag"><span>V20 · Familia E · Modular corner clip art-deco</span></div>
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Nuestra propuesta de valor</span>
+      <h2 class="vp-title">Seis pilares de nuestra propuesta de <em>valor</em></h2>
+      <p class="vp-lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+    </header>
+    <div class="v20-grid">
+      <article class="v20-card"><div><div class="v20-num">01</div><h4 class="v20-ttl">Estándares internacionales</h4></div><p class="v20-txt">Plantas con certificación BRC GS "AA". Inocuidad, calidad y trazabilidad alineadas con mercados internacionales.</p></article>
+      <article class="v20-card"><div><div class="v20-num">02</div><h4 class="v20-ttl">Respaldo de una marca con trayectoria</h4></div><p class="v20-txt">Evolución internacional de Traverso S.A., 130+ años de historia productiva.</p></article>
+      <article class="v20-card"><div><div class="v20-num">03</div><h4 class="v20-ttl">Especialización en vinagres a granel</h4></div><p class="v20-txt">Vinagre de alcohol industrial: insumo productivo, preservante y agente de sanitización.</p></article>
+      <article class="v20-card"><div><div class="v20-num">04</div><h4 class="v20-ttl">Desarrollo de productos para terceros</h4></div><p class="v20-txt">Productos envasados bajo marca privada (Private Label), adaptados a cada cliente.</p></article>
+      <article class="v20-card"><div><div class="v20-num">05</div><h4 class="v20-ttl">Enfoque en exportación y mercados globales</h4></div><p class="v20-txt">Visión internacional con consistencia, cumplimiento y eficiencia logística.</p></article>
+      <article class="v20-card"><div><div class="v20-num">06</div><h4 class="v20-ttl">Procesos confiables y escalables</h4></div><p class="v20-txt">Operación estandarizada y eficiente, capaz de adaptarse a distintos niveles de demanda.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     V16 DERIVADAS · STICKY SIDEBAR + SCROLL · CLEAN MINIMAL
+     5 variantes con mismo funcionamiento que V16, sin bordes
+═══════════════════════════════════════════════════════════ -->
+
+<div style="padding:5rem 2rem 2rem;text-align:center;background:#fff;border-top:1px solid var(--line)">
+  <span style="font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase">V16 derivadas · sticky sidebar limpio</span>
+  <h3 style="font-family:var(--serif);font-size:1.6rem;color:var(--navy);font-weight:400;margin-top:1rem;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.3">5 variantes del módulo sticky sidebar — limpias, blancas, sin bordes</h3>
+</div>
+
+<!-- V16a · Solo número grande serif italic -->
+<section class="variant v16x-section" id="v16a" style="padding:7rem 2rem">
+  <div class="variant__tag"><span>V16a · Sticky · Número serif italic display + espacio puro</span></div>
+  <div class="v16x-grid">
+    <aside class="v16x-side v16a-side">
+      <h3>Pilares</h3>
+      <ul>
+        <li><span>01</span>Estándares internacionales</li>
+        <li><span>02</span>Marca con trayectoria</li>
+        <li><span>03</span>Vinagres a granel</li>
+        <li><span>04</span>Productos para terceros</li>
+        <li><span>05</span>Exportación global</li>
+        <li><span>06</span>Procesos escalables</li>
+      </ul>
+    </aside>
+    <div class="v16a-content">
+      <article class="v16a-card"><div class="v16a-num">01</div><h4 class="v16a-ttl">Estándares internacionales</h4><p class="v16a-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p></article>
+      <article class="v16a-card"><div class="v16a-num">02</div><h4 class="v16a-ttl">Respaldo de una marca con trayectoria</h4><p class="v16a-txt">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p></article>
+      <article class="v16a-card"><div class="v16a-num">03</div><h4 class="v16a-ttl">Especialización en vinagres a granel</h4><p class="v16a-txt">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</p></article>
+      <article class="v16a-card"><div class="v16a-num">04</div><h4 class="v16a-ttl">Desarrollo de productos para terceros</h4><p class="v16a-txt">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</p></article>
+      <article class="v16a-card"><div class="v16a-num">05</div><h4 class="v16a-ttl">Enfoque en exportación y mercados globales</h4><p class="v16a-txt">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística con socios en diversos países.</p></article>
+      <article class="v16a-card"><div class="v16a-num">06</div><h4 class="v16a-ttl">Procesos confiables y escalables</h4><p class="v16a-txt">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- V16b · Hairline top + eyebrow tracked -->
+<section class="variant v16x-section" id="v16b" style="padding:7rem 2rem;background:var(--neutral)">
+  <div class="variant__tag"><span>V16b · Sticky · Hairline + eyebrow tracked (estilo McKinsey)</span></div>
+  <div class="v16x-grid">
+    <aside class="v16x-side v16b-side">
+      <h3>Índice</h3>
+      <ul>
+        <li><span>01</span>Estándares internacionales</li>
+        <li><span>02</span>Marca con trayectoria</li>
+        <li><span>03</span>Vinagres a granel</li>
+        <li><span>04</span>Productos para terceros</li>
+        <li><span>05</span>Exportación global</li>
+        <li><span>06</span>Procesos escalables</li>
+      </ul>
+    </aside>
+    <div class="v16b-content">
+      <article class="v16b-card"><div class="v16b-eyebrow">01 · Pilar fundacional</div><h4 class="v16b-ttl">Estándares internacionales</h4><p class="v16b-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p></article>
+      <article class="v16b-card"><div class="v16b-eyebrow">02 · Marca</div><h4 class="v16b-ttl">Respaldo de una marca con trayectoria</h4><p class="v16b-txt">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p></article>
+      <article class="v16b-card"><div class="v16b-eyebrow">03 · Producto</div><h4 class="v16b-ttl">Especialización en vinagres a granel</h4><p class="v16b-txt">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</p></article>
+      <article class="v16b-card"><div class="v16b-eyebrow">04 · Servicio</div><h4 class="v16b-ttl">Desarrollo de productos para terceros</h4><p class="v16b-txt">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</p></article>
+      <article class="v16b-card"><div class="v16b-eyebrow">05 · Mercado</div><h4 class="v16b-ttl">Enfoque en exportación y mercados globales</h4><p class="v16b-txt">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística.</p></article>
+      <article class="v16b-card"><div class="v16b-eyebrow">06 · Operación</div><h4 class="v16b-ttl">Procesos confiables y escalables</h4><p class="v16b-txt">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- V16c · Stack puro tipográfico con drop cap -->
+<section class="variant v16x-section" id="v16c" style="padding:7rem 2rem">
+  <div class="variant__tag"><span>V16c · Sticky · Stack puro tipográfico · drop cap editorial</span></div>
+  <div class="v16x-grid">
+    <aside class="v16x-side v16c-side">
+      <h3>Sumario</h3>
+      <ol>
+        <li>Estándares internacionales</li>
+        <li>Marca con trayectoria</li>
+        <li>Vinagres a granel</li>
+        <li>Productos para terceros</li>
+        <li>Exportación global</li>
+        <li>Procesos escalables</li>
+      </ol>
+    </aside>
+    <div class="v16c-content">
+      <article class="v16c-card"><div class="v16c-eyebrow">§ 01 · Norma</div><h4 class="v16c-ttl">Estándares <em>internacionales</em></h4><p class="v16c-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p></article>
+      <article class="v16c-card"><div class="v16c-eyebrow">§ 02 · Trayectoria</div><h4 class="v16c-ttl">Respaldo de una marca con <em>trayectoria</em></h4><p class="v16c-txt">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p></article>
+      <article class="v16c-card"><div class="v16c-eyebrow">§ 03 · Especialización</div><h4 class="v16c-ttl">Especialización en vinagres a <em>granel</em></h4><p class="v16c-txt">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</p></article>
+      <article class="v16c-card"><div class="v16c-eyebrow">§ 04 · Servicio</div><h4 class="v16c-ttl">Desarrollo de productos para <em>terceros</em></h4><p class="v16c-txt">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</p></article>
+      <article class="v16c-card"><div class="v16c-eyebrow">§ 05 · Mercado</div><h4 class="v16c-ttl">Enfoque en exportación y mercados <em>globales</em></h4><p class="v16c-txt">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística con socios en diversos países.</p></article>
+      <article class="v16c-card"><div class="v16c-eyebrow">§ 06 · Operación</div><h4 class="v16c-ttl">Procesos confiables y <em>escalables</em></h4><p class="v16c-txt">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- V16d · Two-col baseline (label+body) -->
+<section class="variant v16x-section" id="v16d" style="padding:7rem 2rem;background:var(--neutral)">
+  <div class="variant__tag"><span>V16d · Sticky · Two-col baseline · label mono + body serif</span></div>
+  <div class="v16x-grid">
+    <aside class="v16x-side v16d-side">
+      <h3>Pilares · 06</h3>
+      <ul>
+        <li><span>01</span>Estándares internacionales</li>
+        <li><span>02</span>Marca con trayectoria</li>
+        <li><span>03</span>Vinagres a granel</li>
+        <li><span>04</span>Productos para terceros</li>
+        <li><span>05</span>Exportación global</li>
+        <li><span>06</span>Procesos escalables</li>
+      </ul>
+    </aside>
+    <div class="v16d-content">
+      <article class="v16d-card"><div class="v16d-meta">01 / 06<span class="v16d-meta-tag">Norma</span></div><div class="v16d-body"><h4 class="v16d-ttl">Estándares internacionales</h4><p class="v16d-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p></div></article>
+      <article class="v16d-card"><div class="v16d-meta">02 / 06<span class="v16d-meta-tag">Marca</span></div><div class="v16d-body"><h4 class="v16d-ttl">Respaldo de una marca con trayectoria</h4><p class="v16d-txt">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p></div></article>
+      <article class="v16d-card"><div class="v16d-meta">03 / 06<span class="v16d-meta-tag">Producto</span></div><div class="v16d-body"><h4 class="v16d-ttl">Especialización en vinagres a granel</h4><p class="v16d-txt">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</p></div></article>
+      <article class="v16d-card"><div class="v16d-meta">04 / 06<span class="v16d-meta-tag">Servicio</span></div><div class="v16d-body"><h4 class="v16d-ttl">Desarrollo de productos para terceros</h4><p class="v16d-txt">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</p></div></article>
+      <article class="v16d-card"><div class="v16d-meta">05 / 06<span class="v16d-meta-tag">Mercado</span></div><div class="v16d-body"><h4 class="v16d-ttl">Enfoque en exportación y mercados globales</h4><p class="v16d-txt">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística.</p></div></article>
+      <article class="v16d-card"><div class="v16d-meta">06 / 06<span class="v16d-meta-tag">Operación</span></div><div class="v16d-body"><h4 class="v16d-ttl">Procesos confiables y escalables</h4><p class="v16d-txt">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- V16e · Indent editorial + número en margen -->
+<section class="variant v16e-section" id="v16e">
+  <div class="variant__tag"><span>V16e · Sticky · Indent editorial · número en margen</span></div>
+  <div class="v16x-grid v16e-grid">
+    <aside class="v16x-side v16e-side">
+      <h3>Pilares</h3>
+      <ul>
+        <li>Estándares internacionales</li>
+        <li>Marca con trayectoria</li>
+        <li>Vinagres a granel</li>
+        <li>Productos para terceros</li>
+        <li>Exportación global</li>
+        <li>Procesos escalables</li>
+      </ul>
+    </aside>
+    <div class="v16e-content" style="padding-left:90px">
+      <article class="v16e-card"><div class="v16e-num">Pilar · 01</div><h4 class="v16e-ttl">Estándares <strong>internacionales</strong></h4><p class="v16e-txt">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p><div class="v16e-foot">BRC GS "AA" · Trazabilidad · Inocuidad</div></article>
+      <article class="v16e-card"><div class="v16e-num">Pilar · 02</div><h4 class="v16e-ttl">Respaldo de una <strong>marca con trayectoria</strong></h4><p class="v16e-txt">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p><div class="v16e-foot">Desde 1893 · Chile · Heritage</div></article>
+      <article class="v16e-card"><div class="v16e-num">Pilar · 03</div><h4 class="v16e-ttl">Especialización en <strong>vinagres a granel</strong></h4><p class="v16e-txt">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</p><div class="v16e-foot">Granel · Industrial · Insumo</div></article>
+      <article class="v16e-card"><div class="v16e-num">Pilar · 04</div><h4 class="v16e-ttl">Desarrollo de productos para <strong>terceros</strong></h4><p class="v16e-txt">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</p><div class="v16e-foot">MDD · Private Label · Custom</div></article>
+      <article class="v16e-card"><div class="v16e-num">Pilar · 05</div><h4 class="v16e-ttl">Enfoque en exportación y <strong>mercados globales</strong></h4><p class="v16e-txt">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística.</p><div class="v16e-foot">Export · Logística · Cumplimiento</div></article>
+      <article class="v16e-card"><div class="v16e-num">Pilar · 06</div><h4 class="v16e-ttl">Procesos confiables y <strong>escalables</strong></h4><p class="v16e-txt">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</p><div class="v16e-foot">Estandarizada · Escalable · Consistente</div></article>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:3rem 2rem;text-align:center;background:var(--navy);color:rgba(255,255,255,.6);font-family:var(--mono);font-size:.78rem;letter-spacing:.1em">
+  20 propuestas + 5 V16 derivadas · Propuesta de valor · Traverso International Foods · 2026-04-26
+</footer>
+
+</body>
+</html>

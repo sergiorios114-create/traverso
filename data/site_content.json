@@ -1,0 +1,141 @@
+{
+  "es": {
+    "index": {
+      "hero_badge": "BRC GS \"AA\" · +130 años",
+      "hero_title": "Calidad que cruza <span>fronteras</span>",
+      "hero_subtitle": "Traverso International Foods es una compañía orientada a la producción y exportación de alimentos desde Chile hacia mercados internacionales, con foco en soluciones industriales a granel y desarrollo de productos para terceros, combinando tradición, eficiencia y estándares globales.",
+      "hero_image": "img/uploads/ghaaa.png",
+      "hero_cta1_text": "Explorar productos",
+      "hero_cta1_link": "productos.html",
+      "hero_cta2_text": "Contacto comercial",
+      "hero_cta2_link": "contacto.html",
+      "about_lead": "Nos especializamos en la fabricación de vinagres, siendo líderes en el mercado, con variedades de Sidra de Manzana, Vino, Alcohol (con certificación kosher) y vinagres especiales como balsámicos o condimentos balsámicos. También producimos alimentos bajo marca de terceros (Marca Privada), apoyando a nuestros clientes en sus procesos productivos y en el desarrollo de negocios en distintos mercados.",
+      "values_title": "Seis pilares de <em>valor</em>",
+      "values_lead": "Los diferenciales que ofrecemos como socio exportador confiable.",
+      "products_title": "Líneas de productos para exportación",
+      "products_cta_text": "Contáctanos y conoce nuestras líneas",
+      "products_cta_link": "contacto.html",
+      "mini_contact_title": "Contáctanos y conoce nuestras líneas",
+      "mini_contact_subtitle": "Productos a granel, envasados y marcas propias para mercados internacionales."
+    },
+    "productos": {
+      "hero_label": "Productos",
+      "hero_title": "Nuestras líneas de exportación",
+      "hero_subtitle": "Nuestra oferta se centra en soluciones productivas para la industria alimentaria, con foco en abastecimiento a granel, desarrollo de productos para terceros y productos de marca Traverso.",
+      "intro_title": "Descripción general",
+      "intro_description": "Nuestros productos están desarrollados bajo estándares de calidad consistentes, con foco en eficiencia logística y adaptabilidad a distintos canales de distribución.",
+      "comercial_title": "Propuesta comercial",
+      "comercial_description": "Trabajamos con Industriales, distribuidores, importadores, cadenas de supermercados/retail y empresas del canal food service, ofreciendo soluciones adaptadas a cada tipo de cliente.",
+      "mini_contact_title": "¿Te interesa alguna línea?",
+      "mini_contact_subtitle": "Déjanos tus datos y te contactamos para conversar sobre volúmenes, formatos y condiciones comerciales."
+    },
+    "quienes_somos": {
+      "hero_label": "Quiénes Somos",
+      "hero_title": "La evolución internacional de Traverso",
+      "hero_subtitle": "Más de 130 años de trayectoria productiva proyectados hacia mercados globales, con foco en relaciones comerciales de largo plazo.",
+      "about_label": "Nuestra historia",
+      "about_title": "Una empresa chilena con vocación <em>global</em>",
+      "about_p1": "Traverso International Foods nace como la evolución internacional de Traverso, una empresa chilena con trayectoria en el desarrollo, producción y comercialización de alimentos. Esta nueva unidad tiene como propósito proyectar esa experiencia hacia mercados globales, con una propuesta enfocada en construir relaciones comerciales de largo plazo con industriales, comercializadores, importadores, distribuidores y clientes estratégicos.",
+      "about_p2": "Nuestro objetivo es expandir la presencia de la marca en mercados internacionales a través de productos que combinan calidad, consistencia y una operación preparada para responder a las exigencias de cada industria. Buscamos ser un socio confiable para empresas que valoran la continuidad, el cumplimiento y la solidez en cada etapa del proceso comercial.",
+      "about_image": "assets/exterior-fabrica-1.jpg",
+      "about_cta_text": "Contáctanos",
+      "about_cta_link": "contacto.html",
+      "enfoque_label": "Nuestro enfoque",
+      "enfoque_title": "Visión de largo plazo en cada relación comercial",
+      "enfoque_p1": "Trabajamos con una visión orientada al largo plazo, donde el foco está en aportar valor desde la producción, la flexibilidad operativa y la capacidad de adaptación. Buscamos integrarnos como un aliado estratégico dentro de la cadena de valor de nuestros clientes.",
+      "enfoque_p2": "Entendemos que el desarrollo internacional requiere confianza, consistencia y capacidad de adaptación. Por eso, abordamos cada relación comercial con una mirada estratégica, comprendiendo las necesidades de cada cliente, las particularidades de cada mercado y las condiciones que permiten construir negocios sostenibles en el tiempo.",
+      "enfoque_image": "assets/interior-fabrica-1.jpg",
+      "diffs_label": "Lo que nos diferencia",
+      "diffs_title": "Cinco pilares de nuestra propuesta exportadora",
+      "mini_contact_title": "¿Tu empresa busca un proveedor internacional confiable?",
+      "mini_contact_subtitle": "Conversemos sobre cómo podemos apoyar tu crecimiento en nuevos mercados."
+    },
+    "contacto": {
+      "hero_label": "Hablemos",
+      "hero_title": "Generemos nuevas oportunidades comerciales juntos",
+      "hero_subtitle": "Estamos disponibles para generar nuevas oportunidades comerciales y alianzas estratégicas en mercados internacionales.",
+      "main_label": "Contacto",
+      "main_title": "Escríbenos",
+      "main_lead": "Estamos disponibles para generar nuevas oportunidades comerciales y alianzas estratégicas en mercados internacionales.",
+      "main_message": "Si estás interesado en conocer nuestros productos, establecer una relación comercial o solicitar una cotización para tu proyecto, te invitamos a contactarnos.",
+      "main_tagline": "Traverso International Foods — conectando productos de calidad con mercados globales."
+    },
+    "footer": {
+      "brand_name": "Traverso International Foods",
+      "brand_tagline": "La unidad de exportación de Traverso S.A. <em>Conectando calidad chilena con mercados globales.</em>",
+      "nav_title": "Navegación",
+      "products_title": "Productos",
+      "contact_title": "Contacto",
+      "copyright": "© 2026 Traverso International Foods. Todos los derechos reservados.",
+      "parent_company": "Una empresa de Traverso S.A. · Chile"
+    }
+  },
+  "en": {
+    "index": {
+      "hero_badge": "BRC GS \"AA\" · +130 years",
+      "hero_title": "Quality that crosses <span>borders</span>",
+      "hero_subtitle": "Vinegars, sauces and condiments from Chile. Over 130 years of production experience for the global food industry.",
+      "hero_image": "img/uploads/ghaaa.png",
+      "hero_cta1_text": "Explore products",
+      "hero_cta1_link": "productos.html",
+      "hero_cta2_text": "Commercial contact",
+      "hero_cta2_link": "contacto.html",
+      "values_title": "Trust built over 130 years",
+      "products_title": "Product lines for export",
+      "products_cta_text": "Contact us to learn about our lines",
+      "products_cta_link": "contacto.html",
+      "mini_contact_title": "Let's talk",
+      "mini_contact_subtitle": "Tell us about your market and needs. We respond within 1–2 business days."
+    },
+    "productos": {
+      "hero_label": "Products",
+      "hero_title": "Our export lines",
+      "hero_subtitle": "Consistent quality across every category, backed by 130 years of production experience.",
+      "intro_title": "Consistent quality in every category",
+      "intro_description": "We develop products designed for international markets, with BRC GS \"AA\" quality standards and commercial flexibility to adapt to each channel.",
+      "comercial_title": "Solutions tailored to each channel",
+      "comercial_description": "We work in bulk, packaged and private label modalities, adapting to the industrial and commercial needs of each market.",
+      "mini_contact_title": "Interested in any line?",
+      "mini_contact_subtitle": "Leave us your details and we will contact you to discuss volumes, formats and commercial conditions."
+    },
+    "quienes_somos": {
+      "hero_label": "About Us",
+      "hero_title": "Traverso's international evolution",
+      "hero_subtitle": "Over 130 years of production experience projected to global markets, focused on long-term commercial relationships.",
+      "about_label": "Our history",
+      "about_title": "A Chilean company with a <em>global</em> vocation",
+      "about_p1": "Traverso International Foods is born as the export unit of Traverso, a Chilean company with experience in the development, production and commercialization of food. This unit projects that experience to global markets, focused on building long-term commercial relationships with industrial clients, traders, importers, distributors and strategic partners.",
+      "about_p2": "Our goal is to expand the brand's presence in international markets through products that combine quality, consistency and an operation prepared to respond to the demands of each industry. We aim to be a reliable partner for companies that value continuity, compliance and solidity at every stage of the commercial process.",
+      "about_image": "assets/exterior-fabrica-1.jpg",
+      "about_cta_text": "Contact us",
+      "about_cta_link": "contacto.html",
+      "enfoque_label": "Our approach",
+      "enfoque_title": "Long-term vision in every commercial relationship",
+      "enfoque_p1": "We work with a long-term oriented vision, understanding that international development requires trust, consistency and adaptability. That is why we approach every commercial relationship with a strategic mindset, seeking to understand the needs of each client, the particularities of each market and the conditions that allow building sustainable businesses over time.",
+      "enfoque_p2": "Our approach combines production experience, commercial judgment and a structured operation to seriously respond to the challenges of international trade. More than closing punctual sales, we seek to generate solid links that bring mutual value and growth.",
+      "enfoque_image": "assets/interior-fabrica-1.jpg",
+      "diffs_label": "What sets us apart",
+      "diffs_title": "Four pillars of our export proposal",
+      "mini_contact_title": "Is your company looking for a reliable international supplier?",
+      "mini_contact_subtitle": "Let's talk about how we can support your growth in new markets."
+    },
+    "contacto": {
+      "hero_label": "Let's talk",
+      "hero_title": "Let's create new commercial opportunities together",
+      "hero_subtitle": "We are available to generate strategic alliances in international markets. If you are interested in learning about our products or establishing a commercial relationship, we invite you to contact us.",
+      "main_label": "Contact",
+      "main_title": "Write to us",
+      "main_lead": "We are available to generate new commercial opportunities and strategic alliances in international markets.",
+      "main_tagline": "Traverso International Foods — connecting quality products with global markets."
+    },
+    "footer": {
+      "brand_name": "Traverso International Foods",
+      "brand_tagline": "The export unit of Traverso S.A. <em>Connecting Chilean quality with global markets.</em>",
+      "nav_title": "Navigation",
+      "products_title": "Products",
+      "contact_title": "Contact",
+      "copyright": "© 2026 Traverso International Foods. All rights reserved.",
+      "parent_company": "A Traverso S.A. company · Chile"
+    }
+  }
+}

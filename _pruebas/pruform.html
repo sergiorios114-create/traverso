@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pruform · 15 propuestas form institucional — Traverso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1E6B; --navy-dark:#081450; --gold:#C5A55A; --gold-sat:#C9A227;
+    --neutral:#FBF9FA; --neutral-alt:#F2F4F8; --text:#19212F;
+    --line-soft:rgba(11,30,107,.10); --line:rgba(11,30,107,.18);
+    --muted:rgba(25,33,47,.6);
+    --serif:'Libre Baskerville',Georgia,serif;
+    --sans:'Source Sans 3',system-ui,sans-serif;
+    --mono:'Courier New',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--text);background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased}
+  em{font-style:italic;color:var(--gold-sat)}
+
+  .page-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft);padding:.85rem 1.5rem;display:flex;gap:.4rem;align-items:center;overflow-x:auto;white-space:nowrap;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em}
+  .page-nav__brand{font-family:var(--serif);font-weight:700;color:var(--navy);margin-right:1rem;font-size:.95rem;letter-spacing:0;flex-shrink:0}
+  .page-nav a{color:var(--muted);text-decoration:none;padding:.3rem .55rem;border-radius:2px;flex-shrink:0}
+  .page-nav a:hover{background:var(--navy);color:#fff}
+
+  /* Header común */
+  .vp-header{margin:0 0 4rem;max-width:780px}
+  .vp-eyebrow{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-sat);margin-bottom:1.2rem}
+  .vp-title{font-family:var(--serif);font-size:clamp(1.65rem,2.6vw,2.2rem);font-weight:400;line-height:1.18;color:var(--navy);margin-bottom:1rem;letter-spacing:-.015em}
+  .vp-title em{font-style:italic;color:var(--gold-sat)}
+  .vp-lead{font-size:1rem;color:var(--text);opacity:.78;max-width:580px;line-height:1.7}
+
+  .variant{padding:6rem 2rem;border-bottom:1px solid var(--line-soft)}
+  .variant:nth-child(even){background:var(--neutral)}
+  .variant__tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem;display:block}
+  .variant__container{max-width:min(1400px,94vw);margin:0 auto}
+
+  /* ─── Form base institucional · usar como herencia en todas las variantes ─── */
+  .ifield{margin-bottom:1.6rem;display:flex;flex-direction:column;gap:.5rem}
+  .ilabel{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-sat)}
+  .iinput,.itextarea,.iselect{font-family:var(--sans);font-size:1rem;color:var(--text);background:transparent;border:none;border-bottom:1px solid var(--line);padding:.7rem 0;outline:none;width:100%;transition:border-color .25s ease}
+  .iinput:focus,.itextarea:focus,.iselect:focus{border-bottom-color:var(--navy)}
+  .itextarea{resize:vertical;min-height:120px}
+  .iselect{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--gold-sat) 50%),linear-gradient(135deg,var(--gold-sat) 50%,transparent 50%);background-position:calc(100% - 14px) center,calc(100% - 8px) center;background-size:6px 6px,6px 6px;background-repeat:no-repeat;cursor:pointer;padding-right:32px}
+  .ihint{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-top:.25rem}
+  .isubmit{font-family:var(--mono);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;background:var(--navy);color:#fff;border:none;padding:1.1rem 2.4rem;cursor:pointer;display:inline-flex;align-items:center;gap:.85rem;transition:.3s;border-radius:0;margin-top:1rem}
+  .isubmit:hover{background:var(--gold-sat)}
+  .isubmit svg{width:18px;height:18px}
+  .isubmit-ghost{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+  .isubmit-ghost:hover{background:var(--navy);color:#fff}
+  .irow-2{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  @media(max-width:640px){.irow-2{grid-template-columns:1fr;gap:0}}
+
+  /* ═══ FAMILIA A · STICKY SIDEBAR (matches el polo del index) ═══ */
+
+  /* F01 · Sticky sidebar + form right */
+  .f01-grid{display:grid;grid-template-columns:380px 1fr;gap:5rem;align-items:start}
+  .f01-side{position:sticky;top:6rem}
+  .f01-side h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--navy);line-height:1.2;letter-spacing:-.01em;margin-bottom:.6rem}
+  .f01-side h3 em{font-style:italic;font-weight:400;color:var(--gold-sat)}
+  .f01-side .lead{font-size:.92rem;color:var(--muted);line-height:1.65;margin:1rem 0 1.6rem;padding-bottom:1.5rem;border-bottom:1px solid var(--line);max-width:320px}
+  .f01-side .meta{display:flex;flex-direction:column;gap:.7rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+  .f01-side .meta strong{color:var(--gold-sat);font-weight:400}
+  .f01-form{max-width:680px}
+
+  /* F02 · Sticky + form vertical 1-col grandes */
+  .f02-grid{display:grid;grid-template-columns:340px 1fr;gap:5rem;align-items:start}
+  .f02-side{position:sticky;top:6rem}
+  .f02-side h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--navy);margin-bottom:1rem}
+  .f02-side h3 em{font-style:italic;font-weight:400;color:var(--gold-sat)}
+  .f02-side .lead{font-size:.92rem;color:var(--muted);line-height:1.65;margin-bottom:1.5rem}
+  .f02-side .ref{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--gold-sat);text-transform:uppercase;border-top:1px solid var(--line);padding-top:1.2rem}
+  .f02-form{max-width:580px}
+  .f02-form .ifield{padding:1.4rem 0;border-top:1px solid var(--line-soft);margin:0}
+  .f02-form .ifield:first-child{border-top:none;padding-top:0}
+  .f02-form .ilabel{font-family:var(--serif);font-size:1.05rem;font-weight:400;letter-spacing:0;text-transform:none;color:var(--navy)}
+
+  /* F03 · Sticky + form campos numerados */
+  .f03-grid{display:grid;grid-template-columns:340px 1fr;gap:5rem;align-items:start}
+  .f03-side{position:sticky;top:6rem}
+  .f03-side h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--navy);margin-bottom:1rem}
+  .f03-side h3 em{font-style:italic;font-weight:400;color:var(--gold-sat)}
+  .f03-side .lead{font-size:.92rem;color:var(--muted);line-height:1.65;margin-bottom:1.5rem}
+  .f03-form .ifield{display:grid;grid-template-columns:50px 1fr;gap:1.2rem;padding:1.4rem 0;border-top:1px solid var(--line-soft);align-items:start}
+  .f03-form .ifield:first-child{border-top:none}
+  .f03-num{font-family:var(--mono);font-size:.78rem;letter-spacing:.18em;color:var(--gold-sat);padding-top:.7rem}
+  .f03-content{display:flex;flex-direction:column;gap:.4rem}
+  .f03-content .ilabel{color:var(--navy);font-family:var(--sans);font-size:.95rem;letter-spacing:0;text-transform:none;font-weight:400}
+
+  /* ═══ FAMILIA B · STACK CENTRADO EDITORIAL ═══ */
+
+  /* F04 · Header centrado + form max-w 640 (Aesop) */
+  .f04-wrap{max-width:640px;margin:0 auto;text-align:center}
+  .f04-wrap .vp-header{text-align:center;margin-left:auto;margin-right:auto}
+  .f04-wrap .vp-eyebrow{margin:0 auto 1.2rem}
+  .f04-form{margin-top:2rem;text-align:left}
+
+  /* F05 · 2-col asymmetric con números display */
+  .f05-form{display:grid;grid-template-columns:80px 1fr;gap:2rem;align-items:start}
+  .f05-form .ifield{margin:0;padding:2rem 0;border-top:1px solid var(--line-soft);grid-column:1 / -1;display:grid;grid-template-columns:80px 1fr;gap:2rem;align-items:start}
+  .f05-form .ifield:first-of-type{border-top:none}
+  .f05-num{font-family:var(--serif);font-size:3rem;font-style:italic;font-weight:400;color:var(--gold);line-height:.85;letter-spacing:-.03em}
+  .f05-body{display:flex;flex-direction:column;gap:.5rem}
+  .f05-body .ilabel{font-family:var(--serif);font-size:1.2rem;color:var(--navy);font-weight:400;letter-spacing:0;text-transform:none;margin-bottom:.4rem}
+
+  /* F06 · Header left + form con eyebrow tracked en cada campo */
+  .f06-form{max-width:760px}
+  .f06-form .ifield{margin-bottom:2.4rem}
+  .f06-form .ilabel{display:flex;align-items:center;gap:.85rem;margin-bottom:.7rem}
+  .f06-form .ilabel::before{content:"§";color:var(--gold);font-family:var(--serif);font-style:italic;font-size:1.1em}
+
+  /* ═══ FAMILIA C · TABLA / CLÁUSULAS / GOV.UK ═══ */
+
+  /* F07 · Tabla legal · 2-col label+input · hairlines */
+  .f07-form{max-width:880px;margin:0 auto;border-top:2px solid var(--text)}
+  .f07-form .ifield{margin:0;padding:1.6rem 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:240px 1fr;gap:2rem;align-items:center}
+  .f07-form .ilabel{font-family:var(--serif);font-size:1rem;color:var(--navy);font-weight:400;letter-spacing:0;text-transform:none}
+  .f07-form .iinput,.f07-form .itextarea,.f07-form .iselect{border-bottom:none;padding:.4rem 0}
+  .f07-form .submit-row{padding:2rem 0 0;display:flex;justify-content:flex-end;border-bottom:none}
+
+  /* F08 · Form como cláusulas numeradas § Sec */
+  .f08-form{max-width:780px}
+  .f08-section{padding:2.5rem 0;border-top:1px solid var(--line-soft)}
+  .f08-section:first-child{border-top:none}
+  .f08-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:.8rem;display:block}
+  .f08-tt{font-family:var(--serif);font-size:1.4rem;color:var(--navy);font-weight:400;margin-bottom:1.5rem;line-height:1.25}
+  .f08-tt em{font-style:italic;color:var(--gold-sat)}
+
+  /* F09 · GOV.UK style · label arriba grande + hint */
+  .f09-form{max-width:680px}
+  .f09-form .ifield{margin-bottom:2rem}
+  .f09-form .ilabel{font-family:var(--sans);font-size:1.1rem;font-weight:600;color:var(--navy);letter-spacing:0;text-transform:none;margin-bottom:.3rem}
+  .f09-form .ihint{margin-bottom:.6rem;margin-top:0;text-transform:none;letter-spacing:0;font-family:var(--sans);font-size:.92rem;color:var(--muted)}
+  .f09-form .iinput,.f09-form .itextarea,.f09-form .iselect{border:1px solid var(--line);background:#fff;padding:.85rem 1rem}
+  .f09-form .iinput:focus{border-color:var(--navy);outline:3px solid var(--gold);outline-offset:0}
+
+  /* ═══ FAMILIA D · CINEMÁTICO / SPLIT NAVY ═══ */
+
+  /* F10 · Split izquierda manifiesto + derecha form */
+  .f10-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:600px}
+  .f10-left{padding:5rem 4rem;background:var(--navy);color:#fff;display:flex;flex-direction:column;justify-content:center}
+  .f10-left .vp-eyebrow{color:var(--gold)}
+  .f10-left h3{font-family:var(--serif);font-size:2.2rem;color:#fff;font-weight:400;line-height:1.18;margin-bottom:1.4rem;letter-spacing:-.015em}
+  .f10-left h3 em{font-style:italic;color:var(--gold)}
+  .f10-left p{color:rgba(255,255,255,.75);font-size:1rem;line-height:1.75;max-width:440px;margin-bottom:2rem}
+  .f10-left .meta{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:rgba(255,255,255,.55);text-transform:uppercase;border-top:1px solid rgba(255,255,255,.18);padding-top:1.5rem;display:flex;flex-direction:column;gap:.7rem}
+  .f10-left .meta strong{color:var(--gold);font-weight:400}
+  .f10-right{padding:5rem 4rem;background:#fff;display:flex;flex-direction:column;justify-content:center}
+  @media(max-width:880px){.f10-grid{grid-template-columns:1fr}}
+
+  /* F11 · Hero text full + form al lado dentro de cinta */
+  .f11-grid{display:grid;grid-template-columns:1fr 460px;gap:5rem;align-items:center}
+  .f11-text h3{font-family:var(--serif);font-size:clamp(2rem,4.5vw,3.4rem);font-weight:400;color:var(--navy);line-height:1.05;letter-spacing:-.025em;margin-bottom:1.5rem;max-width:600px}
+  .f11-text h3 em{font-style:italic;color:var(--gold-sat)}
+  .f11-text p{font-size:1.05rem;color:var(--text);opacity:.78;line-height:1.75;max-width:540px;margin-bottom:2rem}
+  .f11-text .meta{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;display:flex;gap:1.5rem;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:1.5rem}
+  .f11-form{background:var(--neutral);padding:2.4rem}
+
+  /* F12 · Form con stat institucional 130+ al lado */
+  .f12-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+  .f12-stat{font-family:var(--serif);font-size:8rem;font-weight:400;color:var(--navy);line-height:.9;letter-spacing:-.05em;margin-bottom:1rem}
+  .f12-stat em{font-style:italic;color:var(--gold-sat);font-size:.45em;display:inline-block;vertical-align:top;margin-top:.85em}
+  .f12-side .label{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:1rem;border-top:1px solid var(--line);padding-top:1rem;display:block}
+  .f12-side h3{font-family:var(--serif);font-size:1.65rem;font-weight:400;color:var(--navy);line-height:1.2;margin-bottom:1.2rem;max-width:520px}
+  .f12-side h3 em{font-style:italic;color:var(--gold-sat)}
+  .f12-side p{color:var(--text);opacity:.78;font-size:1rem;line-height:1.75;max-width:520px}
+
+  /* ═══ FAMILIA E · CONCEPTUAL / HERITAGE ═══ */
+
+  /* F13 · Carta editorial con drop cap + firma form */
+  .f13-wrap{max-width:680px;margin:0 auto;font-family:var(--serif)}
+  .f13-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:1.5rem;display:block;text-align:center}
+  .f13-letter{font-family:var(--serif);font-size:1.05rem;line-height:1.85;color:var(--text);opacity:.85;margin-bottom:2.5rem}
+  .f13-letter::first-letter{font-family:var(--serif);font-size:3.6em;float:left;line-height:.85;margin:.05em .15em -.05em 0;color:var(--gold);font-weight:400}
+  .f13-letter em{font-style:italic;color:var(--gold-sat)}
+  .f13-form{border-top:1px solid var(--line);padding-top:2.5rem;font-family:var(--sans)}
+  .f13-form .ihint{text-align:center;margin-top:1rem;font-style:normal}
+
+  /* F14 · Cuestionario en pasos visuales · breadcrumb */
+  .f14-steps{display:flex;justify-content:center;gap:0;margin-bottom:3rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase}
+  .f14-step{padding:.8rem 1.4rem;color:var(--muted);position:relative}
+  .f14-step.active{color:var(--gold-sat)}
+  .f14-step.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold-sat)}
+  .f14-step:not(:last-child)::before{content:"→";position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--line)}
+  .f14-form{max-width:680px;margin:0 auto}
+  .f14-section h4{font-family:var(--serif);font-size:1.4rem;color:var(--navy);font-weight:400;margin-bottom:.5rem;text-align:center}
+  .f14-section h4 em{font-style:italic;color:var(--gold-sat)}
+  .f14-section .desc{font-size:.95rem;color:var(--muted);text-align:center;margin-bottom:2rem}
+
+  /* F15 · Postal · sello + form como ficha archivo */
+  .f15-wrap{max-width:760px;margin:0 auto;background:#FDFBF6;border:1px solid #E8E0D0;padding:3rem 3.5rem;position:relative;box-shadow:0 2px 0 #E8E0D0}
+  .f15-stamp{position:absolute;top:1.5rem;right:1.5rem;width:80px;height:80px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--gold-sat);text-align:center;line-height:1.3;text-transform:uppercase;background:rgba(251,249,246,.92);transform:rotate(-8deg)}
+  .f15-head{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;border-bottom:1px solid #E8E0D0;padding-bottom:1.2rem;margin-bottom:2rem}
+  .f15-head strong{color:var(--gold-sat);font-weight:400}
+  .f15-wrap h3{font-family:var(--serif);font-size:1.6rem;color:var(--navy);font-weight:400;margin-bottom:1rem;line-height:1.25;max-width:540px}
+  .f15-wrap h3 em{font-style:italic;color:var(--gold-sat)}
+  .f15-wrap .lead{font-size:.95rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;max-width:540px}
+  .f15-form .iinput,.f15-form .itextarea,.f15-form .iselect{border-bottom-color:#E8E0D0;font-family:var(--sans)}
+  .f15-foot{margin-top:1.5rem;padding-top:1.2rem;border-top:1px dashed #C9BFA8;display:flex;justify-content:space-between;font-family:var(--mono);font-size:.65rem;color:var(--muted);letter-spacing:.18em;text-transform:uppercase}
+
+  /* Mobile */
+  @media(max-width:880px){
+    .f01-grid,.f02-grid,.f03-grid,.f11-grid,.f12-grid{grid-template-columns:1fr;gap:3rem}
+    .f01-side,.f02-side,.f03-side{position:static}
+    .f07-form .ifield{grid-template-columns:1fr;gap:.5rem}
+  }
+</style>
+</head>
+<body>
+
+<nav class="page-nav">
+  <span class="page-nav__brand">Pruform · 15 propuestas form institucional</span>
+  <a href="#f01">F01</a><a href="#f02">F02</a><a href="#f03">F03</a><a href="#f04">F04</a><a href="#f05">F05</a>
+  <a href="#f06">F06</a><a href="#f07">F07</a><a href="#f08">F08</a><a href="#f09">F09</a><a href="#f10">F10</a>
+  <a href="#f11">F11</a><a href="#f12">F12</a><a href="#f13">F13</a><a href="#f14">F14</a><a href="#f15">F15</a>
+</nav>
+
+<!-- ═══ F01 · Sticky sidebar + form right (espejo del módulo Pilares) ═══ -->
+<section class="variant" id="f01">
+  <div class="variant__container">
+    <span class="variant__tag">F01 · Sticky sidebar + form right · espejo del polo institucional</span>
+    <div class="f01-grid">
+      <aside class="f01-side">
+        <span class="vp-eyebrow">Consulta comercial</span>
+        <h3>¿Necesitas información sobre <em>disponibilidad</em> o volúmenes?</h3>
+        <p class="lead">Cuéntanos qué producto te interesa, el mercado destino y el tipo de cliente. Te respondemos con disponibilidad, formatos y condiciones comerciales.</p>
+        <div class="meta">
+          <span><strong>24-48 h</strong>Tiempo de respuesta</span>
+          <span><strong>EN · ES</strong>Idiomas</span>
+          <span><strong>Multi-mercado</strong>Cobertura</span>
+        </div>
+      </aside>
+      <form class="f01-form">
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">01 · Nombre</label><input class="iinput" type="text" placeholder="Tu nombre" required></div>
+          <div class="ifield"><label class="ilabel">02 · Empresa</label><input class="iinput" type="text" placeholder="Nombre de empresa"></div>
+        </div>
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">03 · Email</label><input class="iinput" type="email" placeholder="correo@empresa.com" required></div>
+          <div class="ifield"><label class="ilabel">04 · País destino</label><input class="iinput" type="text" placeholder="País de destino"></div>
+        </div>
+        <div class="ifield"><label class="ilabel">05 · Producto</label><select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option><option>Otro / Consultar</option></select></div>
+        <div class="ifield"><label class="ilabel">06 · Mensaje</label><textarea class="itextarea" placeholder="Volúmenes, formatos, mercado destino..." required></textarea></div>
+        <button class="isubmit" type="submit">Consultar disponibilidad <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ F02 · Sticky + form vertical 1-col grandes (Aesop letter style) ═══ -->
+<section class="variant" id="f02">
+  <div class="variant__container">
+    <span class="variant__tag">F02 · Sticky sidebar + form 1-col grandes · labels serif</span>
+    <div class="f02-grid">
+      <aside class="f02-side">
+        <span class="vp-eyebrow">Consulta comercial</span>
+        <h3>¿Necesitas información sobre <em>disponibilidad</em>?</h3>
+        <p class="lead">Cuéntanos qué producto te interesa y el mercado destino. Te respondemos con disponibilidad y condiciones comerciales.</p>
+        <div class="ref">Ref · TIF/COM/2026 · Respuesta 24-48 h</div>
+      </aside>
+      <form class="f02-form">
+        <div class="ifield"><label class="ilabel">Nombre</label><input class="iinput" type="text" placeholder="Tu nombre" required></div>
+        <div class="ifield"><label class="ilabel">Empresa</label><input class="iinput" type="text" placeholder="Nombre de empresa"></div>
+        <div class="ifield"><label class="ilabel">Email</label><input class="iinput" type="email" placeholder="correo@empresa.com" required></div>
+        <div class="ifield"><label class="ilabel">País destino</label><input class="iinput" type="text" placeholder="País"></div>
+        <div class="ifield"><label class="ilabel">Producto de interés</label><select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select></div>
+        <div class="ifield"><label class="ilabel">Mensaje</label><textarea class="itextarea" placeholder="Cuéntanos sobre tu consulta..." required></textarea></div>
+        <button class="isubmit" type="submit">Consultar disponibilidad →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ F03 · Sticky + form campos numerados 01-06 ═══ -->
+<section class="variant" id="f03">
+  <div class="variant__container">
+    <span class="variant__tag">F03 · Sticky + campos numerados 01-06 con § marker</span>
+    <div class="f03-grid">
+      <aside class="f03-side">
+        <span class="vp-eyebrow">Consulta comercial</span>
+        <h3>Formulario de <em>contacto</em> comercial</h3>
+        <p class="lead">06 campos. Te respondemos con disponibilidad, formatos y condiciones comerciales en 24-48 h.</p>
+      </aside>
+      <form class="f03-form">
+        <div class="ifield"><span class="f03-num">01</span><div class="f03-content"><label class="ilabel">Nombre</label><input class="iinput" type="text" placeholder="Tu nombre" required></div></div>
+        <div class="ifield"><span class="f03-num">02</span><div class="f03-content"><label class="ilabel">Empresa</label><input class="iinput" type="text" placeholder="Nombre de empresa"></div></div>
+        <div class="ifield"><span class="f03-num">03</span><div class="f03-content"><label class="ilabel">Email</label><input class="iinput" type="email" placeholder="correo@empresa.com" required></div></div>
+        <div class="ifield"><span class="f03-num">04</span><div class="f03-content"><label class="ilabel">País destino</label><input class="iinput" type="text" placeholder="País"></div></div>
+        <div class="ifield"><span class="f03-num">05</span><div class="f03-content"><label class="ilabel">Producto de interés</label><select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select></div></div>
+        <div class="ifield"><span class="f03-num">06</span><div class="f03-content"><label class="ilabel">Mensaje</label><textarea class="itextarea" placeholder="Volúmenes, formatos, destino..." required></textarea></div></div>
+        <button class="isubmit" type="submit" style="margin-left:70px">Consultar disponibilidad →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ F04 · Header centrado + form max-w 640 (Aesop) ═══ -->
+<section class="variant" id="f04">
+  <div class="variant__container">
+    <span class="variant__tag">F04 · Header centrado + form 640px clean (Aesop heritage)</span>
+    <div class="f04-wrap">
+      <header class="vp-header">
+        <span class="vp-eyebrow">Consulta comercial</span>
+        <h2 class="vp-title">¿Necesitas información sobre <em>disponibilidad</em> o volúmenes?</h2>
+        <p class="vp-lead">Cuéntanos qué producto te interesa, el mercado destino y el tipo de cliente. Te respondemos con disponibilidad, formatos y condiciones comerciales.</p>
+      </header>
+      <form class="f04-form">
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">Nombre</label><input class="iinput" type="text" placeholder="Tu nombre" required></div>
+          <div class="ifield"><label class="ilabel">Empresa</label><input class="iinput" type="text" placeholder="Nombre de empresa"></div>
+        </div>
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">Email</label><input class="iinput" type="email" placeholder="correo@empresa.com" required></div>
+          <div class="ifield"><label class="ilabel">País destino</label><input class="iinput" type="text" placeholder="País"></div>
+        </div>
+        <div class="ifield"><label class="ilabel">Producto de interés</label><select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select></div>
+        <div class="ifield"><label class="ilabel">Mensaje</label><textarea class="itextarea" placeholder="Volúmenes, formatos, mercado..." required></textarea></div>
+        <div style="text-align:center;margin-top:1.5rem"><button class="isubmit" type="submit">Consultar disponibilidad →</button></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ F05 · 2-col asymmetric con números display gigantes ═══ -->
+<section class="variant" id="f05">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Consulta comercial</span>
+      <h2 class="vp-title">Formulario de <em>contacto</em> · 06 campos</h2>
+      <p class="vp-lead">Cuéntanos sobre tu consulta. Te respondemos con disponibilidad y condiciones en 24-48 h.</p>
+    </header>
+    <span class="variant__tag">F05 · 2-col asymmetric · números display 3rem italic gold</span>
+    <form class="f05-form">
+      <div class="ifield"><div class="f05-num">01</div><div class="f05-body"><label class="ilabel">Nombre</label><input class="iinput" type="text" placeholder="Tu nombre" required></div></div>
+      <div class="ifield"><div class="f05-num">02</div><div class="f05-body"><label class="ilabel">Empresa</label><input class="iinput" type="text" placeholder="Nombre de empresa"></div></div>
+      <div class="ifield"><div class="f05-num">03</div><div class="f05-body"><label class="ilabel">Email</label><input class="iinput" type="email" placeholder="correo@empresa.com" required></div></div>
+      <div class="ifield"><div class="f05-num">04</div><div class="f05-body"><label class="ilabel">País destino</label><input class="iinput" type="text" placeholder="País"></div></div>
+      <div class="ifield"><div class="f05-num">05</div><div class="f05-body"><label class="ilabel">Producto</label><select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select></div></div>
+      <div class="ifield"><div class="f05-num">06</div><div class="f05-body"><label class="ilabel">Mensaje</label><textarea class="itextarea" placeholder="Volúmenes, formatos, mercado..." required></textarea></div></div>
+      <div></div><div><button class="isubmit" type="submit">Consultar disponibilidad →</button></div>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ F06 · Form con § eyebrow tracked en cada campo ═══ -->
+<section class="variant" id="f06">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Consulta comercial</span>
+      <h2 class="vp-title">¿Necesitas información sobre <em>disponibilidad</em>?</h2>
+      <p class="vp-lead">Cuéntanos qué producto te interesa, el mercado destino y el tipo de cliente. Te respondemos con disponibilidad, formatos y condiciones comerciales.</p>
+    </header>
+    <span class="variant__tag">F06 · § marker en cada campo · cláusula institucional</span>
+    <form class="f06-form">
+      <div class="irow-2">
+        <div class="ifield"><label class="ilabel">Nombre completo</label><input class="iinput" type="text" placeholder="Tu nombre" required></div>
+        <div class="ifield"><label class="ilabel">Empresa / organización</label><input class="iinput" type="text" placeholder="Nombre de empresa"></div>
+      </div>
+      <div class="irow-2">
+        <div class="ifield"><label class="ilabel">Correo electrónico</label><input class="iinput" type="email" placeholder="correo@empresa.com" required></div>
+        <div class="ifield"><label class="ilabel">País de destino</label><input class="iinput" type="text" placeholder="País destino"></div>
+      </div>
+      <div class="ifield"><label class="ilabel">Producto de interés</label><select class="iselect"><option>Seleccionar línea...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select></div>
+      <div class="ifield"><label class="ilabel">Mensaje / consulta</label><textarea class="itextarea" placeholder="Volúmenes, formatos, mercado destino..." required></textarea></div>
+      <button class="isubmit" type="submit">Consultar disponibilidad →</button>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ F07 · Tabla legal · 2-col label+input · prospecto ═══ -->
+<section class="variant" id="f07">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Consulta comercial</span>
+      <h2 class="vp-title">Solicitud de <em>información</em> comercial</h2>
+      <p class="vp-lead">Formulario tabular tipo prospecto institucional. Cumplimentar todos los campos requeridos.</p>
+    </header>
+    <span class="variant__tag">F07 · Tabla legal 2-col · prospecto institucional</span>
+    <form class="f07-form">
+      <div class="ifield"><label class="ilabel">Nombre</label><input class="iinput" type="text" placeholder="Tu nombre" required></div>
+      <div class="ifield"><label class="ilabel">Empresa</label><input class="iinput" type="text" placeholder="Razón social"></div>
+      <div class="ifield"><label class="ilabel">Email corporativo</label><input class="iinput" type="email" placeholder="correo@empresa.com" required></div>
+      <div class="ifield"><label class="ilabel">País destino</label><input class="iinput" type="text" placeholder="País de exportación"></div>
+      <div class="ifield"><label class="ilabel">Producto de interés</label><select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select></div>
+      <div class="ifield"><label class="ilabel">Detalle de consulta</label><textarea class="itextarea" placeholder="Volúmenes, formatos, destino..." required></textarea></div>
+      <div class="ifield submit-row" style="border-bottom:none"><div></div><button class="isubmit" type="submit">Enviar solicitud →</button></div>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ F08 · Form como cláusulas numeradas § Sec ═══ -->
+<section class="variant" id="f08">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Consulta comercial</span>
+      <h2 class="vp-title">Formulario en <em>tres secciones</em></h2>
+      <p class="vp-lead">Estructura por cláusulas: identificación, mercado, mensaje. Te respondemos en 24-48 h.</p>
+    </header>
+    <span class="variant__tag">F08 · Form en cláusulas § 01 § 02 § 03</span>
+    <form class="f08-form">
+      <div class="f08-section">
+        <span class="f08-eyebrow">§ 01 · Identificación</span>
+        <h4 class="f08-tt">Datos de <em>contacto</em></h4>
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">Nombre</label><input class="iinput" type="text" placeholder="Tu nombre" required></div>
+          <div class="ifield"><label class="ilabel">Empresa</label><input class="iinput" type="text" placeholder="Nombre de empresa"></div>
+        </div>
+        <div class="ifield"><label class="ilabel">Email</label><input class="iinput" type="email" placeholder="correo@empresa.com" required></div>
+      </div>
+      <div class="f08-section">
+        <span class="f08-eyebrow">§ 02 · Mercado destino</span>
+        <h4 class="f08-tt">País y línea de <em>interés</em></h4>
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">País destino</label><input class="iinput" type="text" placeholder="País"></div>
+          <div class="ifield"><label class="ilabel">Producto</label><select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select></div>
+        </div>
+      </div>
+      <div class="f08-section">
+        <span class="f08-eyebrow">§ 03 · Consulta</span>
+        <h4 class="f08-tt">Detalle del <em>requerimiento</em></h4>
+        <div class="ifield"><label class="ilabel">Mensaje</label><textarea class="itextarea" placeholder="Volúmenes, formatos, condiciones..." required></textarea></div>
+        <button class="isubmit" type="submit">Enviar consulta →</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ F09 · GOV.UK style · label arriba grande + hint ═══ -->
+<section class="variant" id="f09">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Consulta comercial</span>
+      <h2 class="vp-title">Solicitud de información <em>comercial</em></h2>
+      <p class="vp-lead">Formulario en formato GOV.UK · accesible · campos con hint explicativo.</p>
+    </header>
+    <span class="variant__tag">F09 · GOV.UK · label arriba grande + hint + outline focus</span>
+    <form class="f09-form">
+      <div class="ifield">
+        <label class="ilabel">Nombre completo</label>
+        <span class="ihint">Como aparece en tu identificación o pasaporte.</span>
+        <input class="iinput" type="text" required>
+      </div>
+      <div class="ifield">
+        <label class="ilabel">Empresa u organización</label>
+        <span class="ihint">Razón social. Si eres independiente, deja en blanco.</span>
+        <input class="iinput" type="text">
+      </div>
+      <div class="ifield">
+        <label class="ilabel">Correo electrónico</label>
+        <span class="ihint">Te responderemos a esta dirección.</span>
+        <input class="iinput" type="email" required>
+      </div>
+      <div class="ifield">
+        <label class="ilabel">País destino</label>
+        <span class="ihint">País donde se comercializarían los productos.</span>
+        <input class="iinput" type="text">
+      </div>
+      <div class="ifield">
+        <label class="ilabel">Producto de interés</label>
+        <span class="ihint">Selecciona la línea principal de tu consulta.</span>
+        <select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select>
+      </div>
+      <div class="ifield">
+        <label class="ilabel">Detalle de la consulta</label>
+        <span class="ihint">Volúmenes estimados, formatos, frecuencia, mercado destino.</span>
+        <textarea class="itextarea" required></textarea>
+      </div>
+      <button class="isubmit" type="submit">Enviar consulta →</button>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ F10 · Split izquierda manifiesto navy + derecha form ═══ -->
+<section class="variant" id="f10" style="padding:0">
+  <div style="padding:2rem 2rem 0"><span class="variant__tag">F10 · Split navy/blanco · manifiesto + form</span></div>
+  <div class="f10-grid">
+    <div class="f10-left">
+      <span class="vp-eyebrow">— Consulta comercial —</span>
+      <h3>¿Necesitas información sobre <em>disponibilidad</em> o volúmenes?</h3>
+      <p>Cuéntanos qué producto te interesa, el mercado destino y el tipo de cliente. Te respondemos con disponibilidad, formatos y condiciones comerciales.</p>
+      <div class="meta">
+        <span><strong>24-48 h</strong> · Tiempo de respuesta</span>
+        <span><strong>EN · ES</strong> · Idiomas</span>
+        <span><strong>Multi-mercado</strong> · Cobertura</span>
+        <span><strong>BRC GS "AA"</strong> · Estándares</span>
+      </div>
+    </div>
+    <div class="f10-right">
+      <form>
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">Nombre</label><input class="iinput" type="text" required></div>
+          <div class="ifield"><label class="ilabel">Empresa</label><input class="iinput" type="text"></div>
+        </div>
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">Email</label><input class="iinput" type="email" required></div>
+          <div class="ifield"><label class="ilabel">País destino</label><input class="iinput" type="text"></div>
+        </div>
+        <div class="ifield"><label class="ilabel">Producto</label><select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select></div>
+        <div class="ifield"><label class="ilabel">Mensaje</label><textarea class="itextarea" required></textarea></div>
+        <button class="isubmit" type="submit">Consultar →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ F11 · Hero text full + form en cinta ═══ -->
+<section class="variant" id="f11">
+  <div class="variant__container">
+    <span class="variant__tag">F11 · Hero text dominante + form compacto al lado</span>
+    <div class="f11-grid">
+      <div class="f11-text">
+        <span class="vp-eyebrow">Consulta comercial</span>
+        <h3>Disponibilidad, volúmenes, mercados — <em>conversemos</em>.</h3>
+        <p>Cuéntanos qué producto te interesa, el mercado destino y el tipo de cliente. Te respondemos con disponibilidad, formatos y condiciones comerciales en 24-48 h.</p>
+        <div class="meta">
+          <span><strong style="color:var(--gold-sat)">130+</strong> años</span>
+          <span><strong style="color:var(--gold-sat)">BRC AA</strong> certif.</span>
+          <span><strong style="color:var(--gold-sat)">04</strong> líneas</span>
+          <span><strong style="color:var(--gold-sat)">EN · ES</strong></span>
+        </div>
+      </div>
+      <form class="f11-form">
+        <div class="ifield"><label class="ilabel">Nombre</label><input class="iinput" type="text" required></div>
+        <div class="ifield"><label class="ilabel">Empresa</label><input class="iinput" type="text"></div>
+        <div class="ifield"><label class="ilabel">Email</label><input class="iinput" type="email" required></div>
+        <div class="ifield"><label class="ilabel">País destino</label><input class="iinput" type="text"></div>
+        <div class="ifield"><label class="ilabel">Producto</label><select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select></div>
+        <div class="ifield"><label class="ilabel">Mensaje</label><textarea class="itextarea" required></textarea></div>
+        <button class="isubmit" type="submit">Consultar →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ F12 · Form con stat institucional 130+ al lado ═══ -->
+<section class="variant" id="f12">
+  <div class="variant__container">
+    <span class="variant__tag">F12 · Stat display 130+ años · cifra institucional dominante</span>
+    <div class="f12-grid">
+      <div class="f12-side">
+        <div class="f12-stat">130+<em>· años</em></div>
+        <span class="label">Trayectoria · BRC GS "AA" · 130 años</span>
+        <h3>Conversemos sobre tu próxima <em>importación</em></h3>
+        <p>Cuéntanos qué producto te interesa, el mercado destino y el tipo de cliente. Te respondemos con disponibilidad, formatos y condiciones comerciales en 24-48 h.</p>
+      </div>
+      <form>
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">Nombre</label><input class="iinput" type="text" required></div>
+          <div class="ifield"><label class="ilabel">Empresa</label><input class="iinput" type="text"></div>
+        </div>
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">Email</label><input class="iinput" type="email" required></div>
+          <div class="ifield"><label class="ilabel">País destino</label><input class="iinput" type="text"></div>
+        </div>
+        <div class="ifield"><label class="ilabel">Producto</label><select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select></div>
+        <div class="ifield"><label class="ilabel">Mensaje</label><textarea class="itextarea" required></textarea></div>
+        <button class="isubmit" type="submit">Consultar →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ F13 · Carta editorial drop cap + firma form ═══ -->
+<section class="variant" id="f13">
+  <div class="variant__container">
+    <span class="variant__tag">F13 · Carta editorial · drop cap + form como firma</span>
+    <div class="f13-wrap">
+      <span class="f13-eyebrow">— Una carta · Consulta comercial —</span>
+      <p class="f13-letter">Estimado lector — si llegaste hasta aquí, es probable que estés evaluando incorporar a Traverso International Foods en tu cadena de suministro. Nuestra empresa, con más de <em>130 años</em> de trayectoria productiva en Chile, exporta vinagres a granel y desarrollos bajo marca privada a múltiples mercados, bajo certificación BRC GS "AA". Cuéntanos sobre tu requerimiento — disponibilidad, volúmenes, formato, mercado destino. Te respondemos personalmente, en 24 a 48 horas.</p>
+      <form class="f13-form">
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">Nombre</label><input class="iinput" type="text" required></div>
+          <div class="ifield"><label class="ilabel">Empresa</label><input class="iinput" type="text"></div>
+        </div>
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">Email</label><input class="iinput" type="email" required></div>
+          <div class="ifield"><label class="ilabel">País destino</label><input class="iinput" type="text"></div>
+        </div>
+        <div class="ifield"><label class="ilabel">Producto</label><select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select></div>
+        <div class="ifield"><label class="ilabel">Mensaje</label><textarea class="itextarea" required></textarea></div>
+        <div style="text-align:center;margin-top:1.5rem"><button class="isubmit" type="submit">Enviar carta →</button></div>
+        <span class="ihint" style="text-align:center;display:block">Respondemos en 24-48 h · Atte. Equipo comercial Traverso International Foods</span>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ F14 · Cuestionario en pasos visuales (breadcrumb) ═══ -->
+<section class="variant" id="f14">
+  <div class="variant__container">
+    <span class="variant__tag">F14 · Wizard visual · 3 pasos breadcrumb (UX guiado)</span>
+    <div class="f14-form">
+      <div class="f14-steps">
+        <span class="f14-step active">01 · Datos</span>
+        <span class="f14-step">02 · Mercado</span>
+        <span class="f14-step">03 · Mensaje</span>
+      </div>
+      <div class="f14-section">
+        <span class="vp-eyebrow" style="display:block;text-align:center;margin-bottom:1rem">Paso 01 de 03</span>
+        <h4>Empecemos con tus <em>datos</em></h4>
+        <p class="desc">Solo necesitamos lo básico para responderte rápido.</p>
+        <form>
+          <div class="irow-2">
+            <div class="ifield"><label class="ilabel">Nombre</label><input class="iinput" type="text" required></div>
+            <div class="ifield"><label class="ilabel">Empresa</label><input class="iinput" type="text"></div>
+          </div>
+          <div class="ifield"><label class="ilabel">Email</label><input class="iinput" type="email" required></div>
+          <div class="ifield"><label class="ilabel">País destino</label><input class="iinput" type="text"></div>
+          <div class="ifield"><label class="ilabel">Producto</label><select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select></div>
+          <div class="ifield"><label class="ilabel">Mensaje</label><textarea class="itextarea" required></textarea></div>
+          <div style="text-align:center;margin-top:1.5rem"><button class="isubmit" type="submit">Siguiente · Mercado →</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ F15 · Postal · sello + form como ficha archivo ═══ -->
+<section class="variant" id="f15">
+  <div class="variant__container">
+    <span class="variant__tag">F15 · Postal heritage · sello dorado + ficha de archivo</span>
+    <div class="f15-wrap">
+      <div class="f15-stamp">TIF · 2026 · COM</div>
+      <div class="f15-head"><span>FORMULARIO · CONSULTA COMERCIAL</span><strong>REF · TIF/COM/2026</strong></div>
+      <h3>¿Necesitas información sobre <em>disponibilidad</em> o volúmenes?</h3>
+      <p class="lead">Cuéntanos qué producto te interesa, el mercado destino y el tipo de cliente. Te respondemos con disponibilidad, formatos y condiciones comerciales en 24-48 h.</p>
+      <form class="f15-form">
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">Nombre</label><input class="iinput" type="text" required></div>
+          <div class="ifield"><label class="ilabel">Empresa</label><input class="iinput" type="text"></div>
+        </div>
+        <div class="irow-2">
+          <div class="ifield"><label class="ilabel">Email</label><input class="iinput" type="email" required></div>
+          <div class="ifield"><label class="ilabel">País destino</label><input class="iinput" type="text"></div>
+        </div>
+        <div class="ifield"><label class="ilabel">Producto</label><select class="iselect"><option>Seleccionar...</option><option>Vinagres a granel</option><option>Marca privada</option><option>Productos marca Traverso</option></select></div>
+        <div class="ifield"><label class="ilabel">Mensaje</label><textarea class="itextarea" required></textarea></div>
+        <button class="isubmit" type="submit">Enviar formulario →</button>
+      </form>
+      <div class="f15-foot"><span>Archivo · Traverso International Foods</span><span>Establecidos en San Bernardo, Chile · 1893</span></div>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:3rem 2rem;text-align:center;background:var(--navy);color:rgba(255,255,255,.6);font-family:var(--mono);font-size:.78rem;letter-spacing:.1em">
+  15 propuestas · Form institucional · Traverso International Foods · 2026-04-26
+</footer>
+
+</body>
+</html>

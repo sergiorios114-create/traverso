@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trust bar backup · Stats centered (vigente hasta 2026-04-24)</title>
+<meta name="description" content="Respaldo del trust bar centered-stats de Traverso. Reemplazado por Badge postal minimal (V10 de prucert.html) el 2026-04-24.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-primary:#0B1E6B;
+  --color-accent:#C5A55A;
+  --color-accent-saturated:#C9A227;
+  --font-heading:'Libre Baskerville',Georgia,serif;
+  --font-body:'Source Sans 3',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);background:#fff;color:#19212F;line-height:1.7}
+.container{max-width:1200px;margin:0 auto;padding:0 clamp(1.5rem,5vw,3rem)}
+
+/* Trust bar: Stats centered — vigente hasta 2026-04-24 */
+.trust {
+  padding: clamp(4rem, 8vw, 6rem) 0;
+  background: var(--color-primary);
+}
+
+.trust__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.trust__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.trust__items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+}
+
+.trust__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trust__item-num {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.trust__item-num::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background: var(--color-accent-saturated);
+}
+
+.trust__item-text {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 600px) {
+  .trust__items { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="trust">
+  <div class="container trust__inner">
+    <span class="trust__label">Certificaciones &amp; Estándares</span>
+    <div class="trust__items">
+      <div class="trust__item">
+        <div class="trust__item-num">AA</div>
+        <span class="trust__item-text">BRC Global Standard</span>
+      </div>
+      <div class="trust__item">
+        <div class="trust__item-num">130+</div>
+        <span class="trust__item-text">Años de trayectoria</span>
+      </div>
+      <div class="trust__item">
+        <div class="trust__item-num">2</div>
+        <span class="trust__item-text">Formatos de exportación</span>
+      </div>
+      <div class="trust__item">
+        <div class="trust__item-num">MDD</div>
+        <span class="trust__item-text">Marca propia disponible</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

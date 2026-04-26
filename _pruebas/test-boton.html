@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Botones — Traverso International</title>
+  <style>
+    /* ========================================
+       RESET & TOKENS
+       ======================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Traverso palette */
+      --t-dark:       #050e33;
+      --t-blue:       #1a3a6b;
+      --t-gold:       #c5a55a;
+      --t-gold-light: #d4b96e;
+      --t-gold-dim:   rgba(197, 165, 90, 0.15);
+
+      /* Neutrals */
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50:  #f8fafc;
+      --white:     #ffffff;
+
+      /* Feedback */
+      --green-600: #16a34a;
+      --green-50:  #f0fdf4;
+      --blue-600:  #2563eb;
+
+      /* Motion */
+      --ease-out:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --dur:         200ms;
+      --dur-slow:    300ms;
+
+      /* Radius */
+      --r-sm:   4px;
+      --r-md:   6px;
+      --r-full: 9999px;
+      --r-card: 12px;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--slate-50);
+      color: var(--slate-800);
+      line-height: 1.5;
+      padding: 40px 20px;
+    }
+
+    .guide {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ========================================
+       LAYOUT HELPERS
+       ======================================== */
+    .guide-header {
+      margin-bottom: 48px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--slate-200);
+    }
+
+    .guide-header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--t-dark);
+      margin-bottom: 6px;
+    }
+
+    .guide-header p {
+      font-size: 14px;
+      color: var(--slate-500);
+    }
+
+    .tier {
+      margin-bottom: 56px;
+    }
+
+    .tier-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .tier-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--t-gold);
+      background: var(--t-gold-dim);
+      padding: 3px 10px;
+      border-radius: var(--r-full);
+    }
+
+    .tier-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    .tier-desc {
+      font-size: 13px;
+      color: var(--slate-500);
+      margin-bottom: 20px;
+      max-width: 600px;
+    }
+
+    .tier-use {
+      font-size: 12px;
+      color: var(--slate-400);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    .tier-use strong {
+      color: var(--slate-600);
+    }
+
+    .demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .demo-label {
+      font-size: 11px;
+      color: var(--slate-400);
+      font-weight: 500;
+      min-width: 90px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .dark-zone {
+      background: var(--t-dark);
+      border-radius: var(--r-card);
+      padding: 28px 24px;
+      margin-bottom: 12px;
+    }
+
+    .light-zone {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--r-card);
+      padding: 28px 24px;
+      margin-bottom: 12px;
+    }
+
+    .microcopy {
+      font-size: 11px;
+      color: var(--slate-400);
+      margin-top: 6px;
+    }
+
+    .dark-zone .microcopy {
+      color: rgba(255,255,255,0.4);
+    }
+
+    .btn-group {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-group--left {
+      align-items: flex-start;
+    }
+
+    /* Divider between tiers */
+    .tier + .tier {
+      padding-top: 40px;
+      border-top: 1px solid var(--slate-200);
+    }
+
+    /* ========================================
+       TIER 1: PRIMARY CTA
+       Compact gold — la accion principal
+       ======================================== */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      height: 36px;
+      padding: 0 20px;
+      border: none;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      white-space: nowrap;
+      position: relative;
+      transition:
+        background-color var(--dur) var(--ease-out),
+        box-shadow var(--dur) var(--ease-out),
+        transform 120ms var(--ease-spring);
+    }
+
+    .btn-primary:active { transform: scale(0.97); }
+
+    .btn-primary:focus-visible {
+      outline: 2px solid var(--blue-600);
+      outline-offset: 2px;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Gold (default — sobre fondo oscuro) */
+    .btn-primary--gold {
+      background: var(--t-gold);
+      color: var(--t-dark);
+    }
+
+    .btn-primary--gold:hover {
+      background: var(--t-gold-light);
+      box-shadow: 0 2px 8px rgba(197, 165, 90, 0.3);
+    }
+
+    /* Dark (sobre fondo claro) */
+    .btn-primary--dark {
+      background: var(--t-dark);
+      color: var(--white);
+    }
+
+    .btn-primary--dark:hover {
+      background: var(--t-blue);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Slate (neutro — formularios) */
+    .btn-primary--slate {
+      background: var(--slate-800);
+      color: var(--white);
+    }
+
+    .btn-primary--slate:hover {
+      background: var(--slate-700);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Ghost (cancel, dismiss) */
+    .btn-primary--ghost {
+      background: transparent;
+      color: var(--slate-600);
+    }
+
+    .btn-primary--ghost:hover {
+      background: var(--slate-100);
+      color: var(--slate-800);
+    }
+
+    /* White border (sobre oscuro, opcion secundaria) */
+    .btn-primary--white-outline {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.25);
+    }
+
+    .btn-primary--white-outline:hover {
+      color: var(--white);
+      box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* Loading */
+    .btn-primary--loading {
+      color: transparent !important;
+      pointer-events: none;
+    }
+
+    .btn-primary--loading::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: var(--white);
+      border-radius: 50%;
+      animation: spin 600ms linear infinite;
+    }
+
+    .btn-primary--gold.btn-primary--loading::after {
+      border-color: rgba(5,14,51,0.2);
+      border-top-color: var(--t-dark);
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ========================================
+       TIER 2: SECONDARY — Underline elegant
+       Links de segunda categoria, "mas info"
+       ======================================== */
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      padding: 6px 0;
+      cursor: pointer;
+      position: relative;
+      transition: color var(--dur) var(--ease-out);
+    }
+
+    .btn-secondary::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      transition: width var(--dur-slow) var(--ease-out);
+    }
+
+    .btn-secondary:hover::after { width: 100%; }
+
+    .btn-secondary:focus-visible {
+      outline: 2px solid var(--blue-600);
+      outline-offset: 4px;
+    }
+
+    .btn-secondary .arrow {
+      display: inline-block;
+      font-size: 0.9em;
+      transition: transform var(--dur) var(--ease-out);
+    }
+
+    .btn-secondary:hover .arrow { transform: translateX(3px); }
+
+    /* Gold (sobre oscuro) */
+    .btn-secondary--gold {
+      color: var(--t-gold);
+    }
+
+    .btn-secondary--gold:hover { color: var(--t-gold-light); }
+    .btn-secondary--gold::after { background: var(--t-gold-light); }
+
+    /* Light (sobre oscuro, mas sutil) */
+    .btn-secondary--light {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .btn-secondary--light:hover { color: var(--white); }
+    .btn-secondary--light::after { background: var(--t-gold); }
+
+    /* Dark (sobre fondo claro) */
+    .btn-secondary--dark {
+      color: var(--slate-700);
+    }
+
+    .btn-secondary--dark:hover { color: var(--t-dark); }
+    .btn-secondary--dark::after { background: var(--t-gold); }
+
+    /* ========================================
+       TIER 3: DOWNLOAD — Accent line
+       Descargas, fichas tecnicas, PDFs
+       ======================================== */
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      height: 40px;
+      padding: 0 20px 0 16px;
+      background: var(--white);
+      color: var(--slate-800);
+      border: 1px solid var(--slate-200);
+      border-left: 3px solid var(--t-gold);
+      border-radius: 0 var(--r-sm) var(--r-sm) 0;
+      cursor: pointer;
+      transition:
+        background-color var(--dur) var(--ease-out),
+        border-color var(--dur) var(--ease-out),
+        box-shadow var(--dur) var(--ease-out);
+    }
+
+    .btn-download:hover {
+      background: var(--slate-50);
+      border-color: var(--slate-300);
+      border-left-color: var(--t-gold-light);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-download:focus-visible {
+      outline: 2px solid var(--blue-600);
+      outline-offset: 2px;
+    }
+
+    .btn-download .icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Dark variant */
+    .btn-download--dark {
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.8);
+      border-color: rgba(255,255,255,0.1);
+      border-left-color: var(--t-gold);
+    }
+
+    .btn-download--dark:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      border-left-color: var(--t-gold-light);
+      color: var(--white);
+    }
+
+    /* ========================================
+       TIER 4: CHIPS — Filtros de catalogo
+       ======================================== */
+    .btn-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      height: 28px;
+      padding: 0 12px;
+      background: var(--slate-100);
+      color: var(--slate-600);
+      border: none;
+      border-radius: var(--r-full);
+      cursor: pointer;
+      transition:
+        background-color var(--dur) var(--ease-out),
+        color var(--dur) var(--ease-out);
+    }
+
+    .btn-chip:hover {
+      background: var(--slate-200);
+      color: var(--slate-800);
+    }
+
+    .btn-chip--active {
+      background: var(--t-dark);
+      color: var(--t-gold);
+    }
+
+    .btn-chip--active:hover {
+      background: var(--t-blue);
+    }
+
+    .btn-chip:focus-visible {
+      outline: 2px solid var(--blue-600);
+      outline-offset: 2px;
+    }
+
+    /* ========================================
+       UTILITY: CLOSE BUTTON
+       ======================================== */
+    .btn-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: transparent;
+      border: none;
+      border-radius: var(--r-sm);
+      color: var(--slate-400);
+      cursor: pointer;
+      transition:
+        background-color var(--dur) var(--ease-out),
+        color var(--dur) var(--ease-out);
+    }
+
+    .btn-close:hover {
+      background: var(--slate-100);
+      color: var(--slate-700);
+    }
+
+    .btn-close--light {
+      color: rgba(255,255,255,0.4);
+    }
+
+    .btn-close--light:hover {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .btn-close svg { width: 16px; height: 16px; }
+
+    /* ========================================
+       CONTEXT BLOCKS — demos en situacion
+       ======================================== */
+    .context-section {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 2px solid var(--slate-200);
+    }
+
+    .context-section__title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: 6px;
+    }
+
+    .context-section__desc {
+      font-size: 13px;
+      color: var(--slate-500);
+      margin-bottom: 24px;
+    }
+
+    .context-card {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--r-card);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .context-card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--slate-100);
+    }
+
+    .context-card__tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--slate-400);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .context-card__body {
+      padding: 28px 24px;
+    }
+
+    .context-card__body--dark {
+      background: var(--t-dark);
+    }
+
+    /* Fake navbar */
+    .fake-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-radius: var(--r-md);
+    }
+
+    .fake-nav--light {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+    }
+
+    .fake-nav--dark {
+      background: var(--t-dark);
+    }
+
+    .fake-nav__logo {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .fake-nav--light .fake-nav__logo { color: var(--t-dark); }
+    .fake-nav--dark .fake-nav__logo { color: var(--white); }
+
+    .fake-nav__links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .fake-nav--light .fake-nav__links { color: var(--slate-500); }
+    .fake-nav--dark .fake-nav__links { color: rgba(255,255,255,0.5); }
+
+    /* Fake product card — horizontal (replica slider home) */
+    .fake-product {
+      background: var(--white);
+      border: 2px solid transparent;
+      border-radius: 10px;
+      overflow: hidden;
+      width: clamp(280px, 30vw, 380px);
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      transition: border-color var(--dur) ease, box-shadow var(--dur) ease;
+      cursor: pointer;
+    }
+
+    .fake-product:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .fake-product__img {
+      width: 100%;
+      height: 100%;
+      min-height: 110px;
+      background: var(--slate-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--slate-300);
+      font-size: 11px;
+      object-fit: cover;
+    }
+
+    .fake-product__body {
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .fake-product__cat {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--t-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .fake-product__name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--t-dark);
+    }
+
+    .fake-product__pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+
+    .fake-product__pill {
+      font-size: 0.58rem;
+      font-weight: 600;
+      padding: 0.18rem 0.5rem;
+      border-radius: var(--r-full);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .fake-product__pill--gold {
+      background: rgba(201,162,39,0.12);
+      color: #a17f15;
+    }
+
+    .fake-product__pill--outline {
+      background: transparent;
+      border: 1px solid var(--slate-200);
+      color: var(--slate-500);
+    }
+
+    .fake-product__actions {
+      display: flex;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    /* Fake modal */
+    .fake-modal {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--r-card);
+      padding: 24px;
+      max-width: 380px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .fake-modal__title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--slate-900);
+      margin-bottom: 8px;
+      padding-right: 32px;
+    }
+
+    .fake-modal__text {
+      font-size: 13px;
+      color: var(--slate-500);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .fake-modal .btn-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+
+    .fake-modal__actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    /* Fake footer */
+    .fake-footer {
+      background: var(--t-dark);
+      border-radius: var(--r-card);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .fake-footer__headline {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .fake-footer__sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 24px;
+    }
+
+    /* Success state */
+    .success-block {
+      text-align: center;
+      padding: 24px;
+      max-width: 400px;
+    }
+
+    .success-block__icon {
+      width: 48px;
+      height: 48px;
+      background: var(--green-50);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .success-block__icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--green-600);
+    }
+
+    .success-block__title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--slate-900);
+      margin-bottom: 4px;
+    }
+
+    .success-block__text {
+      font-size: 13px;
+      color: var(--slate-500);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    /* Specs table */
+    .specs {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 2px solid var(--slate-200);
+    }
+
+    .specs h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: 16px;
+    }
+
+    .specs table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .specs th {
+      text-align: left;
+      font-weight: 600;
+      color: var(--slate-600);
+      padding: 8px 12px;
+      background: var(--slate-100);
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .specs td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--slate-100);
+      color: var(--slate-700);
+    }
+
+    .specs code {
+      background: var(--slate-100);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+      color: var(--slate-800);
+    }
+
+    .specs .swatch {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      vertical-align: middle;
+      margin-right: 6px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .demo-row { gap: 10px; }
+      .fake-nav__links { gap: 12px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="guide">
+
+    <!-- ============================================
+         HEADER
+         ============================================ -->
+    <div class="guide-header">
+      <h1>Sistema de Botones — Traverso International</h1>
+      <p>Directriz definitiva. 4 tiers + utilidades. El color hace el contraste, el tamano se mantiene compacto.</p>
+    </div>
+
+    <!-- ============================================
+         TIER 1: PRIMARY CTA
+         ============================================ -->
+    <div class="tier">
+      <div class="tier-header">
+        <span class="tier-tag">Tier 1</span>
+        <span class="tier-name">Primary CTA</span>
+      </div>
+      <div class="tier-desc">Accion principal. Compacto (36px), uppercase, bold. El color dorado o dark es todo el protagonismo. Un solo primary por seccion visible.</div>
+      <div class="tier-use"><strong>Usar en:</strong> Hero, navbar, form submit, modales, cards de producto, footer CTA</div>
+
+      <!-- Sobre oscuro -->
+      <div class="dark-zone">
+        <div class="demo-row">
+          <span class="demo-label" style="color:rgba(255,255,255,0.4)">Gold</span>
+          <button class="btn-primary btn-primary--gold">Solicitar Cotizacion</button>
+          <button class="btn-primary btn-primary--gold">Request a Quote</button>
+          <button class="btn-primary btn-primary--gold">Contacto</button>
+        </div>
+        <div class="demo-row" style="margin-top:8px">
+          <span class="demo-label" style="color:rgba(255,255,255,0.4)">Outline</span>
+          <button class="btn-primary btn-primary--white-outline">Ver Productos</button>
+          <button class="btn-primary btn-primary--white-outline">Explore Products</button>
+        </div>
+        <div class="demo-row" style="margin-top:8px">
+          <span class="demo-label" style="color:rgba(255,255,255,0.4)">Duo</span>
+          <button class="btn-primary btn-primary--gold">Request a Quote</button>
+          <button class="btn-primary btn-primary--white-outline">Our Products</button>
+        </div>
+      </div>
+
+      <!-- Sobre claro -->
+      <div class="light-zone">
+        <div class="demo-row">
+          <span class="demo-label">Dark</span>
+          <button class="btn-primary btn-primary--dark">Solicitar Cotizacion</button>
+          <button class="btn-primary btn-primary--dark">Enviar Consulta</button>
+          <button class="btn-primary btn-primary--dark">Contact</button>
+        </div>
+        <div class="demo-row" style="margin-top:8px">
+          <span class="demo-label">Slate</span>
+          <button class="btn-primary btn-primary--slate">Enviar</button>
+          <button class="btn-primary btn-primary--slate">Submit Inquiry</button>
+        </div>
+        <div class="demo-row" style="margin-top:8px">
+          <span class="demo-label">Ghost</span>
+          <button class="btn-primary btn-primary--ghost">Cancelar</button>
+          <button class="btn-primary btn-primary--ghost">Volver</button>
+        </div>
+      </div>
+
+      <!-- Estados -->
+      <div class="light-zone">
+        <div class="demo-row">
+          <span class="demo-label">Estados</span>
+          <button class="btn-primary btn-primary--dark">Normal</button>
+          <button class="btn-primary btn-primary--dark" disabled>Disabled</button>
+          <button class="btn-primary btn-primary--dark btn-primary--loading">Enviando</button>
+        </div>
+      </div>
+
+      <!-- Con micro-copy -->
+      <div class="dark-zone">
+        <div class="demo-row">
+          <div class="btn-group">
+            <button class="btn-primary btn-primary--gold">Solicitar Cotizacion</button>
+            <span class="microcopy">Nuestro equipo comercial respondera en 24 horas habiles</span>
+          </div>
+          <div class="btn-group" style="margin-left:24px">
+            <button class="btn-primary btn-primary--gold">Submit Inquiry</button>
+            <span class="microcopy">Our sales team will reach out within one business day</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         TIER 2: SECONDARY — Underline
+         ============================================ -->
+    <div class="tier">
+      <div class="tier-header">
+        <span class="tier-tag">Tier 2</span>
+        <span class="tier-name">Secondary — Underline</span>
+      </div>
+      <div class="tier-desc">Acciones de segunda categoria. "Mas informacion", "ver detalles", "condiciones". La linea dorada aparece en hover. Siempre con flecha.</div>
+      <div class="tier-use"><strong>Usar en:</strong> Junto a un Primary como opcion alternativa, links de navegacion interna, "saber mas"</div>
+
+      <div class="dark-zone">
+        <div class="demo-row">
+          <span class="demo-label" style="color:rgba(255,255,255,0.4)">Gold</span>
+          <button class="btn-secondary btn-secondary--gold">Condiciones Comerciales <span class="arrow">&rarr;</span></button>
+          <button class="btn-secondary btn-secondary--gold">Nuestras Lineas <span class="arrow">&rarr;</span></button>
+        </div>
+        <div class="demo-row" style="margin-top:8px">
+          <span class="demo-label" style="color:rgba(255,255,255,0.4)">Light</span>
+          <button class="btn-secondary btn-secondary--light">Zonas Disponibles <span class="arrow">&rarr;</span></button>
+          <button class="btn-secondary btn-secondary--light">Descargar Catalogo <span class="arrow">&rarr;</span></button>
+        </div>
+      </div>
+
+      <div class="light-zone">
+        <div class="demo-row">
+          <span class="demo-label">Dark</span>
+          <button class="btn-secondary btn-secondary--dark">Ver Certificaciones <span class="arrow">&rarr;</span></button>
+          <button class="btn-secondary btn-secondary--dark">Conocer el Proceso <span class="arrow">&rarr;</span></button>
+        </div>
+      </div>
+
+      <!-- Combinacion Tier 1 + Tier 2 -->
+      <div class="dark-zone" style="margin-top:12px">
+        <div class="demo-row">
+          <span class="demo-label" style="color:rgba(255,255,255,0.4)">Combo</span>
+          <button class="btn-primary btn-primary--gold">Request a Quote</button>
+          <button class="btn-secondary btn-secondary--light">Our Product Lines <span class="arrow">&rarr;</span></button>
+        </div>
+      </div>
+
+      <div class="light-zone">
+        <div class="demo-row">
+          <span class="demo-label">Combo</span>
+          <button class="btn-primary btn-primary--dark">Enviar Consulta</button>
+          <button class="btn-secondary btn-secondary--dark">Ver Catalogo Completo <span class="arrow">&rarr;</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         TIER 3: DOWNLOAD — Accent line
+         ============================================ -->
+    <div class="tier">
+      <div class="tier-header">
+        <span class="tier-tag">Tier 3</span>
+        <span class="tier-name">Download — Accent Line</span>
+      </div>
+      <div class="tier-desc">Descargas de recursos: fichas tecnicas, catalogo PDF, certificaciones. Linea dorada lateral como indicador visual. Iconos opcionales.</div>
+      <div class="tier-use"><strong>Usar en:</strong> Secciones de producto, pagina de recursos, inline con texto descriptivo</div>
+
+      <div class="light-zone">
+        <div class="demo-row">
+          <button class="btn-download">
+            <svg class="icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            Catalogo Completo 2026
+          </button>
+          <button class="btn-download">
+            <svg class="icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+            Ficha Tecnica Vinagres
+          </button>
+        </div>
+        <div class="demo-row">
+          <button class="btn-download">Certificacion ISO 9001</button>
+          <button class="btn-download">Condiciones FOB / CIF</button>
+        </div>
+      </div>
+
+      <div class="dark-zone">
+        <div class="demo-row">
+          <button class="btn-download btn-download--dark">
+            <svg class="icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            Full Catalog 2026
+          </button>
+          <button class="btn-download btn-download--dark">Product Data Sheet</button>
+        </div>
+      </div>
+
+      <!-- Inline con texto -->
+      <div class="light-zone">
+        <div style="font-size:14px; color:var(--slate-600); line-height:1.8; max-width:560px">
+          Nuestra linea de vinagres esta certificada bajo normas ISO 9001 y cumple con los estandares de exportacion exigidos por ProChile.
+          <button class="btn-secondary btn-secondary--dark" style="font-size:12px; text-transform:none; letter-spacing:0">Descargar fichas tecnicas <span class="arrow">&rarr;</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         TIER 4: CHIPS — Filtros
+         ============================================ -->
+    <div class="tier">
+      <div class="tier-header">
+        <span class="tier-tag">Tier 4</span>
+        <span class="tier-name">Chips — Filtros de Catalogo</span>
+      </div>
+      <div class="tier-desc">Seleccion de categorias y filtros de producto. El chip activo usa la paleta de marca (dark + gold). Los inactivos son neutros.</div>
+      <div class="tier-use"><strong>Usar en:</strong> Pagina de productos, catalogo, filtros de busqueda</div>
+
+      <div class="light-zone">
+        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:16px">
+          <span class="demo-label">Linea</span>
+          <button class="btn-chip btn-chip--active">Todos</button>
+          <button class="btn-chip">Vinagres</button>
+          <button class="btn-chip">Jugo de Limon</button>
+          <button class="btn-chip">Salsas y Aderezos</button>
+          <button class="btn-chip">Condimentos</button>
+          <button class="btn-chip">Marca Propia</button>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center">
+          <span class="demo-label">Format</span>
+          <button class="btn-chip btn-chip--active">All</button>
+          <button class="btn-chip">Retail</button>
+          <button class="btn-chip">Foodservice</button>
+          <button class="btn-chip">Industrial</button>
+          <button class="btn-chip">Private Label</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         CONTEXTO: USO EN SITIO
+         ============================================ -->
+    <div class="context-section">
+      <h2 class="context-section__title">Aplicacion en Contexto</h2>
+      <p class="context-section__desc">Como se ven los tiers en las distintas secciones del sitio Traverso International.</p>
+
+      <!-- NAVBAR -->
+      <div class="context-card">
+        <div class="context-card__header">
+          <span class="context-card__tag">Navbar</span>
+          <span class="context-card__tag">Primary Gold / Dark</span>
+        </div>
+        <div class="context-card__body">
+          <div class="fake-nav fake-nav--dark" style="margin-bottom:16px">
+            <span class="fake-nav__logo">TRAVERSO</span>
+            <div class="fake-nav__links">
+              <span>Products</span>
+              <span>About</span>
+              <span>Quality</span>
+              <button class="btn-primary btn-primary--gold">Contact</button>
+            </div>
+          </div>
+          <div class="fake-nav fake-nav--light">
+            <span class="fake-nav__logo">TRAVERSO</span>
+            <div class="fake-nav__links">
+              <span>Productos</span>
+              <span>Nosotros</span>
+              <span>Calidad</span>
+              <button class="btn-primary btn-primary--dark">Contacto</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <div class="context-card">
+        <div class="context-card__header">
+          <span class="context-card__tag">Hero Section</span>
+          <span class="context-card__tag">Primary + Secondary</span>
+        </div>
+        <div class="context-card__body context-card__body--dark">
+          <div style="max-width:480px">
+            <div style="font-size:11px; font-weight:600; color:var(--t-gold); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px">Exportadores desde 1972</div>
+            <div style="font-size:22px; font-weight:700; color:var(--white); margin-bottom:8px; line-height:1.3">Vinagres y condimentos para la industria alimentaria</div>
+            <div style="font-size:14px; color:rgba(255,255,255,0.5); margin-bottom:24px; line-height:1.6">Planta propia en San Bernardo, Chile. Distribucion en 5 paises de Latinoamerica.</div>
+            <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap">
+              <button class="btn-primary btn-primary--gold">Solicitar Cotizacion</button>
+              <button class="btn-secondary btn-secondary--light">Conocer Productos <span class="arrow">&rarr;</span></button>
+            </div>
+            <div class="microcopy" style="margin-top:10px">Respuesta dentro de 24 horas habiles</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT CARDS — formato slider horizontal -->
+      <div class="context-card">
+        <div class="context-card__header">
+          <span class="context-card__tag">Tarjetas de Producto (Slider)</span>
+          <span class="context-card__tag">Horizontal — replica home</span>
+        </div>
+        <div class="context-card__body">
+          <div style="display:flex; gap:16px; flex-wrap:wrap; overflow-x:auto; padding-bottom:8px">
+            <div class="fake-product">
+              <div class="fake-product__img">Foto</div>
+              <div class="fake-product__body">
+                <div class="fake-product__cat">Vinagres</div>
+                <div class="fake-product__name">Vinagre de Alcohol</div>
+                <div class="fake-product__pills">
+                  <span class="fake-product__pill fake-product__pill--gold">Retail</span>
+                  <span class="fake-product__pill fake-product__pill--outline">Foodservice</span>
+                </div>
+                <div class="fake-product__actions">
+                  <button class="btn-primary btn-primary--dark">Ficha Tecnica</button>
+                  <button class="btn-primary btn-primary--ghost">Consultar</button>
+                </div>
+              </div>
+            </div>
+            <div class="fake-product">
+              <div class="fake-product__img">Foto</div>
+              <div class="fake-product__body">
+                <div class="fake-product__cat">Salsas y Aderezos</div>
+                <div class="fake-product__name">Salsa de Soya</div>
+                <div class="fake-product__pills">
+                  <span class="fake-product__pill fake-product__pill--gold">Industrial</span>
+                  <span class="fake-product__pill fake-product__pill--outline">MDD</span>
+                </div>
+                <div class="fake-product__actions">
+                  <button class="btn-primary btn-primary--gold">Solicitar Muestra</button>
+                  <button class="btn-primary btn-primary--ghost">Detalle</button>
+                </div>
+              </div>
+            </div>
+            <div class="fake-product">
+              <div class="fake-product__img">Foto</div>
+              <div class="fake-product__body">
+                <div class="fake-product__cat">Marca Propia</div>
+                <div class="fake-product__name">MDD Custom Label</div>
+                <div class="fake-product__pills">
+                  <span class="fake-product__pill fake-product__pill--gold">Private Label</span>
+                </div>
+                <div class="fake-product__actions">
+                  <button class="btn-primary btn-primary--dark">Consultar</button>
+                  <button class="btn-primary btn-primary--ghost">Ver Mas</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL -->
+      <div class="context-card">
+        <div class="context-card__header">
+          <span class="context-card__tag">Modal / Popup</span>
+          <span class="context-card__tag">Close + Primary + Ghost</span>
+        </div>
+        <div class="context-card__body" style="background:rgba(15,23,42,0.04)">
+          <div style="display:flex; gap:24px; flex-wrap:wrap">
+            <div class="fake-modal">
+              <button class="btn-close" aria-label="Cerrar">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.646 4.646a.5.5 0 01.708 0L8 7.293l2.646-2.647a.5.5 0 01.708.708L8.707 8l2.647 2.646a.5.5 0 01-.708.708L8 8.707l-2.646 2.647a.5.5 0 01-.708-.708L7.293 8 4.646 5.354a.5.5 0 010-.708z"/></svg>
+              </button>
+              <div class="fake-modal__title">Solicitar informacion comercial</div>
+              <div class="fake-modal__text">Nuestro equipo le enviara una propuesta ajustada a sus requerimientos de volumen y distribucion.</div>
+              <div class="fake-modal__actions">
+                <button class="btn-primary btn-primary--ghost">Cancelar</button>
+                <button class="btn-primary btn-primary--dark">Enviar Solicitud</button>
+              </div>
+            </div>
+            <div class="fake-modal">
+              <button class="btn-close" aria-label="Cerrar">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.646 4.646a.5.5 0 01.708 0L8 7.293l2.646-2.647a.5.5 0 01.708.708L8.707 8l2.647 2.646a.5.5 0 01-.708.708L8 8.707l-2.646 2.647a.5.5 0 01-.708-.708L7.293 8 4.646 5.354a.5.5 0 010-.708z"/></svg>
+              </button>
+              <div class="fake-modal__title">Gracias por su interes</div>
+              <div class="fake-modal__text">Hemos recibido su consulta. Recibira confirmacion por correo en los proximos minutos.</div>
+              <div class="fake-modal__actions">
+                <button class="btn-primary btn-primary--gold">Entendido</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="context-card">
+        <div class="context-card__header">
+          <span class="context-card__tag">Footer</span>
+          <span class="context-card__tag">Primary + Secondary + Download</span>
+        </div>
+        <div class="context-card__body" style="padding:0">
+          <div class="fake-footer">
+            <div class="fake-footer__headline">Mas de 50 anos produciendo calidad</div>
+            <div class="fake-footer__sub">Distribuidores en Chile, Peru, Bolivia, Paraguay y Ecuador</div>
+            <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:16px">
+              <button class="btn-primary btn-primary--gold">Contactar Equipo Comercial</button>
+              <button class="btn-secondary btn-secondary--light">Descargar Catalogo Completo <span class="arrow">&rarr;</span></button>
+            </div>
+            <div class="microcopy">Exportaciones a toda Latinoamerica. Consulte condiciones FOB y CIF.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST-ACCION -->
+      <div class="context-card">
+        <div class="context-card__header">
+          <span class="context-card__tag">Post-envio / Confirmacion</span>
+          <span class="context-card__tag">Primary + Ghost</span>
+        </div>
+        <div class="context-card__body">
+          <div class="success-block">
+            <div class="success-block__icon">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </div>
+            <div class="success-block__title">Consulta enviada correctamente</div>
+            <div class="success-block__text">Recibira una copia en su correo. Nuestro equipo le contactara a la brevedad.</div>
+            <div style="display:flex; gap:8px; justify-content:center">
+              <button class="btn-primary btn-primary--dark">Volver al Inicio</button>
+              <button class="btn-primary btn-primary--ghost">Explorar Productos</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DISTRIBUIDOR / B2B -->
+      <div class="context-card">
+        <div class="context-card__header">
+          <span class="context-card__tag">Partners / Distribuidores</span>
+          <span class="context-card__tag">Primary + Secondary + Download</span>
+        </div>
+        <div class="context-card__body context-card__body--dark">
+          <div style="max-width:500px">
+            <div style="font-size:16px; font-weight:600; color:var(--white); margin-bottom:6px">Red de distribucion activa en Latinoamerica</div>
+            <div style="font-size:13px; color:rgba(255,255,255,0.45); margin-bottom:20px; line-height:1.6">Evaluamos nuevos socios comerciales cada trimestre. Consulte las zonas disponibles.</div>
+            <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:20px">
+              <div class="btn-group btn-group--left">
+                <button class="btn-primary btn-primary--gold">Postular como Distribuidor</button>
+                <span class="microcopy">Respuesta dentro del proximo ciclo trimestral</span>
+              </div>
+            </div>
+            <div style="display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px">
+              <button class="btn-secondary btn-secondary--gold">Condiciones Comerciales <span class="arrow">&rarr;</span></button>
+              <button class="btn-secondary btn-secondary--light">Zonas Disponibles <span class="arrow">&rarr;</span></button>
+            </div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap">
+              <button class="btn-download btn-download--dark">
+                <svg class="icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                Catalogo Distribuidores
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================
+         SPECS TABLE
+         ============================================ -->
+    <div class="specs">
+      <h2>Especificaciones Tecnicas</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Altura</th>
+            <th>Font</th>
+            <th>Radius</th>
+            <th>Uso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Primary CTA</strong></td>
+            <td><code>36px</code></td>
+            <td><code>12px / 600 / uppercase</code></td>
+            <td><code>4px</code></td>
+            <td>Accion principal, 1 por seccion</td>
+          </tr>
+          <tr>
+            <td><strong>Secondary</strong></td>
+            <td><code>auto</code></td>
+            <td><code>13px / 500 / uppercase</code></td>
+            <td><code>—</code></td>
+            <td>Mas info, alternativa al primary</td>
+          </tr>
+          <tr>
+            <td><strong>Download</strong></td>
+            <td><code>40px</code></td>
+            <td><code>13px / 500 / normal</code></td>
+            <td><code>0 4px 4px 0</code></td>
+            <td>PDFs, fichas, recursos descargables</td>
+          </tr>
+          <tr>
+            <td><strong>Chips</strong></td>
+            <td><code>28px</code></td>
+            <td><code>12px / 500 / normal</code></td>
+            <td><code>full</code></td>
+            <td>Filtros de producto/catalogo</td>
+          </tr>
+          <tr>
+            <td><strong>Close</strong></td>
+            <td><code>32px</code></td>
+            <td><code>icon only</code></td>
+            <td><code>4px</code></td>
+            <td>Dismiss de modal/popup</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="margin-top:24px">
+        <thead>
+          <tr>
+            <th>Color</th>
+            <th>Hex</th>
+            <th>Uso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="swatch" style="background:#c5a55a"></span>Gold</td>
+            <td><code>#c5a55a</code></td>
+            <td>Primary CTA sobre oscuro, chips activos</td>
+          </tr>
+          <tr>
+            <td><span class="swatch" style="background:#d4b96e"></span>Gold Light</td>
+            <td><code>#d4b96e</code></td>
+            <td>Hover del gold, underlines</td>
+          </tr>
+          <tr>
+            <td><span class="swatch" style="background:#050e33"></span>Dark</td>
+            <td><code>#050e33</code></td>
+            <td>Primary CTA sobre claro, chip activo bg</td>
+          </tr>
+          <tr>
+            <td><span class="swatch" style="background:#1a3a6b"></span>Blue</td>
+            <td><code>#1a3a6b</code></td>
+            <td>Hover del dark</td>
+          </tr>
+          <tr>
+            <td><span class="swatch" style="background:#1e293b"></span>Slate</td>
+            <td><code>#1e293b</code></td>
+            <td>Formularios, acciones neutras</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="margin-top:24px">
+        <thead>
+          <tr>
+            <th>Propiedad</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Transition</td><td><code>200ms ease-out</code></td></tr>
+          <tr><td>Active press</td><td><code>scale(0.97)</code></td></tr>
+          <tr><td>Hover shadow (gold)</td><td><code>0 2px 8px rgba(197,165,90,0.3)</code></td></tr>
+          <tr><td>Focus ring</td><td><code>2px solid #2563eb, offset 2px</code></td></tr>
+          <tr><td>Letter-spacing (primary)</td><td><code>0.06em</code></td></tr>
+          <tr><td>Letter-spacing (secondary)</td><td><code>0.04em</code></td></tr>
+          <tr><td>Loading spinner</td><td><code>16px, 600ms linear infinite</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "gtm": {
+    "enabled": false,
+    "container_id": ""
+  },
+  "ga4": {
+    "enabled": false,
+    "measurement_id": ""
+  },
+  "meta_pixel": {
+    "enabled": false,
+    "pixel_id": ""
+  },
+  "google_ads": {
+    "enabled": false,
+    "conversion_id": "",
+    "conversion_label": ""
+  },
+  "hotjar": {
+    "enabled": false,
+    "site_id": ""
+  },
+  "clarity": {
+    "enabled": false,
+    "project_id": ""
+  },
+  "whatsapp_widget": {
+    "enabled": false,
+    "phone": "56985150056",
+    "message": "Hola, me interesa conocer sus productos de exportación",
+    "position": "bottom-right"
+  },
+  "custom_code": {
+    "head": "",
+    "body_start": "",
+    "body_end": ""
+  }
+}

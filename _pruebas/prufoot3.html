@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prufoot3 · 15 propuestas footer institucional — Traverso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1E6B; --navy-dark:#081450; --gold:#C5A55A; --gold-sat:#C9A227;
+    --neutral:#FBF9FA; --neutral-alt:#F2F4F8; --text:#19212F;
+    --line-soft:rgba(255,255,255,.10); --line:rgba(255,255,255,.20);
+    --muted:rgba(255,255,255,.6);
+    --serif:'Libre Baskerville',Georgia,serif;
+    --sans:'Source Sans 3',system-ui,sans-serif;
+    --mono:'Courier New',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--text);background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased}
+
+  .page-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(11,30,107,.10);padding:.85rem 1.5rem;display:flex;gap:.4rem;align-items:center;overflow-x:auto;white-space:nowrap;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em}
+  .page-nav__brand{font-family:var(--serif);font-weight:700;color:var(--navy);margin-right:1rem;font-size:.95rem;letter-spacing:0;flex-shrink:0}
+  .page-nav a{color:rgba(25,33,47,.6);text-decoration:none;padding:.3rem .55rem;border-radius:2px;flex-shrink:0}
+  .page-nav a:hover{background:var(--navy);color:#fff}
+
+  .variant{padding:0;border-bottom:6px solid var(--neutral)}
+  .variant__tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(25,33,47,.5);padding:1.2rem 2rem;display:block;background:#fff;border-bottom:1px solid rgba(11,30,107,.08)}
+  .variant__container{max-width:min(1500px,94vw);margin:0 auto;padding:5rem 2rem 3rem}
+
+  /* Footer base · navy */
+  footer.tf{background:var(--navy-dark);color:#fff;font-family:var(--sans)}
+  footer.tf a{color:rgba(255,255,255,.75);text-decoration:none;transition:.25s}
+  footer.tf a:hover{color:var(--gold)}
+  footer.tf em{font-style:italic;color:var(--gold-sat)}
+
+  /* Common helpers */
+  .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:inline-block}
+  .hairline{border-color:rgba(255,255,255,.15)}
+
+  /* ═══ F01 · Manifest grande izq + 3 cols der + bottom (matches actual refactor) ═══ */
+  .f01-grid{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:clamp(2rem,4vw,3.5rem);align-items:start;padding:5rem 0}
+  .f01-manifest{font-family:var(--serif);font-size:1.65rem;font-weight:400;line-height:1.3;letter-spacing:-.01em;color:#fff;margin:1.2rem 0 1.5rem;max-width:480px}
+  .f01-desc{color:rgba(255,255,255,.65);font-size:.92rem;line-height:1.7;max-width:440px;margin-bottom:1.5rem}
+  .f01-targets{display:flex;flex-wrap:wrap;gap:.5rem}
+  .f01-target{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);padding:.4rem .85rem;border:1px solid rgba(255,255,255,.18)}
+  .f01-col h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem}
+  .f01-col ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+  .f01-col li,.f01-col li a{font-size:.92rem;color:rgba(255,255,255,.78);font-family:var(--serif);font-weight:400;line-height:1.4}
+  .f01-bottom{border-top:1px solid var(--line-soft);padding:1.8rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+  .f01-bottom-social{display:flex;gap:1.4rem}
+  .f01-bottom-social a{color:rgba(255,255,255,.55)}
+
+  /* ═══ F02 · Manifest full top + 4 cols + legal ═══ */
+  .f02-top{padding:5rem 0 3.5rem;border-bottom:1px solid var(--line-soft)}
+  .f02-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;display:block}
+  .f02-manifest{font-family:var(--serif);font-size:clamp(2rem,3.6vw,3rem);font-weight:400;line-height:1.15;letter-spacing:-.02em;color:#fff;max-width:1100px}
+  .f02-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:3rem;padding:3rem 0;border-bottom:1px solid var(--line-soft)}
+  .f02-col h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+  .f02-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+  .f02-col li,.f02-col li a{font-size:.88rem;color:rgba(255,255,255,.78);font-family:var(--sans)}
+  .f02-legal{padding:1.6rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+
+  /* ═══ F03 · Manifest centrado + 3 cols simétricas ═══ */
+  .f03-top{text-align:center;padding:5rem 0 3rem;border-bottom:1px solid var(--line-soft)}
+  .f03-manifest{font-family:var(--serif);font-style:italic;font-size:clamp(1.4rem,2.6vw,2rem);font-weight:400;line-height:1.4;color:#fff;max-width:780px;margin:1.5rem auto 0}
+  .f03-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;padding:3rem 0;border-bottom:1px solid var(--line-soft);text-align:center}
+  .f03-col h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+  .f03-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+  .f03-col li,.f03-col li a{font-size:.92rem;color:rgba(255,255,255,.78);font-family:var(--serif)}
+  .f03-bottom{padding:1.8rem 0;text-align:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+
+  /* ═══ F04 · Minimal extremo · solo manifest + email + copyright ═══ */
+  .f04{text-align:center;padding:6rem 0 3rem;max-width:640px;margin:0 auto}
+  .f04 .eyebrow{margin-bottom:1.5rem;display:block}
+  .f04-manifest{font-family:var(--serif);font-style:italic;font-size:1.5rem;font-weight:400;color:#fff;line-height:1.5;margin-bottom:2.5rem}
+  .f04-mail{font-family:var(--serif);font-size:1.85rem;color:#fff;font-weight:400;margin-bottom:.8rem;display:inline-block;border-bottom:1px solid var(--gold);padding-bottom:.3rem}
+  .f04-mail:hover{color:var(--gold)}
+  .f04-targets{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:2rem 0 3rem}
+  .f04-bottom{border-top:1px solid var(--line-soft);padding-top:1.6rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem}
+
+  /* ═══ F05 · Carta editorial firma ═══ */
+  .f05{padding:5rem 0;max-width:680px;margin:0 auto;text-align:left;font-family:var(--serif)}
+  .f05 .eyebrow{margin-bottom:1.6rem;text-align:center;display:block}
+  .f05-letter{font-family:var(--serif);font-size:1.05rem;line-height:1.85;color:rgba(255,255,255,.85);margin-bottom:2rem}
+  .f05-letter::first-letter{font-family:var(--serif);font-size:3.4em;float:left;line-height:.85;margin:.05em .15em -.05em 0;color:var(--gold);font-weight:400}
+  .f05-letter em{font-style:italic;color:var(--gold-sat)}
+  .f05-sign{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--line-soft);display:grid;grid-template-columns:1fr 1fr;gap:2rem;font-family:var(--sans)}
+  .f05-sign h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:.7rem}
+  .f05-sign p,.f05-sign a{color:rgba(255,255,255,.78);font-size:.88rem;line-height:1.6;font-family:var(--serif);display:block}
+  .f05-bottom{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--line-soft);text-align:center;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+
+  /* ═══ F06 · Postal sello ═══ */
+  .f06{padding:5rem 0;position:relative}
+  .f06-stamp{position:absolute;top:5rem;right:0;width:90px;height:90px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--gold);text-align:center;line-height:1.3;text-transform:uppercase;transform:rotate(-8deg)}
+  .f06-head{display:grid;grid-template-columns:1fr 1fr;gap:3rem;border-bottom:1px solid var(--line-soft);padding-bottom:3rem;margin-bottom:3rem}
+  .f06-head h2{font-family:var(--serif);font-size:2rem;font-weight:400;color:#fff;line-height:1.2;letter-spacing:-.015em;margin-bottom:1rem}
+  .f06-head h2 em{font-style:italic;color:var(--gold-sat)}
+  .f06-head p{color:rgba(255,255,255,.7);font-size:.95rem;line-height:1.7;max-width:480px}
+  .f06-meta{display:flex;flex-direction:column;gap:1rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:rgba(255,255,255,.55);text-transform:uppercase;padding-top:.4rem}
+  .f06-meta strong{color:var(--gold);font-weight:400;display:block;margin-bottom:.2rem}
+  .f06-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem;padding-bottom:2.5rem}
+  .f06-col h4{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:.9rem}
+  .f06-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;font-size:.85rem;color:rgba(255,255,255,.78);font-family:var(--serif)}
+  .f06-bottom{padding:1.5rem 0;border-top:1px dashed rgba(255,255,255,.18);text-align:center;font-family:var(--mono);font-size:.65rem;letter-spacing:.18em;color:rgba(255,255,255,.4);text-transform:uppercase}
+
+  /* ═══ F07 · UN-tier mega cols (5 cols densas) ═══ */
+  .f07-top{padding:5rem 0 3rem;border-bottom:1px solid var(--line-soft);display:grid;grid-template-columns:1.5fr 3fr;gap:4rem;align-items:start}
+  .f07-brand .eyebrow{margin-bottom:1.2rem;display:block}
+  .f07-brand h2{font-family:var(--serif);font-size:1.5rem;font-weight:400;color:#fff;line-height:1.3;margin-bottom:1.2rem}
+  .f07-brand h2 em{font-style:italic;color:var(--gold-sat)}
+  .f07-brand p{color:rgba(255,255,255,.65);font-size:.88rem;line-height:1.6;max-width:340px}
+  .f07-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+  .f07-col h4{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line-soft)}
+  .f07-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+  .f07-col li,.f07-col a{font-size:.85rem;color:rgba(255,255,255,.75);font-family:var(--sans)}
+  .f07-bottom{padding:1.5rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:rgba(255,255,255,.45);text-transform:uppercase}
+
+  /* ═══ F08 · GOV.UK style · plana lista links + legal denso ═══ */
+  .f08{padding:4rem 0 2rem;border-top:5px solid var(--gold)}
+  .f08-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:.8rem;display:block}
+  .f08-tt{font-family:var(--serif);font-size:1.4rem;font-weight:400;color:#fff;margin-bottom:2rem;line-height:1.3;max-width:680px}
+  .f08-tt em{font-style:italic;color:var(--gold-sat)}
+  .f08-links{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem 2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--line-soft)}
+  .f08-links a{font-family:var(--sans);font-size:.88rem;color:rgba(255,255,255,.78);text-decoration:underline;text-decoration-color:rgba(197,165,90,.4);text-underline-offset:3px}
+  .f08-bottom{display:grid;grid-template-columns:1.5fr 1fr;gap:3rem;align-items:start}
+  .f08-contact h4{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem}
+  .f08-contact p{font-size:.85rem;color:rgba(255,255,255,.75);line-height:1.6;font-family:var(--sans)}
+  .f08-legal{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase;line-height:1.7}
+
+  /* ═══ F09 · Acerca/Información/Contacto/Legal · institutional grid ═══ */
+  .f09{padding:5rem 0 2rem}
+  .f09-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3rem;padding-bottom:3rem;border-bottom:1px solid var(--line-soft)}
+  .f09-col h4{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:1.4rem;padding-bottom:.8rem;border-bottom:1px solid var(--gold);display:inline-block}
+  .f09-col ul{list-style:none;display:flex;flex-direction:column;gap:.7rem;font-family:var(--sans);font-size:.88rem;color:rgba(255,255,255,.78);line-height:1.5}
+  .f09-col p{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.6}
+  .f09-tagline{padding:2rem 0;text-align:center;font-family:var(--serif);font-style:italic;font-size:1.1rem;color:rgba(255,255,255,.6);border-bottom:1px solid var(--line-soft)}
+  .f09-bottom{padding:1.6rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;color:rgba(255,255,255,.4);text-transform:uppercase}
+
+  /* ═══ F10 · Tipografía gigante manifest top + minimal ═══ */
+  .f10{padding:6rem 0 2rem}
+  .f10-tt{font-family:var(--serif);font-size:clamp(2.5rem,6vw,5rem);font-weight:400;line-height:1.05;letter-spacing:-.025em;color:#fff;max-width:1100px;margin-bottom:2.5rem}
+  .f10-tt em{font-style:italic;color:var(--gold-sat)}
+  .f10-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem;padding-top:3rem;border-top:1px solid var(--line-soft);margin-bottom:3rem}
+  .f10-col h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem}
+  .f10-col p,.f10-col a{font-size:.95rem;color:rgba(255,255,255,.78);line-height:1.7;font-family:var(--serif);font-weight:400;display:block}
+  .f10-bottom{padding:1.5rem 0;border-top:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:rgba(255,255,255,.45);text-transform:uppercase}
+
+  /* ═══ F11 · Stats institucionales arriba + footer compacto ═══ */
+  .f11-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:4rem 0;border-bottom:1px solid var(--line-soft)}
+  .f11-stat{padding:0 2rem;border-right:1px solid var(--line-soft)}
+  .f11-stat:last-child{border-right:none}
+  .f11-stat-num{font-family:var(--serif);font-size:3.5rem;font-weight:400;color:#fff;line-height:.9;letter-spacing:-.04em;margin-bottom:.4rem}
+  .f11-stat-num em{font-style:italic;color:var(--gold-sat)}
+  .f11-stat-label{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;color:rgba(255,255,255,.55);text-transform:uppercase}
+  .f11-mid{padding:3rem 0;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;border-bottom:1px solid var(--line-soft)}
+  .f11-mid h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem}
+  .f11-mid p{color:rgba(255,255,255,.7);font-size:.95rem;line-height:1.7;font-family:var(--serif);max-width:480px}
+  .f11-mid p em{font-style:italic;color:var(--gold-sat)}
+  .f11-mid ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;font-size:.88rem;color:rgba(255,255,255,.78)}
+  .f11-bottom{padding:1.6rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;color:rgba(255,255,255,.45);text-transform:uppercase}
+
+  /* ═══ F12 · Newsletter prominente + manifest + cols ═══ */
+  .f12-news{padding:4.5rem 0;border-bottom:1px solid var(--line-soft);display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+  .f12-news h3{font-family:var(--serif);font-size:1.85rem;font-weight:400;color:#fff;line-height:1.2;letter-spacing:-.015em;margin-bottom:.8rem}
+  .f12-news h3 em{font-style:italic;color:var(--gold-sat)}
+  .f12-news p{color:rgba(255,255,255,.65);font-size:.92rem;line-height:1.6}
+  .f12-news-form{display:flex;gap:0;border-bottom:1px solid var(--gold)}
+  .f12-news-form input{flex:1;background:transparent;border:none;color:#fff;font-family:var(--sans);font-size:1rem;padding:.85rem 0;outline:none}
+  .f12-news-form input::placeholder{color:rgba(255,255,255,.4)}
+  .f12-news-form button{background:transparent;border:none;color:var(--gold);font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;padding:0 .8rem;cursor:pointer}
+  .f12-grid{padding:3rem 0;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;border-bottom:1px solid var(--line-soft)}
+  .f12-grid h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem}
+  .f12-grid ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;font-size:.9rem;color:rgba(255,255,255,.78);font-family:var(--serif)}
+  .f12-tagline{font-family:var(--serif);font-size:1.15rem;line-height:1.6;color:rgba(255,255,255,.78);max-width:480px;margin-top:1rem}
+  .f12-tagline em{font-style:italic;color:var(--gold-sat)}
+  .f12-bottom{padding:1.5rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:rgba(255,255,255,.45);text-transform:uppercase}
+
+  /* ═══ F13 · Heritage Establecidos en 1893 + sello ═══ */
+  .f13{padding:5rem 0 2rem;text-align:center;position:relative}
+  .f13-est{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--gold);letter-spacing:.05em;margin-bottom:1rem;display:inline-block;padding:.4rem 1.2rem;border:1px solid var(--gold);border-radius:99px}
+  .f13-tagline{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;line-height:1.25;letter-spacing:-.015em;color:#fff;max-width:780px;margin:1.5rem auto 2.5rem}
+  .f13-tagline em{font-style:italic;color:var(--gold-sat)}
+  .f13-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:3rem;padding:3rem 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);text-align:left}
+  .f13-cols h4{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem}
+  .f13-cols ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;font-size:.88rem;color:rgba(255,255,255,.78);font-family:var(--serif)}
+  .f13-bottom{padding:1.6rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;color:rgba(255,255,255,.45);text-transform:uppercase}
+
+  /* ═══ F14 · Reloj local Santiago + datos export ═══ */
+  .f14{padding:5rem 0 2rem}
+  .f14-top{display:grid;grid-template-columns:1.5fr 1fr;gap:3rem;align-items:end;padding-bottom:3rem;border-bottom:1px solid var(--line-soft)}
+  .f14-tagline{font-family:var(--serif);font-size:clamp(1.5rem,2.6vw,2rem);font-weight:400;line-height:1.3;letter-spacing:-.015em;color:#fff;max-width:680px}
+  .f14-tagline em{font-style:italic;color:var(--gold-sat)}
+  .f14-clock{display:flex;flex-direction:column;align-items:flex-end;gap:.5rem}
+  .f14-clock-time{font-family:var(--serif);font-size:2.6rem;font-weight:400;color:var(--gold);line-height:1;letter-spacing:-.02em}
+  .f14-clock-loc{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:rgba(255,255,255,.55);text-transform:uppercase}
+  .f14-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem;padding:3rem 0;border-bottom:1px solid var(--line-soft)}
+  .f14-col h4{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem}
+  .f14-col ul,.f14-col p{font-size:.88rem;color:rgba(255,255,255,.78);line-height:1.6;list-style:none;display:flex;flex-direction:column;gap:.55rem}
+  .f14-bottom{padding:1.5rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:rgba(255,255,255,.45);text-transform:uppercase}
+
+  /* ═══ F15 · Colofón de libro ═══ */
+  .f15{padding:5rem 0 3rem;text-align:center;font-family:var(--serif)}
+  .f15 .eyebrow{margin-bottom:2rem;display:block}
+  .f15-colofon{max-width:560px;margin:0 auto;font-family:var(--serif);font-size:1rem;line-height:2;color:rgba(255,255,255,.82);text-align:justify;hyphens:auto}
+  .f15-colofon em{font-style:italic;color:var(--gold-sat)}
+  .f15-mark{margin:2.5rem auto;width:60px;height:1px;background:var(--gold)}
+  .f15-targets{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:rgba(255,255,255,.55);text-transform:uppercase;margin:2rem 0}
+  .f15-contact{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:680px;margin:2.5rem auto 0;padding:2rem 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);text-align:left}
+  .f15-contact h4{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:.8rem}
+  .f15-contact p,.f15-contact a{font-size:.88rem;color:rgba(255,255,255,.78);line-height:1.6;font-family:var(--serif);display:block}
+  .f15-bottom{margin-top:2rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;color:rgba(255,255,255,.45);text-transform:uppercase}
+
+  /* Mobile */
+  @media(max-width:880px){
+    .f01-grid,.f02-cols,.f03-cols,.f06-cols,.f06-head,.f07-top,.f07-cols,.f08-links,.f08-bottom,.f09-grid,.f10-grid,.f11-stats,.f11-mid,.f12-news,.f12-grid,.f13-cols,.f14-top,.f14-grid,.f15-contact{grid-template-columns:1fr 1fr;gap:2rem}
+    .f06-stamp{display:none}
+    .f04,.f05,.f15-colofon{max-width:100%}
+  }
+  @media(max-width:560px){
+    .f01-grid,.f02-cols,.f03-cols,.f06-cols,.f07-cols,.f08-links,.f09-grid,.f10-grid,.f11-stats,.f12-grid,.f13-cols,.f14-grid{grid-template-columns:1fr}
+    .f11-stat{border-right:none;border-bottom:1px solid var(--line-soft);padding:1.5rem 0}
+  }
+</style>
+</head>
+<body>
+
+<nav class="page-nav">
+  <span class="page-nav__brand">Prufoot 3 · 15 footers institucional</span>
+  <a href="#f01">F01</a><a href="#f02">F02</a><a href="#f03">F03</a><a href="#f04">F04</a><a href="#f05">F05</a>
+  <a href="#f06">F06</a><a href="#f07">F07</a><a href="#f08">F08</a><a href="#f09">F09</a><a href="#f10">F10</a>
+  <a href="#f11">F11</a><a href="#f12">F12</a><a href="#f13">F13</a><a href="#f14">F14</a><a href="#f15">F15</a>
+</nav>
+
+<!-- ═══ F01 · Manifest grande izq + 3 cols der · matches actual refactor ═══ -->
+<section class="variant" id="f01">
+  <span class="variant__tag">F01 · Manifest grande izq + 3 cols der + bottom row · refactor actual mejorado</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f01-grid">
+        <div class="f01-brand">
+          <span class="eyebrow">— Traverso International Foods</span>
+          <h2 class="f01-manifest">Conectando calidad chilena con mercados globales desde hace más de 130 <em>años</em>.</h2>
+          <p class="f01-desc">Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+          <div class="f01-targets"><span class="f01-target">Industriales</span><span class="f01-target">Distribuidores</span><span class="f01-target">Importadores</span><span class="f01-target">Retail</span><span class="f01-target">HORECA</span></div>
+        </div>
+        <div class="f01-col"><h4>Navegación</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="quienes-somos.html">Quiénes somos</a></li><li><a href="productos.html">Productos</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+        <div class="f01-col"><h4>Productos</h4><ul><li><a href="productos.html">Vinagres a granel</a></li><li><a href="productos.html">Marca privada</a></li><li><a href="productos.html">Marca Traverso</a></li></ul></div>
+        <div class="f01-col"><h4>Contacto</h4><ul><li>Av. Vespucio 1313</li><li>La Cisterna, Santiago</li><li><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056">WhatsApp +56 9 8515 0056</a></li></ul></div>
+      </div>
+      <div class="f01-bottom">
+        <span>© 2026 Traverso International Foods · Todos los derechos reservados</span>
+        <span>Una empresa de Traverso S.A. · Chile</span>
+        <div class="f01-bottom-social"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">WhatsApp</a></div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F02 · Manifest full top + 4 cols + legal ═══ -->
+<section class="variant" id="f02">
+  <span class="variant__tag">F02 · Manifest gigante arriba + 4 cols simétricas + legal denso</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f02-top">
+        <span class="f02-eyebrow">— Traverso International Foods · 1893</span>
+        <h2 class="f02-manifest">Conectando calidad chilena con mercados globales desde hace más de 130 <em>años</em>.</h2>
+      </div>
+      <div class="f02-cols">
+        <div class="f02-col"><h4>Navegación</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="quienes-somos.html">Quiénes somos</a></li><li><a href="productos.html">Productos</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+        <div class="f02-col"><h4>Productos</h4><ul><li><a href="productos.html">Vinagres a granel</a></li><li><a href="productos.html">Marca privada</a></li><li><a href="productos.html">Marca Traverso</a></li></ul></div>
+        <div class="f02-col"><h4>Sectores</h4><ul><li>Industriales</li><li>Distribuidores</li><li>Importadores</li><li>Retail</li><li>HORECA</li></ul></div>
+        <div class="f02-col"><h4>Contacto</h4><ul><li>Av. Vespucio 1313, La Cisterna</li><li>Santiago, Chile</li><li><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056">WhatsApp +56 9 8515 0056</a></li></ul></div>
+      </div>
+      <div class="f02-legal">
+        <span>© 2026 Traverso International Foods · Todos los derechos reservados</span>
+        <span>Una empresa de Traverso S.A. · Chile</span>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F03 · Manifest centrado + 3 cols simétricas ═══ -->
+<section class="variant" id="f03">
+  <span class="variant__tag">F03 · Manifest centrado + 3 cols simétricas (heritage editorial)</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f03-top">
+        <span class="eyebrow">— Traverso International Foods —</span>
+        <p class="f03-manifest">Conectando calidad chilena con mercados globales desde hace más de 130 <em>años</em>.</p>
+      </div>
+      <div class="f03-cols">
+        <div class="f03-col"><h4>Navegación</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="quienes-somos.html">Quiénes somos</a></li><li><a href="productos.html">Productos</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+        <div class="f03-col"><h4>Productos</h4><ul><li><a href="productos.html">Vinagres a granel</a></li><li><a href="productos.html">Marca privada</a></li><li><a href="productos.html">Marca Traverso</a></li></ul></div>
+        <div class="f03-col"><h4>Contacto</h4><ul><li>Av. Vespucio 1313, La Cisterna, Santiago</li><li><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056">WhatsApp +56 9 8515 0056</a></li></ul></div>
+      </div>
+      <div class="f03-bottom">© 2026 Traverso International Foods · Todos los derechos reservados · Una empresa de Traverso S.A. · Chile · Facebook · Instagram · WhatsApp</div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F04 · Minimal extremo Aesop ═══ -->
+<section class="variant" id="f04">
+  <span class="variant__tag">F04 · Minimal extremo · solo manifest + email + targets · Aesop heritage</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f04">
+        <span class="eyebrow">— Traverso International Foods —</span>
+        <p class="f04-manifest">Conectando calidad chilena con mercados globales desde hace más de 130 <em style="font-style:italic;color:var(--gold)">años</em>.</p>
+        <a href="mailto:e-commerce@traverso.cl" class="f04-mail">e-commerce@traverso.cl</a>
+        <div class="f04-targets">Industriales · Distribuidores · Importadores · Retail · HORECA</div>
+        <div class="f04-bottom">
+          <span>© 2026 Traverso International Foods</span>
+          <span>Una empresa de Traverso S.A. · Chile</span>
+          <span>Facebook · Instagram · WhatsApp</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F05 · Carta editorial firma ═══ -->
+<section class="variant" id="f05">
+  <span class="variant__tag">F05 · Carta editorial · drop cap + firma de cierre · Pentagram letter style</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f05">
+        <span class="eyebrow">— Una nota de cierre · Traverso International Foods —</span>
+        <p class="f05-letter">Soluciones para la industria alimentaria, distribuidores e importadores internacionales. Estamos <em>conectando calidad chilena con mercados globales desde hace más de 130 años</em> — desde nuestra planta en San Bernardo hacia industriales, distribuidores, importadores, retail y canal HORECA en distintos países. Si tu empresa necesita disponibilidad, formatos o condiciones comerciales, escríbenos.</p>
+        <div class="f05-sign">
+          <div><h4>Contacto</h4><p>Av. Vespucio 1313<br>La Cisterna, Santiago<br><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a><br><a href="tel:+56224370900">+56 2 24370900</a></p></div>
+          <div><h4>Atte.</h4><p style="font-family:var(--serif);font-style:italic">Equipo comercial<br>Traverso International Foods</p></div>
+        </div>
+        <div class="f05-bottom">© 2026 Traverso International Foods · Todos los derechos reservados · Una empresa de Traverso S.A. · Chile</div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F06 · Postal sello dorado ═══ -->
+<section class="variant" id="f06">
+  <span class="variant__tag">F06 · Postal · sello dorado giratorio + 4 cols ficha archivo</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f06">
+        <div class="f06-stamp">TIF<br>2026<br>EXP</div>
+        <div class="f06-head">
+          <div>
+            <span class="eyebrow">— Traverso International Foods · 1893</span>
+            <h2 style="margin-top:1rem">Conectando calidad chilena con mercados globales desde hace más de 130 <em>años</em>.</h2>
+            <p>Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+          </div>
+          <div class="f06-meta">
+            <span><strong>Ref · TIF/EXP/2026</strong>Documento institucional</span>
+            <span><strong>BRC GS "AA"</strong>Certificación internacional</span>
+            <span><strong>San Bernardo · Chile</strong>Planta productiva</span>
+          </div>
+        </div>
+        <div class="f06-cols">
+          <div class="f06-col"><h4>Navegación</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="quienes-somos.html">Quiénes somos</a></li><li><a href="productos.html">Productos</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+          <div class="f06-col"><h4>Productos</h4><ul><li><a href="productos.html">Vinagres a granel</a></li><li><a href="productos.html">Marca privada</a></li><li><a href="productos.html">Marca Traverso</a></li></ul></div>
+          <div class="f06-col"><h4>Sectores</h4><ul><li>Industriales</li><li>Distribuidores</li><li>Importadores</li><li>Retail · HORECA</li></ul></div>
+          <div class="f06-col"><h4>Contacto</h4><ul><li>Av. Vespucio 1313</li><li><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056">+56 9 8515 0056</a></li></ul></div>
+        </div>
+        <div class="f06-bottom">© 2026 Traverso International Foods · Todos los derechos reservados · Una empresa de Traverso S.A. · Chile · Facebook · Instagram · WhatsApp</div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F07 · UN-tier mega cols denso ═══ -->
+<section class="variant" id="f07">
+  <span class="variant__tag">F07 · UN-tier · brand izq + 4 cols densas der · institucional pesado</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f07-top">
+        <div class="f07-brand">
+          <span class="eyebrow">— Traverso International Foods · Desde 1893</span>
+          <h2>Conectando calidad chilena con mercados globales desde hace más de 130 <em>años</em>.</h2>
+          <p>Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+        </div>
+        <div class="f07-cols">
+          <div class="f07-col"><h4>Navegación</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="quienes-somos.html">Quiénes somos</a></li><li><a href="productos.html">Productos</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+          <div class="f07-col"><h4>Productos</h4><ul><li><a href="productos.html">Vinagres a granel</a></li><li><a href="productos.html">Marca privada</a></li><li><a href="productos.html">Marca Traverso</a></li></ul></div>
+          <div class="f07-col"><h4>Sectores</h4><ul><li>Industriales</li><li>Distribuidores</li><li>Importadores</li><li>Retail · HORECA</li></ul></div>
+          <div class="f07-col"><h4>Contacto</h4><ul><li>Av. Vespucio 1313, La Cisterna, Santiago</li><li><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056">WhatsApp +56 9 8515 0056</a></li></ul></div>
+        </div>
+      </div>
+      <div class="f07-bottom"><span>© 2026 Traverso International Foods · Una empresa de Traverso S.A. · Chile</span><span>Facebook · Instagram · WhatsApp</span></div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F08 · GOV.UK style · plana lista + legal denso ═══ -->
+<section class="variant" id="f08">
+  <span class="variant__tag">F08 · GOV.UK · barra dorada arriba + plana lista links + contacto + legal</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f08">
+        <span class="f08-eyebrow">Traverso International Foods · Servicios y productos</span>
+        <h2 class="f08-tt">Conectando calidad chilena con mercados globales desde hace más de 130 <em>años</em>. Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</h2>
+        <div class="f08-links">
+          <a href="index.html">Inicio</a>
+          <a href="quienes-somos.html">Quiénes somos</a>
+          <a href="productos.html">Productos</a>
+          <a href="contacto.html">Contacto</a>
+          <a href="productos.html">Vinagres a granel</a>
+          <a href="productos.html">Marca privada</a>
+          <a href="productos.html">Marca Traverso</a>
+          <a href="#">Industriales</a>
+          <a href="#">Distribuidores</a>
+          <a href="#">Importadores</a>
+          <a href="#">Retail</a>
+          <a href="#">HORECA</a>
+        </div>
+        <div class="f08-bottom">
+          <div class="f08-contact"><h4>Oficinas comerciales</h4><p>Av. Vespucio 1313, La Cisterna, Santiago, Chile<br><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a> · <a href="tel:+56224370900">+56 2 24370900</a> · WhatsApp <a href="https://wa.me/56985150056">+56 9 8515 0056</a></p></div>
+          <div class="f08-legal">© 2026 Traverso International Foods<br>Todos los derechos reservados<br>Una empresa de Traverso S.A.<br>Chile · Establecidos en 1893<br>Facebook · Instagram · WhatsApp</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F09 · Acerca/Información/Contacto/Legal · institutional grid ═══ -->
+<section class="variant" id="f09">
+  <span class="variant__tag">F09 · 4 columnas institucionales · h4 serif con underline gold · UN/Wellcome</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f09">
+        <div class="f09-grid">
+          <div class="f09-col"><h4>Acerca</h4><ul><li><a href="quienes-somos.html">Nuestra historia</a></li><li><a href="quienes-somos.html">Estándares</a></li><li><a href="quienes-somos.html">Heritage 1893</a></li><li><a href="contacto.html">Equipo comercial</a></li></ul></div>
+          <div class="f09-col"><h4>Productos</h4><ul><li><a href="productos.html">Vinagres a granel</a></li><li><a href="productos.html">Marca privada</a></li><li><a href="productos.html">Marca Traverso</a></li><li>Industriales · Distribuidores · Importadores · Retail · HORECA</li></ul></div>
+          <div class="f09-col"><h4>Contacto</h4><ul><li>Av. Vespucio 1313</li><li>La Cisterna, Santiago, Chile</li><li><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056">WhatsApp +56 9 8515 0056</a></li></ul></div>
+          <div class="f09-col"><h4>Legal</h4><ul><li>Una empresa de Traverso S.A.</li><li>BRC GS "AA"</li><li>Marca Chile · ProChile</li><li>Facebook · Instagram · WhatsApp</li></ul></div>
+        </div>
+        <div class="f09-tagline">"Conectando calidad chilena con mercados globales desde hace más de 130 años."</div>
+        <div class="f09-bottom"><span>© 2026 Traverso International Foods · Todos los derechos reservados</span><span>Establecidos en 1893 · Chile</span></div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F10 · Tipografía gigante manifest + minimal ═══ -->
+<section class="variant" id="f10">
+  <span class="variant__tag">F10 · Tipografía gigante 5rem · manifest dominante + footer minimal</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f10">
+        <span class="eyebrow">— Traverso International Foods · 1893</span>
+        <h2 class="f10-tt">Conectando calidad chilena con mercados globales desde hace más de 130 <em>años</em>.</h2>
+        <div class="f10-grid">
+          <div class="f10-col"><h4>Visitar</h4><p><a href="index.html">Inicio</a><a href="quienes-somos.html">Quiénes somos</a><a href="productos.html">Productos</a><a href="contacto.html">Contacto</a></p></div>
+          <div class="f10-col"><h4>Productos</h4><p><a href="productos.html">Vinagres a granel</a><a href="productos.html">Marca privada</a><a href="productos.html">Marca Traverso</a></p></div>
+          <div class="f10-col"><h4>Contacto</h4><p>Av. Vespucio 1313, Santiago<br><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a><br><a href="tel:+56224370900">+56 2 24370900</a></p></div>
+        </div>
+        <div class="f10-bottom"><span>© 2026 Traverso International Foods · Una empresa de Traverso S.A.</span><span>Facebook · Instagram · WhatsApp</span></div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F11 · Stats institucionales arriba + footer compacto ═══ -->
+<section class="variant" id="f11">
+  <span class="variant__tag">F11 · Stats display 3.5rem (130+ años · BRC AA · etc) + footer compacto · Cosentino</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f11-stats">
+        <div class="f11-stat"><div class="f11-stat-num">130<em>+</em></div><div class="f11-stat-label">Años de trayectoria</div></div>
+        <div class="f11-stat"><div class="f11-stat-num">AA</div><div class="f11-stat-label">BRC Global Standard</div></div>
+        <div class="f11-stat"><div class="f11-stat-num">04</div><div class="f11-stat-label">Líneas de exportación</div></div>
+        <div class="f11-stat"><div class="f11-stat-num">CL<em>·</em></div><div class="f11-stat-label">San Bernardo · Chile</div></div>
+      </div>
+      <div class="f11-mid">
+        <div><h4>Manifesto</h4><p><em>Conectando calidad chilena con mercados globales desde hace más de 130 años.</em> Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p></div>
+        <div><h4>Productos</h4><ul><li><a href="productos.html">Vinagres a granel</a></li><li><a href="productos.html">Marca privada</a></li><li><a href="productos.html">Marca Traverso</a></li></ul></div>
+        <div><h4>Contacto</h4><ul><li>Av. Vespucio 1313, Santiago</li><li><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056">WhatsApp +56 9 8515 0056</a></li></ul></div>
+      </div>
+      <div class="f11-bottom"><span>© 2026 Traverso International Foods · Una empresa de Traverso S.A. · Chile</span><span>Facebook · Instagram · WhatsApp</span></div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F12 · Newsletter prominente + manifest + cols ═══ -->
+<section class="variant" id="f12">
+  <span class="variant__tag">F12 · Newsletter prominente · suscripción industria + cols + manifest tagline</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f12-news">
+        <div>
+          <span class="eyebrow">— Mantente informado</span>
+          <h3 style="margin-top:.8rem">Recibe novedades sobre <em>disponibilidad</em> y mercados</h3>
+          <p>Información mensual sobre nuestras líneas, certificaciones y oportunidades de exportación.</p>
+        </div>
+        <form class="f12-news-form">
+          <input type="email" placeholder="correo@empresa.com">
+          <button type="submit">Suscribir →</button>
+        </form>
+      </div>
+      <div class="f12-grid">
+        <div><h4>— Traverso International Foods</h4><p class="f12-tagline">Conectando calidad chilena con mercados globales desde hace más de 130 <em>años</em>. Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p></div>
+        <div><h4>Navegación</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="quienes-somos.html">Quiénes somos</a></li><li><a href="productos.html">Productos</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+        <div><h4>Productos</h4><ul><li><a href="productos.html">Vinagres a granel</a></li><li><a href="productos.html">Marca privada</a></li><li><a href="productos.html">Marca Traverso</a></li></ul></div>
+        <div><h4>Contacto</h4><ul><li><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056">+56 9 8515 0056</a></li><li>Av. Vespucio 1313, Santiago</li></ul></div>
+      </div>
+      <div class="f12-bottom"><span>© 2026 Traverso International Foods · Una empresa de Traverso S.A. · Chile</span><span>Facebook · Instagram · WhatsApp</span></div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F13 · Heritage Establecidos 1893 + sello pill ═══ -->
+<section class="variant" id="f13">
+  <span class="variant__tag">F13 · Heritage editorial · "Establecidos 1893" pill + tagline + 4 cols</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f13">
+        <span class="f13-est">Establecidos en 1893</span>
+        <h2 class="f13-tagline">Conectando calidad chilena con mercados globales desde hace más de 130 <em>años</em>.</h2>
+        <div class="f13-cols">
+          <div><h4>Navegación</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="quienes-somos.html">Quiénes somos</a></li><li><a href="productos.html">Productos</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+          <div><h4>Productos</h4><ul><li><a href="productos.html">Vinagres a granel</a></li><li><a href="productos.html">Marca privada</a></li><li><a href="productos.html">Marca Traverso</a></li></ul></div>
+          <div><h4>Sectores</h4><ul><li>Industriales</li><li>Distribuidores</li><li>Importadores</li><li>Retail · HORECA</li></ul></div>
+          <div><h4>Contacto</h4><ul><li>Av. Vespucio 1313, Santiago</li><li><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056">WhatsApp</a></li></ul></div>
+        </div>
+        <div class="f13-bottom"><span>© 2026 Traverso International Foods · Una empresa de Traverso S.A. · Chile</span><span>Facebook · Instagram · WhatsApp</span></div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F14 · Reloj local Santiago + 4 cols ═══ -->
+<section class="variant" id="f14">
+  <span class="variant__tag">F14 · Reloj local Santiago + manifest + 4 cols (cinemático Monocle)</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f14">
+        <div class="f14-top">
+          <h2 class="f14-tagline">Conectando calidad chilena con mercados globales desde hace más de 130 <em>años</em>. Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</h2>
+          <div class="f14-clock">
+            <div class="f14-clock-time">14:23</div>
+            <div class="f14-clock-loc">Santiago · GMT−3</div>
+          </div>
+        </div>
+        <div class="f14-grid">
+          <div class="f14-col"><h4>Navegación</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="quienes-somos.html">Quiénes somos</a></li><li><a href="productos.html">Productos</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+          <div class="f14-col"><h4>Productos</h4><ul><li><a href="productos.html">Vinagres a granel</a></li><li><a href="productos.html">Marca privada</a></li><li><a href="productos.html">Marca Traverso</a></li></ul></div>
+          <div class="f14-col"><h4>Sectores</h4><ul><li>Industriales</li><li>Distribuidores</li><li>Importadores</li><li>Retail · HORECA</li></ul></div>
+          <div class="f14-col"><h4>Contacto</h4><ul><li>Av. Vespucio 1313, Santiago</li><li><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056">+56 9 8515 0056</a></li></ul></div>
+        </div>
+        <div class="f14-bottom"><span>© 2026 Traverso International Foods · Una empresa de Traverso S.A. · Chile</span><span>Facebook · Instagram · WhatsApp</span></div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ═══ F15 · Colofón de libro ═══ -->
+<section class="variant" id="f15">
+  <span class="variant__tag">F15 · Colofón de libro · texto justified + mark dorado + contacto</span>
+  <footer class="tf">
+    <div class="variant__container">
+      <div class="f15">
+        <span class="eyebrow">— Colofón —</span>
+        <p class="f15-colofon">Este sitio es publicado por <em>Traverso International Foods</em>, división exportadora de Traverso S.A., empresa chilena establecida en 1893 con planta productiva en San Bernardo. Conectando calidad chilena con mercados globales desde hace más de <em>130 años</em>, ofrecemos soluciones para la industria alimentaria, distribuidores e importadores internacionales — vinagres a granel, productos bajo marca privada y línea propia, dirigidos a industriales, distribuidores, importadores, retail y canal HORECA.</p>
+        <div class="f15-mark"></div>
+        <div class="f15-targets">Industriales · Distribuidores · Importadores · Retail · HORECA</div>
+        <div class="f15-contact">
+          <div><h4>Oficinas</h4><p>Av. Vespucio 1313, La Cisterna, Santiago, Chile</p></div>
+          <div><h4>Contacto</h4><p><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a><a href="tel:+56224370900">+56 2 24370900</a><a href="https://wa.me/56985150056">WhatsApp +56 9 8515 0056</a></p></div>
+        </div>
+        <div class="f15-bottom">© 2026 Traverso International Foods · Todos los derechos reservados · Una empresa de Traverso S.A. · Chile · Facebook · Instagram · WhatsApp</div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+</body>
+</html>

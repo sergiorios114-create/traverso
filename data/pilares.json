@@ -1,0 +1,57 @@
+[
+  {
+    "id": "pilar_1",
+    "orden": 1,
+    "numero": "01",
+    "titulo_es": "Experiencia en producción alimentaria",
+    "titulo_en": "Experience in food production",
+    "resumen_es": "Trayectoria consolidada en la fabricación de alimentos, con criterio y conocimiento técnico.",
+    "resumen_en": "Consolidated track record in food manufacturing, with judgment and technical expertise.",
+    "descripcion_es": "Contamos con una trayectoria consolidada en la fabricación de alimentos, lo que nos permite abordar distintos desafíos productivos con criterio, conocimiento técnico y eficiencia operativa.",
+    "descripcion_en": "We have a consolidated track record in food manufacturing, which allows us to address different production challenges with judgment, technical knowledge and operational efficiency."
+  },
+  {
+    "id": "pilar_2",
+    "orden": 2,
+    "numero": "02",
+    "titulo_es": "Especialización en soluciones industriales",
+    "titulo_en": "Specialization in industrial solutions",
+    "resumen_es": "Productos con aplicación directa en procesos productivos, como vinagres a granel.",
+    "resumen_en": "Products with direct application in production processes, such as bulk vinegars.",
+    "descripcion_es": "Nos enfocamos en productos con aplicación directa en procesos productivos, como vinagres a granel, lo que nos posiciona como un proveedor relevante para distintas industrias.",
+    "descripcion_en": "We focus on products with direct application in production processes, such as bulk vinegars, positioning us as a relevant supplier for different industries."
+  },
+  {
+    "id": "pilar_3",
+    "orden": 3,
+    "numero": "03",
+    "titulo_es": "Capacidad de desarrollo para terceros",
+    "titulo_en": "Development capacity for third parties",
+    "resumen_es": "Fabricación bajo marca privada, adaptándonos a requerimientos específicos de cada cliente.",
+    "resumen_en": "Private label manufacturing, adapting to each client's specific requirements.",
+    "descripcion_es": "Trabajamos en la fabricación de productos bajo marca privada, adaptándonos a requerimientos específicos de clientes, mercados y canales de distribución.",
+    "descripcion_en": "We manufacture products under private label, adapting to specific requirements of clients, markets and distribution channels."
+  },
+  {
+    "id": "pilar_4",
+    "orden": 4,
+    "numero": "04",
+    "titulo_es": "Flexibilidad y adaptación a distintos mercados",
+    "titulo_en": "Flexibility and adaptation to different markets",
+    "resumen_es": "Comprendemos las diferencias regulatorias, comerciales y operativas de cada país.",
+    "resumen_en": "We understand the regulatory, commercial and operational differences of each country.",
+    "descripcion_es": "Entendemos las diferencias regulatorias, comerciales y operativas de cada país, lo que nos permite ajustar nuestra oferta según las necesidades de cada cliente.",
+    "descripcion_en": "We understand the regulatory, commercial and operational differences of each country, which allows us to adjust our offer according to each client's needs."
+  },
+  {
+    "id": "pilar_5",
+    "orden": 5,
+    "numero": "05",
+    "titulo_es": "Compromiso con el servicio y la continuidad operativa",
+    "titulo_en": "Commitment to service and operational continuity",
+    "resumen_es": "Relaciones comerciales estables, con foco en cumplimiento, comunicación y confiabilidad.",
+    "resumen_en": "Stable commercial relationships, focused on compliance, communication and reliability.",
+    "descripcion_es": "Priorizamos relaciones comerciales estables, con foco en cumplimiento, comunicación y confiabilidad en cada etapa del proceso.",
+    "descripcion_en": "We prioritize stable commercial relationships, focused on compliance, communication and reliability at every stage of the process."
+  }
+]

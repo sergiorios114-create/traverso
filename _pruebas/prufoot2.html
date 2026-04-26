@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Traverso — Pruebas de footer B2B (10 variantes con certificaciones)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   TOKENS TRAVERSO (oficiales DESIGN.md)
+═══════════════════════════════════════════════════════════════ */
+:root{
+  --primary:#0B1E6B;
+  --primary-dark:#081450;
+  --accent:#C5A55A;
+  --accent-saturated:#C9A227;
+  --accent-hover:#D4B96E;
+  --neutral:#FBF9FA;
+  --neutral-alt:#F2F4F8;
+  --text:#19212F;
+  --text-muted:#4A5362;
+  --text-subtle:#6B7280;
+  --on-dark:#FFFFFF;
+  --border:#DDE2EC;
+  --border-light:#EEF0F5;
+
+  --ff-serif:"Libre Baskerville",Georgia,serif;
+  --ff-sans:"Source Sans 3",system-ui,sans-serif;
+  --ff-mono:"Courier New",ui-monospace,monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:68px}
+body{font-family:var(--ff-sans);background:#e9ecf3;color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+img{max-width:100%;display:block}
+em{font-style:italic}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHELL
+═══════════════════════════════════════════════════════════════ */
+.shell-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.shell-nav__inner{max-width:1280px;margin:0 auto;padding:10px 24px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.shell-nav__brand{font-family:var(--ff-serif);font-size:14px;font-weight:700;color:var(--primary-dark);margin-right:auto}
+.shell-nav__brand span{font-family:var(--ff-mono);font-size:10px;font-weight:400;color:var(--text-subtle);letter-spacing:.14em;text-transform:uppercase;margin-left:12px}
+.shell-nav__links{display:flex;gap:2px;flex-wrap:wrap}
+.shell-nav__link{font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);padding:5px 9px;border:1px solid transparent;border-radius:14px;transition:all .15s}
+.shell-nav__link:hover{background:var(--neutral-alt);color:var(--primary-dark);border-color:var(--border)}
+
+.variant-label{max-width:1280px;margin:72px auto 18px;padding:0 32px;display:flex;align-items:baseline;gap:14px}
+.variant-label__n{font-family:var(--ff-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);border:1px solid var(--accent-saturated);padding:4px 10px;border-radius:3px}
+.variant-label__t{font-family:var(--ff-serif);font-size:22px;font-weight:700;color:var(--primary-dark);letter-spacing:-.005em}
+.variant-label__d{font-family:var(--ff-sans);font-size:13px;color:var(--text-muted);margin-left:auto;max-width:420px;text-align:right}
+.variant-frame{width:100%}
+.variant-frame__inner{width:100%}
+.t-container{max-width:1200px;margin:0 auto;padding:0 clamp(24px,5vw,48px)}
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE v09 (footer editorial hybrid) compartido
+═══════════════════════════════════════════════════════════════ */
+.foot{background:var(--neutral);color:var(--text);padding:clamp(4rem,7vw,5.5rem) 0 1.75rem;border-top:1px solid var(--border)}
+.foot__inner{display:grid;grid-template-columns:1.7fr 1fr;gap:clamp(2.5rem,5vw,4rem);align-items:start}
+.foot__eyebrow{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:1.25rem;display:block}
+.foot__manifest{font-family:var(--ff-serif);font-size:clamp(2rem,4.2vw,3.4rem);font-weight:700;line-height:1;letter-spacing:-.025em;color:var(--primary-dark)}
+.foot__manifest em{font-style:italic;font-weight:400;color:var(--accent-saturated)}
+.foot__targets{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.5rem}
+.foot__target{font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);padding:.3rem .8rem;border:1px solid var(--border);border-radius:20px}
+.foot__right{display:flex;flex-direction:column;gap:1.5rem}
+.foot__col{border-top:1px solid var(--primary-dark);padding-top:.75rem}
+.foot__col-title{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:.65rem}
+.foot__links{display:flex;flex-direction:column;gap:.28rem;list-style:none}
+.foot__link{font-size:.95rem;color:var(--text);transition:color .2s ease;display:inline-flex;align-items:center;gap:.4rem;padding:.1rem 0}
+.foot__link:hover{color:var(--accent-saturated)}
+.foot__mid{display:grid;grid-template-columns:1fr auto;gap:1.8rem;align-items:center;margin:clamp(2.5rem,4vw,3rem) 0 1.5rem;padding:1.25rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.foot__mid-text{font-family:var(--ff-serif);font-style:italic;font-size:1.05rem;line-height:1.5;color:var(--primary-dark);max-width:620px}
+.foot__mid-cta{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background:var(--primary-dark);color:var(--on-dark);font-family:var(--ff-sans);font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;border-radius:3px;transition:background .2s ease,transform .15s ease;white-space:nowrap}
+.foot__mid-cta:hover{background:var(--primary)}
+.foot__mid-cta:active{transform:scale(.97)}
+.foot__bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
+.foot__copy{color:var(--text-muted);font-size:.65rem}
+.foot__social{display:flex;gap:.5rem;align-items:center}
+.foot__social a{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);padding:.25rem .6rem;border:1px solid var(--border);border-radius:20px;transition:color .2s,border-color .2s}
+.foot__social a:hover{color:var(--accent-saturated);border-color:var(--accent-saturated)}
+
+@media (max-width:900px){.foot__inner{grid-template-columns:1fr}.foot__mid{grid-template-columns:1fr;align-items:flex-start}.foot__mid-cta{width:fit-content}}
+
+/* ═══════════════════════════════════════════════════════════════
+   ENRIQUECIMIENTOS B2B por variante
+═══════════════════════════════════════════════════════════════ */
+
+/* V01 · Trust inline discreto */
+.v01 .foot__bottom{justify-content:space-between}
+.v01 .foot__trust-inline{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.v01 .foot__trust-inline strong{color:var(--accent-saturated);font-weight:700}
+.v01 .foot__trust-inline span{color:var(--text-subtle)}
+
+/* V02 · Trust strip superior */
+.v02__trust{background:var(--primary-dark);color:var(--on-dark);padding:1.75rem 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.v02__trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;align-items:center}
+.v02__trust-item{text-align:left;border-left:1px solid rgba(255,255,255,.12);padding-left:1rem}
+.v02__trust-item:first-child{border-left:none;padding-left:0}
+.v02__trust-n{font-family:var(--ff-serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;color:var(--accent);letter-spacing:-.02em;line-height:1}
+.v02__trust-t{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-top:6px}
+.v02__trust-s{font-size:.72rem;color:rgba(255,255,255,.5);margin-top:3px}
+@media (max-width:900px){.v02__trust-grid{grid-template-columns:1fr 1fr;gap:1.25rem}.v02__trust-item{border-left:none;padding-left:0}}
+@media (max-width:560px){.v02__trust-grid{grid-template-columns:1fr}}
+
+/* V03 · 5 pilares como columna */
+.v03 .foot__right{grid-template-columns:unset}
+.v03 .foot__pilares{border-top:1px solid var(--primary-dark);padding-top:.75rem}
+.v03 .foot__pilar{display:grid;grid-template-columns:22px 1fr;gap:.5rem;padding:.4rem 0;border-bottom:1px dashed var(--border-light);align-items:baseline}
+.v03 .foot__pilar:last-child{border-bottom:none}
+.v03 .foot__pilar-n{font-family:var(--ff-mono);font-size:.7rem;color:var(--accent-saturated);letter-spacing:.08em}
+.v03 .foot__pilar-t{font-family:var(--ff-serif);font-size:.92rem;line-height:1.3;color:var(--text);font-weight:400}
+
+/* V04 · Certificación como divisor editorial */
+.v04 .foot__divisor{display:flex;align-items:center;gap:1rem;margin:clamp(2.5rem,4vw,3rem) 0 1.5rem;padding:0}
+.v04 .foot__divisor hr{flex:1;border:none;border-top:1px solid var(--primary-dark);margin:0}
+.v04 .foot__divisor-text{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--primary-dark);white-space:nowrap}
+.v04 .foot__divisor-text strong{color:var(--accent-saturated);font-weight:700}
+
+/* V05 · Bloque editorial fábrica */
+.v05 .foot__editorial{margin:clamp(2rem,3vw,2.5rem) 0 1rem;padding:1.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start}
+.v05 .foot__editorial-tag{font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);white-space:nowrap;padding-top:.3rem}
+.v05 .foot__editorial-tag::before{content:"§ ";color:var(--text-muted)}
+.v05 .foot__editorial-body{font-family:var(--ff-serif);font-style:italic;font-size:1.02rem;line-height:1.55;color:var(--primary-dark);max-width:780px}
+.v05 .foot__editorial-body strong{font-style:normal;font-weight:700;color:var(--primary-dark)}
+@media (max-width:700px){.v05 .foot__editorial{grid-template-columns:1fr}}
+
+/* V06 · Variedades reales (sin cambios estructurales, solo contenido) */
+
+/* V07 · 4a columna trust seals */
+.v07 .foot__inner{grid-template-columns:1.5fr 1fr}
+.v07 .foot__right{grid-template-columns:1fr 1fr}
+.v07 .foot__seals{border-top:1px solid var(--primary-dark);padding-top:.75rem;display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.v07 .foot__seal-t{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:1rem}
+.v07 .foot__seal{display:flex;flex-direction:column;gap:2px}
+.v07 .foot__seal-n{font-family:var(--ff-serif);font-size:1.35rem;font-weight:700;color:var(--primary-dark);line-height:1;letter-spacing:-.01em}
+.v07 .foot__seal-l{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);line-height:1.35}
+@media (max-width:900px){.v07 .foot__inner,.v07 .foot__right{grid-template-columns:1fr}}
+
+/* V08 · Mega-footer 5 pilares horizontal */
+.v08 .foot__pilares-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin:clamp(2rem,3vw,2.5rem) 0;padding:1.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.v08 .foot__pilar-card{display:flex;flex-direction:column;gap:4px}
+.v08 .foot__pilar-card-n{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.16em;color:var(--accent-saturated)}
+.v08 .foot__pilar-card-t{font-family:var(--ff-serif);font-size:.92rem;line-height:1.25;color:var(--primary-dark);font-weight:400}
+@media (max-width:900px){.v08 .foot__pilares-row{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.v08 .foot__pilares-row{grid-template-columns:1fr}}
+
+/* V09 · Chips formatos */
+.v09 .foot__formatos{margin-top:1rem;display:flex;flex-wrap:wrap;gap:.35rem;align-items:center}
+.v09 .foot__formatos-lbl{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-subtle);margin-right:.25rem}
+.v09 .foot__format{font-family:var(--ff-sans);font-size:.72rem;font-weight:600;padding:.25rem .7rem;border-radius:3px;background:rgba(197,165,90,.08);color:var(--accent-saturated);border:1px solid rgba(201,162,39,.25)}
+
+/* V10 · B2B cinematográfico */
+.v10{background:var(--primary-dark);color:var(--on-dark);border-top:none}
+.v10 .foot__eyebrow{color:var(--accent)}
+.v10 .foot__manifest{color:var(--on-dark);font-size:clamp(2.5rem,5.5vw,4.4rem)}
+.v10 .foot__manifest em{color:var(--accent)}
+.v10 .foot__target{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.18)}
+.v10 .foot__col{border-top:1px solid rgba(255,255,255,.15)}
+.v10 .foot__col-title{color:var(--accent)}
+.v10 .foot__link{color:rgba(255,255,255,.78)}
+.v10 .foot__link:hover{color:var(--accent)}
+.v10__row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin:clamp(2rem,3vw,2.5rem) 0 1.5rem;padding:1.25rem 0;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
+.v10__row-item{display:flex;flex-direction:column;gap:2px}
+.v10__row-n{font-family:var(--ff-serif);font-size:1.6rem;font-weight:700;color:var(--accent);line-height:1;letter-spacing:-.02em}
+.v10__row-t{font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-top:4px}
+.v10__row-s{font-size:.7rem;color:rgba(255,255,255,.5)}
+.v10__ctas{display:flex;gap:.7rem;flex-wrap:wrap;margin:1.5rem 0 2rem}
+.v10__cta-gold{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.7rem;background:var(--accent);color:var(--primary-dark);font-family:var(--ff-sans);font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border-radius:3px;transition:background .2s,transform .15s}
+.v10__cta-gold:hover{background:var(--accent-hover)}
+.v10__cta-gold:active{transform:scale(.97)}
+.v10__cta-ghost{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.7rem;background:transparent;color:var(--on-dark);font-family:var(--ff-sans);font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.4);border-radius:3px;transition:border-color .2s,background .2s}
+.v10__cta-ghost:hover{border-color:var(--accent);background:rgba(197,165,90,.08)}
+.v10 .foot__bottom{color:rgba(255,255,255,.4);border-top:1px solid rgba(255,255,255,.08);padding-top:1.25rem}
+.v10 .foot__social a{color:rgba(255,255,255,.55);border-color:rgba(255,255,255,.2)}
+.v10 .foot__social a:hover{color:var(--accent);border-color:var(--accent)}
+@media (max-width:900px){.v10__row{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.v10__row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="shell-nav">
+  <div class="shell-nav__inner">
+    <div class="shell-nav__brand">Traverso <span>Pruebas footer B2B · certificaciones</span></div>
+    <div class="shell-nav__links">
+      <a href="#v01" class="shell-nav__link">01 Trust inline</a>
+      <a href="#v02" class="shell-nav__link">02 Strip top</a>
+      <a href="#v03" class="shell-nav__link">03 Pilares col</a>
+      <a href="#v04" class="shell-nav__link">04 Divisor cert</a>
+      <a href="#v05" class="shell-nav__link">05 Editorial</a>
+      <a href="#v06" class="shell-nav__link">06 Variedades</a>
+      <a href="#v07" class="shell-nav__link">07 Seals col</a>
+      <a href="#v08" class="shell-nav__link">08 Pilares row</a>
+      <a href="#v09" class="shell-nav__link">09 Formatos</a>
+      <a href="#v10" class="shell-nav__link">10 Cinematic</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════ V01 · TRUST INLINE DISCRETO ══════════════════ -->
+<div class="variant-label" id="v01">
+  <span class="variant-label__n">01</span>
+  <span class="variant-label__t">Trust inline discreto</span>
+  <span class="variant-label__d">v09 tal cual, con una linea Courier abajo con 3 items de confianza. Minimo, elegante, sin romper la arquitectura.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="foot v01">
+  <div class="t-container">
+    <div class="foot__inner">
+      <div>
+        <span class="foot__eyebrow">— Traverso International Foods</span>
+        <h2 class="foot__manifest">La unidad de exportación de Traverso S.A. <em>Conectando calidad chilena con mercados globales.</em></h2>
+        <div class="foot__targets">
+          <span class="foot__target">Industriales</span><span class="foot__target">Distribuidores</span><span class="foot__target">Importadores</span><span class="foot__target">Retail</span><span class="foot__target">HORECA</span>
+        </div>
+      </div>
+      <div class="foot__right">
+        <div class="foot__col"><h4 class="foot__col-title">Navegación</h4><ul class="foot__links"><li><a href="#" class="foot__link">Inicio</a></li><li><a href="#" class="foot__link">Quiénes somos</a></li><li><a href="#" class="foot__link">Productos</a></li><li><a href="#" class="foot__link">Contacto</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Productos</h4><ul class="foot__links"><li><a href="#" class="foot__link">Vinagres a granel</a></li><li><a href="#" class="foot__link">Marca privada</a></li><li><a href="#" class="foot__link">Marca Traverso</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Contacto</h4><ul class="foot__links"><li><a href="mailto:e-commerce@traverso.cl" class="foot__link">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900" class="foot__link">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056" class="foot__link">WhatsApp</a></li></ul></div>
+      </div>
+    </div>
+    <div class="foot__mid">
+      <p class="foot__mid-text">Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+      <a href="#" class="foot__mid-cta">Contactar →</a>
+    </div>
+    <div class="foot__bottom">
+      <p class="foot__copy">© 2026 Traverso International Foods. Todos los derechos reservados. · Una empresa de Traverso S.A. · Chile</p>
+      <div class="foot__trust-inline">
+        <strong>BRC GS "AA"</strong><span>·</span><span>+130 años</span><span>·</span><span>MDD disponible</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V02 · TRUST STRIP SUPERIOR ══════════════════ -->
+<div class="variant-label" id="v02">
+  <span class="variant-label__n">02</span>
+  <span class="variant-label__t">Trust strip superior</span>
+  <span class="variant-label__d">Franja oscura arriba con los 4 trust_items (AA · 130+ · 2 · MDD) tipografia serif grande. Seriedad B2B sin gritar.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="foot v02">
+  <div class="v02__trust">
+    <div class="t-container">
+      <div class="v02__trust-grid">
+        <div class="v02__trust-item"><div class="v02__trust-n">AA</div><div class="v02__trust-t">BRC Global Standard</div><div class="v02__trust-s">Certificación internacional</div></div>
+        <div class="v02__trust-item"><div class="v02__trust-n">130<em style="font-style:normal;color:var(--accent-saturated)">+</em></div><div class="v02__trust-t">Años de trayectoria</div><div class="v02__trust-s">De trayectoria productiva</div></div>
+        <div class="v02__trust-item"><div class="v02__trust-n">2</div><div class="v02__trust-t">Formatos de exportación</div><div class="v02__trust-s">Granel &amp; Envasado</div></div>
+        <div class="v02__trust-item"><div class="v02__trust-n">MDD</div><div class="v02__trust-t">Marca propia disponible</div><div class="v02__trust-s">Para tu mercado</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="t-container" style="padding-top:clamp(2.5rem,5vw,3.5rem)">
+    <div class="foot__inner">
+      <div>
+        <span class="foot__eyebrow">— Traverso International Foods</span>
+        <h2 class="foot__manifest">La unidad de exportación de Traverso S.A. <em>Conectando calidad chilena con mercados globales.</em></h2>
+        <div class="foot__targets">
+          <span class="foot__target">Industriales</span><span class="foot__target">Distribuidores</span><span class="foot__target">Importadores</span><span class="foot__target">Retail</span><span class="foot__target">HORECA</span>
+        </div>
+      </div>
+      <div class="foot__right">
+        <div class="foot__col"><h4 class="foot__col-title">Navegación</h4><ul class="foot__links"><li><a href="#" class="foot__link">Inicio</a></li><li><a href="#" class="foot__link">Quiénes somos</a></li><li><a href="#" class="foot__link">Productos</a></li><li><a href="#" class="foot__link">Contacto</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Productos</h4><ul class="foot__links"><li><a href="#" class="foot__link">Vinagres a granel</a></li><li><a href="#" class="foot__link">Marca privada</a></li><li><a href="#" class="foot__link">Marca Traverso</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Contacto</h4><ul class="foot__links"><li><a href="mailto:e-commerce@traverso.cl" class="foot__link">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900" class="foot__link">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056" class="foot__link">WhatsApp</a></li></ul></div>
+      </div>
+    </div>
+    <div class="foot__mid">
+      <p class="foot__mid-text">Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+      <a href="#" class="foot__mid-cta">Contactar →</a>
+    </div>
+    <div class="foot__bottom">
+      <p class="foot__copy">© 2026 Traverso International Foods. Todos los derechos reservados.</p>
+      <div class="foot__social"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">WhatsApp</a></div>
+      <p class="foot__copy">Una empresa de Traverso S.A. · Chile</p>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V03 · 5 PILARES COMO COLUMNA ══════════════════ -->
+<div class="variant-label" id="v03">
+  <span class="variant-label__n">03</span>
+  <span class="variant-label__t">5 pilares · columna</span>
+  <span class="variant-label__d">La columna "Productos" se convierte en los 5 pilares numerados (01–05) con titulo corto. Suma autoridad de compania.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="foot v03">
+  <div class="t-container">
+    <div class="foot__inner">
+      <div>
+        <span class="foot__eyebrow">— Traverso International Foods</span>
+        <h2 class="foot__manifest">La unidad de exportación de Traverso S.A. <em>Conectando calidad chilena con mercados globales.</em></h2>
+        <div class="foot__targets">
+          <span class="foot__target">Industriales</span><span class="foot__target">Distribuidores</span><span class="foot__target">Importadores</span><span class="foot__target">Retail</span><span class="foot__target">HORECA</span>
+        </div>
+      </div>
+      <div class="foot__right">
+        <div class="foot__col"><h4 class="foot__col-title">Navegación</h4><ul class="foot__links"><li><a href="#" class="foot__link">Inicio</a></li><li><a href="#" class="foot__link">Quiénes somos</a></li><li><a href="#" class="foot__link">Productos</a></li><li><a href="#" class="foot__link">Contacto</a></li></ul></div>
+        <div class="foot__col foot__pilares">
+          <h4 class="foot__col-title">Pilares</h4>
+          <div class="foot__pilar"><span class="foot__pilar-n">01</span><span class="foot__pilar-t">Experiencia en producción alimentaria</span></div>
+          <div class="foot__pilar"><span class="foot__pilar-n">02</span><span class="foot__pilar-t">Soluciones industriales</span></div>
+          <div class="foot__pilar"><span class="foot__pilar-n">03</span><span class="foot__pilar-t">Desarrollo para terceros</span></div>
+          <div class="foot__pilar"><span class="foot__pilar-n">04</span><span class="foot__pilar-t">Flexibilidad de mercados</span></div>
+          <div class="foot__pilar"><span class="foot__pilar-n">05</span><span class="foot__pilar-t">Compromiso de servicio</span></div>
+        </div>
+        <div class="foot__col"><h4 class="foot__col-title">Contacto</h4><ul class="foot__links"><li><a href="mailto:e-commerce@traverso.cl" class="foot__link">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900" class="foot__link">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056" class="foot__link">WhatsApp</a></li></ul></div>
+      </div>
+    </div>
+    <div class="foot__mid">
+      <p class="foot__mid-text">Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+      <a href="#" class="foot__mid-cta">Contactar →</a>
+    </div>
+    <div class="foot__bottom">
+      <p class="foot__copy">© 2026 Traverso International Foods. Todos los derechos reservados. · Una empresa de Traverso S.A. · Chile</p>
+      <div class="foot__social"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">WhatsApp</a></div>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V04 · CERTIFICACIÓN COMO DIVISOR ══════════════════ -->
+<div class="variant-label" id="v04">
+  <span class="variant-label__n">04</span>
+  <span class="variant-label__t">Certificación como divisor editorial</span>
+  <span class="variant-label__d">El bloque mid se reemplaza por un divisor con rules + "BRC GS AA · +130 años · Marca Chile" centrado. Patron tier premium 2026.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="foot v04">
+  <div class="t-container">
+    <div class="foot__inner">
+      <div>
+        <span class="foot__eyebrow">— Traverso International Foods</span>
+        <h2 class="foot__manifest">La unidad de exportación de Traverso S.A. <em>Conectando calidad chilena con mercados globales.</em></h2>
+        <div class="foot__targets">
+          <span class="foot__target">Industriales</span><span class="foot__target">Distribuidores</span><span class="foot__target">Importadores</span><span class="foot__target">Retail</span><span class="foot__target">HORECA</span>
+        </div>
+      </div>
+      <div class="foot__right">
+        <div class="foot__col"><h4 class="foot__col-title">Navegación</h4><ul class="foot__links"><li><a href="#" class="foot__link">Inicio</a></li><li><a href="#" class="foot__link">Quiénes somos</a></li><li><a href="#" class="foot__link">Productos</a></li><li><a href="#" class="foot__link">Contacto</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Productos</h4><ul class="foot__links"><li><a href="#" class="foot__link">Vinagres a granel</a></li><li><a href="#" class="foot__link">Marca privada</a></li><li><a href="#" class="foot__link">Marca Traverso</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Contacto</h4><ul class="foot__links"><li><a href="mailto:e-commerce@traverso.cl" class="foot__link">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900" class="foot__link">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056" class="foot__link">WhatsApp</a></li></ul></div>
+      </div>
+    </div>
+    <div class="foot__divisor">
+      <hr>
+      <span class="foot__divisor-text"><strong>BRC GS "AA"</strong> · +130 años · Marca Chile autorizada</span>
+      <hr>
+    </div>
+    <div class="foot__bottom">
+      <p class="foot__copy">© 2026 Traverso International Foods. Todos los derechos reservados. · Una empresa de Traverso S.A. · Chile</p>
+      <div class="foot__social"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">WhatsApp</a></div>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V05 · BLOQUE EDITORIAL FÁBRICA ══════════════════ -->
+<div class="variant-label" id="v05">
+  <span class="variant-label__n">05</span>
+  <span class="variant-label__t">Bloque editorial de fábrica</span>
+  <span class="variant-label__d">Parrafo italic entre manifesto y columnas con la cita oficial de BRC GS AA. Autoridad editorial, no badge.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="foot v05">
+  <div class="t-container">
+    <div class="foot__inner">
+      <div>
+        <span class="foot__eyebrow">— Traverso International Foods</span>
+        <h2 class="foot__manifest">La unidad de exportación de Traverso S.A. <em>Conectando calidad chilena con mercados globales.</em></h2>
+        <div class="foot__targets">
+          <span class="foot__target">Industriales</span><span class="foot__target">Distribuidores</span><span class="foot__target">Importadores</span><span class="foot__target">Retail</span><span class="foot__target">HORECA</span>
+        </div>
+      </div>
+      <div class="foot__right">
+        <div class="foot__col"><h4 class="foot__col-title">Navegación</h4><ul class="foot__links"><li><a href="#" class="foot__link">Inicio</a></li><li><a href="#" class="foot__link">Quiénes somos</a></li><li><a href="#" class="foot__link">Productos</a></li><li><a href="#" class="foot__link">Contacto</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Productos</h4><ul class="foot__links"><li><a href="#" class="foot__link">Vinagres a granel</a></li><li><a href="#" class="foot__link">Marca privada</a></li><li><a href="#" class="foot__link">Marca Traverso</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Contacto</h4><ul class="foot__links"><li><a href="mailto:e-commerce@traverso.cl" class="foot__link">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900" class="foot__link">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056" class="foot__link">WhatsApp</a></li></ul></div>
+      </div>
+    </div>
+    <div class="foot__editorial">
+      <span class="foot__editorial-tag">01 Certificación</span>
+      <p class="foot__editorial-body"><strong>Nuestras plantas productivas operan bajo certificación BRC GS "AA",</strong> estándar reconocido internacionalmente en seguridad y calidad alimentaria. Proyectamos más de 130 años de experiencia hacia mercados internacionales con seriedad y continuidad.</p>
+    </div>
+    <div class="foot__bottom">
+      <p class="foot__copy">© 2026 Traverso International Foods. Todos los derechos reservados. · Una empresa de Traverso S.A. · Chile</p>
+      <div class="foot__social"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">WhatsApp</a></div>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V06 · VARIEDADES REALES ══════════════════ -->
+<div class="variant-label" id="v06">
+  <span class="variant-label__n">06</span>
+  <span class="variant-label__t">Variedades reales de vinagre</span>
+  <span class="variant-label__d">La columna "Productos" muestra las 5 lineas reales (Sidra · Vino · Alcohol kosher · Balsámicos · MDD). Es puro B2B util.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="foot v06">
+  <div class="t-container">
+    <div class="foot__inner">
+      <div>
+        <span class="foot__eyebrow">— Traverso International Foods</span>
+        <h2 class="foot__manifest">La unidad de exportación de Traverso S.A. <em>Conectando calidad chilena con mercados globales.</em></h2>
+        <div class="foot__targets">
+          <span class="foot__target">Industriales</span><span class="foot__target">Distribuidores</span><span class="foot__target">Importadores</span><span class="foot__target">Retail</span><span class="foot__target">HORECA</span>
+        </div>
+      </div>
+      <div class="foot__right">
+        <div class="foot__col"><h4 class="foot__col-title">Navegación</h4><ul class="foot__links"><li><a href="#" class="foot__link">Inicio</a></li><li><a href="#" class="foot__link">Quiénes somos</a></li><li><a href="#" class="foot__link">Productos</a></li><li><a href="#" class="foot__link">Contacto</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Líneas de vinagre</h4><ul class="foot__links">
+          <li><a href="#" class="foot__link">Sidra de Manzana</a></li>
+          <li><a href="#" class="foot__link">Vino</a></li>
+          <li><a href="#" class="foot__link">Alcohol <span style="font-family:var(--ff-mono);font-size:.62rem;color:var(--accent-saturated);letter-spacing:.1em">· KOSHER</span></a></li>
+          <li><a href="#" class="foot__link">Balsámicos</a></li>
+          <li><a href="#" class="foot__link">Marca Privada</a></li>
+        </ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Contacto</h4><ul class="foot__links"><li><a href="mailto:e-commerce@traverso.cl" class="foot__link">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900" class="foot__link">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056" class="foot__link">WhatsApp</a></li></ul></div>
+      </div>
+    </div>
+    <div class="foot__mid">
+      <p class="foot__mid-text">Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+      <a href="#" class="foot__mid-cta">Contactar →</a>
+    </div>
+    <div class="foot__bottom">
+      <p class="foot__copy">© 2026 Traverso International Foods. Todos los derechos reservados. · Una empresa de Traverso S.A. · Chile</p>
+      <div class="foot__social"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">WhatsApp</a></div>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V07 · 4A COLUMNA TRUST SEALS ══════════════════ -->
+<div class="variant-label" id="v07">
+  <span class="variant-label__n">07</span>
+  <span class="variant-label__t">Trust seals · columna dedicada</span>
+  <span class="variant-label__d">Los 4 trust_items ocupan una columna propia con layout mini-stat. Claro, ordenado, muy B2B.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="foot v07">
+  <div class="t-container">
+    <div class="foot__inner">
+      <div>
+        <span class="foot__eyebrow">— Traverso International Foods</span>
+        <h2 class="foot__manifest">La unidad de exportación de Traverso S.A. <em>Conectando calidad chilena con mercados globales.</em></h2>
+        <div class="foot__targets">
+          <span class="foot__target">Industriales</span><span class="foot__target">Distribuidores</span><span class="foot__target">Importadores</span><span class="foot__target">Retail</span><span class="foot__target">HORECA</span>
+        </div>
+      </div>
+      <div class="foot__right">
+        <div class="foot__col"><h4 class="foot__col-title">Navegación</h4><ul class="foot__links"><li><a href="#" class="foot__link">Inicio</a></li><li><a href="#" class="foot__link">Quiénes somos</a></li><li><a href="#" class="foot__link">Productos</a></li><li><a href="#" class="foot__link">Contacto</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Productos</h4><ul class="foot__links"><li><a href="#" class="foot__link">Vinagres a granel</a></li><li><a href="#" class="foot__link">Marca privada</a></li><li><a href="#" class="foot__link">Marca Traverso</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Contacto</h4><ul class="foot__links"><li><a href="mailto:e-commerce@traverso.cl" class="foot__link">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900" class="foot__link">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056" class="foot__link">WhatsApp</a></li></ul></div>
+        <div class="foot__seals" style="grid-column:1/-1;margin-top:.5rem">
+          <div class="foot__seal-t" style="grid-column:1/-1">— Certificaciones &amp; trayectoria</div>
+          <div class="foot__seal"><span class="foot__seal-n">AA</span><span class="foot__seal-l">BRC Global Standard</span></div>
+          <div class="foot__seal"><span class="foot__seal-n">130+</span><span class="foot__seal-l">Años de trayectoria</span></div>
+          <div class="foot__seal"><span class="foot__seal-n">2</span><span class="foot__seal-l">Formatos · Granel &amp; Envasado</span></div>
+          <div class="foot__seal"><span class="foot__seal-n">MDD</span><span class="foot__seal-l">Marca propia disponible</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="foot__mid">
+      <p class="foot__mid-text">Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+      <a href="#" class="foot__mid-cta">Contactar →</a>
+    </div>
+    <div class="foot__bottom">
+      <p class="foot__copy">© 2026 Traverso International Foods. Todos los derechos reservados. · Una empresa de Traverso S.A. · Chile</p>
+      <div class="foot__social"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">WhatsApp</a></div>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V08 · MEGA-FOOTER 5 PILARES HORIZONTAL ══════════════════ -->
+<div class="variant-label" id="v08">
+  <span class="variant-label__n">08</span>
+  <span class="variant-label__t">5 pilares horizontales</span>
+  <span class="variant-label__d">Bloque horizontal bajo el mid con los 5 pilares como micro-indice de quienes somos. Contexto corporativo fuerte.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="foot v08">
+  <div class="t-container">
+    <div class="foot__inner">
+      <div>
+        <span class="foot__eyebrow">— Traverso International Foods</span>
+        <h2 class="foot__manifest">La unidad de exportación de Traverso S.A. <em>Conectando calidad chilena con mercados globales.</em></h2>
+        <div class="foot__targets">
+          <span class="foot__target">Industriales</span><span class="foot__target">Distribuidores</span><span class="foot__target">Importadores</span><span class="foot__target">Retail</span><span class="foot__target">HORECA</span>
+        </div>
+      </div>
+      <div class="foot__right">
+        <div class="foot__col"><h4 class="foot__col-title">Navegación</h4><ul class="foot__links"><li><a href="#" class="foot__link">Inicio</a></li><li><a href="#" class="foot__link">Quiénes somos</a></li><li><a href="#" class="foot__link">Productos</a></li><li><a href="#" class="foot__link">Contacto</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Productos</h4><ul class="foot__links"><li><a href="#" class="foot__link">Vinagres a granel</a></li><li><a href="#" class="foot__link">Marca privada</a></li><li><a href="#" class="foot__link">Marca Traverso</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Contacto</h4><ul class="foot__links"><li><a href="mailto:e-commerce@traverso.cl" class="foot__link">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900" class="foot__link">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056" class="foot__link">WhatsApp</a></li></ul></div>
+      </div>
+    </div>
+    <div class="foot__pilares-row">
+      <div class="foot__pilar-card"><div class="foot__pilar-card-n">§ 01</div><div class="foot__pilar-card-t">Experiencia en producción alimentaria</div></div>
+      <div class="foot__pilar-card"><div class="foot__pilar-card-n">§ 02</div><div class="foot__pilar-card-t">Soluciones industriales</div></div>
+      <div class="foot__pilar-card"><div class="foot__pilar-card-n">§ 03</div><div class="foot__pilar-card-t">Desarrollo para terceros</div></div>
+      <div class="foot__pilar-card"><div class="foot__pilar-card-n">§ 04</div><div class="foot__pilar-card-t">Flexibilidad de mercados</div></div>
+      <div class="foot__pilar-card"><div class="foot__pilar-card-n">§ 05</div><div class="foot__pilar-card-t">Compromiso de servicio</div></div>
+    </div>
+    <div class="foot__bottom">
+      <p class="foot__copy">© 2026 Traverso International Foods. Todos los derechos reservados. · Una empresa de Traverso S.A. · Chile</p>
+      <div class="foot__social"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">WhatsApp</a></div>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V09 · CHIPS FORMATOS ══════════════════ -->
+<div class="variant-label" id="v09">
+  <span class="variant-label__n">09</span>
+  <span class="variant-label__t">Chips de formatos disponibles</span>
+  <span class="variant-label__d">Bajo los targets, chips operativos con el "que podemos hacer": Granel · Envasado · Marca Privada · Kosher. Lenguaje B2B directo.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="foot v09">
+  <div class="t-container">
+    <div class="foot__inner">
+      <div>
+        <span class="foot__eyebrow">— Traverso International Foods</span>
+        <h2 class="foot__manifest">La unidad de exportación de Traverso S.A. <em>Conectando calidad chilena con mercados globales.</em></h2>
+        <div class="foot__targets">
+          <span class="foot__target">Industriales</span><span class="foot__target">Distribuidores</span><span class="foot__target">Importadores</span><span class="foot__target">Retail</span><span class="foot__target">HORECA</span>
+        </div>
+        <div class="foot__formatos">
+          <span class="foot__formatos-lbl">Formatos —</span>
+          <span class="foot__format">Granel</span>
+          <span class="foot__format">Envasado</span>
+          <span class="foot__format">Marca Privada</span>
+          <span class="foot__format">Kosher</span>
+        </div>
+      </div>
+      <div class="foot__right">
+        <div class="foot__col"><h4 class="foot__col-title">Navegación</h4><ul class="foot__links"><li><a href="#" class="foot__link">Inicio</a></li><li><a href="#" class="foot__link">Quiénes somos</a></li><li><a href="#" class="foot__link">Productos</a></li><li><a href="#" class="foot__link">Contacto</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Productos</h4><ul class="foot__links"><li><a href="#" class="foot__link">Vinagres a granel</a></li><li><a href="#" class="foot__link">Marca privada</a></li><li><a href="#" class="foot__link">Marca Traverso</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Contacto</h4><ul class="foot__links"><li><a href="mailto:e-commerce@traverso.cl" class="foot__link">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900" class="foot__link">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056" class="foot__link">WhatsApp</a></li></ul></div>
+      </div>
+    </div>
+    <div class="foot__mid">
+      <p class="foot__mid-text">Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+      <a href="#" class="foot__mid-cta">Contactar →</a>
+    </div>
+    <div class="foot__bottom">
+      <p class="foot__copy">© 2026 Traverso International Foods. Todos los derechos reservados. · Una empresa de Traverso S.A. · Chile</p>
+      <div class="foot__social"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">WhatsApp</a></div>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V10 · B2B CINEMATOGRÁFICO ══════════════════ -->
+<div class="variant-label" id="v10">
+  <span class="variant-label__n">10</span>
+  <span class="variant-label__t">B2B cinematográfico</span>
+  <span class="variant-label__d">Footer oscuro navy profundo + manifesto gigante + trust row con los 4 items + doble CTA (ficha tecnica / contactar export).</span>
+</div>
+<div class="variant-frame" style="margin-bottom:64px"><div class="variant-frame__inner">
+<footer class="foot v10">
+  <div class="t-container">
+    <div class="foot__inner">
+      <div>
+        <span class="foot__eyebrow">— Traverso International Foods</span>
+        <h2 class="foot__manifest">La unidad de exportación de Traverso S.A. <em>Conectando calidad chilena con mercados globales.</em></h2>
+        <div class="foot__targets">
+          <span class="foot__target">Industriales</span><span class="foot__target">Distribuidores</span><span class="foot__target">Importadores</span><span class="foot__target">Retail</span><span class="foot__target">HORECA</span>
+        </div>
+      </div>
+      <div class="foot__right">
+        <div class="foot__col"><h4 class="foot__col-title">Navegación</h4><ul class="foot__links"><li><a href="#" class="foot__link">Inicio</a></li><li><a href="#" class="foot__link">Quiénes somos</a></li><li><a href="#" class="foot__link">Productos</a></li><li><a href="#" class="foot__link">Contacto</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Productos</h4><ul class="foot__links"><li><a href="#" class="foot__link">Vinagres a granel</a></li><li><a href="#" class="foot__link">Marca privada</a></li><li><a href="#" class="foot__link">Marca Traverso</a></li></ul></div>
+        <div class="foot__col"><h4 class="foot__col-title">Contacto</h4><ul class="foot__links"><li><a href="mailto:e-commerce@traverso.cl" class="foot__link">e-commerce@traverso.cl</a></li><li><a href="tel:+56224370900" class="foot__link">+56 2 24370900</a></li><li><a href="https://wa.me/56985150056" class="foot__link">WhatsApp</a></li></ul></div>
+      </div>
+    </div>
+    <div class="v10__row">
+      <div class="v10__row-item"><span class="v10__row-n">AA</span><span class="v10__row-t">BRC Global Standard</span><span class="v10__row-s">Certificación internacional</span></div>
+      <div class="v10__row-item"><span class="v10__row-n">130+</span><span class="v10__row-t">Años de trayectoria</span><span class="v10__row-s">De trayectoria productiva</span></div>
+      <div class="v10__row-item"><span class="v10__row-n">2</span><span class="v10__row-t">Formatos</span><span class="v10__row-s">Granel &amp; Envasado</span></div>
+      <div class="v10__row-item"><span class="v10__row-n">MDD</span><span class="v10__row-t">Marca propia</span><span class="v10__row-s">Para tu mercado</span></div>
+    </div>
+    <div class="v10__ctas">
+      <a href="#" class="v10__cta-gold">Solicitar ficha técnica →</a>
+      <a href="#" class="v10__cta-ghost">Contactar exportación →</a>
+    </div>
+    <div class="foot__bottom">
+      <p class="foot__copy">© 2026 Traverso International Foods. Todos los derechos reservados.</p>
+      <div class="foot__social"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">WhatsApp</a></div>
+      <p class="foot__copy">Una empresa de Traverso S.A. · Chile</p>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+</body>
+</html>

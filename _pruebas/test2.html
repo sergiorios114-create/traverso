@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Footer &mdash; 20 Variantes (Research-Based)</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #0b1e6b; --primary-dark: #081450; --deep: #050e33; --deeper: #030a24;
+      --gold: #c9a227; --gold-dim: rgba(201,162,39,0.12);
+      --bg: #fbf9fa; --bg-alt: #f2f4f8;
+      --text: #1a1a2e; --text-muted: #5a6272; --text-light: #8a94a6;
+      --border: #dde2ec; --border-light: #eef0f5;
+      --w: rgba(255,255,255,1); --w80: rgba(255,255,255,0.8); --w60: rgba(255,255,255,0.6);
+      --w40: rgba(255,255,255,0.4); --w20: rgba(255,255,255,0.2); --w10: rgba(255,255,255,0.1);
+      --w06: rgba(255,255,255,0.06);
+      --heading: 'Libre Baskerville', Georgia, serif;
+      --body: 'Source Sans 3', system-ui, sans-serif;
+      --mono: 'DM Mono', monospace;
+    }
+    body { font-family: var(--body); color: var(--text); background: #c8cad2; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; } ul { list-style: none; } img { display: block; }
+
+    .page-header { background: var(--primary-dark); color: white; padding: 3rem 2rem 2rem; text-align: center; }
+    .page-header h1 { font-family: var(--heading); font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .page-header p { font-size: 0.85rem; color: var(--w40); max-width: 600px; margin: 0 auto; }
+
+    .label { max-width: 1300px; margin: 2.5rem auto 0; padding: 0 2rem; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-light); }
+    .label b { display: inline-block; background: var(--primary); color: white; padding: 0.2rem 0.55rem; border-radius: 3px; margin-right: 0.4rem; font-size: 0.6rem; font-weight: 700; }
+    .label em { font-style: normal; color: var(--text-muted); font-weight: 400; }
+    .label .src { display: inline-block; background: rgba(201,162,39,0.15); color: #8a6d10; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.55rem; margin-left: 0.5rem; }
+
+    .w { max-width: 1300px; margin: 0.65rem auto 0; overflow: hidden; border-radius: 8px; }
+    .w:last-of-type { margin-bottom: 4rem; }
+
+    /* ── shared primitives ── */
+    .logo { height: 30px; filter: brightness(0) invert(1); }
+    .logo--dark { height: 30px; filter: none; }
+    .soc { display: flex; gap: 0.6rem; }
+    .soc a { width: 32px; height: 32px; border: 1px solid var(--w20); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+    .soc a:hover { border-color: var(--gold); background: var(--gold-dim); }
+    .soc svg { width: 12px; height: 12px; fill: var(--w60); }
+    .soc--dk a { border-color: var(--border); } .soc--dk svg { fill: var(--text-muted); }
+    .soc--dk a:hover { border-color: var(--gold); background: var(--gold-dim); }
+
+    .ct { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--w40); margin-bottom: 0.9rem; }
+    .ct--dk { color: var(--text-light); }
+    .lk { display: flex; flex-direction: column; gap: 0.55rem; }
+    .lk a { font-size: 0.78rem; color: var(--w60); transition: color 0.3s; } .lk a:hover { color: var(--gold); }
+    .lk--dk a { color: var(--text-muted); } .lk--dk a:hover { color: var(--gold); }
+    .cl { font-size: 0.78rem; color: var(--w60); display: block; margin-bottom: 0.4rem; }
+    .cl--dk { color: var(--text-muted); }
+    .cp { font-size: 0.65rem; color: var(--w20); }
+    .cp--dk { color: var(--text-light); }
+    .tl { font-size: 0.78rem; color: var(--w40); line-height: 1.6; }
+    .tl--dk { color: var(--text-muted); }
+    .bn { font-family: var(--heading); font-size: 1.05rem; font-weight: 700; color: white; }
+    .bn--dk { color: var(--primary-dark); }
+
+    /* cert badge */
+    .badge { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.65rem; border-radius: 3px; background: var(--gold-dim); color: var(--gold); }
+    .badge--outline { background: transparent; border: 1px solid var(--w20); color: var(--w40); }
+    .badge--dk { background: rgba(201,162,39,0.1); color: #a17f15; border: none; }
+
+    /* CTA button */
+    .cta-btn { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; font-weight: 600; padding: 0.65rem 1.3rem; border-radius: 4px; transition: 0.3s; cursor: pointer; border: none; font-family: var(--body); }
+    .cta-btn--gold { background: var(--gold); color: var(--primary-dark); }
+    .cta-btn--gold:hover { background: #d4ad2f; }
+    .cta-btn--outline { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
+    .cta-btn--outline:hover { background: var(--gold); color: var(--primary-dark); }
+    .cta-btn--white { background: white; color: var(--primary-dark); }
+
+    /* SVG social icons (reused) */
+    .ico-fb { } .ico-ig { } .ico-wa { } .ico-li { }
+
+    /* ════════════════════════════════════════════════════════════
+       1 — DANONE INSPIRED: market directory below columns
+    ════════════════════════════════════════════════════════════ */
+    .f1 { background: #0a0f1e; padding: clamp(3rem,6vw,4.5rem) clamp(1.5rem,5vw,3rem) 0; }
+    .f1 .cols { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.2fr; gap: 2.5rem; max-width: 1100px; margin: 0 auto; padding-bottom: 2.5rem; border-bottom: 1px solid var(--w06); }
+    .f1 .markets { max-width: 1100px; margin: 0 auto; padding: 1.5rem 0; display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+    .f1 .markets .label-sm { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--w20); margin-right: 0.5rem; }
+    .f1 .markets a { font-size: 0.7rem; color: var(--w40); transition: color 0.3s; } .f1 .markets a:hover { color: var(--gold); }
+    .f1 .bottom { border-top: 1px solid var(--w06); padding: 1.25rem 0; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media(max-width:768px){ .f1 .cols { grid-template-columns: 1fr 1fr; } .f1 .brand-col { grid-column: 1/-1; } }
+
+    /* ════════════════════════════════════════════════════════════
+       2 — HEINZ MODEL: brand color bg + newsletter
+    ════════════════════════════════════════════════════════════ */
+    .f2 { background: var(--primary-dark); padding: clamp(3rem,6vw,4.5rem) clamp(1.5rem,5vw,3rem) 0; }
+    .f2 .cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.5rem; max-width: 1100px; margin: 0 auto; padding-bottom: 2.5rem; }
+    .f2 .nl { background: rgba(255,255,255,0.05); border-radius: 6px; padding: 1.25rem; margin-top: 1rem; }
+    .f2 .nl p { font-size: 0.72rem; color: var(--w40); margin-bottom: 0.75rem; }
+    .f2 .nl .row { display: flex; gap: 0.4rem; }
+    .f2 .nl input { flex: 1; padding: 0.55rem 0.75rem; border: 1px solid var(--w20); background: transparent; border-radius: 3px; color: white; font-size: 0.75rem; font-family: var(--body); outline: none; }
+    .f2 .nl input::placeholder { color: var(--w40); }
+    .f2 .bottom { border-top: 1px solid var(--w06); padding: 1.25rem 0; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media(max-width:640px){ .f2 .cols { grid-template-columns: 1fr; } .f2 .nl .row { flex-direction: column; } }
+
+    /* ════════════════════════════════════════════════════════════
+       3 — TABASCO B2B: dedicated export/foodservice CTA column
+    ════════════════════════════════════════════════════════════ */
+    .f3 { background: #111827; padding: clamp(3rem,6vw,4.5rem) clamp(1.5rem,5vw,3rem) 0; }
+    .f3 .cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.3fr; gap: 2.5rem; max-width: 1100px; margin: 0 auto; padding-bottom: 2.5rem; }
+    .f3 .b2b-col { background: rgba(201,162,39,0.06); border: 1px solid rgba(201,162,39,0.15); border-radius: 8px; padding: 1.25rem; }
+    .f3 .b2b-col .b2b-title { font-size: 0.9rem; font-weight: 700; color: var(--gold); margin-bottom: 0.5rem; }
+    .f3 .b2b-col p { font-size: 0.72rem; color: var(--w40); line-height: 1.6; margin-bottom: 1rem; }
+    .f3 .b2b-col .targets { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 1rem; }
+    .f3 .b2b-col .target { font-size: 0.6rem; padding: 0.2rem 0.5rem; border-radius: 20px; background: var(--w06); color: var(--w60); }
+    .f3 .bottom { border-top: 1px solid var(--w06); padding: 1.25rem 0; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media(max-width:768px){ .f3 .cols { grid-template-columns: 1fr 1fr; } .f3 .brand-col { grid-column: 1/-1; } .f3 .b2b-col { grid-column: 1/-1; } }
+
+    /* ════════════════════════════════════════════════════════════
+       4 — LAVAZZA LIGHT: white bg, clean hierarchy
+    ════════════════════════════════════════════════════════════ */
+    .f4 { background: white; border-top: 1px solid var(--border-light); padding: clamp(3rem,6vw,4.5rem) clamp(1.5rem,5vw,3rem) 0; }
+    .f4 .cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 2.5rem; max-width: 1100px; margin: 0 auto; padding-bottom: 2.5rem; }
+    .f4 .bottom { border-top: 1px solid var(--border-light); padding: 1.25rem 0; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media(max-width:768px){ .f4 .cols { grid-template-columns: 1fr 1fr; } .f4 .brand-col { grid-column: 1/-1; } }
+
+    /* ════════════════════════════════════════════════════════════
+       5 — CERT TRUST STRIP: badges bar above standard footer
+    ════════════════════════════════════════════════════════════ */
+    .f5 { background: var(--deeper); }
+    .f5 .certs { background: var(--primary); padding: 1rem clamp(1.5rem,5vw,3rem); }
+    .f5 .certs-inner { display: flex; justify-content: center; gap: 1.5rem; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; align-items: center; }
+    .f5 .cert { display: flex; align-items: center; gap: 0.4rem; font-size: 0.68rem; color: var(--w60); }
+    .f5 .cert-icon { width: 20px; height: 20px; border-radius: 50%; background: var(--gold-dim); display: flex; align-items: center; justify-content: center; font-size: 0.55rem; color: var(--gold); font-weight: 700; }
+    .f5 .cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 2.5rem; max-width: 1100px; margin: 0 auto; padding: clamp(2.5rem,4vw,3.5rem) clamp(1.5rem,5vw,3rem); }
+    .f5 .bottom { border-top: 1px solid var(--w06); padding: 1.25rem clamp(1.5rem,5vw,3rem); max-width: 1100px; margin: 0 auto; text-align: center; }
+    @media(max-width:768px){ .f5 .cols { grid-template-columns: 1fr 1fr; } .f5 .brand-col { grid-column: 1/-1; } }
+
+    /* ════════════════════════════════════════════════════════════
+       6 — EXPORT MARKETS: flags/destinations strip
+    ════════════════════════════════════════════════════════════ */
+    .f6 { background: var(--deeper); padding: clamp(3rem,6vw,4.5rem) clamp(1.5rem,5vw,3rem) 0; }
+    .f6 .cols { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2.5rem; max-width: 1100px; margin: 0 auto; padding-bottom: 2.5rem; }
+    .f6 .markets-strip { border-top: 1px solid var(--w06); border-bottom: 1px solid var(--w06); padding: 1.25rem 0; max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .f6 .markets-strip .ms-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+    .f6 .flag { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.7rem; color: var(--w40); }
+    .f6 .flag-emoji { font-size: 1rem; }
+    .f6 .bottom { padding: 1.25rem 0; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media(max-width:640px){ .f6 .cols { grid-template-columns: 1fr; } }
+
+    /* ════════════════════════════════════════════════════════════
+       7 — LEAD CAPTURE HERO: large CTA band above footer
+    ════════════════════════════════════════════════════════════ */
+    .f7 { background: var(--deeper); }
+    .f7 .hero-cta { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,3rem); text-align: center; }
+    .f7 .hero-cta h3 { font-family: var(--heading); font-size: clamp(1.1rem,2.5vw,1.5rem); color: white; margin-bottom: 0.5rem; }
+    .f7 .hero-cta p { font-size: 0.8rem; color: var(--w40); margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .f7 .hero-cta .btns { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
+    .f7 .cols { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; padding: clamp(2.5rem,4vw,3rem) clamp(1.5rem,5vw,3rem); }
+    .f7 .bottom { border-top: 1px solid var(--w06); padding: 1.25rem clamp(1.5rem,5vw,3rem); max-width: 1100px; margin: 0 auto; text-align: center; }
+    @media(max-width:640px){ .f7 .cols { grid-template-columns: 1fr 1fr; } }
+
+    /* ════════════════════════════════════════════════════════════
+       8 — ULTRA-MINIMAL 3-COL: clean dark with gold
+    ════════════════════════════════════════════════════════════ */
+    .f8 { background: #0d1117; padding: clamp(3rem,6vw,4.5rem) clamp(1.5rem,5vw,3rem) 0; }
+    .f8 .inner { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; max-width: 900px; margin: 0 auto; padding-bottom: 3rem; }
+    .f8 .divider { width: 30px; height: 2px; background: var(--gold); margin: 1rem 0; }
+    .f8 .bottom { border-top: 1px solid var(--w06); padding: 1.25rem 0; max-width: 900px; margin: 0 auto; text-align: center; }
+    @media(max-width:640px){ .f8 .inner { grid-template-columns: 1fr; max-width: 500px; } }
+
+    /* ════════════════════════════════════════════════════════════
+       9 — SPLIT BRAND + UTILITY: big brand left, utility right
+    ════════════════════════════════════════════════════════════ */
+    .f9 { background: var(--deeper); padding: clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,3rem) 0; }
+    .f9 .inner { display: grid; grid-template-columns: 1.8fr 1fr; gap: 4rem; max-width: 1100px; margin: 0 auto; padding-bottom: 3rem; align-items: start; }
+    .f9 .brand-side .bn { font-size: 1.4rem; margin-bottom: 0.75rem; }
+    .f9 .brand-side .tl { margin-bottom: 1.5rem; }
+    .f9 .brand-side .badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 1.25rem; }
+    .f9 .util { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .f9 .bottom { border-top: 1px solid var(--w06); padding: 1.25rem 0; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media(max-width:640px){ .f9 .inner { grid-template-columns: 1fr; } }
+
+    /* ════════════════════════════════════════════════════════════
+       10 — MEGA WITH DESCRIPTIONS per column
+    ════════════════════════════════════════════════════════════ */
+    .f10 { background: #0a0e1a; padding: clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,3rem) 0; }
+    .f10 .inner { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 2.5rem; max-width: 1100px; margin: 0 auto; padding-bottom: 3rem; }
+    .f10 .col-desc { font-size: 0.68rem; color: var(--w20); line-height: 1.6; margin-bottom: 0.75rem; }
+    .f10 .bottom { border-top: 1px solid var(--w06); padding: 1.25rem 0; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media(max-width:768px){ .f10 .inner { grid-template-columns: 1fr 1fr; } .f10 .brand-col { grid-column: 1/-1; } }
+
+    /* ════════════════════════════════════════════════════════════
+       11 — CONTACT-FIRST: contact bar on top
+    ════════════════════════════════════════════════════════════ */
+    .f11 { background: var(--deeper); }
+    .f11 .contact-bar { background: var(--primary); padding: 1.1rem clamp(1.5rem,5vw,3rem); }
+    .f11 .contact-bar-inner { display: flex; justify-content: center; gap: 2.5rem; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; }
+    .f11 .ci { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--w80); }
+    .f11 .ci svg { width: 14px; height: 14px; fill: none; stroke: var(--gold); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .f11 .cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2.5rem; max-width: 1100px; margin: 0 auto; padding: clamp(2.5rem,4vw,3rem) clamp(1.5rem,5vw,3rem); }
+    .f11 .bottom { border-top: 1px solid var(--w06); padding: 1.25rem clamp(1.5rem,5vw,3rem); max-width: 1100px; margin: 0 auto; text-align: center; }
+    @media(max-width:640px){ .f11 .cols { grid-template-columns: 1fr; } .f11 .contact-bar-inner { flex-direction: column; align-items: center; gap: 0.6rem; } }
+
+    /* ════════════════════════════════════════════════════════════
+       12 — TWO-TONE: light upper + dark bar
+    ════════════════════════════════════════════════════════════ */
+    .f12 { background: var(--deeper); }
+    .f12 .upper { background: var(--bg-alt); padding: clamp(3rem,6vw,4.5rem) clamp(1.5rem,5vw,3rem); }
+    .f12 .upper-inner { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 2.5rem; max-width: 1100px; margin: 0 auto; }
+    .f12 .lower { padding: 1.25rem clamp(1.5rem,5vw,3rem); }
+    .f12 .lower-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media(max-width:768px){ .f12 .upper-inner { grid-template-columns: 1fr 1fr; } .f12 .brand-col { grid-column: 1/-1; } }
+
+    /* ════════════════════════════════════════════════════════════
+       13 — WATERMARK TYPO: large faded brand name
+    ════════════════════════════════════════════════════════════ */
+    .f13 { background: var(--deeper); padding: clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,3rem) 0; position: relative; overflow: hidden; }
+    .f13 .wm { position: absolute; bottom: -0.15em; right: -2%; font-family: var(--heading); font-size: 14rem; font-weight: 700; color: var(--w06); pointer-events: none; line-height: 1; letter-spacing: -0.03em; white-space: nowrap; }
+    .f13 .inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 2.5rem; max-width: 1100px; margin: 0 auto; padding-bottom: 3rem; }
+    .f13 .bottom { position: relative; z-index: 1; border-top: 1px solid var(--w06); padding: 1.25rem 0; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media(max-width:768px){ .f13 .inner { grid-template-columns: 1fr 1fr; } .f13 .brand-col { grid-column: 1/-1; } .f13 .wm { font-size: 8rem; } }
+
+    /* ════════════════════════════════════════════════════════════
+       14 — CARD BLOCKS: translucent cards
+    ════════════════════════════════════════════════════════════ */
+    .f14 { background: #080d1c; padding: clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,3rem) 0; }
+    .f14 .head { text-align: center; margin-bottom: 2rem; }
+    .f14 .cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.75rem; max-width: 1100px; margin: 0 auto 2.5rem; }
+    .f14 .card { background: var(--w06); border: 1px solid var(--w06); border-radius: 8px; padding: 1.25rem; transition: background 0.3s; }
+    .f14 .card:hover { background: var(--w10); }
+    .f14 .card .card-t { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+    .f14 .bottom { border-top: 1px solid var(--w06); padding: 1.25rem 0; max-width: 1100px; margin: 0 auto; text-align: center; }
+    @media(max-width:768px){ .f14 .cards { grid-template-columns: 1fr 1fr; } }
+
+    /* ════════════════════════════════════════════════════════════
+       15 — EDITORIAL QUOTE: mission statement left
+    ════════════════════════════════════════════════════════════ */
+    .f15 { background: var(--deeper); padding: clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,3rem) 0; }
+    .f15 .inner { display: grid; grid-template-columns: 1.6fr 1fr; gap: 4rem; max-width: 1100px; margin: 0 auto; padding-bottom: 3rem; align-items: start; }
+    .f15 blockquote { font-family: var(--heading); font-size: clamp(1.1rem,2.2vw,1.5rem); color: var(--w80); line-height: 1.5; margin-bottom: 1.25rem; font-style: italic; }
+    .f15 .src { font-size: 0.68rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 1.5rem; }
+    .f15 .rside { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .f15 .bottom { border-top: 1px solid var(--w06); padding: 1.25rem 0; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media(max-width:640px){ .f15 .inner { grid-template-columns: 1fr; } }
+
+    /* ════════════════════════════════════════════════════════════
+       16 — CENTERED MINIMAL with cert strip
+    ════════════════════════════════════════════════════════════ */
+    .f16 { background: #0d1117; padding: clamp(3rem,6vw,4rem) clamp(1.5rem,5vw,3rem); text-align: center; }
+    .f16 .nav-row { display: flex; justify-content: center; gap: 1.75rem; flex-wrap: wrap; margin: 1.25rem 0; }
+    .f16 .nav-row a { font-size: 0.78rem; color: var(--w60); transition: color 0.3s; } .f16 .nav-row a:hover { color: var(--gold); }
+    .f16 .soc { justify-content: center; margin: 1.25rem 0; }
+    .f16 .certs-row { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin: 1.5rem 0; }
+    .f16 .div { width: 40px; height: 1px; background: var(--w10); margin: 1.25rem auto; }
+
+    /* ════════════════════════════════════════════════════════════
+       17 — GOLD ACCENT BAND: gold stripe top + dark footer
+    ════════════════════════════════════════════════════════════ */
+    .f17 { background: var(--deeper); border-top: 3px solid var(--gold); padding: clamp(3rem,6vw,4.5rem) clamp(1.5rem,5vw,3rem) 0; }
+    .f17 .inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; max-width: 1100px; margin: 0 auto; padding-bottom: 2.5rem; }
+    .f17 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1.5rem; margin-top: 1rem; }
+    .f17 .cg-label { font-size: 0.6rem; color: var(--w20); text-transform: uppercase; letter-spacing: 0.1em; }
+    .f17 .cg-value { font-size: 0.78rem; color: var(--w60); }
+    .f17 .bottom { border-top: 1px solid var(--w06); padding: 1.25rem 0; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media(max-width:640px){ .f17 .inner { grid-template-columns: 1fr; } .f17 .contact-grid { grid-template-columns: 1fr; } }
+
+    /* ════════════════════════════════════════════════════════════
+       18 — MICRO ONE-LINE
+    ════════════════════════════════════════════════════════════ */
+    .f18 { background: var(--deeper); padding: 1.25rem clamp(1.5rem,5vw,3rem); }
+    .f18 .row { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; gap: 0.75rem; }
+    .f18 .nav-row { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .f18 .nav-row a { font-size: 0.75rem; color: var(--w60); transition: color 0.3s; } .f18 .nav-row a:hover { color: var(--gold); }
+
+    /* ════════════════════════════════════════════════════════════
+       19 — PHOTO TEXTURE BACKGROUND
+    ════════════════════════════════════════════════════════════ */
+    .f19 { position: relative; overflow: hidden; padding: clamp(3.5rem,6vw,5rem) clamp(1.5rem,5vw,3rem) 0; }
+    .f19 .bg { position: absolute; inset: 0; background: url('assets/producto-1.webp') center/cover; opacity: 0.06; pointer-events: none; }
+    .f19 .overlay { position: absolute; inset: 0; background: var(--deeper); pointer-events: none; }
+    .f19 .inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 2.5rem; max-width: 1100px; margin: 0 auto; padding-bottom: 3rem; }
+    .f19 .bottom { position: relative; z-index: 1; border-top: 1px solid var(--w06); padding: 1.25rem 0; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media(max-width:768px){ .f19 .inner { grid-template-columns: 1fr 1fr; } .f19 .brand-col { grid-column: 1/-1; } }
+
+    /* ════════════════════════════════════════════════════════════
+       20 — FULL B2B EXPORT: markets, certs, CTA, multi-channel
+    ════════════════════════════════════════════════════════════ */
+    .f20 { background: #060b1a; }
+    .f20 .cta-band { background: linear-gradient(135deg, var(--primary) 0%, #0f2580 100%); padding: clamp(2rem,4vw,3rem) clamp(1.5rem,5vw,3rem); }
+    .f20 .cta-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; gap: 1rem; }
+    .f20 .cta-inner h3 { font-family: var(--heading); font-size: 1.2rem; color: white; }
+    .f20 .cta-inner p { font-size: 0.78rem; color: var(--w40); }
+    .f20 .cols { display: grid; grid-template-columns: 1.4fr 0.8fr 0.8fr 1fr 1fr; gap: 2rem; max-width: 1100px; margin: 0 auto; padding: clamp(2.5rem,4vw,3.5rem) clamp(1.5rem,5vw,3rem); }
+    .f20 .brand-col .badges { display: flex; gap: 0.35rem; flex-wrap: wrap; margin-top: 1rem; }
+    .f20 .markets-col .flag { display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; color: var(--w60); margin-bottom: 0.4rem; }
+    .f20 .markets-col .flag-emoji { font-size: 0.9rem; }
+    .f20 .bottom { border-top: 1px solid var(--w06); padding: 1.25rem clamp(1.5rem,5vw,3rem); max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media(max-width:768px){ .f20 .cols { grid-template-columns: 1fr 1fr; } .f20 .brand-col { grid-column: 1/-1; } .f20 .cta-inner { flex-direction: column; text-align: center; } }
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Footer &mdash; 20 Variantes (Research-Based)</h1>
+  <p>Basadas en an&aacute;lisis de Danone, Heinz, Tabasco, Kikkoman, Lavazza y tendencias 2025-2026 en food/export B2B</p>
+</div>
+
+<!-- ═══════════════ 1 ═══════════════ -->
+<p class="label"><b>1</b> Danone Inspired <em>&mdash; directorio de mercados en barra inferior</em> <span class="src">Ref: danone.com</span></p>
+<div class="w"><div class="f1">
+  <div class="cols">
+    <div class="brand-col"><img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="margin-bottom:0.75rem"><p class="tl">La unidad de exportaci&oacute;n de Traverso S.A. Conectando calidad chilena con mercados globales.</p><div class="soc" style="margin-top:1rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a></div></div>
+    <div><div class="ct">Navegaci&oacute;n</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct">Productos</div><div class="lk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Marca propia</a></div></div>
+    <div><div class="ct">Contacto</div><span class="cl">e-commerce@traverso.cl</span><span class="cl">+56 2 24370900</span><span class="cl">Av. Vespucio 1313, La Cisterna</span><span class="cl">Santiago, Chile</span></div>
+  </div>
+  <div class="markets"><span class="label-sm">Mercados de exportaci&oacute;n</span><a href="#">Am&eacute;rica Latina</a><a href="#">Estados Unidos</a><a href="#">Europa</a><a href="#">Asia</a><a href="#">Medio Oriente</a><a href="#">Caribe</a></div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods</span><span class="cp">Una empresa de Traverso S.A. &middot; Chile</span></div>
+</div></div>
+
+<!-- ═══════════════ 2 ═══════════════ -->
+<p class="label"><b>2</b> Heinz Model <em>&mdash; brand color bg, newsletter inline</em> <span class="src">Ref: heinz.com</span></p>
+<div class="w"><div class="f2">
+  <div class="cols">
+    <div><img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="margin-bottom:0.75rem"><p class="tl">La unidad de exportaci&oacute;n de Traverso S.A.</p><div class="nl"><p>Recibe novedades sobre nuestro portafolio de exportaci&oacute;n</p><div class="row"><input type="email" placeholder="Tu email corporativo"><button class="cta-btn cta-btn--gold">Suscribir</button></div></div></div>
+    <div><div class="ct">Empresa</div><div class="lk"><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Certificaciones</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct">Productos</div><div class="lk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Granel &amp; Envasado</a></div></div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods</span><div class="soc" style="gap:0.4rem"><a href="#" style="width:28px;height:28px"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a><a href="#" style="width:28px;height:28px"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a></div></div>
+</div></div>
+
+<!-- ═══════════════ 3 ═══════════════ -->
+<p class="label"><b>3</b> Tabasco B2B <em>&mdash; columna dedicada export/foodservice con CTA</em> <span class="src">Ref: tabasco.com</span></p>
+<div class="w"><div class="f3">
+  <div class="cols">
+    <div class="brand-col"><img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="margin-bottom:0.75rem"><p class="tl">Conectando calidad chilena con mercados globales desde hace m&aacute;s de 130 a&ntilde;os.</p><div class="soc" style="margin-top:1rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a></div></div>
+    <div><div class="ct">Navegaci&oacute;n</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct">Productos</div><div class="lk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Marca propia</a></div></div>
+    <div class="b2b-col"><div class="b2b-title">Exportaci&oacute;n &amp; B2B</div><p>Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p><div class="targets"><span class="target">Industriales</span><span class="target">Distribuidores</span><span class="target">Importadores</span><span class="target">Retail</span><span class="target">HORECA</span></div><a href="#" class="cta-btn cta-btn--gold">Solicitar cat&aacute;logo &rarr;</a></div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods</span><span class="cp">Una empresa de Traverso S.A. &middot; Chile</span></div>
+</div></div>
+
+<!-- ═══════════════ 4 ═══════════════ -->
+<p class="label"><b>4</b> Lavazza Light <em>&mdash; fondo blanco, texto oscuro, elegante</em> <span class="src">Ref: lavazza.com</span></p>
+<div class="w"><div class="f4">
+  <div class="cols">
+    <div class="brand-col"><img src="../assets/logo-traverso.png" alt="Traverso" class="logo--dark" style="margin-bottom:0.75rem"><p class="tl--dk">La unidad de exportaci&oacute;n de Traverso S.A. Conectando calidad chilena con mercados globales.</p><div class="soc soc--dk" style="margin-top:1rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a></div></div>
+    <div><div class="ct ct--dk">Navegaci&oacute;n</div><div class="lk lk--dk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct ct--dk">Productos</div><div class="lk lk--dk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Granel &amp; Envasado</a></div></div>
+    <div><div class="ct ct--dk">Contacto</div><span class="cl cl--dk">e-commerce@traverso.cl</span><span class="cl cl--dk">+56 2 24370900</span><span class="cl cl--dk">Av. Vespucio 1313, La Cisterna</span><span class="cl cl--dk">RUT: 96.777.000-4</span></div>
+  </div>
+  <div class="bottom"><span class="cp cp--dk">&copy; 2026 Traverso International Foods</span><span class="cp cp--dk">Pol&iacute;tica de privacidad &middot; T&eacute;rminos de uso</span></div>
+</div></div>
+
+<!-- ═══════════════ 5 ═══════════════ -->
+<p class="label"><b>5</b> Certification Strip <em>&mdash; barra de certificaciones sobre footer cl&aacute;sico</em> <span class="src">Trend: trust signals</span></p>
+<div class="w"><div class="f5">
+  <div class="certs"><div class="certs-inner"><div class="cert"><div class="cert-icon">AA</div>BRC Global Standard</div><div class="cert"><div class="cert-icon">&#10003;</div>HACCP</div><div class="cert"><div class="cert-icon">&#9733;</div>130+ a&ntilde;os</div><div class="cert"><div class="cert-icon">MDD</div>Marca propia disponible</div></div></div>
+  <div class="cols">
+    <div class="brand-col"><img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="margin-bottom:0.75rem"><p class="tl">Conectando calidad chilena con mercados globales.</p><div class="soc" style="margin-top:1rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a></div></div>
+    <div><div class="ct">Navegaci&oacute;n</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct">Productos</div><div class="lk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Marca propia</a></div></div>
+    <div><div class="ct">Contacto</div><span class="cl">e-commerce@traverso.cl</span><span class="cl">+56 2 24370900</span><span class="cl">Santiago, Chile</span></div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods &middot; Una empresa de Traverso S.A.</span></div>
+</div></div>
+
+<!-- ═══════════════ 6 ═══════════════ -->
+<p class="label"><b>6</b> Export Markets <em>&mdash; franja con banderas de destinos</em> <span class="src">Ref: danone.com regional</span></p>
+<div class="w"><div class="f6">
+  <div class="cols">
+    <div><img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="margin-bottom:0.75rem"><p class="tl">La unidad de exportaci&oacute;n de Traverso S.A. M&aacute;s de 130 a&ntilde;os conectando calidad chilena.</p><div class="soc" style="margin-top:1rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a></div></div>
+    <div><div class="ct">Navegaci&oacute;n</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct">Contacto</div><span class="cl">e-commerce@traverso.cl</span><span class="cl">+56 2 24370900</span><span class="cl">Santiago, Chile</span></div>
+  </div>
+  <div class="markets-strip"><span class="ms-label">Exportamos a</span><span class="flag"><span class="flag-emoji">&#127482;&#127480;</span>EE.UU.</span><span class="flag"><span class="flag-emoji">&#127474;&#127485;</span>M&eacute;xico</span><span class="flag"><span class="flag-emoji">&#127463;&#127479;</span>Brasil</span><span class="flag"><span class="flag-emoji">&#127466;&#127480;</span>Espa&ntilde;a</span><span class="flag"><span class="flag-emoji">&#127471;&#127477;</span>Jap&oacute;n</span><span class="flag"><span class="flag-emoji">&#127464;&#127473;</span>Chile</span><span class="flag"><span class="flag-emoji">&#127468;&#127463;</span>UK</span><span class="flag"><span class="flag-emoji">&#127462;&#127466;</span>EAU</span></div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods</span><span class="cp">Una empresa de Traverso S.A.</span></div>
+</div></div>
+
+<!-- ═══════════════ 7 ═══════════════ -->
+<p class="label"><b>7</b> Lead Capture Hero <em>&mdash; CTA grande &ldquo;Solicitar Cat&aacute;logo&rdquo; arriba</em> <span class="src">Trend: B2B lead capture</span></p>
+<div class="w"><div class="f7">
+  <div class="hero-cta"><h3>&iquest;Listo para exportar con nosotros?</h3><p>Solicita nuestro cat&aacute;logo de exportaci&oacute;n y conoce nuestras l&iacute;neas de productos disponibles.</p><div class="btns"><a href="#" class="cta-btn cta-btn--gold">Solicitar cat&aacute;logo &rarr;</a><a href="#" class="cta-btn cta-btn--outline">Contacto comercial</a></div></div>
+  <div class="cols">
+    <div><div class="ct">Navegaci&oacute;n</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct">Productos</div><div class="lk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a></div></div>
+    <div><div class="ct">Formatos</div><div class="lk"><a href="#">Granel</a><a href="#">Envasado</a><a href="#">Marca propia (MDD)</a></div></div>
+    <div><div class="ct">Contacto</div><span class="cl">e-commerce@traverso.cl</span><span class="cl">+56 2 24370900</span><span class="cl">Santiago, Chile</span></div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods &middot; Una empresa de Traverso S.A.</span></div>
+</div></div>
+
+<!-- ═══════════════ 8 ═══════════════ -->
+<p class="label"><b>8</b> Ultra-Minimal 3-Col <em>&mdash; limpio oscuro con l&iacute;nea dorada</em> <span class="src">Trend: utility-first</span></p>
+<div class="w"><div class="f8">
+  <div class="inner">
+    <div><img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="margin-bottom:0.5rem"><div class="divider"></div><p class="tl">Conectando calidad chilena con mercados globales.</p><div class="soc" style="margin-top:1rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a></div></div>
+    <div><div class="ct">Mapa del sitio</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct">Contacto</div><span class="cl">e-commerce@traverso.cl</span><span class="cl">+56 2 24370900</span><span class="cl">Av. Vespucio 1313</span><span class="cl">Santiago, Chile</span></div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods</span></div>
+</div></div>
+
+<!-- ═══════════════ 9 ═══════════════ -->
+<p class="label"><b>9</b> Split Brand + Utility <em>&mdash; brand grande izquierda con badges, utility derecha</em> <span class="src">Trend: storytelling micro-copy</span></p>
+<div class="w"><div class="f9">
+  <div class="inner">
+    <div class="brand-side"><div class="bn">Traverso International Foods</div><p class="tl">La unidad de exportaci&oacute;n de Traverso S.A. M&aacute;s de 130 a&ntilde;os conectando la calidad chilena con el mundo.</p><div class="soc" style="margin-top:1.25rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a></div><div class="badges"><span class="badge">BRC AA</span><span class="badge">HACCP</span><span class="badge badge--outline">130+ a&ntilde;os</span></div></div>
+    <div class="util">
+      <div><div class="ct">Navegaci&oacute;n</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+      <div><div class="ct">Contacto</div><span class="cl">e-commerce@traverso.cl</span><span class="cl">+56 2 24370900</span><span class="cl">Santiago, Chile</span></div>
+    </div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods</span><span class="cp">Una empresa de Traverso S.A.</span></div>
+</div></div>
+
+<!-- ═══════════════ 10 ═══════════════ -->
+<p class="label"><b>10</b> Mega with Descriptions <em>&mdash; cada columna con texto descriptivo</em> <span class="src">Trend: mega footer</span></p>
+<div class="w"><div class="f10">
+  <div class="inner">
+    <div class="brand-col"><div class="bn" style="font-size:1.2rem;margin-bottom:0.75rem">Traverso International Foods</div><p class="tl">Exportadores de vinagres, salsas y condimentos desde Chile al mundo. Certificaci&oacute;n BRC Global Standard &ldquo;AA&rdquo;.</p><div class="soc" style="margin-top:1.25rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a></div></div>
+    <div><div class="ct">Navegaci&oacute;n</div><p class="col-desc">Explora nuestro sitio completo.</p><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct">Productos</div><p class="col-desc">L&iacute;neas disponibles para exportaci&oacute;n.</p><div class="lk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Marca propia</a></div></div>
+    <div><div class="ct">Contacto</div><p class="col-desc">Conversemos sobre tu pr&oacute;xima importaci&oacute;n.</p><span class="cl">e-commerce@traverso.cl</span><span class="cl">+56 2 24370900</span><span class="cl">Santiago, Chile</span></div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods</span><span class="cp">Una empresa de Traverso S.A. &middot; Chile</span></div>
+</div></div>
+
+<!-- ═══════════════ 11 ═══════════════ -->
+<p class="label"><b>11</b> Contact-First <em>&mdash; barra de contacto con iconos SVG arriba</em> <span class="src">Trend: contact prominence</span></p>
+<div class="w"><div class="f11">
+  <div class="contact-bar"><div class="contact-bar-inner">
+    <div class="ci"><svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Santiago, Chile</div>
+    <div class="ci"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>e-commerce@traverso.cl</div>
+    <div class="ci"><svg viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>+56 2 24370900</div>
+    <div class="ci"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>WhatsApp</div>
+  </div></div>
+  <div class="cols">
+    <div><img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="margin-bottom:0.75rem"><p class="tl">La unidad de exportaci&oacute;n de Traverso S.A.</p><div class="soc" style="margin-top:1rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a></div></div>
+    <div><div class="ct">Navegaci&oacute;n</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct">Productos</div><div class="lk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Marca propia</a></div></div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods</span></div>
+</div></div>
+
+<!-- ═══════════════ 12 ═══════════════ -->
+<p class="label"><b>12</b> Two-Tone <em>&mdash; secci&oacute;n clara arriba + barra oscura abajo</em> <span class="src">Ref: lavazza.com dual</span></p>
+<div class="w"><div class="f12">
+  <div class="upper"><div class="upper-inner">
+    <div class="brand-col"><img src="../assets/logo-traverso.png" alt="Traverso" class="logo--dark" style="margin-bottom:0.75rem"><p class="tl--dk">La unidad de exportaci&oacute;n de Traverso S.A.</p><div class="soc soc--dk" style="margin-top:1rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a></div></div>
+    <div><div class="ct ct--dk">Navegaci&oacute;n</div><div class="lk lk--dk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct ct--dk">Productos</div><div class="lk lk--dk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Marca propia</a></div></div>
+    <div><div class="ct ct--dk">Contacto</div><span class="cl cl--dk">e-commerce@traverso.cl</span><span class="cl cl--dk">+56 2 24370900</span><span class="cl cl--dk">Santiago, Chile</span></div>
+  </div></div>
+  <div class="lower"><div class="lower-inner"><span class="cp">&copy; 2026 Traverso International Foods</span><span class="cp">Una empresa de Traverso S.A.</span></div></div>
+</div></div>
+
+<!-- ═══════════════ 13 ═══════════════ -->
+<p class="label"><b>13</b> Watermark Typo <em>&mdash; nombre grande semitransparente de fondo</em> <span class="src">Trend: brand presence</span></p>
+<div class="w"><div class="f13">
+  <div class="wm">Traverso</div>
+  <div class="inner">
+    <div class="brand-col"><img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="margin-bottom:0.75rem"><p class="tl">Conectando calidad chilena con mercados globales.</p><div class="soc" style="margin-top:1rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a></div></div>
+    <div><div class="ct">Navegaci&oacute;n</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct">Productos</div><div class="lk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Marca propia</a></div></div>
+    <div><div class="ct">Contacto</div><span class="cl">e-commerce@traverso.cl</span><span class="cl">+56 2 24370900</span><span class="cl">Santiago, Chile</span></div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods</span><span class="cp">Una empresa de Traverso S.A.</span></div>
+</div></div>
+
+<!-- ═══════════════ 14 ═══════════════ -->
+<p class="label"><b>14</b> Card Blocks <em>&mdash; bloques trasl&uacute;cidos tipo tarjeta</em> <span class="src">Trend: modular UI</span></p>
+<div class="w"><div class="f14">
+  <div class="head"><img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="margin: 0 auto 0.75rem"><p class="tl" style="text-align:center">Conectando calidad chilena con mercados globales.</p></div>
+  <div class="cards">
+    <div class="card"><div class="card-t">Navegaci&oacute;n</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div class="card"><div class="card-t">Productos</div><div class="lk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Marca propia</a></div></div>
+    <div class="card"><div class="card-t">Contacto</div><span class="cl">e-commerce@traverso.cl</span><span class="cl">+56 2 24370900</span><span class="cl">Santiago, Chile</span></div>
+    <div class="card"><div class="card-t">Certificaciones</div><div style="display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.5rem"><span class="badge">BRC AA</span><span class="badge">HACCP</span></div><span class="cl">130+ a&ntilde;os de experiencia</span><span class="cl">Granel &amp; Envasado</span></div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods &middot; Una empresa de Traverso S.A.</span></div>
+</div></div>
+
+<!-- ═══════════════ 15 ═══════════════ -->
+<p class="label"><b>15</b> Editorial Quote <em>&mdash; misi&oacute;n grande izquierda, links compactos</em> <span class="src">Trend: storytelling</span></p>
+<div class="w"><div class="f15">
+  <div class="inner">
+    <div><blockquote>&ldquo;M&aacute;s de 130 a&ntilde;os conectando la calidad chilena con el mundo.&rdquo;</blockquote><div class="src">Traverso International Foods</div><img src="../assets/logo-traverso.png" alt="Traverso" class="logo"><div class="soc" style="margin-top:1.25rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a></div></div>
+    <div class="rside">
+      <div><div class="ct">Navegaci&oacute;n</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+      <div><div class="ct">Productos</div><div class="lk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Marca propia</a></div></div>
+      <div><div class="ct">Contacto</div><span class="cl">e-commerce@traverso.cl</span><span class="cl">+56 2 24370900</span><span class="cl">Santiago, Chile</span></div>
+      <div><div class="ct">Formatos</div><div class="lk"><a href="#">Granel</a><a href="#">Envasado</a><a href="#">Marca propia (MDD)</a></div></div>
+    </div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods</span><span class="cp">Una empresa de Traverso S.A.</span></div>
+</div></div>
+
+<!-- ═══════════════ 16 ═══════════════ -->
+<p class="label"><b>16</b> Centered + Cert Strip <em>&mdash; centrado minimal con badges de certificaci&oacute;n</em> <span class="src">Trend: trust + minimal</span></p>
+<div class="w"><div class="f16">
+  <img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="margin:0 auto 0.5rem">
+  <p class="tl" style="text-align:center">La unidad de exportaci&oacute;n de Traverso S.A.</p>
+  <div class="nav-row"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div>
+  <div class="soc"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a></div>
+  <div class="certs-row"><span class="badge">BRC Global Standard AA</span><span class="badge">HACCP</span><span class="badge badge--outline">130+ a&ntilde;os</span><span class="badge badge--outline">Granel &amp; Envasado</span></div>
+  <div class="div"></div>
+  <span class="cp">&copy; 2026 Traverso International Foods &middot; Una empresa de Traverso S.A.</span>
+</div></div>
+
+<!-- ═══════════════ 17 ═══════════════ -->
+<p class="label"><b>17</b> Gold Accent Band <em>&mdash; l&iacute;nea dorada top, contacto en grid</em> <span class="src">Trend: brand accent</span></p>
+<div class="w"><div class="f17">
+  <div class="inner">
+    <div><img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="margin-bottom:0.75rem"><p class="tl">Conectando calidad chilena con mercados globales desde hace m&aacute;s de 130 a&ntilde;os.</p><div class="contact-grid"><span class="cg-label">Email</span><span class="cg-value">e-commerce@traverso.cl</span><span class="cg-label">Tel&eacute;fono</span><span class="cg-value">+56 2 24370900</span><span class="cg-label">Direcci&oacute;n</span><span class="cg-value">Santiago, Chile</span><span class="cg-label">WhatsApp</span><span class="cg-value">+56 9 8515 0056</span></div></div>
+    <div><div class="ct">Navegaci&oacute;n</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct">Productos</div><div class="lk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Granel &amp; Envasado</a><a href="#">Marca propia</a></div></div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods</span><div class="soc" style="gap:0.4rem"><a href="#" style="width:26px;height:26px"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#" style="width:26px;height:26px"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a></div></div>
+</div></div>
+
+<!-- ═══════════════ 18 ═══════════════ -->
+<p class="label"><b>18</b> Micro One-Line <em>&mdash; comprimido en fila &uacute;nica</em> <span class="src">Trend: minimal</span></p>
+<div class="w"><div class="f18">
+  <div class="row">
+    <img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="height:24px">
+    <div class="nav-row"><a href="#">Inicio</a><a href="#">Productos</a><a href="#">Contacto</a><a href="#">e-commerce@traverso.cl</a></div>
+    <div class="soc" style="gap:0.4rem"><a href="#" style="width:28px;height:28px"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#" style="width:28px;height:28px"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a></div>
+    <span class="cp">&copy; 2026 Traverso</span>
+  </div>
+</div></div>
+
+<!-- ═══════════════ 19 ═══════════════ -->
+<p class="label"><b>19</b> Photo Texture Bg <em>&mdash; foto de producto tenue como fondo</em> <span class="src">Trend: subtle bg texture</span></p>
+<div class="w"><div class="f19">
+  <div class="bg"></div><div class="overlay"></div>
+  <div class="inner">
+    <div class="brand-col"><img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="margin-bottom:0.75rem"><p class="tl">Conectando calidad chilena con mercados globales.</p><div class="soc" style="margin-top:1rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a></div></div>
+    <div><div class="ct">Navegaci&oacute;n</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct">Productos</div><div class="lk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Marca propia</a></div></div>
+    <div><div class="ct">Contacto</div><span class="cl">e-commerce@traverso.cl</span><span class="cl">+56 2 24370900</span><span class="cl">Santiago, Chile</span></div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods</span><span class="cp">Una empresa de Traverso S.A.</span></div>
+</div></div>
+
+<!-- ═══════════════ 20 ═══════════════ -->
+<p class="label"><b>20</b> Full B2B Export <em>&mdash; CTA + mercados + certs + multi-canal (el m&aacute;s completo)</em> <span class="src">Best practices combinadas</span></p>
+<div class="w"><div class="f20">
+  <div class="cta-band"><div class="cta-inner"><div><h3>&iquest;Buscas un socio exportador confiable?</h3><p>M&aacute;s de 130 a&ntilde;os de experiencia en la industria alimentaria chilena.</p></div><div style="display:flex;gap:0.6rem;flex-wrap:wrap"><a href="#" class="cta-btn cta-btn--gold">Solicitar cat&aacute;logo &rarr;</a><a href="#" class="cta-btn cta-btn--white">WhatsApp directo</a></div></div></div>
+  <div class="cols">
+    <div class="brand-col"><img src="../assets/logo-traverso.png" alt="Traverso" class="logo" style="margin-bottom:0.75rem"><p class="tl">La unidad de exportaci&oacute;n de Traverso S.A.</p><div class="soc" style="margin-top:1rem"><a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a></div><div class="badges"><span class="badge">BRC AA</span><span class="badge">HACCP</span><span class="badge badge--outline">MDD</span></div></div>
+    <div><div class="ct">Navegaci&oacute;n</div><div class="lk"><a href="#">Inicio</a><a href="#">Qui&eacute;nes somos</a><a href="#">Productos</a><a href="#">Contacto</a></div></div>
+    <div><div class="ct">Productos</div><div class="lk"><a href="#">Vinagres</a><a href="#">Jugo de Lim&oacute;n</a><a href="#">Salsas y Aderezos</a><a href="#">Granel &amp; Envasado</a><a href="#">Marca propia</a></div></div>
+    <div class="markets-col"><div class="ct">Mercados</div><div class="flag"><span class="flag-emoji">&#127462;&#127474;</span>Am&eacute;rica</div><div class="flag"><span class="flag-emoji">&#127466;&#127482;</span>Europa</div><div class="flag"><span class="flag-emoji">&#127462;&#127480;</span>Asia-Pac&iacute;fico</div><div class="flag"><span class="flag-emoji">&#127474;&#127466;</span>Medio Oriente</div><div class="flag"><span class="flag-emoji">&#127464;&#127463;</span>Caribe</div></div>
+    <div><div class="ct">Contacto</div><span class="cl">e-commerce@traverso.cl</span><span class="cl">+56 2 24370900</span><span class="cl">+56 9 8515 0056 (WhatsApp)</span><span class="cl">Av. Vespucio 1313</span><span class="cl">La Cisterna, Santiago, Chile</span></div>
+  </div>
+  <div class="bottom"><span class="cp">&copy; 2026 Traverso International Foods. Todos los derechos reservados.</span><span class="cp">Una empresa de Traverso S.A. &middot; Chile &middot; Pol&iacute;tica de privacidad</span></div>
+</div></div>
+
+</body>
+</html>

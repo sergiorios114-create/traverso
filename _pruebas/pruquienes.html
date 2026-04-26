@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Traverso — 20 propuestas Quiénes Somos · 5 pilares</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#0B1E6B;--primary-dark:#081450;--primary-deepest:#050E33;
+  --accent:#C5A55A;--accent-saturated:#C9A227;
+  --neutral:#FBF9FA;--neutral-alt:#F2F4F8;--bone:#F4F2EE;
+  --text:#19212F;--text-muted:#4A5362;--text-subtle:#6B7280;
+  --border:#DDE2EC;--border-light:#EEF0F5;
+  --ff-serif:"Libre Baskerville",Georgia,serif;
+  --ff-sans:"Source Sans 3",system-ui,sans-serif;
+  --ff-mono:"Courier New",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:60px}
+body{font-family:var(--ff-sans);background:#e9ecf3;color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+em{font-style:italic}
+
+/* Shell nav */
+.shell{position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:200;padding:8px 16px}
+.shell-inner{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:11px;max-width:1500px;margin:0 auto}
+.shell strong{font-family:var(--ff-serif);font-size:13px;color:var(--primary-dark);margin-right:auto}
+.shell strong span{font-family:var(--ff-mono);font-size:9px;color:var(--text-subtle);letter-spacing:.14em;text-transform:uppercase;margin-left:10px}
+.shell a{font-family:var(--ff-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);padding:4px 8px;border-radius:12px;border:1px solid transparent}
+.shell a:hover{background:var(--neutral-alt);color:var(--primary-dark);border-color:var(--border)}
+.shell-grp{font-family:var(--ff-mono);font-size:9px;color:var(--accent-saturated);padding:0 6px;letter-spacing:.1em}
+
+/* Variant header */
+.label{max-width:1500px;margin:60px auto 16px;padding:0 24px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.label .n{font-family:var(--ff-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-saturated);border:1px solid var(--accent-saturated);padding:4px 10px;border-radius:3px}
+.label .fam{font-family:var(--ff-mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-subtle);background:var(--neutral-alt);padding:3px 8px;border-radius:2px}
+.label .t{font-family:var(--ff-serif);font-size:22px;font-weight:700;color:var(--primary-dark);letter-spacing:-.005em}
+.label .d{font-family:var(--ff-sans);font-size:13px;color:var(--text-muted);margin-left:auto;max-width:520px;text-align:right}
+
+/* Demo stage */
+.stage{max-width:1500px;margin:0 auto;padding:0 24px}
+.demo{background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(11,30,107,.04)}
+
+/* Section intro reusable */
+.intro{padding:32px 32px 0}
+.intro--center{text-align:center;max-width:680px;margin:0 auto;padding:32px 24px 0}
+.intro .eyebrow{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-saturated);display:block;margin-bottom:.6rem}
+.intro h2{font-family:var(--ff-serif);font-size:1.9rem;font-weight:700;color:var(--primary);line-height:1.15;margin-bottom:.85rem}
+.intro h2 em{font-style:italic;color:var(--accent-saturated);font-weight:400}
+.intro p{font-size:.92rem;color:var(--text-muted);line-height:1.7;max-width:60ch}
+.intro--center p{margin:0 auto}
+
+/* ═══════════════════════════════════════════════════════════════
+   PILLAR · estilos base compartidos
+   Estados: base / hover (la card tocada) / next (siguiente en secuencia, texto) / video (resto)
+   Regla cliente: números SIEMPRE visibles (z-index encima de overlay video)
+═══════════════════════════════════════════════════════════════ */
+.p{
+  background:#fff;
+  padding:1.5rem 1.4rem;
+  position:relative;
+  overflow:hidden;
+  cursor:default;
+  transition:background .35s ease, color .35s ease;
+  display:flex;flex-direction:column;gap:.5rem;
+  min-height:160px;
+}
+.p__num{
+  font-family:var(--ff-mono);
+  font-size:1.5rem;
+  font-weight:400;
+  color:var(--accent-saturated);
+  line-height:1;
+  position:relative;
+  z-index:3; /* ALWAYS visible · regla del cliente */
+  transition:color .3s ease;
+}
+.p__title{
+  font-family:var(--ff-serif);
+  font-size:.95rem;
+  font-weight:700;
+  color:var(--primary-dark);
+  line-height:1.25;
+  letter-spacing:-.01em;
+  position:relative;z-index:3;
+  transition:opacity .3s ease, color .3s ease;
+}
+.p__desc{
+  font-size:.78rem;
+  color:var(--text-muted);
+  line-height:1.6;
+  position:relative;z-index:3;
+  transition:opacity .3s ease, color .3s ease;
+}
+/* Overlay video (placeholder gradient) */
+.p__bg{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(11,30,107,.92),rgba(8,20,80,.85)),
+             radial-gradient(circle at 30% 30%,#1a3380,#0b1e6b 60%);
+  background-size:cover;
+  opacity:0;
+  transform:scale(1.06);
+  transition:opacity .4s ease, transform .6s ease;
+  z-index:1;
+  pointer-events:none;
+}
+.p__bg::before{
+  content:"▶";position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-size:14px;color:rgba(255,255,255,.35);
+}
+/* Estados */
+.p--video .p__title,.p--video .p__desc{opacity:0}
+.p--video .p__bg{opacity:1;transform:scale(1)}
+.p--video .p__num{color:var(--accent)}
+.p--hover{background:var(--primary-dark);color:#fff}
+.p--hover .p__title,.p--hover .p__desc{color:#fff}
+.p--hover .p__num{color:var(--accent)}
+.p--next{background:var(--bone)}
+
+/* Hover indicador label (solo demos estáticos) */
+.p__ind{
+  position:absolute;top:8px;right:8px;
+  font-family:var(--ff-mono);font-size:.5rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent-saturated);
+  background:rgba(201,162,39,.15);
+  padding:2px 6px;border-radius:8px;
+  z-index:4;
+}
+.p--hover .p__ind{background:rgba(201,162,39,.25);color:#fff}
+.p--next .p__ind{background:rgba(46,125,50,.18);color:#2e7d32}
+.p--video .p__ind{background:rgba(255,255,255,.18);color:#fff}
+
+/* Spacing común antes del grid */
+.body{padding:0 32px 32px;margin-top:1.5rem}
+
+/* ═══════════════════════════════════════════════════════════════
+   FAMILIA A · SIMÉTRICO RÍGIDO (V01-V04)
+═══════════════════════════════════════════════════════════════ */
+
+/* V01 · Grid 2x2 + full */
+.v01__grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr auto;gap:2px;background:var(--border-light)}
+.v01__grid .p--full{grid-column:1/-1;flex-direction:row;align-items:center;gap:1rem;min-height:auto;padding:1.1rem 1.4rem}
+.v01__grid .p--full .p__num{font-size:1.2rem}
+.v01__grid .p--full .p__title{font-size:.95rem}
+.v01__grid .p--full .p__desc{display:none}
+
+/* V02 · Grid 5 cols horizontal · una fila */
+.v02__grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--border-light)}
+.v02__grid .p{min-height:230px}
+
+/* V03 · Grid 3-2 (3 arriba, 2 abajo) */
+.v03__grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;background:var(--border-light)}
+.v03__grid .p:nth-child(1),.v03__grid .p:nth-child(2),.v03__grid .p:nth-child(3){grid-column:span 2}
+.v03__grid .p:nth-child(4),.v03__grid .p:nth-child(5){grid-column:span 3}
+
+/* V04 · Grid 5 cols con primer card más alto (intro lateral) */
+.v04__layout{display:grid;grid-template-columns:1fr 2.4fr;gap:2rem}
+.v04__layout .intro{padding:0;max-width:none}
+.v04__grid{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:auto;gap:2px;background:var(--border-light)}
+.v04__grid .p{min-height:200px;padding:1.2rem 1rem}
+.v04__grid .p__num{font-size:1.3rem}
+.v04__grid .p__title{font-size:.85rem}
+
+/* ═══════════════════════════════════════════════════════════════
+   FAMILIA B · ASIMÉTRICO EDITORIAL (V05-V09)
+═══════════════════════════════════════════════════════════════ */
+
+/* V05 · Hero § 02 + 4 cards */
+.v05__grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;background:var(--border-light)}
+.v05__grid .p--hero{grid-column:1;grid-row:1/-1;min-height:340px}
+.v05__grid .p--hero .p__num{font-size:2.4rem}
+.v05__grid .p--hero .p__title{font-size:1.4rem}
+.v05__grid .p--hero .p__desc{font-size:.85rem}
+
+/* V06 · L-shape § 01 vertical + 4 stacked */
+.v06__grid{display:grid;grid-template-columns:1fr 1.4fr;grid-template-rows:repeat(4,1fr);gap:2px;background:var(--border-light)}
+.v06__grid .p--anchor{grid-column:1;grid-row:1/-1;min-height:auto}
+.v06__grid .p--anchor .p__num{font-size:2.2rem}
+.v06__grid .p--anchor .p__title{font-size:1.25rem}
+.v06__grid .p--anchor .p__desc{font-size:.85rem;margin-top:auto}
+.v06__grid .p--row{grid-column:2;min-height:auto;padding:1rem 1.4rem;flex-direction:row;align-items:center;gap:1rem}
+.v06__grid .p--row .p__num{font-size:1.2rem}
+.v06__grid .p--row .p__title{font-size:.95rem;flex:1}
+.v06__grid .p--row .p__desc{display:none}
+
+/* V07 · Bento mosaico (1 hero + 2 medianas + 2 chicas) */
+.v07__grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr 1fr;gap:2px;background:var(--border-light)}
+.v07__grid .p:nth-child(1){grid-column:1/3;grid-row:1/-1;min-height:340px}
+.v07__grid .p:nth-child(1) .p__num{font-size:2.4rem}
+.v07__grid .p:nth-child(1) .p__title{font-size:1.3rem}
+.v07__grid .p:nth-child(2){grid-column:3/5;grid-row:1}
+.v07__grid .p:nth-child(3){grid-column:3}
+.v07__grid .p:nth-child(4){grid-column:4}
+.v07__grid .p:nth-child(5){display:none} /* fallback if 5th doesn't fit naturally */
+
+/* V08 · Editorial 12-col asimétrico */
+.v08__grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:1fr 1fr;gap:2px;background:var(--border-light)}
+.v08__grid .p:nth-child(1){grid-column:1/5;grid-row:1}
+.v08__grid .p:nth-child(2){grid-column:5/10;grid-row:1/-1;min-height:340px}
+.v08__grid .p:nth-child(2) .p__num{font-size:2.2rem}
+.v08__grid .p:nth-child(2) .p__title{font-size:1.3rem}
+.v08__grid .p:nth-child(3){grid-column:10/-1;grid-row:1}
+.v08__grid .p:nth-child(4){grid-column:1/5;grid-row:2}
+.v08__grid .p:nth-child(5){grid-column:10/-1;grid-row:2}
+
+/* V09 · Stair escalonado */
+.v09__stack{display:flex;flex-direction:column;gap:8px;padding:8px;background:var(--neutral-alt)}
+.v09__stack .p{margin-left:0;width:50%;min-height:120px;border-radius:2px}
+.v09__stack .p:nth-child(2){margin-left:12.5%}
+.v09__stack .p:nth-child(3){margin-left:25%}
+.v09__stack .p:nth-child(4){margin-left:37.5%}
+.v09__stack .p:nth-child(5){margin-left:50%}
+
+/* ═══════════════════════════════════════════════════════════════
+   FAMILIA C · LISTA / LINEAL (V10-V13)
+═══════════════════════════════════════════════════════════════ */
+
+/* V10 · Stack accordion (1 expandida + 4 colapsadas) */
+.v10__list{display:flex;flex-direction:column;gap:2px;background:var(--border-light)}
+.v10__list .p{min-height:auto;padding:1rem 1.4rem;flex-direction:row;align-items:center;gap:1.2rem}
+.v10__list .p .p__num{font-size:1.2rem;flex-shrink:0}
+.v10__list .p .p__title{font-size:1rem;margin-right:auto}
+.v10__list .p .p__desc{display:none}
+.v10__list .p--hover{padding:1.5rem 1.4rem;display:grid;grid-template-columns:auto 1fr 1.2fr;gap:1.5rem;align-items:center;min-height:140px}
+.v10__list .p--hover .p__num{font-size:1.8rem}
+.v10__list .p--hover .p__title{font-size:1.15rem}
+.v10__list .p--hover .p__desc{display:block;color:rgba(255,255,255,.8);font-size:.85rem}
+.v10__hint{
+  background:linear-gradient(135deg,#1a3380,#0b1e6b);
+  border-radius:2px;height:100%;min-height:100px;
+  display:flex;align-items:flex-end;padding:14px;
+  color:#fff;font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;position:relative
+}
+.v10__hint::before{content:"▶";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:18px;color:rgba(255,255,255,.3)}
+.v10__hint span{color:var(--accent);position:relative;z-index:2}
+
+/* V11 · Index numerado tipográfico (Basic Agency style) */
+.v11__list{padding:32px 24px;background:#fff;border-top:2px solid var(--primary-dark)}
+.v11__row{display:grid;grid-template-columns:80px 1fr 60px;gap:1.5rem;padding:1.4rem 0;border-bottom:1px solid var(--border);align-items:baseline;cursor:default;transition:padding-left .25s ease,background .25s ease;position:relative;overflow:hidden}
+.v11__row .p__bg{display:none}
+.v11__row.is-hover{background:var(--primary-dark);color:#fff;padding-left:1rem;margin:0 -1rem}
+.v11__row.is-next{background:var(--bone)}
+.v11__row.is-video{background:linear-gradient(135deg,#1a3380,#0b1e6b);color:#fff;padding-left:1rem;margin:0 -1rem}
+.v11__row.is-video .v11__row-ttl,.v11__row.is-video .v11__row-meta{opacity:0}
+.v11__row .num{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-saturated);position:relative;z-index:3}
+.v11__row.is-hover .num,.v11__row.is-video .num{color:var(--accent)}
+.v11__row-ttl{font-family:var(--ff-serif);font-size:1.3rem;font-weight:700;color:var(--primary-dark);line-height:1.2;transition:opacity .3s ease,color .3s ease}
+.v11__row.is-hover .v11__row-ttl{color:#fff}
+.v11__row-meta{font-family:var(--ff-mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-subtle);display:block;margin-top:.3rem;transition:opacity .3s ease}
+.v11__row .arr{font-family:var(--ff-mono);font-size:1rem;color:var(--accent-saturated);text-align:right;position:relative;z-index:3}
+.v11__row.is-hover .arr,.v11__row.is-video .arr{color:var(--accent)}
+.v11__ind{position:absolute;top:8px;right:8px;font-family:var(--ff-mono);font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;padding:2px 6px;border-radius:8px;z-index:4}
+.v11__row.is-hover .v11__ind{color:#fff;background:rgba(201,162,39,.25)}
+.v11__row.is-next .v11__ind{color:#2e7d32;background:rgba(46,125,50,.18)}
+.v11__row.is-video .v11__ind{color:#fff;background:rgba(255,255,255,.18)}
+
+/* V12 · Sidebar nav + main viewer · réplica EXACTA del index (intro arriba full + panel abajo full · video delimitado en su columna) */
+.v12__panel{display:grid;grid-template-columns:280px 1fr;gap:0;background:var(--border-light);border:1px solid var(--border);border-radius:4px;overflow:hidden;min-height:520px}
+@media (max-width:900px){.v12__panel{grid-template-columns:1fr;min-height:auto}}
+.v12__sidebar{background:#fff;display:flex;flex-direction:column;border-right:1px solid var(--border-light)}
+.v12__sidebar-row{padding:1.1rem 1.3rem;border-bottom:1px solid var(--border-light);display:flex;flex-direction:column;gap:.35rem;cursor:default;transition:background .25s ease,color .25s ease;position:relative;flex:1;justify-content:center}
+.v12__sidebar-row:last-child{border-bottom:none}
+.v12__sidebar-row .num{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-saturated);transition:color .25s ease}
+.v12__sidebar-row .ttl{font-family:var(--ff-serif);font-size:.82rem;font-weight:700;color:var(--primary-dark);line-height:1.25;letter-spacing:-.01em;transition:color .25s ease}
+.v12__sidebar-row.is-hover,.v12__sidebar-row.is-active{background:var(--primary-dark)}
+.v12__sidebar-row.is-hover .num,.v12__sidebar-row.is-active .num{color:var(--accent)}
+.v12__sidebar-row.is-hover .ttl,.v12__sidebar-row.is-active .ttl{color:#fff}
+.v12__sidebar-row.is-next{background:var(--bone)}
+.v12__sidebar-row .ind{position:absolute;top:8px;right:8px;font-family:var(--ff-mono);font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;padding:2px 6px;border-radius:8px;color:var(--accent-saturated);background:rgba(201,162,39,.15)}
+.v12__sidebar-row.is-hover .ind,.v12__sidebar-row.is-active .ind{color:#fff;background:rgba(201,162,39,.25)}
+.v12__sidebar-row.is-next .ind{color:#2e7d32;background:rgba(46,125,50,.18)}
+.v12__viewer{position:relative;background:var(--primary-dark);overflow:hidden;min-height:520px}
+.v12__viewer-panel{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0;align-items:center;opacity:0;transition:opacity .5s ease;pointer-events:none}
+.v12__viewer-panel.is-active{opacity:1}
+.v12__viewer-content{padding:2.5rem;color:#fff;display:flex;flex-direction:column;justify-content:center}
+.v12__viewer-media{position:relative;background:rgba(0,0,0,.2);overflow:hidden;margin:2rem 2.5rem 2rem .5rem;border-radius:2px;aspect-ratio:16 / 10;width:calc(100% - 3rem);box-shadow:0 8px 32px rgba(0,0,0,.18)}
+.v12__viewer-media video,.v12__viewer-media .flat-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.v12__viewer-media .flat-bg{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase}
+.v12__viewer-num{font-family:var(--ff-mono);font-size:2.4rem;font-weight:400;color:var(--accent);line-height:1}
+.v12__viewer-title{font-family:var(--ff-serif);font-size:1.5rem;font-weight:700;line-height:1.2;letter-spacing:-.015em;margin-top:.7rem;color:#fff}
+.v12__viewer-desc{font-size:.9rem;color:rgba(255,255,255,.8);line-height:1.65;margin-top:.8rem;max-width:100%}
+.v12__viewer-next{margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.15);font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.v12__viewer-next b{color:var(--accent);font-weight:400;margin-right:.4rem}
+
+/* Intro V12 · compacto B2B (réplica del index actualizado) · 2-col asym + body 2-col interno */
+.v12__intro{display:grid;grid-template-columns:1fr 1.3fr;gap:3rem;align-items:start;padding:1.5rem 2.5rem;border-top:1px solid rgba(11,30,107,.18);border-bottom:1px solid rgba(11,30,107,.10);margin-bottom:2.5rem}
+.v12__intro-head{display:flex;flex-direction:column;gap:.75rem}
+.v12__intro-head::before{content:"§ Quiénes Somos · 130 años · BRC AA";font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-saturated);display:block}
+.v12__intro-head h2{font-family:var(--ff-serif);font-size:clamp(1.5rem,2.2vw,1.85rem);font-weight:700;color:var(--primary);line-height:1.15;letter-spacing:-.015em;margin:0;max-width:22ch}
+.v12__intro-head h2 em{font-style:italic;font-weight:400;color:var(--accent-saturated)}
+.v12__intro-body{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.v12__intro-body p{font-size:.8rem;color:var(--text-muted);line-height:1.65;margin:0;position:relative}
+.v12__intro-body p::before{content:"01";font-family:var(--ff-mono);font-size:.55rem;letter-spacing:.18em;color:var(--accent-saturated);display:block;margin-bottom:.4rem}
+.v12__intro-body p:nth-of-type(2)::before{content:"02"}
+.v12__intro-cta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;align-items:center}
+.v12__intro-cta a{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:8px 14px;border-radius:2px;display:inline-flex;align-items:center;gap:.4rem}
+.v12__intro-cta .btn-primary{background:var(--primary);color:#fff}
+.v12__intro-cta .btn-secondary{background:transparent;color:var(--primary);border:1px solid var(--primary)}
+@media (max-width:900px){.v12__intro{grid-template-columns:1fr;gap:1.5rem}.v12__intro-body{grid-template-columns:1fr}}
+
+/* V13 · Magazine spread alternado (foto + texto) */
+.v13__list{display:flex;flex-direction:column;gap:2px;background:var(--border-light)}
+.v13__row{display:grid;grid-template-columns:1fr 1.2fr;gap:0;min-height:140px}
+.v13__row.flip{grid-template-columns:1.2fr 1fr}
+.v13__row.flip .v13__media{order:2}
+.v13__media{background:linear-gradient(135deg,#1a3380,#0b1e6b);position:relative}
+.v13__media::before{content:"▶";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:24px;color:rgba(255,255,255,.3)}
+.v13__media-cap{position:absolute;bottom:14px;left:14px;font-family:var(--ff-mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#fff}
+.v13__row .p{border:none;min-height:auto}
+.v13__row.is-hover .v13__media{background:#0b1e6b}
+
+/* ═══════════════════════════════════════════════════════════════
+   FAMILIA D · SCROLL / MOTION (V14-V16)
+═══════════════════════════════════════════════════════════════ */
+
+/* V14 · Horizontal scroll panels */
+.v14__scroll{overflow-x:auto;scroll-snap-type:x mandatory;background:var(--neutral-alt);border:1px solid var(--border)}
+.v14__scroll::-webkit-scrollbar{height:8px}
+.v14__scroll::-webkit-scrollbar-thumb{background:var(--accent-saturated);border-radius:4px}
+.v14__panels{display:flex;gap:2px;background:var(--border-light);width:max-content;min-width:100%}
+.v14__panels .p{width:340px;scroll-snap-align:start;flex-shrink:0;min-height:300px}
+.v14__hint{padding:14px 32px;background:var(--neutral-alt);border-top:1px solid var(--border);font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-subtle);text-align:center}
+
+/* V15 · Stacked z-axis cards (Apple keynote style) */
+.v15__stage{position:relative;height:420px;perspective:1000px;background:linear-gradient(180deg,var(--neutral-alt) 0%,var(--bone) 100%);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.v15__cards{position:relative;width:60%;max-width:540px;height:280px}
+.v15__cards .p{position:absolute;left:0;right:0;top:0;height:100%;border-radius:4px;box-shadow:0 8px 32px rgba(8,20,80,.12)}
+.v15__cards .p:nth-child(1){transform:translateY(40px) translateZ(-80px) scale(.9);opacity:.4;z-index:1}
+.v15__cards .p:nth-child(2){transform:translateY(20px) translateZ(-40px) scale(.95);opacity:.6;z-index:2}
+.v15__cards .p:nth-child(3){z-index:3}
+.v15__cards .p:nth-child(4){transform:translateY(-20px) translateZ(-40px) scale(.95);opacity:.6;z-index:2;display:none}
+.v15__cards .p:nth-child(5){display:none}
+.v15__nav{padding:14px 32px;display:flex;justify-content:center;gap:8px;background:#fff;border-top:1px solid var(--border)}
+.v15__nav-dot{width:8px;height:8px;border-radius:50%;background:var(--border)}
+.v15__nav-dot.active{background:var(--accent-saturated);width:24px;border-radius:4px}
+
+/* V16 · Vertical scroll snap (cada pilar full viewport snap) */
+.v16__viewport{height:480px;overflow-y:auto;scroll-snap-type:y mandatory;background:var(--neutral-alt);border:1px solid var(--border)}
+.v16__viewport::-webkit-scrollbar{width:8px}
+.v16__viewport::-webkit-scrollbar-thumb{background:var(--accent-saturated);border-radius:4px}
+.v16__panel{height:100%;scroll-snap-align:start;display:grid;grid-template-columns:1fr 1.4fr;gap:0;border-bottom:2px solid var(--primary-dark)}
+.v16__panel-text{padding:2.5rem;display:flex;flex-direction:column;justify-content:center;background:#fff}
+.v16__panel-text .num{font-family:var(--ff-mono);font-size:2.4rem;color:var(--accent-saturated);font-weight:700;line-height:1}
+.v16__panel-text .ttl{font-family:var(--ff-serif);font-size:1.6rem;font-weight:700;color:var(--primary-dark);margin-top:.6rem;line-height:1.2}
+.v16__panel-text .desc{font-size:.9rem;color:var(--text-muted);line-height:1.65;margin-top:.7rem}
+.v16__panel-media{background:linear-gradient(135deg,#1a3380,#0b1e6b);position:relative}
+.v16__panel-media::before{content:"▶";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:32px;color:rgba(255,255,255,.3)}
+
+/* ═══════════════════════════════════════════════════════════════
+   FAMILIA E · CONCEPTUAL (V17-V20)
+═══════════════════════════════════════════════════════════════ */
+
+/* V17 · Hub & spoke § 02 centro */
+.v17__grid{display:grid;grid-template-columns:1fr 1.5fr 1fr;grid-template-rows:1fr 1fr;gap:2px;background:var(--border-light)}
+.v17__grid .p--center{grid-column:2;grid-row:1/-1;text-align:center;align-items:center;justify-content:center;padding:2rem}
+.v17__grid .p--center .p__num{font-size:2.6rem}
+.v17__grid .p--center .p__title{font-size:1.4rem}
+.v17__grid .p--center .p__desc{text-align:center}
+.v17__grid .p--tl{grid-column:1;grid-row:1}
+.v17__grid .p--tr{grid-column:3;grid-row:1}
+.v17__grid .p--bl{grid-column:1;grid-row:2}
+.v17__grid .p--br{grid-column:3;grid-row:2}
+
+/* V18 · Timeline horizontal · 130 años */
+.v18__timeline{padding:48px 32px 32px}
+.v18__line{position:relative;height:1px;background:var(--border);margin:2.8rem 1.4rem 1rem}
+.v18__line .dot{position:absolute;top:-5px;width:11px;height:11px;background:var(--primary);border-radius:50%}
+.v18__line .dot.active{width:14px;height:14px;top:-7px;background:var(--accent-saturated);box-shadow:0 0 0 4px rgba(201,162,39,.2)}
+.v18__line .dot:nth-child(1){left:0}.v18__line .dot:nth-child(2){left:25%}
+.v18__line .dot:nth-child(3){left:50%}.v18__line .dot:nth-child(4){left:75%}
+.v18__line .dot:nth-child(5){right:0}
+.v18__line .yr{position:absolute;top:-30px;font-family:var(--ff-mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-subtle);transform:translateX(-50%)}
+.v18__line .yr:nth-child(6){left:0;transform:none}.v18__line .yr:nth-child(7){left:25%}
+.v18__line .yr:nth-child(8){left:50%;color:var(--accent-saturated)}.v18__line .yr:nth-child(9){left:75%}
+.v18__line .yr:nth-child(10){right:0;transform:none}
+.v18__grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--border-light)}
+.v18__grid .p{min-height:200px}
+
+/* V19 · Constellation con líneas conectoras (SVG) */
+.v19__stage{position:relative;background:var(--neutral-alt);padding:48px 32px;min-height:480px}
+.v19__svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.v19__svg line{stroke:rgba(11,30,107,.18);stroke-width:1;stroke-dasharray:3 4}
+.v19__svg line.active{stroke:var(--accent-saturated);stroke-width:2;stroke-dasharray:none}
+.v19__node{position:absolute;width:160px;z-index:2}
+.v19__node-1{top:10%;left:8%}
+.v19__node-2{top:8%;left:42%}
+.v19__node-3{top:42%;right:8%}
+.v19__node-4{bottom:8%;left:18%}
+.v19__node-5{bottom:12%;right:32%}
+.v19__node .p{min-height:auto;padding:1rem}
+
+/* V20 · Theater stage (1 al frente · 4 al fondo arc) */
+.v20__stage{position:relative;background:linear-gradient(180deg,var(--neutral-alt) 0%,var(--bone) 100%);padding:48px 32px;min-height:480px;display:flex;align-items:flex-end;justify-content:center}
+.v20__back{position:absolute;top:48px;left:0;right:0;display:flex;justify-content:center;gap:20px}
+.v20__back .p{width:140px;min-height:120px;padding:1rem;border-radius:4px;opacity:.55;filter:saturate(.6);transform-origin:bottom center}
+.v20__back .p:nth-child(1){transform:rotate(-8deg) translateY(8px)}
+.v20__back .p:nth-child(2){transform:rotate(-3deg)}
+.v20__back .p:nth-child(3){transform:rotate(3deg)}
+.v20__back .p:nth-child(4){transform:rotate(8deg) translateY(8px)}
+.v20__front{position:relative;z-index:2;width:380px;min-height:240px;padding:2rem;border-radius:4px;box-shadow:0 12px 40px rgba(8,20,80,.18)}
+.v20__front .p__num{font-size:2.4rem}
+.v20__front .p__title{font-size:1.4rem}
+
+</style>
+</head>
+<body>
+
+<nav class="shell">
+  <div class="shell-inner">
+    <strong>Traverso · Quiénes Somos<span>20 propuestas · 5 familias del research</span></strong>
+    <a href="#v01">01</a><a href="#v02">02</a><a href="#v03">03</a><a href="#v04">04</a>
+    <span class="shell-grp">| B asym</span>
+    <a href="#v05">05</a><a href="#v06">06</a><a href="#v07">07</a><a href="#v08">08</a><a href="#v09">09</a>
+    <span class="shell-grp">| C lista</span>
+    <a href="#v10">10</a><a href="#v11">11</a><a href="#v12">12</a><a href="#v13">13</a>
+    <span class="shell-grp">| D scroll</span>
+    <a href="#v14">14</a><a href="#v15">15</a><a href="#v16">16</a>
+    <span class="shell-grp">| E concept</span>
+    <a href="#v17">17</a><a href="#v18">18</a><a href="#v19">19</a><a href="#v20">20</a>
+  </div>
+</nav>
+
+<div style="max-width:1500px;margin:32px auto 0;padding:0 24px;font-size:13px;color:var(--text-muted);line-height:1.7">
+  <strong style="font-family:var(--ff-serif);color:var(--primary-dark)">Cómo leer:</strong>
+  cada propuesta muestra el módulo en estado <em>hover § 02</em> → § 02 hovereada (navy + texto blanco) · § 03 (siguiente · bone bg) en texto · § 01, § 04, § 05 (resto) en video con números siempre visibles. Las 20 variantes vienen del research <code>research-layouts-cards-b2b.html</code>, filtradas a las que aplican a 5 cards paritarios B2B sobrio.
+</div>
+
+<!-- ═════════════ V01 · GRID 2x2 + FULL ═════════════ -->
+<div class="label" id="v01">
+  <span class="n">01</span><span class="fam">A · simétrico</span><span class="t">Grid 2x2 + full · baseline actual</span>
+  <span class="d">L01 del research. Estructura del módulo actual de Traverso. § 05 ocupa la fila completa abajo.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>130 años de oficio en alimentos. Cinco pilares que sostienen la propuesta para mercados globales.</p>
+  </div>
+  <div class="body"><div class="v01__grid">
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3><p class="p__desc">130 años de trayectoria en alimentos.</p></article>
+    <article class="p p--hover"><span class="p__ind">hover</span><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3><p class="p__desc">Líderes en mercado · BRC AA.</p></article>
+    <article class="p p--next"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3><p class="p__desc">Marca privada y desarrollo.</p></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3><p class="p__desc">Adaptación regulatoria.</p></article>
+    <article class="p p--video p--full"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso con el servicio y la continuidad operativa</h3></article>
+  </div></div>
+</div></div>
+
+<!-- ═════════════ V02 · GRID 5 COLS ═════════════ -->
+<div class="label" id="v02">
+  <span class="n">02</span><span class="fam">A · simétrico</span><span class="t">Grid 5 cols horizontal · recorrido lineal</span>
+  <span class="d">L03 del research. Recomendado en §07. Las 5 cards en fila — ES físicamente una línea, refuerza la idea de secuencia § 01 → § 05.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>Cinco pilares en línea — léelos en orden o saltá entre ellos.</p>
+  </div>
+  <div class="body"><div class="v02__grid">
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3><p class="p__desc">130 años.</p></article>
+    <article class="p p--hover"><span class="p__ind">hover</span><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3><p class="p__desc">Líderes BRC AA.</p></article>
+    <article class="p p--next"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3><p class="p__desc">Marca privada.</p></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3><p class="p__desc">Adaptación.</p></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso</h3><p class="p__desc">Continuidad.</p></article>
+  </div></div>
+</div></div>
+
+<!-- ═════════════ V03 · GRID 3-2 ═════════════ -->
+<div class="label" id="v03">
+  <span class="n">03</span><span class="fam">A · simétrico</span><span class="t">Grid 3-2 · pirámide invertida</span>
+  <span class="d">3 cards arriba (oficio) + 2 cards más anchas abajo (servicio). Variación del L01 mantiendo simetría pero con peso semántico — los 3 primeros pilares son productivos, los 2 últimos son de servicio.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro intro--center">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>Tres pilares de oficio + dos de servicio.</p>
+  </div>
+  <div class="body"><div class="v03__grid">
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3><p class="p__desc">130 años.</p></article>
+    <article class="p p--hover"><span class="p__ind">hover</span><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3><p class="p__desc">Líderes vinagres.</p></article>
+    <article class="p p--next"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3><p class="p__desc">Marca privada.</p></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3><p class="p__desc">Adaptación regulatoria por país.</p></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso con el servicio y la continuidad operativa</h3><p class="p__desc">Continuidad operativa.</p></article>
+  </div></div>
+</div></div>
+
+<!-- ═════════════ V04 · INTRO LATERAL + GRID 5 ═════════════ -->
+<div class="label" id="v04">
+  <span class="n">04</span><span class="fam">A · simétrico</span><span class="t">Intro lateral + grid 5 horizontal</span>
+  <span class="d">Variación de V02 con intro a la izquierda como columna fija. Layout 2 col del módulo "Quiénes Somos" actual + grid 5 cols a la derecha. Híbrido más balanceado.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div style="padding:32px"><div class="v04__layout">
+    <div class="intro">
+      <span class="eyebrow">— Quiénes Somos</span>
+      <h2>La evolución internacional de <em>Traverso</em></h2>
+      <p>130 años de oficio. Cinco pilares que sostienen la propuesta global.</p>
+    </div>
+    <div class="v04__grid">
+      <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3></article>
+      <article class="p p--hover"><span class="p__ind">hover</span><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3></article>
+      <article class="p p--next"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3></article>
+      <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3></article>
+      <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso</h3></article>
+    </div>
+  </div></div>
+</div></div>
+
+<!-- ═════════════ V05 · HERO § 02 + 4 ═════════════ -->
+<div class="label" id="v05">
+  <span class="n">05</span><span class="fam">B · asimétrico</span><span class="t">Hero § 02 + 4 cards</span>
+  <span class="d">L06 del research. Especialización en vinagres como pilar dominante (activo de marca más fuerte). Comunica jerarquía: "el experto en vinagres que también hace otras cosas".</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>Especialización en vinagres como pilar central — los otros cuatro se construyen sobre esa base.</p>
+  </div>
+  <div class="body"><div class="v05__grid">
+    <article class="p p--hover p--hero"><span class="p__ind">hover</span><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3><p class="p__desc">Líderes en mercado vinagrero · BRC AA · 4 variedades (alcohol kosher, manzana, vino, mosto). Activo central de la marca.</p></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3></article>
+    <article class="p p--next"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso</h3></article>
+  </div></div>
+</div></div>
+
+<!-- ═════════════ V06 · L-SHAPE § 01 ANCLA ═════════════ -->
+<div class="label" id="v06">
+  <span class="n">06</span><span class="fam">B · asimétrico</span><span class="t">L-shape · § 01 vertical ancla</span>
+  <span class="d">L07 del research. § 01 (Experiencia, 130 años) como columna estable a la izquierda — punto de partida fundacional. Las otras 4 stackeadas como pasos a la derecha.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>130 años como punto de partida. Cuatro consecuencias que se construyen encima.</p>
+  </div>
+  <div class="body"><div class="v06__grid">
+    <article class="p p--video p--anchor"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3><p class="p__desc">130 años de trayectoria — punto de partida de todo lo demás.</p></article>
+    <article class="p p--hover p--row"><span class="p__ind">hover</span><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3></article>
+    <article class="p p--next p--row"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3></article>
+    <article class="p p--video p--row"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3></article>
+    <article class="p p--video p--row"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso con el servicio y la continuidad operativa</h3></article>
+  </div></div>
+</div></div>
+
+<!-- ═════════════ V07 · BENTO MOSAICO ═════════════ -->
+<div class="label" id="v07">
+  <span class="n">07</span><span class="fam">B · asimétrico</span><span class="t">Bento mosaico · 1 hero + 2 medianas + 2 chicas</span>
+  <span class="d">L08 del research. Una card grande (§ 01 hero) + cards de tamaños mixtos. Patrón Apple WWDC adaptado a B2B sobrio.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>Bento de jerarquía editorial — un pilar dominante + cuatro de soporte.</p>
+  </div>
+  <div class="body"><div class="v07__grid">
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3><p class="p__desc">130 años de trayectoria en alimentos chilenos.</p></article>
+    <article class="p p--hover"><span class="p__ind">hover</span><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3><p class="p__desc">Líderes BRC AA · 4 variedades.</p></article>
+    <article class="p p--next"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3></article>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr;gap:2px;margin-top:2px;background:var(--border-light)">
+    <article class="p p--video" style="flex-direction:row;align-items:center;gap:1rem;min-height:auto;padding:1rem 1.4rem"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso con el servicio y la continuidad operativa</h3></article>
+  </div></div>
+</div></div>
+
+<!-- ═════════════ V08 · EDITORIAL 12-COL ═════════════ -->
+<div class="label" id="v08">
+  <span class="n">08</span><span class="fam">B · asimétrico</span><span class="t">Editorial 12-col · cada card su lugar</span>
+  <span class="d">L09 del research. Max Pentagram. § 02 al centro como hero, § 01 + § 03 flanqueando arriba, § 04 + § 05 abajo. Cada pilar tiene un "lugar" único.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+  </div>
+  <div class="body"><div class="v08__grid">
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3></article>
+    <article class="p p--hover"><span class="p__ind">hover</span><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3><p class="p__desc">Líderes BRC AA · 4 variedades.</p></article>
+    <article class="p p--next"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso</h3></article>
+  </div></div>
+</div></div>
+
+<!-- ═════════════ V09 · STAIR ESCALONADO ═════════════ -->
+<div class="label" id="v09">
+  <span class="n">09</span><span class="fam">B · asimétrico</span><span class="t">Stair · escalonado diagonal</span>
+  <span class="d">L10 del research. Cards desplazadas progresivamente — sugiere evolución sin necesidad de timeline explícito. Diferenciador visual fuerte para B2B sobrio.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>Cinco pilares que se acumulan en el tiempo — cada uno construye sobre el anterior.</p>
+  </div>
+  <div class="body"><div class="v09__stack">
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3><p class="p__desc">130 años.</p></article>
+    <article class="p p--hover"><span class="p__ind">hover</span><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3><p class="p__desc">Líderes BRC AA.</p></article>
+    <article class="p p--next"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3><p class="p__desc">Marca privada.</p></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3><p class="p__desc">Adaptación.</p></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso con el servicio y la continuidad operativa</h3><p class="p__desc">Continuidad.</p></article>
+  </div></div>
+</div></div>
+
+<!-- ═════════════ V10 · STACK ACCORDION ═════════════ -->
+<div class="label" id="v10">
+  <span class="n">10</span><span class="fam">C · lista</span><span class="t">Stack accordion vertical</span>
+  <span class="d">L11 del research. Una columna full-width. Card hovereada se expande con preview del siguiente al lado. Las demás colapsan a fila estrecha. Polo C max editorial.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>Lectura vertical — un pilar a la vez en foco, los demás en reposo.</p>
+  </div>
+  <div class="body"><div class="v10__list">
+    <article class="p"><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3><span style="font-family:var(--ff-mono);font-size:1.1rem;color:var(--text-subtle)">+</span></article>
+    <article class="p p--hover"><span class="p__ind">hover</span><span class="p__num">02</span><div><h3 class="p__title">Especialización en soluciones industriales</h3><p class="p__desc">Líderes BRC AA · 4 variedades · alcohol kosher.</p></div><div class="v10__hint"><span>§ 03 ↓ siguiente · capacidad terceros</span></div></article>
+    <article class="p p--next"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3><span style="font-family:var(--ff-mono);font-size:1.1rem;color:var(--text-subtle)">+</span></article>
+    <article class="p"><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3><span style="font-family:var(--ff-mono);font-size:1.1rem;color:var(--text-subtle)">+</span></article>
+    <article class="p"><span class="p__num">05</span><h3 class="p__title">Compromiso con el servicio y la continuidad operativa</h3><span style="font-family:var(--ff-mono);font-size:1.1rem;color:var(--text-subtle)">+</span></article>
+  </div></div>
+</div></div>
+
+<!-- ═════════════ V11 · INDEX TIPOGRÁFICO ═════════════ -->
+<div class="label" id="v11">
+  <span class="n">11</span><span class="fam">C · lista</span><span class="t">Index numerado tipográfico · Basic Agency</span>
+  <span class="d">L12 del research. Solo tipografía, sin chrome de card. Tier max minimal. Hover en row → row activa fondo navy + row siguiente bone + resto cambia a video gradient.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+  </div>
+  <div class="v11__list">
+    <div class="v11__row is-video"><span class="v11__ind">video</span><span class="num">§ 01</span><div><h3 class="v11__row-ttl">Experiencia productiva</h3><span class="v11__row-meta">130 años</span></div><span class="arr">→</span></div>
+    <div class="v11__row is-hover"><span class="v11__ind">hover</span><span class="num">§ 02</span><div><h3 class="v11__row-ttl">Especialización en vinagres</h3><span class="v11__row-meta">Líderes BRC AA</span></div><span class="arr">→</span></div>
+    <div class="v11__row is-next"><span class="v11__ind">siguiente</span><span class="num">§ 03</span><div><h3 class="v11__row-ttl">Capacidad para terceros</h3><span class="v11__row-meta">Marca privada</span></div><span class="arr">→</span></div>
+    <div class="v11__row is-video"><span class="v11__ind">video</span><span class="num">§ 04</span><div><h3 class="v11__row-ttl">Flexibilidad mercados</h3><span class="v11__row-meta">Adaptación</span></div><span class="arr">→</span></div>
+    <div class="v11__row is-video"><span class="v11__ind">video</span><span class="num">§ 05</span><div><h3 class="v11__row-ttl">Compromiso servicio</h3><span class="v11__row-meta">Continuidad</span></div><span class="arr">→</span></div>
+  </div>
+</div></div>
+
+<!-- ═════════════ V12 · SIDEBAR + VIEWER · réplica index.html ═════════════ -->
+<div class="label" id="v12">
+  <span class="n">12</span><span class="fam">C · lista</span><span class="t">Sidebar nav + main viewer · ★ aplicado en index</span>
+  <span class="d">L13 del research. Réplica exacta de cómo se aplicó en el index.html (2026-04-26). Sidebar con 5 rows full title · viewer derecha con video de fondo + overlay gradient + content bottom · regla "siguiente + resto".</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="v12__intro">
+    <div class="v12__intro-head">
+      <h2>La evolución internacional de <em>Traverso</em></h2>
+      <div class="v12__intro-cta">
+        <a class="btn-primary" href="#">Conocer certificaciones</a>
+        <a class="btn-secondary" href="#">Hablar con un ejecutivo →</a>
+      </div>
+    </div>
+    <div class="v12__intro-body">
+      <p>Nos especializamos en la fabricación de vinagres, siendo líderes en el mercado, con variedades de Sidra de Manzana, Vino, Alcohol (con certificación kosher) y vinagres especiales como balsámicos o condimentos balsámicos. También producimos alimentos bajo marca de terceros (Marca Privada), apoyando a nuestros clientes en sus procesos productivos y en el desarrollo de negocios en distintos mercados.</p>
+      <p>Nuestra propuesta combina experiencia productiva, criterio comercial y una operación estructurada para responder con seriedad a los desafíos del comercio internacional.</p>
+    </div>
+  </div>
+  <div style="padding:0 2.5rem 2.5rem"><div class="v12__panel">
+    <!-- Sidebar · 5 rows con full original titles · recorrido siempre visible · interactivo -->
+    <div class="v12__sidebar">
+      <div class="v12__sidebar-row" data-row="1"><span class="num">§ 01</span><span class="ttl">Experiencia en producción alimentaria</span></div>
+      <div class="v12__sidebar-row" data-row="2"><span class="num">§ 02</span><span class="ttl">Especialización en soluciones industriales</span></div>
+      <div class="v12__sidebar-row" data-row="3"><span class="num">§ 03</span><span class="ttl">Capacidad de desarrollo para terceros</span></div>
+      <div class="v12__sidebar-row" data-row="4"><span class="num">§ 04</span><span class="ttl">Flexibilidad y adaptación a distintos mercados</span></div>
+      <div class="v12__sidebar-row" data-row="5"><span class="num">§ 05</span><span class="ttl">Compromiso con el servicio y la continuidad operativa</span></div>
+    </div>
+
+    <!-- Viewer · 5 panels (4 con video + 1 flat) · controlled por JS · last-active persiste -->
+    <div class="v12__viewer">
+      <div class="v12__viewer-panel" data-pillar="1">
+        <div class="v12__viewer-content">
+          <div class="v12__viewer-num">01</div>
+          <h3 class="v12__viewer-title">Experiencia en producción alimentaria</h3>
+          <p class="v12__viewer-desc">Contamos con una trayectoria consolidada en la fabricación de alimentos, lo que nos permite abordar distintos desafíos productivos con criterio, conocimiento técnico y eficiencia operativa.</p>
+          <div class="v12__viewer-next"><b>→</b> Siguiente: § 02 Especialización en soluciones industriales</div>
+        </div>
+        <div class="v12__viewer-media"><video src="../assets/videos/video-01card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+      </div>
+      <div class="v12__viewer-panel" data-pillar="2">
+        <div class="v12__viewer-content">
+          <div class="v12__viewer-num">02</div>
+          <h3 class="v12__viewer-title">Especialización en soluciones industriales</h3>
+          <p class="v12__viewer-desc">Nos enfocamos en productos con aplicación directa en procesos productivos, como vinagres a granel, lo que nos posiciona como un proveedor relevante para distintas industrias.</p>
+          <div class="v12__viewer-next"><b>→</b> Siguiente: § 03 Capacidad de desarrollo para terceros</div>
+        </div>
+        <div class="v12__viewer-media"><video src="../assets/videos/video-02card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+      </div>
+      <div class="v12__viewer-panel" data-pillar="3">
+        <div class="v12__viewer-content">
+          <div class="v12__viewer-num">03</div>
+          <h3 class="v12__viewer-title">Capacidad de desarrollo para terceros</h3>
+          <p class="v12__viewer-desc">Trabajamos en la fabricación de productos bajo marca privada, adaptándonos a requerimientos específicos de clientes, mercados y canales de distribución.</p>
+          <div class="v12__viewer-next"><b>→</b> Siguiente: § 04 Flexibilidad y adaptación a distintos mercados</div>
+        </div>
+        <div class="v12__viewer-media"><video src="../assets/videos/video-01card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+      </div>
+      <div class="v12__viewer-panel" data-pillar="4">
+        <div class="v12__viewer-content">
+          <div class="v12__viewer-num">04</div>
+          <h3 class="v12__viewer-title">Flexibilidad y adaptación a distintos mercados</h3>
+          <p class="v12__viewer-desc">Entendemos las diferencias regulatorias, comerciales y operativas de cada país, lo que nos permite ajustar nuestra oferta según las necesidades de cada cliente.</p>
+          <div class="v12__viewer-next"><b>→</b> Siguiente: § 05 Compromiso con el servicio y la continuidad operativa</div>
+        </div>
+        <div class="v12__viewer-media"><video src="../assets/videos/video-02card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+      </div>
+      <div class="v12__viewer-panel" data-pillar="5">
+        <div class="v12__viewer-content">
+          <div class="v12__viewer-num">05</div>
+          <h3 class="v12__viewer-title">Compromiso con el servicio y la continuidad operativa</h3>
+          <p class="v12__viewer-desc">Priorizamos relaciones comerciales estables, con foco en cumplimiento, comunicación y confiabilidad en cada etapa del proceso.</p>
+          <div class="v12__viewer-next"><b>↻</b> Volver al inicio: § 01 Experiencia en producción alimentaria</div>
+        </div>
+        <div class="v12__viewer-media"><div class="flat-bg">cierre · sin video</div></div>
+      </div>
+    </div>
+  </div></div>
+</div></div>
+
+<!-- ═════════════ V13 · MAGAZINE SPREAD ═════════════ -->
+<div class="label" id="v13">
+  <span class="n">13</span><span class="fam">C · lista</span><span class="t">Magazine spread alternado · foto + texto</span>
+  <span class="d">L14 del research. Cada pilar en fila full-width con foto/video alternando lado y texto al otro. Tier editorial revista. Aprovecha activos de fotografía de planta.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>Cada pilar como página de revista — foto, texto, alternado.</p>
+  </div>
+  <div class="body"><div class="v13__list">
+    <div class="v13__row">
+      <div class="v13__media"><span class="v13__media-cap">§ 01 · planta</span></div>
+      <article class="p p--video"><span class="p__ind">video</span><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3><p class="p__desc">130 años de trayectoria.</p></article>
+    </div>
+    <div class="v13__row flip">
+      <div class="v13__media" style="background:#0b1e6b"><span class="v13__media-cap">§ 02 · vinagres</span></div>
+      <article class="p p--hover"><span class="p__ind">hover</span><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3><p class="p__desc">Líderes BRC AA · 4 variedades.</p></article>
+    </div>
+    <div class="v13__row">
+      <div class="v13__media" style="background:#f4f2ee"><span class="v13__media-cap" style="color:#0b1e6b">§ 03 · marca privada</span></div>
+      <article class="p p--next"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3><p class="p__desc">Marca privada · distribuidores · retail.</p></article>
+    </div>
+  </div></div>
+</div></div>
+
+<!-- ═════════════ V14 · HORIZONTAL SCROLL ═════════════ -->
+<div class="label" id="v14">
+  <span class="n">14</span><span class="fam">D · scroll</span><span class="t">Horizontal scroll panels · scroll-snap</span>
+  <span class="d">L15 del research. 5 panels en fila · scroll horizontal con snap. Variante "lite" sin GSAP pin (CSS scroll-snap nativo). Sirve también en mobile como swipe natural.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>Cinco pilares en panels horizontales · desliza para descubrir cada uno.</p>
+  </div>
+  <div style="padding:0 32px"><div class="v14__scroll"><div class="v14__panels">
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3><p class="p__desc">130 años de trayectoria.</p></article>
+    <article class="p p--hover"><span class="p__ind">hover</span><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3><p class="p__desc">Líderes BRC AA · 4 variedades.</p></article>
+    <article class="p p--next"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3><p class="p__desc">Marca privada · distribuidores.</p></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3><p class="p__desc">Adaptación regulatoria.</p></article>
+    <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso con el servicio y la continuidad operativa</h3><p class="p__desc">Continuidad operativa.</p></article>
+  </div></div></div>
+  <div class="v14__hint">← arrastra horizontal · scroll-snap activo →</div>
+</div></div>
+
+<!-- ═════════════ V15 · STACKED Z-AXIS ═════════════ -->
+<div class="label" id="v15">
+  <span class="n">15</span><span class="fam">D · scroll</span><span class="t">Stacked z-axis · Apple keynote</span>
+  <span class="d">L17 del research. Cards apiladas en perspectiva. Solo la "frontal" se ve completa, las otras al fondo desenfocadas. Scroll horizontal o click en dots cambia la frontal.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>Un pilar al frente · los demás al fondo · scroll para cambiar.</p>
+  </div>
+  <div class="v15__stage"><div class="v15__cards">
+    <article class="p p--video"><div class="p__bg"></div><span class="p__num">01</span></article>
+    <article class="p p--video"><div class="p__bg"></div><span class="p__num">04</span></article>
+    <article class="p p--hover" style="min-height:280px;padding:2rem"><span class="p__ind">hover · al frente</span><span class="p__num" style="font-size:2rem">02</span><h3 class="p__title" style="font-size:1.3rem">Especialización en vinagres</h3><p class="p__desc" style="font-size:.9rem">Líderes en mercado vinagrero chileno · BRC AA · 4 variedades de vinagre. Activo central de la marca.</p></article>
+  </div></div>
+  <div class="v15__nav">
+    <span class="v15__nav-dot"></span>
+    <span class="v15__nav-dot active"></span>
+    <span class="v15__nav-dot"></span>
+    <span class="v15__nav-dot"></span>
+    <span class="v15__nav-dot"></span>
+  </div>
+</div></div>
+
+<!-- ═════════════ V16 · VERTICAL SCROLL SNAP ═════════════ -->
+<div class="label" id="v16">
+  <span class="n">16</span><span class="fam">D · scroll</span><span class="t">Vertical scroll snap · cada pilar viewport completo</span>
+  <span class="d">Variante D del research. Cada pilar ocupa el viewport completo con scroll-snap-y. Texto izq + media der. Inmersivo · permite pause real para leer.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>Cinco pilares · cada uno una pantalla. Scroll vertical con snap.</p>
+  </div>
+  <div style="padding:0 32px;margin-top:1.5rem"><div class="v16__viewport">
+    <div class="v16__panel">
+      <div class="v16__panel-text"><span class="num">01</span><h3 class="ttl">Experiencia productiva</h3><p class="desc">130 años de trayectoria en alimentos chilenos · oficio acumulado en cinco generaciones.</p></div>
+      <div class="v16__panel-media"></div>
+    </div>
+    <div class="v16__panel" style="background:var(--primary-dark)">
+      <div class="v16__panel-text" style="background:var(--primary-dark);color:#fff"><span class="num" style="color:var(--accent)">02</span><h3 class="ttl" style="color:#fff">Especialización en vinagres</h3><p class="desc" style="color:rgba(255,255,255,.75)">Líderes en mercado chileno de vinagres. BRC AA · 4 variedades.</p></div>
+      <div class="v16__panel-media" style="background:linear-gradient(135deg,#c9a227,#0b1e6b)"></div>
+    </div>
+    <div class="v16__panel" style="background:var(--bone)">
+      <div class="v16__panel-text" style="background:var(--bone)"><span class="num">03</span><h3 class="ttl">Capacidad para terceros</h3><p class="desc">Marca privada · distribuidores · retail · food service.</p></div>
+      <div class="v16__panel-media"></div>
+    </div>
+  </div></div>
+  <div class="v14__hint">↓ scroll vertical · cada pilar snap full viewport ↓</div>
+</div></div>
+
+<!-- ═════════════ V17 · HUB & SPOKE ═════════════ -->
+<div class="label" id="v17">
+  <span class="n">17</span><span class="fam">E · conceptual</span><span class="t">Hub & spoke · § 02 centro irradia</span>
+  <span class="d">L18 del research. § 02 (Especialización vinagres = activo central) en el medio rodeada de 4 satélites. Comunica radial: "todo lo que hacemos parte de saber hacer vinagre".</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro intro--center">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>El núcleo y sus consecuencias.</p>
+  </div>
+  <div class="body"><div class="v17__grid">
+    <article class="p p--video p--tl"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3></article>
+    <article class="p p--hover p--center"><span class="p__ind">hover · centro</span><span class="p__num">★ 02</span><h3 class="p__title">Especialización en soluciones industriales</h3><p class="p__desc">Activo central de la marca · todo lo demás se construye desde aquí.</p></article>
+    <article class="p p--next p--tr"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3></article>
+    <article class="p p--video p--bl"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3></article>
+    <article class="p p--video p--br"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso</h3></article>
+  </div></div>
+</div></div>
+
+<!-- ═════════════ V18 · TIMELINE 130 AÑOS ═════════════ -->
+<div class="label" id="v18">
+  <span class="n">18</span><span class="fam">E · conceptual</span><span class="t">Timeline horizontal · 1893 → 2026</span>
+  <span class="d">L19 del research. Pilares como hitos en línea de tiempo · aprovecha el activo "130 años". Riesgo: las cards deben mapear a fechas reales o el timeline miente.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>Cinco pilares como hitos en una línea de oficio que arranca en 1893.</p>
+  </div>
+  <div class="v18__timeline">
+    <div class="v18__line">
+      <div class="dot"></div><div class="dot"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+      <span class="yr">1893</span><span class="yr">1950</span><span class="yr">2026</span><span class="yr">2030</span><span class="yr">→</span>
+    </div>
+    <div class="v18__grid">
+      <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Fundación</h3><p class="p__desc">Primer vinagre Traverso.</p></article>
+      <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3><p class="p__desc">Líderes vinagres Chile.</p></article>
+      <article class="p p--hover"><span class="p__ind">hito actual</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3><p class="p__desc">Marca privada · expansión.</p></article>
+      <article class="p p--next"><span class="p__ind">siguiente</span><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3><p class="p__desc">Adaptación regulatoria.</p></article>
+      <article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso futuro</h3><p class="p__desc">Continuidad.</p></article>
+    </div>
+  </div>
+</div></div>
+
+<!-- ═════════════ V19 · CONSTELLATION ═════════════ -->
+<div class="label" id="v19">
+  <span class="n">19</span><span class="fam">E · conceptual</span><span class="t">Constellation · cards con líneas conectoras</span>
+  <span class="d">Variante de Familia E. Cards posicionadas absolutamente con líneas SVG punteadas que conectan unas con otras. Sugiere red, interdependencia. Tier conceptual.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>Cinco pilares conectados — cada uno se apoya en otros para formar la red de la marca.</p>
+  </div>
+  <div class="v19__stage">
+    <svg class="v19__svg" viewBox="0 0 1000 500" preserveAspectRatio="none">
+      <line x1="160" y1="100" x2="500" y2="80"/>
+      <line x1="160" y1="100" x2="800" y2="280"/>
+      <line x1="500" y1="80" class="active" x2="800" y2="280"/>
+      <line x1="500" y1="80" x2="280" y2="430"/>
+      <line x1="800" y1="280" x2="600" y2="450"/>
+      <line x1="280" y1="430" x2="600" y2="450"/>
+    </svg>
+    <div class="v19__node v19__node-1"><article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3></article></div>
+    <div class="v19__node v19__node-2"><article class="p p--hover"><span class="p__ind">hover</span><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3></article></div>
+    <div class="v19__node v19__node-3"><article class="p p--next"><span class="p__ind">siguiente</span><span class="p__num">03</span><h3 class="p__title">Capacidad de desarrollo para terceros</h3></article></div>
+    <div class="v19__node v19__node-4"><article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3></article></div>
+    <div class="v19__node v19__node-5"><article class="p p--video"><span class="p__ind">video</span><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso</h3></article></div>
+  </div>
+</div></div>
+
+<!-- ═════════════ V20 · THEATER STAGE ═════════════ -->
+<div class="label" id="v20">
+  <span class="n">20</span><span class="fam">E · conceptual</span><span class="t">Theater stage · 1 al frente + 4 audiencia</span>
+  <span class="d">Variante de Familia E inspirada en stacked z-axis. La card hovereada al frente, las otras 4 al fondo en arco como audiencia rotada. Hover cambia cuál está al frente.</span>
+</div>
+<div class="stage"><div class="demo">
+  <div class="intro intro--center">
+    <span class="eyebrow">— Quiénes Somos</span>
+    <h2>La evolución internacional de <em>Traverso</em></h2>
+    <p>Un pilar al frente · los demás en formación al fondo.</p>
+  </div>
+  <div class="v20__stage">
+    <div class="v20__back">
+      <article class="p p--video"><div class="p__bg"></div><span class="p__num">01</span><h3 class="p__title">Experiencia en producción alimentaria</h3></article>
+      <article class="p p--next"><span class="p__num">03</span><h3 class="p__title">Capacidad</h3></article>
+      <article class="p p--video"><div class="p__bg"></div><span class="p__num">04</span><h3 class="p__title">Flexibilidad y adaptación a distintos mercados</h3></article>
+      <article class="p p--video"><div class="p__bg"></div><span class="p__num">05</span><h3 class="p__title">Compromiso</h3></article>
+    </div>
+    <article class="p p--hover v20__front"><span class="p__ind">al frente</span><span class="p__num">02</span><h3 class="p__title">Especialización en soluciones industriales</h3><p class="p__desc">Líderes en mercado vinagrero · BRC AA · 4 variedades.</p></article>
+  </div>
+</div></div>
+
+<!-- ═════════════ RECOMENDACIÓN ═════════════ -->
+<div class="label" style="margin-top:80px">
+  <span class="n" style="background:var(--primary-dark);color:#fff;border-color:var(--primary-dark)">★</span>
+  <span class="t">Top 3 candidatos según research</span>
+  <span class="d">Filtrados por: 5 pilares paritarios + Polo Editorial sobrio + presencia industrial Traverso</span>
+</div>
+<div class="stage"><div class="demo" style="padding:32px 40px;background:#fff">
+  <ol style="font-family:var(--ff-sans);font-size:.92rem;color:var(--text);line-height:1.8;padding-left:24px">
+    <li><strong style="color:var(--primary-dark)">V02 Grid 5 cols horizontal</strong> — refuerza el recorrido lineal porque ES físicamente una línea. Mantiene la simetría institucional. Mejora directa sobre V01 actual.</li>
+    <li><strong style="color:var(--primary-dark)">V05 Hero § 02 + 4 cards</strong> — comunica jerarquía editorial real. Refuerza "vinagres = activo central de marca". Tier Pentagram.</li>
+    <li><strong style="color:var(--primary-dark)">V13 Magazine spread alternado</strong> — aprovecha la sesión fotográfica de planta. Tier editorial revista, máxima sobriedad. Ideal si Traverso quiere tono "memoria anual".</li>
+  </ol>
+  <div style="margin-top:18px;padding:14px 18px;background:#fff3e0;border-left:3px solid #ffb74d;font-size:.82rem;color:#7a4900;line-height:1.6">
+    <strong>Descartados para Traverso:</strong> V14/V15/V16 scroll-driven (tier agency, B2B alimentos puede sentirse pretencioso) · V19 constellation (decorativo si no hay relación real entre pilares) · V20 theater (B2C lujoso, no B2B alimentos) · V17 hub & spoke salvo si el copy SOSTIENE que § 02 es el centro real.
+  </div>
+</div></div>
+
+<script>
+// V12 panel · sidebar interactiva · last-active-persists (igual al index)
+(function v12Controller(){
+  document.querySelectorAll('.v12__panel').forEach(panel => {
+    const rows    = panel.querySelectorAll('.v12__sidebar-row');
+    const viewers = panel.querySelectorAll('.v12__viewer-panel');
+    if (!rows.length || !viewers.length) return;
+    function setActive(idx){
+      const total = rows.length;
+      const nextIdx = (idx + 1) % total;
+      rows.forEach((r,i) => {
+        r.classList.toggle('is-active', i === idx);
+        r.classList.toggle('is-next',   i === nextIdx);
+      });
+      viewers.forEach((v,i) => v.classList.toggle('is-active', i === idx));
+    }
+    setActive(0); // default § 01
+    rows.forEach((r, i) => {
+      r.addEventListener('mouseenter', () => setActive(i));
+      r.addEventListener('click',      () => setActive(i));
+    });
+  });
+})();
+</script>
+</body>
+</html>

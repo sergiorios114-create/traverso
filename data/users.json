@@ -1,0 +1,18 @@
+{
+    "users": [
+        {
+            "username": "MasterWBA12532",
+            "password": "$2y$12$u8OW8wQ4dV2K2FpCCqto1OPr9LqHuiiUkBIPbsWb9INVr9Fo6Kca6",
+            "role": "admin",
+            "created_at": "2026-04-08",
+            "hashed_at": "2026-04-08 22:40:10"
+        },
+        {
+            "username": "InterMaster186024",
+            "password": "$PLAIN$F00ds!Int3rn@t1onal#Br(2026",
+            "role": "admin",
+            "created_at": "2026-04-08"
+        }
+    ],
+    "_note": "Passwords with $PLAIN$ prefix are auto-hashed on first successful login via bcrypt."
+}

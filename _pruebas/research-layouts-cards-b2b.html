@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Layouts B2B con N cards — v1</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fafafa;color:#222;line-height:1.5;font-size:14px}
+a{color:inherit}
+.container{max-width:1080px;margin:0 auto;padding:24px 20px 140px}
+
+.topnav{position:sticky;top:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid #e0e0e0;z-index:100}
+.topnav-inner{max-width:1080px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.topnav .brand{font-size:13px;font-weight:700;flex-shrink:0}
+.topnav .brand span{color:#888;font-weight:400;margin-left:6px}
+.topnav .anchors{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;font-size:11px}
+.topnav .anchors a{padding:4px 9px;border-radius:12px;text-decoration:none;color:#666;border:1px solid transparent}
+.topnav .anchors a:hover{background:#f0f0f0;color:#222;border-color:#e0e0e0}
+
+.hero{padding:56px 0 28px;border-bottom:1px solid #e0e0e0;margin-bottom:32px}
+.hero .kicker{font-size:11px;font-weight:700;letter-spacing:.8px;color:#888;text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-size:clamp(34px,5.5vw,52px);line-height:1.05;letter-spacing:-.025em;font-weight:800;margin-bottom:16px}
+.hero h1 em{font-style:italic;color:#0b1e6b}
+.hero .lead{font-size:16px;color:#555;max-width:680px;margin-bottom:20px}
+.hero .meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px}
+.hero .meta span{padding:4px 10px;border-radius:12px;background:#222;color:#fff}
+.hero .meta span.alt{background:#fff;color:#222;border:1px solid #ccc}
+
+.sh{margin:56px 0 14px;border-top:2px solid #222;padding-top:18px}
+.sh .n{font-size:11px;font-weight:700;color:#888;letter-spacing:.8px;text-transform:uppercase}
+.sh h2{font-size:28px;font-weight:800;letter-spacing:-.01em;margin-top:4px;line-height:1.1}
+.sh p{font-size:14px;color:#666;margin-top:6px;max-width:680px}
+
+.sub{margin:28px 0 10px;padding-top:6px}
+.sub .n{font-size:10px;font-weight:700;color:#aaa;letter-spacing:.6px;text-transform:uppercase}
+.sub h3{font-size:19px;font-weight:700;letter-spacing:-.005em;margin-top:2px}
+.sub p{font-size:13px;color:#666;margin-top:4px;max-width:640px}
+
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;margin:10px 0;overflow:hidden}
+.card-h{padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f0f0f0;flex-wrap:wrap}
+.card-t{font-size:13px;font-weight:700;flex:1;min-width:180px}
+.card-t .sub-t{color:#999;font-weight:400;font-size:12px}
+.card-b{padding:14px}
+
+.tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 7px;border-radius:4px;color:#fff;white-space:nowrap}
+.tag-ctx{background:#455a64}
+.tag-mech{background:#0d47a1}
+.tag-polo{background:#6a1b9a}
+.tag-pat{background:#00695c}
+.tag-adj{background:#e65100}
+.tag-cont{background:#7b1fa2}
+.tag-anti{background:#b71c1c}
+.tag-rec{background:#ff6f00}
+
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 10px}
+.chip{font-size:11px;background:#f5f5f5;border:1px solid #e0e0e0;border-radius:12px;padding:2px 9px;color:#555}
+.chip-dark{background:#0b1e6b;color:#fff;border-color:#0b1e6b}
+.chip-warn{background:#fff3e0;border-color:#ffb74d;color:#e65100;font-weight:600}
+.chip-ok{background:#e8f5e9;border-color:#81c784;color:#2e7d32;font-weight:600}
+
+.quote{background:#fdf6e3;border-left:3px solid #d4a017;padding:10px 14px;margin:8px 0;border-radius:0 4px 4px 0;font-size:13px}
+.note{background:#e3f2fd;border-left:3px solid #1565c0;padding:10px 14px;margin:8px 0;border-radius:0 4px 4px 0;font-size:13px}
+.warn{background:#fce4ec;border-left:3px solid #c62828;padding:10px 14px;margin:8px 0;border-radius:0 4px 4px 0;font-size:13px}
+.success{background:#e8f5e9;border-left:3px solid #2e7d32;padding:10px 14px;margin:8px 0;border-radius:0 4px 4px 0;font-size:13px}
+
+ul.bl{list-style:none}
+ul.bl li{font-size:13px;color:#555;padding:3px 0;padding-left:16px;position:relative}
+ul.bl li::before{content:"→";position:absolute;left:0;color:#bbb}
+
+/* MOCKUPS layout reveal */
+.mock{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:14px;margin:10px 0;overflow:hidden}
+.mock-l{font-size:9px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline}
+.mock-l span{font-style:italic;color:#666;font-weight:400;letter-spacing:0;text-transform:none;font-size:11px}
+.stage{aspect-ratio:16/9;background:#f4f6fa;border:1px solid #e8eaf0;border-radius:4px;padding:14px;position:relative;overflow:hidden}
+
+/* Pillar mock — base */
+.pl{background:#fff;border:1px solid #d0d6e0;padding:10px 12px;border-radius:3px;font-size:10px;line-height:1.4;display:flex;flex-direction:column;gap:4px;position:relative;transition:background .2s ease}
+.pl .num{font-family:'Courier New',monospace;font-size:13px;color:#c9a227;font-weight:700;line-height:1}
+.pl .t{font-family:Georgia,serif;font-size:11px;font-weight:700;color:#0b1e6b;line-height:1.2}
+.pl .d{font-size:9px;color:#666;line-height:1.5}
+.pl.video{background:linear-gradient(135deg,#1a3380,#0b1e6b);color:#fff}
+.pl.video .num,.pl.video .t,.pl.video .d{color:#fff}
+.pl.video .num{color:#c9a227}
+.pl.video::after{content:"▶";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:20px;color:rgba(255,255,255,.4)}
+.pl.active{background:#0b1e6b;color:#fff}
+.pl.active .num,.pl.active .t,.pl.active .d{color:#fff}
+.pl.active .num{color:#c9a227}
+.pl-hover-ind{position:absolute;top:6px;right:6px;font-size:8px;color:#c9a227;background:rgba(201,162,39,.15);padding:1px 5px;border-radius:8px;letter-spacing:.5px;text-transform:uppercase;font-weight:700}
+
+.tips{margin-top:10px;padding:10px 14px;background:#f8f8f8;border-left:3px solid #0b1e6b;font-size:12px;border-radius:0 4px 4px 0}
+.tips b{display:block;margin-bottom:4px;font-size:9px;color:#888;letter-spacing:.5px;text-transform:uppercase;font-weight:800}
+
+.mx{border:1px solid #222;border-radius:6px;overflow:hidden;margin:10px 0;font-size:12px}
+.mx-h{display:grid;grid-template-columns:1.3fr 1fr 1fr;background:#222;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.mx-h div{padding:10px 12px;border-right:1px solid #444}
+.mx-h div:last-child{border-right:none}
+.mx-r{display:grid;grid-template-columns:1.3fr 1fr 1fr;border-bottom:1px solid #eee}
+.mx-r:last-child{border-bottom:none}
+.mx-r div{padding:10px 12px;border-right:1px solid #eee}
+.mx-r div:last-child{border-right:none}
+.mx-r .q{background:#f8f8f8;font-weight:700;font-size:11px}
+
+.polos{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0 16px}
+.pole{border:1px solid #ccc;border-radius:6px;padding:14px;font-size:12px}
+.pole h4{font-size:13px;margin-bottom:6px;font-weight:800}
+.pole.a{background:#f8f8f8;border-color:#bbb}
+.pole.b{background:#e0f2f1;border-color:#80cbc4}
+.pole.c{background:#0b1e6b;color:#fff;border-color:#0b1e6b}
+.pole .ag{font-size:10px;opacity:.78;margin-top:8px;line-height:1.4}
+.pole .mt{font-size:10px;margin-top:6px;color:#777}
+.pole.c .mt{color:#a8c7f0}
+
+code{font-family:ui-monospace,'SF Mono',Menlo,monospace;background:#f0f0f0;padding:1px 5px;border-radius:3px;font-size:12px}
+
+.foot{margin-top:72px;padding:32px 0 10px;border-top:2px solid #222;font-size:13px;color:#666}
+.foot h4{color:#222;font-size:15px;margin-bottom:10px;font-weight:800}
+
+/* FEEDBACK SYSTEM */
+.fb{position:absolute;top:8px;right:8px;display:flex;gap:3px;z-index:5;opacity:.55;transition:opacity .2s}
+.fb:hover{opacity:1}
+.card,.mock,.polos,.mx{position:relative}
+.fb button{width:22px;height:22px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;padding:0;color:#666;font-weight:700;transition:all .15s}
+.fb button:hover{transform:scale(1.08);border-color:#222;color:#222}
+.fb button.on[data-s="ok"]{background:#2e7d32;border-color:#2e7d32;color:#fff}
+.fb button.on[data-s="more"]{background:#f57c00;border-color:#f57c00;color:#fff}
+.fb button.on[data-s="drop"]{background:#c62828;border-color:#c62828;color:#fff}
+.fb button[data-s="note"]{font-size:10px}
+.fb button.on[data-s="note"]{background:#1565c0;border-color:#1565c0;color:#fff}
+
+.note-panel{background:#f5f9ff;border-top:1px solid #bbd6ed;padding:10px 14px;display:none}
+.note-panel.open{display:block}
+.note-panel label{display:block;font-size:10px;font-weight:700;color:#1565c0;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.note-panel textarea{width:100%;border:1px solid #bbd6ed;border-radius:4px;padding:8px 10px;font-family:inherit;font-size:13px;line-height:1.5;color:#222;background:#fff;resize:vertical;min-height:60px;outline:none}
+.note-panel textarea:focus{border-color:#1565c0}
+.note-panel .hint{font-size:10px;color:#888;margin-top:4px;display:flex;justify-content:space-between}
+.note-pill{display:flex;align-items:flex-start;gap:8px;padding:8px 12px;background:#e3f2fd;border-top:1px solid #bbd6ed;font-size:12px;color:#0d47a1;cursor:pointer}
+.note-pill b{font-weight:700;margin-right:4px}
+.note-pill span{flex:1;line-height:1.45}
+.mock .note-panel,.mock .note-pill{margin:8px -14px -14px;border-radius:0 0 5px 5px}
+.card .note-panel,.card .note-pill{margin:0}
+
+.card.fb-ok,.mock.fb-ok{border-color:#81c784;box-shadow:0 0 0 1px #81c784 inset}
+.card.fb-more,.mock.fb-more{border-color:#ffb74d;box-shadow:0 0 0 1px #ffb74d inset;background:#fff9ec}
+.card.fb-drop,.mock.fb-drop{opacity:.35;filter:grayscale(.7)}
+.card.fb-drop::after,.mock.fb-drop::after{content:"MARCADO PARA DESCARTAR · clic en ✕ para revertir";position:absolute;inset:0;background:rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;letter-spacing:.8px;color:#c62828;text-transform:uppercase;pointer-events:none;border-radius:8px}
+
+.fbsum{position:sticky;top:50px;background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px 14px;margin:10px 0 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.fbsum b{font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#888}
+.fbsum .n{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:12px;font-weight:700}
+.fbsum .n.ok{background:#e8f5e9;color:#2e7d32}
+.fbsum .n.more{background:#fff3e0;color:#e65100}
+.fbsum .n.drop{background:#fce4ec;color:#c62828}
+.fbsum .n.tot{background:#f5f5f5;color:#555}
+.fbsum .n.note{background:#e3f2fd;color:#0d47a1}
+.fbsum .act{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.fbsum .act button{font-size:11px;padding:4px 10px;border:1px solid #ccc;background:#fff;border-radius:12px;cursor:pointer;color:#555;font-weight:600}
+.fbsum .act button:hover{border-color:#222;color:#222}
+.fbsum .act button.danger:hover{border-color:#c62828;color:#c62828}
+
+body.filter-more .card:not(.fb-more),body.filter-more .mock:not(.fb-more){display:none}
+body.filter-more .sh,body.filter-more .sub,body.filter-more .polos,body.filter-more .mx{opacity:.25}
+
+@media (max-width:680px){
+  .topnav .anchors{width:100%;margin:6px 0 0;justify-content:flex-start;overflow-x:auto}
+  .polos,.mx-h,.mx-r{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="fbsum" id="fbsum">
+  <b>Feedback</b>
+  <span class="n tot" id="fb-tot">0 módulos</span>
+  <span class="n ok" id="fb-ok">0 ✓ bien</span>
+  <span class="n more" id="fb-more">0 ↻ seguir</span>
+  <span class="n drop" id="fb-drop">0 ✕ descartar</span>
+  <span class="n note" id="fb-note">0 💬 notas</span>
+  <div class="act">
+    <button id="fb-filter">Ver solo ↻ seguir</button>
+    <button id="fb-export">Exportar JSON</button>
+    <button id="fb-reset" class="danger">Reset</button>
+  </div>
+</div>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">Research Layouts B2B · N cards<span>— v1</span></div>
+    <div class="anchors">
+      <a href="#top">Top</a>
+      <a href="#contexto">00 Contexto</a>
+      <a href="#funcion">01 Función vs forma</a>
+      <a href="#polos">02 Polos</a>
+      <a href="#layouts">03 Layouts</a>
+      <a href="#variables">04 Variables</a>
+      <a href="#anti">05 Anti</a>
+      <a href="#mapeo">06 Mapeo</a>
+      <a href="#rec">07 Decisión</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="kicker">Research · Layout B2B · 2026-04-26</div>
+  <h1>Cómo se diagraman <em>N cards</em><br>en B2B 2026.</h1>
+  <p class="lead">Catálogo de patrones de diagramación para módulos B2B corporativos con N tarjetas — productos, servicios, pilares, equipo, casos, certificaciones, partners. Independiente de cualquier mecánica de interacción. Mapea forma con contenido: qué layout funciona para qué tipo de cards, cuándo se rompe, cuándo brilla.</p>
+  <div class="meta">
+    <span>20 layouts</span>
+    <span class="alt">5 polos</span>
+    <span class="alt">Mocks CSS</span>
+    <span class="alt">~14 min lectura</span>
+  </div>
+</section>
+
+<!-- §00 CONTEXTO -->
+<div class="sh" id="contexto">
+  <div class="n">00 — Contexto</div>
+  <h2>Cualquier sitio B2B se reduce a "n cards en una grilla"</h2>
+  <p>En B2B corporativo el patrón "N tarjetas" aparece literalmente en TODA página: productos, servicios, equipo, pilares, casos, certificaciones, partners, integraciones, oficinas, beneficios. La diagramación de esas N cards es una de las decisiones de diseño más recurrentes — y la más subestimada.</p>
+</div>
+
+<div class="card" data-fb="ctx-uses">
+  <div class="card-h"><span class="tag tag-ctx">Inventario</span><div class="card-t">Dónde aparecen módulos con N cards en sitios B2B</div></div>
+  <div class="card-b">
+    <div class="mx">
+      <div class="mx-h"><div>Tipo de contenido</div><div>N típico</div><div>Característica</div></div>
+      <div class="mx-r"><div class="q">Productos / líneas</div><div>3-8</div><div>Foto + nombre + categoría · jerarquía editorial posible</div></div>
+      <div class="mx-r"><div class="q">Servicios / capabilities</div><div>3-6</div><div>Ícono o imagen + texto · suelen ser pares</div></div>
+      <div class="mx-r"><div class="q">Pilares / propuesta de valor</div><div>4-6</div><div>Numerados § XX · todos pesan parejo</div></div>
+      <div class="mx-r"><div class="q">Equipo</div><div>5-30+</div><div>Foto + nombre + rol · pueden ser muchas</div></div>
+      <div class="mx-r"><div class="q">Casos / clientes</div><div>4-12</div><div>Foto/logo + título · ranking por peso</div></div>
+      <div class="mx-r"><div class="q">Certificaciones</div><div>3-8</div><div>Logo + nombre · paritarias por defecto</div></div>
+      <div class="mx-r"><div class="q">Partners / integraciones</div><div>6-50+</div><div>Logo monocromático · alta cantidad</div></div>
+      <div class="mx-r"><div class="q">Oficinas / mercados</div><div>3-30</div><div>Mapa o foto + ubicación</div></div>
+      <div class="mx-r"><div class="q">Testimonios</div><div>3-6</div><div>Foto + cita + nombre/cargo</div></div>
+      <div class="mx-r"><div class="q">Beneficios / por qué</div><div>3-6</div><div>Pictogram + título + texto corto</div></div>
+    </div>
+    <div class="note"><strong>Implicación:</strong> el mismo sitio B2B suele tener 4-7 módulos distintos con N cards. Si todos usan el mismo layout (grid simétrico) el sitio se siente repetitivo. Variar la diagramación según contenido es estrategia visual real.</div>
+  </div>
+</div>
+
+<!-- §01 FUNCIÓN VS FORMA -->
+<div class="sh" id="funcion">
+  <div class="n">01 — Función vs forma</div>
+  <h2>El layout debe servir al contenido, no al revés</h2>
+  <p>Antes de elegir un patrón visual hay que responder qué quiere comunicar el módulo. La forma sigue a la función — no es decoración intercambiable.</p>
+</div>
+
+<div class="card" data-fb="fn-3-questions">
+  <div class="card-h"><span class="tag tag-mech">Filtro</span><div class="card-t">3 preguntas para decidir el layout antes de mirar referentes</div></div>
+  <div class="card-b">
+    <ol style="padding-left:20px;font-size:13px;color:#555;line-height:1.85">
+      <li><b style="color:#0b1e6b">¿Las cards pesan parejo o hay jerarquía?</b><br>Pesan parejo (4 servicios = 4 servicios) → simétrico. Hay jerarquía (1 producto estrella + 4 secundarios) → asimétrico.</li>
+      <li><b style="color:#0b1e6b">¿Hay relación secuencial entre las cards?</b><br>Sí (proceso 1→5, evolución temporal) → lineal/timeline. No (grupo de servicios independientes) → grid o mosaico.</li>
+      <li><b style="color:#0b1e6b">¿La info por card es densa o liviana?</b><br>Densa (paragrafos + chips + meta) → cards más anchas, menos por fila. Liviana (logo + 2 palabras) → más cards por fila, más densidad visual.</li>
+    </ol>
+    <div class="success"><strong>Heurística:</strong> "el layout es la respuesta visual a las 3 preguntas". Si el layout que elegiste no responde alguna, está mal — independientemente de qué tan lindo se vea.</div>
+  </div>
+</div>
+
+<!-- §02 POLOS -->
+<div class="sh" id="polos">
+  <div class="n">02 — Polos de diagramación</div>
+  <h2>Cinco familias de layout</h2>
+  <p>Toda diagramación de N cards cae en una de cinco familias. Cada una tiene sub-patrones, pero la familia define el tono.</p>
+</div>
+
+<div class="polos" data-fb="polos-5-overview">
+  <div class="pole a">
+    <h4>A · Simétrico rígido</h4>
+    <p>Grid regular (2x2, 3x2, 4x1). Todas iguales. Tono institucional, ordenado, predecible.</p>
+    <div class="ag">Ej. Cargill, McKinsey services, Olam.</div>
+    <div class="mt">Confianza por orden</div>
+  </div>
+  <div class="pole b">
+    <h4>B · Asimétrico editorial</h4>
+    <p>Bento, hero+cards, L-shape, 12-col. Hay jerarquía. Tono editorial, autor con voz.</p>
+    <div class="ag">Ej. Pentagram, Apple WWDC, Order NY.</div>
+    <div class="mt">Confianza por criterio</div>
+  </div>
+  <div class="pole c">
+    <h4>C · Lista lineal</h4>
+    <p>Una columna numerada. Index, accordion, sidebar+viewer. Tono dossier, memoria anual.</p>
+    <div class="ag">Ej. Basic Agency, Locomotive about, Frères.</div>
+    <div class="mt">Confianza por reducción</div>
+  </div>
+</div>
+
+<div class="polos" data-fb="polos-5-overview2" style="margin-top:6px">
+  <div class="pole" style="background:#fff8e1;border-color:#ffe082">
+    <h4 style="color:#7a4900">D · Scroll / motion</h4>
+    <p>Horizontal scroll panels, marquee infinito, stacked z-axis. La diagramación se completa en el tiempo, no en el espacio.</p>
+    <div class="ag" style="color:#7a4900">Ej. Active Theory, Locomotive cases, Studio Mesh.</div>
+    <div class="mt" style="color:#7a4900">Confianza por show controlado</div>
+  </div>
+  <div class="pole" style="background:#f3e5f5;border-color:#ce93d8">
+    <h4 style="color:#4a148c">E · Conceptual</h4>
+    <p>Hub & spoke, timeline, mapa, treemap, flow. La diagramación misma comunica una idea (radial, temporal, jerárquica).</p>
+    <div class="ag" style="color:#4a148c">Ej. corporate annual reports, IBM design, financial datavis.</div>
+    <div class="mt" style="color:#4a148c">Confianza por insight visual</div>
+  </div>
+  <div class="pole" style="background:#fafafa;border-color:#bdbdbd;color:#888;align-self:flex-start;padding:10px 14px">
+    <h4 style="color:#888;font-size:11px">★ Híbridos</h4>
+    <p style="font-size:11px;line-height:1.4">Casi todos los sitios reales mezclan dos polos. La taxonomía define la dominante.</p>
+  </div>
+</div>
+
+<!-- §03 LAYOUTS -->
+<div class="sh" id="layouts">
+  <div class="n">03 — Layouts</div>
+  <h2>20 patrones de diagramación</h2>
+  <p>Cada patrón con mock CSS, polo asignado, cantidad típica de cards, y nota de cuándo aplicarlo. Agrupados por las 5 familias de §02.</p>
+</div>
+
+<!-- ─────── A · SIMÉTRICO RÍGIDO ─────── -->
+<div class="sub"><div class="n">Familia A</div><h3>Simétrico rígido · grids regulares</h3><p>Todas las cards iguales en tamaño y peso visual. Lectura por filas/columnas. Tono institucional.</p></div>
+
+<div class="mock" data-fb="L01-grid2x2">
+  <div class="mock-l">L01 · Grid 2x2<span>4 cards · paritarias · cuadrante</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;background:#d0d6e0;height:100%">
+      <div class="pl"><span class="num">01</span><span class="t">Card 1</span></div>
+      <div class="pl"><span class="num">02</span><span class="t">Card 2</span></div>
+      <div class="pl"><span class="num">03</span><span class="t">Card 3</span></div>
+      <div class="pl"><span class="num">04</span><span class="t">Card 4</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>4 elementos paritarios. Servicios principales, propuestas de valor pares. · <b>Cuándo no</b>Si N ≠ 4 o hay jerarquía clara entre cards.</div>
+</div>
+
+<div class="mock" data-fb="L02-grid3x2">
+  <div class="mock-l">L02 · Grid 3x2 (6 cards)<span>3 columnas · 2 filas · alta densidad horizontal</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:2px;background:#d0d6e0;height:100%">
+      <div class="pl"><span class="num">01</span><span class="t">Card 1</span></div>
+      <div class="pl"><span class="num">02</span><span class="t">Card 2</span></div>
+      <div class="pl"><span class="num">03</span><span class="t">Card 3</span></div>
+      <div class="pl"><span class="num">04</span><span class="t">Card 4</span></div>
+      <div class="pl"><span class="num">05</span><span class="t">Card 5</span></div>
+      <div class="pl"><span class="num">06</span><span class="t">Card 6</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>6 elementos. Pilares value-prop (Nestlé corporate), 6 servicios. Estable y predecible. · <b>Cuándo no</b>Texto largo por card — en mobile las 3 cols colapsan a 1 y el módulo se alarga 6 filas.</div>
+</div>
+
+<div class="mock" data-fb="L03-row-N">
+  <div class="mock-l">L03 · Una fila de N cards (4-6)<span>lectura horizontal pura · proceso o pasos</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:#d0d6e0;height:100%">
+      <div class="pl"><span class="num">01</span><span class="t">Step 1</span><span class="d" style="font-size:9px">Inicia</span></div>
+      <div class="pl"><span class="num">02</span><span class="t">Step 2</span><span class="d" style="font-size:9px">Conecta</span></div>
+      <div class="pl"><span class="num">03</span><span class="t">Step 3</span><span class="d" style="font-size:9px">Procesa</span></div>
+      <div class="pl"><span class="num">04</span><span class="t">Step 4</span><span class="d" style="font-size:9px">Entrega</span></div>
+      <div class="pl"><span class="num">05</span><span class="t">Step 5</span><span class="d" style="font-size:9px">Cierra</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Hay secuencia (proceso de trabajo, etapas, flujo de cliente). Refuerza idea lineal porque ES físicamente una línea. · <b>Cuándo no</b>Cards angostas con texto largo se rompen en mobile.</div>
+</div>
+
+<div class="mock" data-fb="L04-grid-4x2">
+  <div class="mock-l">L04 · Grid 4x2 (8 cards)<span>partners, certs, oficinas · alta cantidad</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr 1fr;gap:2px;background:#d0d6e0;height:100%">
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:14px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:14px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:14px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:14px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:14px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:14px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:14px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:14px">[ logo ]</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Logos de partners, certificaciones, banderas de mercados. Info liviana por card (1 elemento). · <b>Cuándo no</b>Texto descriptivo — la grilla 4x2 con texto se vuelve un muro denso.</div>
+</div>
+
+<div class="mock" data-fb="L05-grid-12">
+  <div class="mock-l">L05 · Grid 6 cols logos / cantidad alta<span>partners + integraciones · 12+ logos posibles</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:1fr 1fr;gap:2px;background:#d0d6e0;height:100%">
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:11px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:11px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:11px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:11px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:11px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:11px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:11px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:11px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:11px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:11px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:11px">[ logo ]</span></div>
+      <div class="pl" style="align-items:center;justify-content:center"><span style="color:#888;font-size:11px">[ logo ]</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>12+ partners, certificaciones extensas, integraciones SaaS. Tratar como "mosaico de credenciales". · <b>Truco</b>Logos en monocromático (greyscale + filter:contrast en hover) unifica visual aun cuando los logos originales son de colores distintos.</div>
+</div>
+
+<!-- ─────── B · ASIMÉTRICO EDITORIAL ─────── -->
+<div class="sub"><div class="n">Familia B</div><h3>Asimétrico editorial · jerarquía visible</h3><p>Cards de tamaños distintos. Una "hero" + secundarias, o composición editorial 12-col. Comunica "no todas pesan igual".</p></div>
+
+<div class="mock" data-fb="L06-hero-cards">
+  <div class="mock-l">L06 · Hero + cards menores<span>1 producto/servicio destacado + N secundarios</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;background:#d0d6e0;height:100%">
+      <div class="pl" style="grid-column:1;grid-row:1/-1;background:#0b1e6b;color:#fff"><span class="num" style="color:#c9a227">★</span><span class="t" style="color:#fff;font-size:14px">Hero · destacado</span><span class="d" style="color:rgba(255,255,255,.7)">Card de mayor jerarquía con copy más extenso.</span></div>
+      <div class="pl"><span class="num">02</span><span class="t">Secundario</span></div>
+      <div class="pl"><span class="num">03</span><span class="t">Secundario</span></div>
+      <div class="pl"><span class="num">04</span><span class="t">Secundario</span></div>
+      <div class="pl"><span class="num">05</span><span class="t">Secundario</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Hay UN producto/servicio estrella + 4 complementarios. Pentagram cases page, Apple WWDC capability stack. · <b>Cuándo no</b>Si las 5 cards pesan igual el hero miente — visualmente promete algo que el contenido no entrega.</div>
+</div>
+
+<div class="mock" data-fb="L07-l-shape">
+  <div class="mock-l">L07 · L-shape · 1 vertical + N stacked<span>una columna ancla + lista vertical de items</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:grid;grid-template-columns:1fr 1.4fr;grid-template-rows:repeat(4,1fr);gap:2px;background:#d0d6e0;height:100%">
+      <div class="pl" style="grid-column:1;grid-row:1/-1;background:#0b1e6b;color:#fff"><span class="num" style="color:#c9a227">A</span><span class="t" style="color:#fff;font-size:14px">Ancla / contexto</span><span class="d" style="color:rgba(255,255,255,.7)">Card vertical estable como punto de partida.</span></div>
+      <div class="pl" style="grid-column:2;grid-row:1;flex-direction:row;align-items:center;gap:1rem"><span class="num" style="font-size:1.2rem">01</span><span class="t" style="font-size:11px">Item 1</span></div>
+      <div class="pl" style="grid-column:2;grid-row:2;flex-direction:row;align-items:center;gap:1rem"><span class="num" style="font-size:1.2rem">02</span><span class="t" style="font-size:11px">Item 2</span></div>
+      <div class="pl" style="grid-column:2;grid-row:3;flex-direction:row;align-items:center;gap:1rem"><span class="num" style="font-size:1.2rem">03</span><span class="t" style="font-size:11px">Item 3</span></div>
+      <div class="pl" style="grid-column:2;grid-row:4;flex-direction:row;align-items:center;gap:1rem"><span class="num" style="font-size:1.2rem">04</span><span class="t" style="font-size:11px">Item 4</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Un activo grande de marca a la izquierda (foto histórica, dato fuerte, manifesto) + lista de pasos/items a la derecha. · <b>Variante</b>Inverso (1 derecha + 4 stacked izq) para layouts RTL o cuando la lista es la "intro".</div>
+</div>
+
+<div class="mock" data-fb="L08-bento">
+  <div class="mock-l">L08 · Bento mosaico mixto<span>cards de 3 tamaños · WWDC / Apple</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr 1fr;gap:2px;background:#d0d6e0;height:100%">
+      <div class="pl" style="grid-column:1/3;grid-row:1/-1;background:#0b1e6b;color:#fff"><span class="num" style="color:#c9a227">★</span><span class="t" style="color:#fff;font-size:14px">Hero 2x2</span></div>
+      <div class="pl" style="grid-column:3/5;grid-row:1"><span class="num">02</span><span class="t">Wide 2x1</span></div>
+      <div class="pl" style="grid-column:3"><span class="num">03</span><span class="t">1x1</span></div>
+      <div class="pl" style="grid-column:4"><span class="num">04</span><span class="t">1x1</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Cuando hay 1 dominante + 1 secundario + 2 detalles. Apple WWDC, Linear features, Vercel capabilities. · <b>Riesgo (research EK)</b>Saturado en SaaS — en B2B alimentos/industrial menos visto, sí aplica.</div>
+</div>
+
+<div class="mock" data-fb="L09-editorial-12">
+  <div class="mock-l">L09 · 12-col editorial asimétrico<span>cada card su lugar único · max Pentagram</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:1fr 1fr;gap:2px;background:#d0d6e0;height:100%">
+      <div class="pl" style="grid-column:1/5;grid-row:1"><span class="num">01</span><span class="t">Edge L</span></div>
+      <div class="pl" style="grid-column:5/10;grid-row:1/-1;background:#0b1e6b;color:#fff"><span class="num" style="color:#c9a227">★</span><span class="t" style="color:#fff;font-size:14px">Center hero</span></div>
+      <div class="pl" style="grid-column:10/-1;grid-row:1"><span class="num">03</span><span class="t">Edge R</span></div>
+      <div class="pl" style="grid-column:1/5;grid-row:2"><span class="num">04</span><span class="t">Edge L</span></div>
+      <div class="pl" style="grid-column:10/-1;grid-row:2"><span class="num">05</span><span class="t">Edge R</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Si la marca tiene voz editorial fuerte y querés layout "diseñado", no "construido". Pentagram standard. · <b>Cuándo no</b>Si los pilares son técnicos/paritarios — el 12-col asimétrico se siente arbitrario.</div>
+</div>
+
+<div class="mock" data-fb="L10-stair">
+  <div class="mock-l">L10 · Stair / escalonado<span>cada card desplazada respecto a la anterior</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:flex;flex-direction:column;gap:6px;height:100%;padding:14px;justify-content:center">
+      <div class="pl" style="margin-left:0;width:32%;min-height:auto;padding:.7rem .9rem"><span class="num" style="font-size:1rem">01</span><span class="t" style="font-size:10px">Card 1</span></div>
+      <div class="pl" style="margin-left:8%;width:32%;min-height:auto;padding:.7rem .9rem"><span class="num" style="font-size:1rem">02</span><span class="t" style="font-size:10px">Card 2</span></div>
+      <div class="pl" style="margin-left:16%;width:32%;min-height:auto;padding:.7rem .9rem"><span class="num" style="font-size:1rem">03</span><span class="t" style="font-size:10px">Card 3</span></div>
+      <div class="pl" style="margin-left:24%;width:32%;min-height:auto;padding:.7rem .9rem"><span class="num" style="font-size:1rem">04</span><span class="t" style="font-size:10px">Card 4</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Sugiere progresión / evolución sin necesidad de timeline explícito. Diferenciador visual fuerte. · <b>Cuándo no</b>Mobile rompe el efecto. Cards angostas si hay 5+. Riesgo de leerse decorativo si no hay narrativa real.</div>
+</div>
+
+<!-- ─────── C · LISTA / LINEAL ─────── -->
+<div class="sub"><div class="n">Familia C</div><h3>Lista / lineal · una columna</h3><p>Stack vertical. Cada card en su fila, ancho completo. Tono dossier, memoria anual, archivo. Max editorial sobrio.</p></div>
+
+<div class="mock" data-fb="L11-stack-accordion">
+  <div class="mock-l">L11 · Stack accordion vertical<span>una columna · una expandida + N colapsadas</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:flex;flex-direction:column;gap:2px;background:#d0d6e0;height:100%">
+      <div class="pl" style="flex-direction:row;align-items:center;gap:1rem;min-height:auto;padding:.6rem 1rem"><span class="num" style="font-size:1.1rem">01</span><span class="t" style="font-size:11px;flex:1">Item colapsado</span><span style="color:#888;font-size:13px">+</span></div>
+      <div class="pl" style="flex:1.5;background:#0b1e6b;color:#fff"><span class="num" style="color:#c9a227">02</span><span class="t" style="color:#fff;font-size:14px">Item expandido</span><span class="d" style="color:rgba(255,255,255,.7)">Contenido completo · más detalle.</span></div>
+      <div class="pl" style="flex-direction:row;align-items:center;gap:1rem;min-height:auto;padding:.6rem 1rem"><span class="num" style="font-size:1.1rem">03</span><span class="t" style="font-size:11px;flex:1">Item colapsado</span><span style="color:#888;font-size:13px">+</span></div>
+      <div class="pl" style="flex-direction:row;align-items:center;gap:1rem;min-height:auto;padding:.6rem 1rem"><span class="num" style="font-size:1.1rem">04</span><span class="t" style="font-size:11px;flex:1">Item colapsado</span><span style="color:#888;font-size:13px">+</span></div>
+      <div class="pl" style="flex-direction:row;align-items:center;gap:1rem;min-height:auto;padding:.6rem 1rem"><span class="num" style="font-size:1.1rem">05</span><span class="t" style="font-size:11px;flex:1">Item colapsado</span><span style="color:#888;font-size:13px">+</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Cards con copy denso y lectura profunda. FAQs, casos largos, beneficios extensos. · <b>UX</b>Solo una expandida a la vez · click en otra cierra la actual. <code>&lt;details&gt;</code> nativo o JS controller.</div>
+</div>
+
+<div class="mock" data-fb="L12-index-typo">
+  <div class="mock-l">L12 · Index numerado tipográfico<span>solo tipo · sin chrome de card · tier Basic Agency</span></div>
+  <div class="stage" style="aspect-ratio:16/9;background:#fafafa">
+    <div style="padding:24px 28px;display:flex;flex-direction:column;border-top:1px solid #222;height:100%">
+      <div style="padding:12px 0;border-bottom:1px solid #e0e0e0;display:grid;grid-template-columns:60px 1fr auto;gap:14px;align-items:baseline"><span style="font-family:'Courier New',monospace;color:#c9a227;font-size:10px;letter-spacing:.18em">§ 01</span><span style="font-family:Georgia,serif;font-size:13px;color:#0b1e6b;font-weight:700">Item primero</span><span style="font-size:13px;color:#c9a227">→</span></div>
+      <div style="padding:12px 0;border-bottom:1px solid #e0e0e0;display:grid;grid-template-columns:60px 1fr auto;gap:14px;align-items:baseline"><span style="font-family:'Courier New',monospace;color:#c9a227;font-size:10px;letter-spacing:.18em">§ 02</span><span style="font-family:Georgia,serif;font-size:13px;color:#0b1e6b;font-weight:700">Item segundo</span><span style="font-size:13px;color:#c9a227">→</span></div>
+      <div style="padding:12px 0;border-bottom:1px solid #e0e0e0;display:grid;grid-template-columns:60px 1fr auto;gap:14px;align-items:baseline"><span style="font-family:'Courier New',monospace;color:#c9a227;font-size:10px;letter-spacing:.18em">§ 03</span><span style="font-family:Georgia,serif;font-size:13px;color:#0b1e6b;font-weight:700">Item tercero</span><span style="font-size:13px;color:#c9a227">→</span></div>
+      <div style="padding:12px 0;border-bottom:1px solid #e0e0e0;display:grid;grid-template-columns:60px 1fr auto;gap:14px;align-items:baseline"><span style="font-family:'Courier New',monospace;color:#c9a227;font-size:10px;letter-spacing:.18em">§ 04</span><span style="font-family:Georgia,serif;font-size:13px;color:#0b1e6b;font-weight:700">Item cuarto</span><span style="font-size:13px;color:#c9a227">→</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Cuando la lista es el contenido — casos, proyectos, publicaciones. Tier Basic Agency, Locomotive about. · <b>Truco</b>Hover puede revelar imagen flotante a un lado (ver L14 magazine spread).</div>
+</div>
+
+<div class="mock" data-fb="L13-sidebar-viewer">
+  <div class="mock-l">L13 · Sidebar nav + main viewer<span>menú izq + detalle der · UX B2B avanzada</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:grid;grid-template-columns:160px 1fr;gap:2px;background:#d0d6e0;height:100%">
+      <div style="background:#fff;display:flex;flex-direction:column">
+        <div style="padding:8px 12px;border-bottom:1px solid #e8eaf0;font-size:9px;font-family:'Courier New',monospace;color:#888;letter-spacing:.18em">§ 01 · Item 1</div>
+        <div style="padding:8px 12px;border-bottom:1px solid #e8eaf0;font-size:9px;font-family:'Courier New',monospace;background:#0b1e6b;color:#fff;letter-spacing:.18em">§ 02 · Item activo</div>
+        <div style="padding:8px 12px;border-bottom:1px solid #e8eaf0;font-size:9px;font-family:'Courier New',monospace;color:#888;letter-spacing:.18em">§ 03 · Item 3</div>
+        <div style="padding:8px 12px;border-bottom:1px solid #e8eaf0;font-size:9px;font-family:'Courier New',monospace;color:#888;letter-spacing:.18em">§ 04 · Item 4</div>
+        <div style="padding:8px 12px;font-size:9px;font-family:'Courier New',monospace;color:#888;letter-spacing:.18em">§ 05 · Item 5</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#1a3380,#0b1e6b);color:#fff;padding:18px;display:flex;flex-direction:column;justify-content:space-between">
+        <div><span style="font-family:'Courier New',monospace;font-size:.6rem;letter-spacing:.18em;color:#c9a227">VIEWER</span><div style="font-family:Georgia,serif;font-size:14px;font-weight:700;margin-top:6px">Detalle del item activo</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:6px">Texto extenso del item seleccionado.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Catálogos profundos (productos con sub-categorías), casos con muchos atributos. UX tipo dashboard. · <b>Cuándo no</b>Mobile lo rompe — sidebar fija de 160px no funciona en 375px.</div>
+</div>
+
+<div class="mock" data-fb="L14-magazine-spread">
+  <div class="mock-l">L14 · Magazine spread · texto + foto alternada<span>cada item ocupa fila completa con foto + texto en split</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:flex;flex-direction:column;gap:2px;background:#d0d6e0;height:100%">
+      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:0;flex:1">
+        <div style="background:linear-gradient(135deg,#1a3380,#0b1e6b);position:relative"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(255,255,255,.4);font-size:18px">▶</span></div>
+        <div class="pl" style="border:none"><span class="num">01</span><span class="t">Item 1 · foto izq</span><span class="d" style="font-size:9px">Texto descriptivo del item alineado a la derecha.</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:0;flex:1">
+        <div class="pl" style="border:none"><span class="num">02</span><span class="t">Item 2 · foto der (alternado)</span><span class="d" style="font-size:9px">Texto descriptivo · foto a la derecha.</span></div>
+        <div style="background:linear-gradient(135deg,#1a3380,#0b1e6b);position:relative"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(255,255,255,.4);font-size:18px">▶</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Cada item merece una foto fuerte. Casos de estudio, líneas de producto con shots dedicados. Tier editorial revista. · <b>Variante</b>Sin alternancia (todas foto izq) si es más institucional.</div>
+</div>
+
+<!-- ─────── D · SCROLL / MOTION ─────── -->
+<div class="sub"><div class="n">Familia D</div><h3>Scroll / motion · diagramación temporal</h3><p>El layout se completa en el tiempo (al hacer scroll), no en el espacio. Pinned panels, marquees, stacked z-axis. Tier agencia premium.</p></div>
+
+<div class="mock" data-fb="L15-h-scroll">
+  <div class="mock-l">L15 · Horizontal scroll panels<span>scroll vertical → mueve cards horizontalmente · GSAP pinned</span></div>
+  <div class="stage" style="aspect-ratio:16/9;overflow:hidden">
+    <div style="display:flex;gap:2px;height:100%;width:200%;transform:translateX(-30%)">
+      <div class="pl" style="flex:1.4"><span class="num">01</span><span class="t">Panel 1</span></div>
+      <div class="pl" style="flex:1.4"><span class="num">02</span><span class="t">Panel 2</span></div>
+      <div class="pl" style="flex:1.4;background:#0b1e6b;color:#fff"><span class="num" style="color:#c9a227">03</span><span class="t" style="color:#fff">Panel 3 · activo</span></div>
+      <div class="pl" style="flex:1.4"><span class="num">04</span><span class="t">Panel 4</span></div>
+      <div class="pl" style="flex:1.4"><span class="num">05</span><span class="t">Panel 5</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Casos de estudio, capabilities con copy denso. Tier Locomotive, Active Theory. Stack: GSAP ScrollTrigger pin+scrub+containerAnimation. · <b>Cuándo no</b>Mobile rompe el efecto — debe degradarse a stack vertical. B2B alimentos serio puede sentirse pretencioso.</div>
+</div>
+
+<div class="mock" data-fb="L16-marquee">
+  <div class="mock-l">L16 · Marquee infinito<span>banda en loop horizontal · partners, certs, logos clientes</span></div>
+  <div class="stage" style="aspect-ratio:16/9;overflow:hidden;display:flex;align-items:center;background:#fafafa">
+    <div style="display:flex;gap:30px;animation:none;color:#999;font-size:14px">
+      <span>[ logo 1 ]</span><span>[ logo 2 ]</span><span>[ logo 3 ]</span><span>[ logo 4 ]</span><span>[ logo 5 ]</span><span>[ logo 6 ]</span><span>[ logo 7 ]</span><span>[ logo 8 ]</span><span>[ logo 9 ]</span><span>[ logo 10 ]</span>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>20+ partners/clientes/certs. Densidad sin saturar el viewport. CSS animation pura, sin JS. · <b>Truco</b>Duplicar contenido 2x + animar -50% para loop perfecto. Pause on hover.</div>
+</div>
+
+<div class="mock" data-fb="L17-stacked-z">
+  <div class="mock-l">L17 · Stacked z-axis · Apple style<span>cards apiladas en perspectiva · scroll trae al frente la siguiente</span></div>
+  <div class="stage" style="aspect-ratio:16/9;background:#fafafa;display:flex;align-items:center;justify-content:center;perspective:600px">
+    <div style="position:relative;width:60%;height:80%">
+      <div class="pl" style="position:absolute;top:0;left:0;right:0;height:80%;transform:translateY(0) translateZ(0);box-shadow:0 12px 40px rgba(0,0,0,.15);background:#0b1e6b;color:#fff;z-index:3"><span class="num" style="color:#c9a227">02</span><span class="t" style="color:#fff;font-size:14px">Card al frente</span></div>
+      <div class="pl" style="position:absolute;top:8px;left:14px;right:14px;height:80%;transform:translateY(0) translateZ(-20px);background:#fff;opacity:.7;z-index:2;display:none"></div>
+      <div class="pl" style="position:absolute;top:16px;left:28px;right:28px;height:80%;background:#fff;opacity:.4;z-index:1"></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Storytelling secuencial donde quieres jerarquizar UNA card por vez. Apple keynotes, Linear changelog. · <b>Cuándo no</b>Contenido paritario — el stacking sugiere prioridad que no existe.</div>
+</div>
+
+<!-- ─────── E · CONCEPTUAL ─────── -->
+<div class="sub"><div class="n">Familia E</div><h3>Conceptual · la diagramación es una idea</h3><p>El layout en sí mismo comunica algo (radial, temporal, jerárquico, geográfico). Riesgo: si el contenido no calza con el concepto, el layout miente.</p></div>
+
+<div class="mock" data-fb="L18-hub-spoke">
+  <div class="mock-l">L18 · Hub & spoke · centro + satélites<span>1 card central irradia hacia N satélites</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:grid;grid-template-columns:1fr 1.4fr 1fr;grid-template-rows:1fr 1fr;gap:2px;background:#d0d6e0;height:100%">
+      <div class="pl"><span class="num">01</span><span class="t">Sat NW</span></div>
+      <div class="pl" style="grid-column:2;grid-row:1/-1;background:#0b1e6b;color:#fff;text-align:center;align-items:center;justify-content:center"><span class="num" style="font-size:2rem;color:#c9a227">★</span><span class="t" style="color:#fff;font-size:14px">CENTRO</span><span class="d" style="color:rgba(255,255,255,.7)">Idea irradiante</span></div>
+      <div class="pl"><span class="num">02</span><span class="t">Sat NE</span></div>
+      <div class="pl"><span class="num">04</span><span class="t">Sat SW</span></div>
+      <div class="pl"><span class="num">05</span><span class="t">Sat SE</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>UNA idea/competencia central + N consecuencias o expresiones. "Todo lo que hacemos parte de X". · <b>Cuándo no</b>Si los satélites NO son consecuencias claras del centro, el layout miente y el visitante lo nota.</div>
+</div>
+
+<div class="mock" data-fb="L19-timeline">
+  <div class="mock-l">L19 · Timeline horizontal · narrativa temporal<span>cards posicionadas en línea de tiempo · evolución / hitos</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="position:relative;height:100%;padding:30px 14px 14px;display:flex;flex-direction:column;gap:14px">
+      <div style="position:relative;height:1px;background:#bbb;margin-top:4px">
+        <div style="position:absolute;top:-4px;left:0;width:9px;height:9px;background:#0b1e6b;border-radius:50%"></div>
+        <div style="position:absolute;top:-4px;left:25%;width:9px;height:9px;background:#0b1e6b;border-radius:50%"></div>
+        <div style="position:absolute;top:-5px;left:50%;width:11px;height:11px;background:#c9a227;border-radius:50%;box-shadow:0 0 0 3px rgba(201,162,39,.25)"></div>
+        <div style="position:absolute;top:-4px;left:75%;width:9px;height:9px;background:#0b1e6b;border-radius:50%"></div>
+        <div style="position:absolute;top:-4px;right:0;width:9px;height:9px;background:#0b1e6b;border-radius:50%"></div>
+        <div style="position:absolute;top:-26px;left:0;font-family:'Courier New',monospace;font-size:.55rem;color:#888;letter-spacing:.18em">1893</div>
+        <div style="position:absolute;top:-26px;left:25%;transform:translateX(-50%);font-family:'Courier New',monospace;font-size:.55rem;color:#888;letter-spacing:.18em">1950</div>
+        <div style="position:absolute;top:-26px;left:50%;transform:translateX(-50%);font-family:'Courier New',monospace;font-size:.55rem;color:#c9a227;letter-spacing:.18em">2026</div>
+        <div style="position:absolute;top:-26px;left:75%;transform:translateX(-50%);font-family:'Courier New',monospace;font-size:.55rem;color:#888;letter-spacing:.18em">2030</div>
+        <div style="position:absolute;top:-26px;right:0;font-family:'Courier New',monospace;font-size:.55rem;color:#888;letter-spacing:.18em">→</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;flex:1">
+        <div class="pl"><span class="num">01</span><span class="d" style="font-size:9px;color:#888">Fundación</span></div>
+        <div class="pl"><span class="num">02</span><span class="d" style="font-size:9px;color:#888">Crecimiento</span></div>
+        <div class="pl" style="background:#0b1e6b;color:#fff"><span class="num" style="color:#c9a227">03</span><span class="t" style="color:#fff;font-size:11px">Hito actual</span></div>
+        <div class="pl"><span class="num">04</span><span class="d" style="font-size:9px;color:#888">Proyección</span></div>
+        <div class="pl"><span class="num">05</span><span class="d" style="font-size:9px;color:#888">Visión</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Trayectoria con fechas reales. 130 años, hitos históricos, evolución de capacidades. · <b>Cuándo no</b>Si las cards no mapean a fechas el timeline es decorativo y miente. Anti-patrón clave.</div>
+</div>
+
+<div class="mock" data-fb="L20-treemap">
+  <div class="mock-l">L20 · Treemap / jerárquico<span>cards de tamaño proporcional al peso · mostrar magnitudes</span></div>
+  <div class="stage" style="aspect-ratio:16/9">
+    <div style="display:grid;grid-template-columns:2.5fr 1fr 1fr;grid-template-rows:1.5fr 1fr;gap:2px;background:#d0d6e0;height:100%">
+      <div class="pl" style="grid-column:1;grid-row:1/-1;background:#0b1e6b;color:#fff"><span class="num" style="color:#c9a227;font-size:2rem">75%</span><span class="t" style="color:#fff;font-size:14px">Categoría dominante</span><span class="d" style="color:rgba(255,255,255,.7)">Mayoría del volumen / mercado / facturación.</span></div>
+      <div class="pl" style="grid-column:2/-1;grid-row:1"><span class="num">15%</span><span class="t" style="font-size:11px">Secundaria</span></div>
+      <div class="pl"><span class="num">5%</span><span class="t" style="font-size:10px">Terc.</span></div>
+      <div class="pl"><span class="num">5%</span><span class="t" style="font-size:10px">Cuart.</span></div>
+    </div>
+  </div>
+  <div class="tips"><b>Cuándo</b>Mostrar peso/magnitud relativa de manera visual. Mercados (75% Latam · 25% otros), líneas de negocio, distribución de revenue. · <b>Cuándo no</b>Si las cards pesan parejo el treemap es engañoso (todas iguales).</div>
+</div>
+
+<!-- §04 VARIABLES DE DECISIÓN -->
+<div class="sh" id="variables">
+  <div class="n">04 — Variables de decisión</div>
+  <h2>Qué define qué layout elegir</h2>
+  <p>Cinco variables del contenido determinan qué familia y qué patrón concreto funciona. Mapa rápido para evitar errores de elección.</p>
+</div>
+
+<div class="card" data-fb="vars-decision">
+  <div class="card-h"><span class="tag tag-mech">Variables</span><div class="card-t">5 dimensiones del contenido que dictan el layout</div></div>
+  <div class="card-b">
+    <div class="mx">
+      <div class="mx-h"><div>Variable</div><div>Bajo / poco</div><div>Alto / mucho</div></div>
+      <div class="mx-r"><div class="q">Cantidad de cards (N)</div><div>3-6 → grid simétrico, hero+cards</div><div>10+ → grid 6 cols, marquee, treemap</div></div>
+      <div class="mx-r"><div class="q">Peso (paritario / jerárquico)</div><div>Paritario → simétrico (Familia A)</div><div>Hay hero → asimétrico (Familia B)</div></div>
+      <div class="mx-r"><div class="q">Densidad info por card</div><div>Pictograma + 2 palabras → grid 4-6 cols</div><div>Párrafo + chips → stack vertical, accordion</div></div>
+      <div class="mx-r"><div class="q">Relación entre cards</div><div>Independientes → grid</div><div>Secuencial / temporal → timeline, scroll-driven</div></div>
+      <div class="mx-r"><div class="q">Mobile %</div><div>&lt;30% → cualquier layout</div><div>&gt;70% → stack vertical, accordion (descartar scroll-driven)</div></div>
+    </div>
+    <div class="success"><strong>Heurística rápida:</strong> mirar las 5 variables del contenido antes de elegir layout. Si una "alta" choca con una "baja" en otra dimensión, hay que comprometer (ej. mucho mobile + 12 cards → grid 2 cols, no marquee).</div>
+  </div>
+</div>
+
+<!-- §05 ANTI-PATRONES -->
+<div class="sh" id="anti">
+  <div class="n">05 — Anti-patrones</div>
+  <h2>Lo que rompe la lectura B2B</h2>
+  <p>Errores recurrentes que delatan craft junior o falta de criterio editorial.</p>
+</div>
+
+<div class="card" data-fb="anti-list">
+  <div class="card-h"><span class="tag tag-anti">No hacer</span><div class="card-t">10 anti-patrones de diagramación B2B</div></div>
+  <div class="card-b">
+    <ul class="bl">
+      <li><b style="color:#0b1e6b">Hero asimétrico cuando todo pesa parejo</b> — promete jerarquía que no existe. Confunde.</li>
+      <li><b style="color:#0b1e6b">Timeline sin fechas reales</b> — la línea de tiempo decorativa se lee como mentira.</li>
+      <li><b style="color:#0b1e6b">Bento con 3 cards</b> — necesita mínimo 4-5 para tener sentido. Bento de 3 = grid mal hecho.</li>
+      <li><b style="color:#0b1e6b">Grid 4 cols con texto largo</b> — cards angostas + párrafos = muro denso ilegible.</li>
+      <li><b style="color:#0b1e6b">Hub & spoke decorativo</b> — si los satélites no son consecuencias del centro, el layout miente.</li>
+      <li><b style="color:#0b1e6b">Treemap con cards iguales</b> — el treemap promete diferenciación de magnitud. Cards iguales = engaño.</li>
+      <li><b style="color:#0b1e6b">Scroll-driven en B2B alimentos / industrial</b> — tier agencia premium puede sentirse pretencioso. Reservar para SaaS / tech.</li>
+      <li><b style="color:#0b1e6b">Sidebar fija en mobile</b> — 160px de sidebar en 375px de viewport rompe todo. Necesita degradar.</li>
+      <li><b style="color:#0b1e6b">Más de 8 cards en grid 3 cols</b> — 9+ cards = muro. Considerar paginación, marquee, treemap.</li>
+      <li><b style="color:#0b1e6b">Cards con shadows dramáticos</b> — sombra blur 40px + spread = look 2018. Editorial 2026 pide hairlines, no sombras.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- §06 MAPEO -->
+<div class="sh" id="mapeo">
+  <div class="n">06 — Mapeo contenido ↔ layout</div>
+  <h2>Qué patrón sirve para qué tipo de cards</h2>
+  <p>Tabla de referencia rápida. Para cada tipo de contenido B2B, el layout (o layouts) que mejor funciona y los que no.</p>
+</div>
+
+<div class="card" data-fb="mapeo-table">
+  <div class="card-h"><span class="tag tag-rec">Mapeo</span><div class="card-t">Tipo de contenido → layout recomendado</div></div>
+  <div class="card-b">
+    <div class="mx">
+      <div class="mx-h"><div>Tipo de cards</div><div>Layouts ideales</div><div>Evitar</div></div>
+      <div class="mx-r"><div class="q">Productos / líneas (3-6)</div><div>L01, L02, L06 hero, L08 bento</div><div>L18 hub (raramente aplica), L20 treemap</div></div>
+      <div class="mx-r"><div class="q">Servicios / capabilities (3-6)</div><div>L01 grid 2x2, L02 3x2, L11 accordion</div><div>L19 timeline, L17 stacked z</div></div>
+      <div class="mx-r"><div class="q">Pilares / value (4-6)</div><div>L02, L03 row 5, L09 12-col</div><div>L20 treemap (paridad)</div></div>
+      <div class="mx-r"><div class="q">Equipo (5-30)</div><div>L02 grid 3x2, L05 grid 6 cols, L13 sidebar</div><div>L18, L20 (no aplica jerarquía visual)</div></div>
+      <div class="mx-r"><div class="q">Casos / clientes (4-12)</div><div>L06 hero+cards, L11 accordion, L14 magazine</div><div>L01 grid 2x2 (poco para 8+)</div></div>
+      <div class="mx-r"><div class="q">Certificaciones (3-8)</div><div>L02 row, L05 grid logos, L16 marquee</div><div>L11 accordion (sobra para logos simples)</div></div>
+      <div class="mx-r"><div class="q">Partners / integraciones (12+)</div><div>L05 grid 4x2/6x2, L16 marquee</div><div>L01-L03 grids chicos (no escala)</div></div>
+      <div class="mx-r"><div class="q">Oficinas / mercados (3-30)</div><div>L19 mapa geográfico, L05 grid logos</div><div>L20 treemap (engañoso)</div></div>
+      <div class="mx-r"><div class="q">Testimonios (3-6)</div><div>L02 row, L11 accordion, L14 magazine</div><div>L20 treemap, L05 grid (mucha info)</div></div>
+      <div class="mx-r"><div class="q">Beneficios / por qué (3-6)</div><div>L01 grid 2x2, L03 row, L06 hero</div><div>L18 hub si no hay centro real</div></div>
+    </div>
+    <div class="note"><strong>Cómo usar:</strong> antes de empezar a diseñar un módulo, identificar el tipo de contenido en la columna izquierda · ver los layouts ideales · descartar los a evitar. Esto recorta el catálogo de 20 a 2-3 candidatos antes de mirar referentes visuales.</div>
+  </div>
+</div>
+
+<!-- §07 DECISIÓN -->
+<div class="sh" id="rec">
+  <div class="n">07 — Cómo decidir</div>
+  <h2>Cuadro de decisión rápida</h2>
+  <p>Síntesis: 4 preguntas en orden, una sola respuesta por pregunta, llegás a la familia y luego al patrón concreto.</p>
+</div>
+
+<div class="card" data-fb="decision-tree">
+  <div class="card-h"><span class="tag tag-rec">Árbol</span><div class="card-t">4 preguntas → familia → patrón</div></div>
+  <div class="card-b">
+    <ol style="padding-left:20px;font-size:13.5px;color:#444;line-height:1.85">
+      <li><b style="color:#0b1e6b">¿Hay un peso desigual entre las cards?</b><br>Sí → Familia B (asimétrico). No → seguir.</li>
+      <li><b style="color:#0b1e6b">¿Las cards tienen relación temporal o secuencial?</b><br>Sí → Familia E (timeline) o D (scroll). No → seguir.</li>
+      <li><b style="color:#0b1e6b">¿La info por card es densa (necesita lectura profunda)?</b><br>Sí → Familia C (lista). No → seguir.</li>
+      <li><b style="color:#0b1e6b">¿La cantidad es alta (10+) o baja (3-6)?</b><br>Alta → Familia A grid denso (L05) o D marquee (L16). Baja → Familia A grid simétrico (L01-L03).</li>
+    </ol>
+    <div class="success" style="margin-top:14px"><strong>Resultado típico:</strong> seguir el árbol te lleva a 1 familia + 2-3 patrones candidatos. Con eso ya podés probar mocks rápidos sin gastar tiempo en patrones que claramente no aplican.</div>
+    <div class="warn" style="margin-top:10px"><strong>Excepción editorial:</strong> si la marca tiene tono fuerte (Pentagram, Koto), a veces conviene "romper" el árbol y elegir un layout asimétrico aun cuando las cards pesan parejo — pero solo si hay copy editorial fuerte que sostenga la jerarquía visual creada.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="foot">
+  <h4>Research Layouts B2B con N cards — v1 · 2026-04-26</h4>
+  <p>Documento vivo. Marcá módulos con ✓ / ↻ / ✕ / 💬 usando los botones de cada card. La barra superior muestra contadores. "Exportar JSON" copia tu feedback al portapapeles — cuando pidas seguir con el JSON pegado, se actualiza el sitio: se borran los ✕, se expanden los ↻ con tus notas como guía, los ✓ quedan intactos.</p>
+  <p style="margin-top:10px;font-size:11px;color:#999">Catálogo aplicable a cualquier cliente B2B con módulos de N tarjetas · WBA / Sergio Rios · 2026-04-26</p>
+</div>
+
+
+</div>
+
+<script>
+(function(){
+  const SK='research-fb-layouts-cards-b2b-v1';
+  let st={};
+  try{st=JSON.parse(localStorage.getItem(SK)||'{}')}catch(e){st={}}
+  Object.keys(st).forEach(k=>{
+    if(typeof st[k]==='string')st[k]={state:st[k]};
+    else if(!st[k]||typeof st[k]!=='object')st[k]={};
+  });
+  const save=()=>localStorage.setItem(SK,JSON.stringify(st));
+  const get=(id)=>st[id]||(st[id]={});
+  const clean=(id)=>{if(st[id]&&!st[id].state&&!st[id].note)delete st[id]};
+
+  document.querySelectorAll('[data-fb]').forEach(el=>{
+    const id=el.getAttribute('data-fb');
+    const w=document.createElement('div');
+    w.className='fb';
+    w.innerHTML='<button data-s="ok" title="Está bien">✓</button><button data-s="more" title="Seguir investigando">↻</button><button data-s="drop" title="Descartar">✕</button><button data-s="note" title="Agregar comentario">💬</button>';
+    el.appendChild(w);
+
+    const panel=document.createElement('div');
+    panel.className='note-panel';
+    panel.innerHTML='<label>Comentario</label><textarea placeholder="Por qué lo marcaste así..."></textarea><div class="hint"><span>Auto-guardado al salir del campo · se exporta en JSON</span><span class="char-count">0 chars</span></div>';
+    const pill=document.createElement('div');
+    pill.className='note-pill';
+    pill.innerHTML='<b>💬</b><span></span>';
+    el.appendChild(panel);
+    el.appendChild(pill);
+    const ta=panel.querySelector('textarea');
+    const pillText=pill.querySelector('span');
+    const charCount=panel.querySelector('.char-count');
+
+    const applyState=()=>{
+      const d=st[id]||{};
+      el.classList.remove('fb-ok','fb-more','fb-drop','fb-has-note');
+      w.querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+      if(d.state){el.classList.add('fb-'+d.state);w.querySelector('[data-s="'+d.state+'"]').classList.add('on')}
+      if(d.note&&d.note.trim()){
+        el.classList.add('fb-has-note');
+        w.querySelector('[data-s="note"]').classList.add('on');
+        ta.value=d.note;
+        pillText.textContent=d.note.length>120?d.note.slice(0,120)+'…':d.note;
+        pill.style.display='flex';
+        charCount.textContent=d.note.length+' chars';
+      }else{ta.value='';pill.style.display='none';charCount.textContent='0 chars'}
+    };
+
+    w.querySelectorAll('button[data-s="ok"],button[data-s="more"],button[data-s="drop"]').forEach(b=>{
+      b.addEventListener('click',e=>{e.stopPropagation();const s=b.getAttribute('data-s');const d=get(id);if(d.state===s)delete d.state;else d.state=s;clean(id);save();applyState();sum()});
+    });
+    w.querySelector('[data-s="note"]').addEventListener('click',e=>{e.stopPropagation();panel.classList.toggle('open');if(panel.classList.contains('open'))setTimeout(()=>ta.focus(),50)});
+    pill.addEventListener('click',()=>{panel.classList.add('open');setTimeout(()=>ta.focus(),50)});
+    ta.addEventListener('input',()=>charCount.textContent=ta.value.length+' chars');
+    ta.addEventListener('blur',()=>{const d=get(id);const v=ta.value.trim();if(v)d.note=v;else delete d.note;clean(id);save();applyState();sum()});
+    applyState();
+  });
+
+  function sum(){
+    const all=document.querySelectorAll('[data-fb]').length;
+    let ok=0,more=0,drop=0,note=0;
+    Object.values(st).forEach(d=>{if(d.state==='ok')ok++;else if(d.state==='more')more++;else if(d.state==='drop')drop++;if(d.note&&d.note.trim())note++});
+    document.getElementById('fb-tot').textContent=all+' módulos';
+    document.getElementById('fb-ok').textContent=ok+' ✓ bien';
+    document.getElementById('fb-more').textContent=more+' ↻ seguir';
+    document.getElementById('fb-drop').textContent=drop+' ✕ descartar';
+    document.getElementById('fb-note').textContent=note+' 💬 notas';
+  }
+  sum();
+
+  document.getElementById('fb-filter').addEventListener('click',()=>{document.body.classList.toggle('filter-more');const b=document.getElementById('fb-filter');b.textContent=document.body.classList.contains('filter-more')?'Ver todo':'Ver solo ↻ seguir'});
+  document.getElementById('fb-export').addEventListener('click',()=>{const data=JSON.stringify(st,null,2);navigator.clipboard.writeText(data).then(()=>{const b=document.getElementById('fb-export');const o=b.textContent;b.textContent='✓ Copiado';setTimeout(()=>b.textContent=o,1800)}).catch(()=>{const w=window.open('','_blank');w.document.write('<pre>'+data+'</pre>')})});
+  document.getElementById('fb-reset').addEventListener('click',()=>{if(!confirm('¿Borrar todas las marcas y notas?'))return;st={};localStorage.removeItem(SK);document.querySelectorAll('[data-fb]').forEach(el=>{el.classList.remove('fb-ok','fb-more','fb-drop','fb-has-note');el.querySelectorAll('.fb button').forEach(b=>b.classList.remove('on'));const ta=el.querySelector('.note-panel textarea');if(ta)ta.value='';const p=el.querySelector('.note-panel');if(p)p.classList.remove('open');const pill=el.querySelector('.note-pill');if(pill)pill.style.display='none'});sum()});
+})();
+</script>
+
+</body>
+</html>

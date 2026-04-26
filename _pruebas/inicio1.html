@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Traverso International Foods — Exportación de alimentos de alta calidad desde Chile hacia mercados internacionales. BRC GS 'AA'. 130 años de trayectoria." />
+  <title>Propuesta 1 — Traverso International Foods — Exportación de Alimentos desde Chile</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* ============================================================
+       VARIABLES CSS — COLORES DE TRAVERSO
+    ============================================================ */
+    :root {
+      /* Colores oficiales Traverso — fuente: DESIGN.md */
+      --color-primary:          #0B1E6B;
+      --color-primary-dark:     #081450;
+      --color-accent:           #C5A55A;
+      --color-accent-saturated: #C9A227;
+
+      /* Fondos */
+      --color-bg:        #FBF9FA;
+      --color-bg-alt:    #F2F4F8;
+      --color-bg-dark:   var(--color-primary);
+      --color-bg-deeper: var(--color-primary-dark);
+
+      /* Textos */
+      --color-text:         #19212F;
+      --color-text-muted:   #4A5362;
+      --color-text-light:   #6B7280;
+      --color-text-on-dark: #FFFFFF;
+
+      /* Bordes */
+      --color-border:       #DDE2EC;
+      --color-border-light: #EEF0F5;
+
+      /* Tipografía */
+      --font-heading:        'Libre Baskerville', Georgia, serif;
+      --font-body:           'Source Sans 3', system-ui, sans-serif;
+
+      /* Tamaños de texto */
+      --text-xs:    clamp(0.75rem,  1vw,   0.875rem);
+      --text-sm:    clamp(0.875rem, 1.2vw, 1rem);
+      --text-base:  clamp(1rem,     1.5vw, 1.125rem);
+      --text-lg:    clamp(1.125rem, 1.8vw, 1.25rem);
+      --text-xl:    clamp(1.25rem,  2vw,   1.5rem);
+      --text-2xl:   clamp(1.5rem,   2.5vw, 2rem);
+      --text-3xl:   clamp(2rem,     3vw,   2.75rem);
+      --text-4xl:   clamp(2.5rem,   4vw,   3.5rem);
+      --text-5xl:   clamp(3rem,     5vw,   4.5rem);
+
+      /* Layout */
+      --section-padding:    clamp(4rem, 8vw, 7rem) 0;
+      --container-width:    1200px;
+      --container-padding:  0 clamp(1.5rem, 5vw, 3rem);
+
+      /* UI */
+      --border-radius:      4px;
+      --border-radius-lg:   8px;
+      --transition:         0.3s ease;
+      --transition-slow:    0.6s ease;
+
+      /* Sombras */
+      --shadow-sm:  0 1px 3px rgba(11,53,105,0.08);
+      --shadow-md:  0 4px 16px rgba(11,53,105,0.12);
+      --shadow-lg:  0 12px 40px rgba(11,53,105,0.16);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a   { color: inherit; text-decoration: none; }
+    ul  { list-style: none; }
+
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: var(--container-padding);
+    }
+
+    /* ── TIER 1: Primary CTA — compact 36px ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.4rem; font-family: var(--font-body); font-size: 0.75rem;
+      font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      height: 36px; padding: 0 1.25rem; border: none; border-radius: 4px;
+      cursor: pointer; white-space: nowrap; position: relative;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 120ms cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+
+    .btn--gold { background: #c5a55a; color: var(--color-primary-dark); }
+    .btn--gold:hover { background: #d4b96e; box-shadow: 0 2px 8px rgba(197,165,90,0.3); }
+
+    .btn--primary { background: var(--color-primary-dark); color: white; }
+    .btn--primary:hover { background: #1a3a6b; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+
+    .btn--outline {
+      background: transparent; color: rgba(255,255,255,0.7);
+      box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.25);
+    }
+    .btn--outline:hover {
+      color: white; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* ── TIER 2: Secondary — Underline ── */
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-body); font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      background: none; border: none; padding: 0.4rem 0;
+      cursor: pointer; position: relative; transition: color 0.2s ease;
+    }
+    .btn-secondary::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1.5px; transition: width 0.3s ease;
+    }
+    .btn-secondary:hover::after { width: 100%; }
+    .btn-secondary .arrow { display: inline-block; font-size: 0.9em; transition: transform 0.2s ease; }
+    .btn-secondary:hover .arrow { transform: translateX(3px); }
+
+    .btn-secondary--light { color: rgba(255,255,255,0.55); }
+    .btn-secondary--light:hover { color: white; }
+    .btn-secondary--light::after { background: #c5a55a; }
+
+    .section-label {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c9a227;
+      margin-bottom: 1rem;
+    }
+
+    .section-label--light {
+      color: rgba(201,162,39,0.8);
+    }
+
+    /* ============================================================
+       HEADER
+    ============================================================ */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: transparent;
+      transition: background 0.6s cubic-bezier(0.4,0,0.2,1), box-shadow 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .header.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header.scrolled .header__link {
+      color: var(--color-text);
+    }
+
+    .header.scrolled .header__link:hover {
+      color: var(--color-primary);
+    }
+
+    .header.scrolled .header__cta {
+      background: var(--color-primary-dark);
+      color: white;
+    }
+    .header.scrolled .header__cta:hover {
+      background: #1a3a6b;
+    }
+
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      max-width: 100%;
+      padding-left: clamp(1.5rem, 3vw, 2.5rem);
+      padding-right: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .header__logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .header__logo img {
+      height: 30px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      transition: filter 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .header.scrolled .header__logo img {
+      filter: none;
+    }
+
+    .header__nav { display: none; margin-left: auto; }
+
+    .header__list {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .header__link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.04em;
+      transition: color 0.6s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+    }
+
+    .header__link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-accent);
+      transition: width 0.3s ease;
+    }
+
+    .header__link:hover::after { width: 100%; }
+
+    .header__link--active::after { width: 100%; }
+    .header.scrolled .header__link--active { color: var(--color-primary); }
+
+    /* Dropdown */
+    .header__dropdown { position: relative; }
+    .header__dropdown-toggle { cursor: pointer; }
+    .header__dropdown-menu {
+      position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%);
+      background: rgba(5,14,51,0.95); backdrop-filter: blur(12px); border-radius: 6px;
+      padding: 0.5rem 0; min-width: 160px; opacity: 0; visibility: hidden;
+      transform: translateX(-50%) translateY(-6px);
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.08);
+    }
+    .header.scrolled .header__dropdown-menu {
+      background: rgba(255,255,255,0.97); border-color: var(--color-border-light);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .header__dropdown:hover .header__dropdown-menu {
+      opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+    }
+    .header__dropdown-item {
+      display: block; padding: 0.5rem 1.25rem; font-size: 0.82rem; font-weight: 500;
+      color: rgba(255,255,255,0.7); transition: background 0.2s, color 0.2s; white-space: nowrap;
+    }
+    .header__dropdown-item:hover { background: rgba(255,255,255,0.08); color: white; }
+    .header.scrolled .header__dropdown-item { color: var(--color-text-muted); }
+    .header.scrolled .header__dropdown-item:hover { background: var(--color-bg-alt); color: var(--color-primary-dark); }
+    .header__dropdown-item--active { color: var(--color-accent-saturated); }
+    .header.scrolled .header__dropdown-item--active { color: var(--color-primary); }
+
+    .header__cta {
+      display: none;
+      transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .header__burger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    .header__burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: white;
+      transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .header.scrolled .header__burger span {
+      background: var(--color-primary);
+    }
+
+    .header__burger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .header__burger.active span:nth-child(2) { opacity: 0; }
+    .header__burger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile menu */
+    .header__mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: min(320px, 85vw);
+      height: 100vh;
+      background: var(--color-primary-dark);
+      padding: 5rem 2rem 2rem;
+      transition: right 0.4s ease;
+      z-index: 99;
+    }
+
+    .header__mobile-menu.open { right: 0; }
+
+    .header__mobile-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .header__mobile-link {
+      font-size: var(--text-lg);
+      color: white;
+      font-weight: 400;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 1.5rem;
+      display: block;
+    }
+
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 98;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .mobile-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    @media (min-width: 850px) {
+      .header__nav  { display: flex; align-items: center; gap: 2rem; margin-right: 1.5rem; }
+      .header__cta  { display: inline-flex; opacity: 0; }
+      .header__burger { display: none; }
+    }
+
+    /* ============================================================
+       HERO — #15 Full Photo Immersive (Ref: Tesla)
+    ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 85vh;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+    }
+    .hero__bg-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero__bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(5,14,51,0.92) 0%, rgba(5,14,51,0.55) 40%, rgba(5,14,51,0.15) 70%);
+    }
+
+    .hero__logo {
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hero__logo img {
+      height: 52px;
+      filter: brightness(0) invert(1);
+    }
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: clamp(3rem,6vw,5rem) var(--container-padding);
+    }
+    .hero__title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+      max-width: 500px;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .hero__title span {
+      color: rgba(255,255,255,0.3);
+    }
+    .hero__subtitle {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      max-width: 400px;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .hero__actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .hero__actions .btn {
+      padding: 0.7rem 1.6rem;
+      font-size: 0.75rem;
+    }
+
+    /* ============================================================
+       PROPUESTA DE VALOR — Variant E: Side-by-side
+    ============================================================ */
+    .value-props {
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 3rem);
+      background: var(--color-bg-alt);
+      border-radius: 8px;
+    }
+
+    .value-props__layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 3rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    @media (max-width: 640px) {
+      .value-props__layout {
+        grid-template-columns: 1fr;
+      }
+      .value-props__sticky {
+        position: static !important;
+      }
+    }
+
+    .value-props__sticky {
+      position: sticky;
+      top: 2rem;
+    }
+
+    .value-props__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      line-height: 1.2;
+      margin: 0.5rem 0 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .value-props__title em {
+      font-style: normal;
+      color: var(--color-text-light);
+    }
+
+    .value-props__lead {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    .value-item {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--color-border-light);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .value-item:first-child {
+      padding-top: 0;
+    }
+
+    .value-item:last-child {
+      border-bottom: none;
+    }
+
+    .value-item__num {
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      color: #c9a227;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.25rem;
+    }
+
+    .value-item__title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-primary-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .value-item__text {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       QUIÉNES SOMOS — V6 Text + Diffs Grid
+    ============================================================ */
+    .about {
+      padding: var(--section-padding);
+      background: var(--color-bg-alt);
+    }
+
+    .about__header {
+      max-width: 600px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(25px);
+    }
+
+    .about__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .about__title em {
+      font-style: normal;
+      color: var(--color-text-light);
+    }
+
+    .about__lead {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+    }
+
+    .about__diffs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.5rem;
+    }
+
+    .about__diff-item {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .about__diff-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #c9a227;
+      margin-bottom: 0.75rem;
+    }
+
+    .about__diff-item h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .about__diff-item p {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .about__diffs { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       PRODUCTOS — V19 Horizontal Image Cards
+    ============================================================ */
+    /* ── Variant D: Featured Hero + Smaller Grid ── */
+    .products {
+      padding: var(--section-padding);
+      background: var(--color-bg);
+    }
+
+    .products__header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto clamp(2.5rem, 4vw, 3.5rem);
+    }
+
+    .products__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(25px);
+    }
+
+    .products__title em {
+      font-style: normal;
+      color: var(--color-text-light);
+    }
+
+    .products__subtitle {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    .products__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      max-width: 900px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ── Featured (first card) ── */
+    .product-card {
+      border: 1px solid var(--color-border-light);
+      border-radius: 10px;
+      overflow: hidden;
+      background: white;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .product-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+
+    .product-card:first-child {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      align-items: center;
+    }
+
+    .product-card:first-child .product-card__img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .product-card:first-child .product-card__body {
+      padding: 2rem 2rem 2rem 0;
+    }
+
+    .product-card:first-child .product-card__tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #c9a227;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card:first-child .product-card__title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .product-card:first-child .product-card__desc {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    /* ── Small cards (2nd, 3rd) ── */
+    .product-card:not(:first-child) {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+    }
+
+    .product-card:not(:first-child) .product-card__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-card:not(:first-child) .product-card__body {
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .product-card:not(:first-child) .product-card__tag { display: none; }
+    .product-card:not(:first-child) .product-card__desc { display: none; }
+
+    .product-card:not(:first-child) .product-card__title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-primary-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    /* ── Pills shared ── */
+    .product-card__tag {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #c9a227;
+      margin-bottom: 0.25rem;
+    }
+
+    .product-card__title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-primary-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .product-card__desc {
+      display: none;
+    }
+
+    .product-card__pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+
+    .product-card__pill {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+    }
+
+    .product-card__pill--gold {
+      background: rgba(201,162,39,0.12);
+      color: #a17f15;
+    }
+
+    .product-card__pill--outline {
+      background: transparent;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+    }
+
+    .products__cta {
+      text-align: center;
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    @media (max-width: 640px) {
+      .products__grid { grid-template-columns: 1fr; }
+      .product-card:first-child { grid-template-columns: 1fr; }
+      .product-card:first-child .product-card__body { padding: 1.5rem; }
+      .product-card:not(:first-child) { grid-template-columns: 1fr; }
+      .product-card:not(:first-child) .product-card__img { height: 160px; }
+    }
+
+    /* ============================================================
+       CERTIFICACIONES / TRUST BAR
+    ============================================================ */
+    /* ── V5-I: Underline Accent Numbers ── */
+    .trust {
+      padding: clamp(4rem, 8vw, 6rem) 0;
+      background: var(--color-primary);
+    }
+
+    .trust__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(2.5rem, 4vw, 3.5rem);
+    }
+
+    .trust__label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      opacity: 0;
+    }
+
+    .trust__items {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .trust__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .trust__item-num {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .trust__item-num::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 2px;
+      background: #c9a227;
+    }
+
+    .trust__item-text {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 600px) {
+      .trust__items { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ============================================================
+       CONTACTO — V1 Navy Centered
+    ============================================================ */
+    .contact {
+      padding: var(--section-padding);
+      background: var(--color-primary);
+    }
+
+    .contact__header {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 2.5rem;
+      opacity: 0;
+      transform: translateY(25px);
+    }
+
+    .contact__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .contact__lead {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .contact__form {
+      max-width: 650px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .contact__form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact__form label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.03em;
+    }
+
+    .contact__form input,
+    .contact__form textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      color: white;
+      transition: border-color 0.3s ease;
+      outline: none;
+    }
+
+    .contact__form input::placeholder,
+    .contact__form textarea::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+
+    .contact__form input:focus,
+    .contact__form textarea:focus {
+      border-color: rgba(201,162,39,0.4);
+    }
+
+    .contact__form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .contact__form-submit {
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .contact__info-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.4);
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    @media (max-width: 600px) {
+      .contact__form-row { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    /* ── Footer: Tabasco B2B Style — columna dedicada export ── */
+    .footer {
+      background: #111827;
+      padding: clamp(3.5rem, 7vw, 5rem) 0 0;
+    }
+
+    .footer__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: clamp(2.5rem, 4vw, 3rem);
+    }
+
+    .footer__brand-sub {
+      font-size: var(--text-sm);
+      color: rgba(255,255,255,0.4);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer__social {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .footer__social-link {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .footer__social-link:hover {
+      border-color: #c9a227;
+      background: rgba(201,162,39,0.1);
+    }
+
+    .footer__social-link svg {
+      width: 13px;
+      height: 13px;
+      fill: rgba(255,255,255,0.5);
+    }
+
+    .footer__col-title {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 1rem;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer__link {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.3s ease;
+    }
+
+    .footer__link:hover { color: #c9a227; }
+
+    .footer__contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .footer__contact-item svg { display: none; }
+
+    .footer__contact-item span {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ── B2B Export Column ── */
+    .footer__b2b {
+      background: rgba(201,162,39,0.06);
+      border: 1px solid rgba(201,162,39,0.15);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+
+    .footer__b2b-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #c9a227;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer__b2b-desc {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .footer__b2b-targets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer__b2b-target {
+      font-size: 0.6rem;
+      font-weight: 500;
+      padding: 0.2rem 0.55rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.6);
+    }
+
+    .footer__b2b-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.65rem 1.3rem;
+      border-radius: 4px;
+      background: #c9a227;
+      color: #081450;
+      transition: background 0.3s;
+    }
+
+    .footer__b2b-cta:hover { background: #d4ad2f; }
+
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.25rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer__copy {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .footer__brand { grid-column: span 2; }
+
+    @media (min-width: 640px) {
+      .footer__bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+    }
+
+    @media (min-width: 1024px) {
+      .footer__inner { grid-template-columns: 1.5fr 1fr 1fr 1.3fr; }
+      .footer__brand { grid-column: span 1; }
+    }
+
+    @media (max-width: 767px) {
+      .footer__b2b { grid-column: 1 / -1; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="../index.html" class="header__logo" aria-label="Traverso International Foods">
+        <img
+          src="../assets/logo-traverso.png"
+          alt="Traverso International Foods"
+          width="180"
+          height="50"
+        />
+      </a>
+
+      <nav class="header__nav" id="main-nav" aria-label="Navegación principal">
+        <ul class="header__list">
+          <li class="header__dropdown">
+            <a href="../index.html" class="header__link header__link--active header__dropdown-toggle">Inicio</a>
+            <div class="header__dropdown-menu">
+              <a href="../index.html"    class="header__dropdown-item">Inicio 1</a>
+              <a href="inicio1.html"  class="header__dropdown-item header__dropdown-item--active">Inicio 2</a>
+              <a href="inicio2.html"  class="header__dropdown-item">Inicio 3</a>
+              <a href="inicio3.html"  class="header__dropdown-item">Inicio 4</a>
+            </div>
+          </li>
+          <li><a href="../quienes-somos.html" class="header__link">Quiénes Somos</a></li>
+          <li><a href="../productos.html"     class="header__link">Productos</a></li>
+          <li><a href="../contacto.html"      class="header__link">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <a href="../contacto.html" class="btn btn--gold header__cta">Conversemos</a>
+
+      <button class="header__burger" id="burger-btn" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="header__mobile-menu" id="mobile-menu" aria-hidden="true">
+    <ul class="header__mobile-list">
+      <li><a href="../index.html"         class="header__mobile-link">Inicio</a></li>
+      <li><a href="inicio1.html"      class="header__mobile-link">Inicio 2</a></li>
+      <li><a href="inicio2.html"      class="header__mobile-link">Inicio 3</a></li>
+      <li><a href="inicio3.html"      class="header__mobile-link">Inicio 4</a></li>
+      <li><a href="../quienes-somos.html" class="header__mobile-link">Quiénes Somos</a></li>
+      <li><a href="../productos.html"     class="header__mobile-link">Productos</a></li>
+      <li><a href="../contacto.html"      class="header__mobile-link">Contacto</a></li>
+    </ul>
+  </div>
+  <div class="mobile-overlay" id="mobile-overlay"></div>
+
+  <!-- ============================================================
+       HERO — #15 Full Photo Immersive
+  ============================================================ -->
+  <section class="hero" id="inicio">
+    <div class="hero__bg">
+      <img
+        class="hero__bg-img"
+        src="../assets/exterior-fabrica-portada.jpg"
+        alt="Planta de producción Traverso International Foods"
+        width="1600"
+        height="900"
+        data-content-attr-src="index.hero_image"
+      />
+      <div class="hero__bg-overlay"></div>
+    </div>
+
+    <div class="hero__content">
+      <div class="hero__logo">
+        <img src="../assets/logo-traverso.png" alt="Traverso International Foods" />
+      </div>
+      <h1 class="hero__title" data-content="index.hero_title">
+        Calidad que cruza <span>fronteras</span>
+      </h1>
+      <p class="hero__subtitle" data-content="index.hero_subtitle">
+        Vinagres, salsas y condimentos desde Chile. Más de 130 años de
+        experiencia productiva para la industria alimentaria global.
+      </p>
+      <div class="hero__actions">
+        <a href="../productos.html" class="btn btn--outline" style="background:#c9a227;color:var(--color-primary);border-color:#c9a227;" data-content="index.hero_cta1_text" data-content-attr-href="index.hero_cta1_link">Explorar productos →</a>
+        <a href="../contacto.html" class="btn btn--outline" data-content="index.hero_cta2_text" data-content-attr-href="index.hero_cta2_link">Contacto comercial</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROPUESTA DE VALOR
+  ============================================================ -->
+  <section class="value-props" id="propuesta">
+    <div class="container">
+      <div class="value-props__layout">
+        <div class="value-props__sticky">
+          <span class="section-label">Por qué elegirnos</span>
+          <h2 class="value-props__title" data-content="index.values_title">
+            Confianza construida en <em>130 años</em>
+          </h2>
+          <p class="value-props__lead" data-content="index.values_lead">Cuatro pilares que definen nuestra propuesta de valor como exportadores.</p>
+        </div>
+
+        <div class="value-props__list" data-collection="pilares" data-collection-variant="pilares_home">
+          <!-- Renderizado dinámico desde data/pilares.json por collections-loader.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TRUST BAR — CERTIFICACIONES
+  ============================================================ -->
+  <div class="trust">
+    <div class="container trust__inner">
+      <span class="trust__label">Certificaciones & Estándares</span>
+      <div class="trust__items" data-collection="trust_items">
+        <!-- Renderizado dinámico desde data/trust_items.json por collections-loader.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       QUIÉNES SOMOS
+  ============================================================ -->
+  <section class="about" id="nosotros">
+    <div class="container">
+
+      <div class="about__header">
+        <span class="section-label">Quiénes somos</span>
+        <h2 class="about__title">
+          La evolución internacional de <em>Traverso</em>
+        </h2>
+        <p class="about__lead">
+          Empresa chilena con trayectoria en producción y comercialización de alimentos.
+          Proyectamos esa experiencia hacia mercados globales.
+        </p>
+      </div>
+
+      <div class="about__diffs" data-collection="pilares" data-collection-variant="pilares_about">
+        <!-- Renderizado dinámico desde data/pilares.json por collections-loader.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRODUCTOS
+  ============================================================ -->
+  <section class="products" id="productos">
+    <div class="container">
+
+      <div class="products__header">
+        <span class="section-label">Portafolio</span>
+        <h2 class="products__title" data-content="index.products_title">Líneas de productos para <em>exportación</em></h2>
+        <p class="products__subtitle">
+          Portafolio diseñado para responder a las necesidades de distintos mercados
+          internacionales con estándares consistentes.
+        </p>
+      </div>
+
+      <div class="products__grid" data-collection="productos" data-collection-variant="productos_home" data-collection-filter="destacado_home" data-collection-limit="3">
+        <!-- Renderizado dinámico desde data/productos.json por collections-loader.js -->
+      </div>
+
+      <div class="products__cta">
+        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+          Trabajamos con industriales, distribuidores, importadores, retail y canal HORECA,
+          ofreciendo soluciones adaptadas a cada tipo de cliente.
+        </p>
+        <a href="../contacto.html" class="btn btn--primary" data-content="index.products_cta_text" data-content-attr-href="index.products_cta_link">Contáctanos y conoce nuestras líneas</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACTO
+  ============================================================ -->
+  <section class="contact" id="contacto">
+    <div class="container">
+
+      <div class="contact__header">
+        <span class="section-label section-label--light">Contacto</span>
+        <h2 class="contact__title" data-content="index.mini_contact_title">
+          Generemos nuevas oportunidades comerciales juntos
+        </h2>
+        <p class="contact__lead" data-content="index.mini_contact_subtitle">
+          Estamos disponibles para alianzas estratégicas en mercados internacionales.
+        </p>
+      </div>
+
+      <form id="form-home" class="contact__form" action="https://formspree.io/f/XXXX" method="POST">
+        <div class="contact__form-row">
+          <div><label for="hm-nombre">Nombre</label><input type="text" id="hm-nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name" /></div>
+          <div><label for="hm-empresa">Empresa</label><input type="text" id="hm-empresa" name="empresa" placeholder="Nombre de empresa" autocomplete="organization" /></div>
+        </div>
+        <div class="contact__form-row">
+          <div><label for="hm-email">Email</label><input type="email" id="hm-email" name="email" placeholder="correo@empresa.com" required autocomplete="email" /></div>
+          <div><label for="hm-pais">País</label><input type="text" id="hm-pais" name="pais" placeholder="País de destino" autocomplete="country-name" /></div>
+        </div>
+        <div style="margin-bottom:0.75rem;">
+          <label for="hm-mensaje">Mensaje</label>
+          <textarea id="hm-mensaje" name="mensaje" placeholder="Cuéntanos sobre tu proyecto o consulta comercial..." required></textarea>
+        </div>
+        <div class="contact__form-submit">
+          <button type="submit" class="btn" style="background:#c9a227;color:var(--color-primary);border-color:#c9a227;">Enviar consulta</button>
+        </div>
+      </form>
+
+      <div class="contact__info-row">
+        <div style="text-align:center;">
+          <span data-brand="direccion">Av. Vespucio 1313, La Cisterna, Santiago, Chile</span>
+          · <span data-brand="email">e-commerce@traverso.cl</span>
+          · <span data-brand="telefono">+56 2 24370900</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+
+        <div class="footer__brand">
+          <img src="../assets/logo-traverso.png" alt="Traverso International Foods" style="height:32px;filter:brightness(0) invert(1);margin-bottom:1rem;" />
+          <p class="footer__brand-sub" data-content="footer.brand_tagline">
+            Conectando calidad chilena con mercados globales desde hace más de 130 años.
+          </p>
+          <div class="footer__social" data-collection="redes_sociales">
+            <!-- Renderizado dinámico desde data/redes_sociales.json -->
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer__col-title" data-content="footer.nav_title">Navegación</h4>
+          <ul class="footer__links">
+            <li><a href="../index.html"         class="footer__link">Inicio</a></li>
+            <li><a href="../quienes-somos.html" class="footer__link">Quiénes somos</a></li>
+            <li><a href="../productos.html"     class="footer__link">Productos</a></li>
+            <li><a href="../contacto.html"      class="footer__link">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer__col-title" data-content="footer.products_title">Productos</h4>
+          <ul class="footer__links">
+            <li><a href="../productos.html" class="footer__link">Vinagres</a></li>
+            <li><a href="../productos.html" class="footer__link">Jugo de Limón</a></li>
+            <li><a href="../productos.html" class="footer__link">Salsas y Aderezos</a></li>
+            <li><a href="../productos.html" class="footer__link">Marca propia</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__b2b">
+          <div class="footer__b2b-title">Exportación &amp; B2B</div>
+          <p class="footer__b2b-desc">Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+          <div class="footer__b2b-targets">
+            <span class="footer__b2b-target">Industriales</span>
+            <span class="footer__b2b-target">Distribuidores</span>
+            <span class="footer__b2b-target">Importadores</span>
+            <span class="footer__b2b-target">Retail</span>
+            <span class="footer__b2b-target">HORECA</span>
+          </div>
+          <a href="../contacto.html" class="footer__b2b-cta">Solicitar catálogo &rarr;</a>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy" data-content="footer.copyright">© 2026 Traverso International Foods. Todos los derechos reservados.</p>
+        <p class="footer__copy" data-content="footer.parent_company">Una empresa de Traverso S.A. · Chile</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // ─── GSAP Setup ───────────────────────────────────────────
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ─── Header scroll state ──────────────────────────────────
+    const header = document.getElementById('header');
+    const heroLogo = document.querySelector('.hero__logo');
+    const headerLogo = document.querySelector('.header__logo');
+    const headerCta = document.querySelector('.header__cta');
+
+    gsap.set(headerLogo, { opacity: 0, y: -8 });
+    gsap.set(headerCta, { opacity: 0, y: -8 });
+
+    ScrollTrigger.create({
+      start: 'top -80px',
+      onEnter: () => {
+        header.classList.add('scrolled');
+        gsap.to(headerLogo, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+        gsap.to(headerCta, { opacity: 1, y: 0, duration: 0.4, delay: 0.1, ease: 'power2.out' });
+        if (heroLogo) gsap.to(heroLogo, { opacity: 0, y: -15, duration: 0.35, ease: 'power2.in' });
+      },
+      onLeaveBack: () => {
+        header.classList.remove('scrolled');
+        gsap.to(headerLogo, { opacity: 0, y: -8, duration: 0.3, ease: 'power2.in' });
+        gsap.to(headerCta, { opacity: 0, y: -8, duration: 0.3, ease: 'power2.in' });
+        if (heroLogo) gsap.to(heroLogo, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+      },
+    });
+
+    // ─── Mobile menu ──────────────────────────────────────────
+    const burgerBtn     = document.getElementById('burger-btn');
+    const mobileMenu    = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      mobileOverlay.classList.add('active');
+      burgerBtn.classList.add('active');
+      burgerBtn.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      mobileOverlay.classList.remove('active');
+      burgerBtn.classList.remove('active');
+      burgerBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    }
+
+    burgerBtn.addEventListener('click', () => {
+      mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    mobileOverlay.addEventListener('click', closeMenu);
+    document.querySelectorAll('.header__mobile-link').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // ─── HERO animations — #15 Full Photo Immersive ──────────
+    const heroTl = gsap.timeline({ delay: 0.3 });
+    heroTl
+      .to('.hero__logo', {
+        opacity: 1, y: 0,
+        duration: 0.8, ease: 'power2.out'
+      })
+      .to('.hero__title', {
+        opacity: 1, y: 0,
+        duration: 1.2, ease: 'power2.out'
+      }, '-=0.4')
+      .to('.hero__subtitle', {
+        opacity: 1, y: 0,
+        duration: 1, ease: 'power2.out'
+      }, '-=0.7')
+      .to('.hero__actions', {
+        opacity: 1, y: 0,
+        duration: 0.8, ease: 'power2.out'
+      }, '-=0.5');
+
+    // ─── HERO EXIT ──────────
+    heroTl.eventCallback('onComplete', () => {
+      const heroExit = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.hero',
+          start: '20% top',
+          end: 'bottom top',
+          scrub: 0.6,
+        }
+      });
+      heroExit.to('.hero__actions', { opacity: 0, y: 40, duration: 0.25 }, 0);
+      heroExit.to('.hero__subtitle', { opacity: 0, y: 30, duration: 0.25 }, 0.1);
+      heroExit.to('.hero__title', { opacity: 0, y: -40, scale: 1.05, duration: 0.35 }, 0.15);
+      heroExit.to('.hero__bg-img', { scale: 1.15, duration: 1 }, 0);
+    });
+
+    // ─── VALUE PROPS title (estático, no necesita esperar collections) ─
+    gsap.to('.value-props__title', {
+      scrollTrigger: { trigger: '.value-props', start: 'top 95%', toggleActions: 'play none none reverse' },
+      opacity: 1, y: 0,
+      duration: 1.2, ease: 'power2.out'
+    });
+
+    // ─── TRUST BAR label (estático) ───────────────────────────
+    gsap.to('.trust__label', {
+      scrollTrigger: { trigger: '.trust', start: 'top 95%', toggleActions: 'play none none reverse' },
+      opacity: 1, duration: 1, ease: 'power2.out'
+    });
+
+    // ─── ABOUT header (estático) ────────────────────────────
+    gsap.to('.about__header', {
+      scrollTrigger: { trigger: '.about', start: 'top 95%', toggleActions: 'play none none reverse' },
+      opacity: 1, y: 0, duration: 1, ease: 'power2.out'
+    });
+
+    // ─── PRODUCTS titles (estáticos) ───────────────────────
+    gsap.to('.products__title', {
+      scrollTrigger: { trigger: '.products', start: 'top 95%', toggleActions: 'play none none reverse' },
+      opacity: 1, y: 0, duration: 1.2, ease: 'power2.out'
+    });
+    gsap.to('.products__subtitle', {
+      scrollTrigger: { trigger: '.products', start: 'top 95%', toggleActions: 'play none none reverse' },
+      opacity: 1, y: 0, duration: 1, delay: 0.2, ease: 'power2.out'
+    });
+    gsap.to('.products__cta', {
+      scrollTrigger: { trigger: '.products__cta', start: 'top 95%', toggleActions: 'play none none reverse' },
+      opacity: 1, y: 0, duration: 1, ease: 'power2.out'
+    });
+
+    // ─── ANIMACIONES DE COLECCIONES DINÁMICAS ─────────────────
+    // Se registran DESPUÉS de que collections-loader.js renderiza los ítems
+    document.addEventListener('traverso:collections-loaded', function() {
+      ScrollTrigger.refresh();
+
+      // VALUE ITEMS (pilares_home)
+      gsap.to('.value-item', {
+        scrollTrigger: { trigger: '.value-props__list', start: 'top 95%', toggleActions: 'play none none reverse' },
+        opacity: 1, y: 0,
+        duration: 0.8, stagger: 0.15, ease: 'power2.out'
+      });
+
+      // VALUE PROPS EXIT
+      const vpExit = gsap.timeline({
+        scrollTrigger: { trigger: '.value-props', start: '90% center', end: 'bottom top', scrub: 0.6 }
+      });
+      vpExit.to('.value-item:nth-child(4)', { opacity: 0, y: -20, duration: 0.2 }, 0);
+      vpExit.to('.value-item:nth-child(3)', { opacity: 0, y: -20, duration: 0.2 }, 0.05);
+      vpExit.to('.value-item:nth-child(2)', { opacity: 0, y: -20, duration: 0.2 }, 0.1);
+      vpExit.to('.value-item:nth-child(1)', { opacity: 0, y: -20, duration: 0.2 }, 0.15);
+      vpExit.to('.value-props__sticky', { opacity: 0, y: -30, duration: 0.3 }, 0.2);
+
+      // TRUST ITEMS
+      gsap.to('.trust__item', {
+        scrollTrigger: { trigger: '.trust', start: 'top 95%', toggleActions: 'play none none reverse' },
+        opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power2.out'
+      });
+
+      // TRUST EXIT
+      const trustExit = gsap.timeline({
+        scrollTrigger: { trigger: '.trust', start: '70% center', end: 'bottom top', scrub: 0.6 }
+      });
+      trustExit.to('.trust__item', { opacity: 0, y: -15, stagger: { each: 0.03, from: 'end' }, duration: 0.2 }, 0);
+      trustExit.to('.trust__label', { opacity: 0, y: -10, duration: 0.15 }, 0.1);
+
+      // ABOUT DIFF ITEMS (pilares_about)
+      gsap.to('.about__diff-item', {
+        scrollTrigger: { trigger: '.about__diffs', start: 'top 95%', toggleActions: 'play none none reverse' },
+        opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power2.out'
+      });
+
+      // ABOUT EXIT
+      const aboutExit = gsap.timeline({
+        scrollTrigger: { trigger: '.about', start: '70% center', end: 'bottom top', scrub: 0.6 }
+      });
+      aboutExit.to('.about__diff-item:nth-child(4)', { opacity: 0, y: -15, duration: 0.2 }, 0);
+      aboutExit.to('.about__diff-item:nth-child(3)', { opacity: 0, y: -15, duration: 0.2 }, 0.04);
+      aboutExit.to('.about__diff-item:nth-child(2)', { opacity: 0, y: -15, duration: 0.2 }, 0.08);
+      aboutExit.to('.about__diff-item:nth-child(1)', { opacity: 0, y: -15, duration: 0.2 }, 0.12);
+      aboutExit.to('.about__header', { opacity: 0, y: -25, scale: 1.02, duration: 0.3 }, 0.15);
+
+      // PRODUCT CARDS
+      gsap.to('.product-card', {
+        scrollTrigger: { trigger: '.products__grid', start: 'top 95%', toggleActions: 'play none none reverse' },
+        opacity: 1, y: 0, duration: 1, stagger: 0.15, ease: 'power2.out'
+      });
+
+      // PRODUCTS EXIT
+      const prodExit = gsap.timeline({
+        scrollTrigger: { trigger: '.products', start: '90% center', end: 'bottom top', scrub: 0.6 }
+      });
+      prodExit.to('.products__cta', { opacity: 0, y: -15, duration: 0.15 }, 0);
+      prodExit.to('.product-card:not(:first-child)', { opacity: 0, y: -20, stagger: { each: 0.04, from: 'end' }, duration: 0.2 }, 0.05);
+      prodExit.to('.product-card:first-child', { opacity: 0, y: -25, duration: 0.25 }, 0.1);
+      prodExit.to('.products__subtitle', { opacity: 0, y: -15, duration: 0.2 }, 0.15);
+      prodExit.to('.products__title', { opacity: 0, y: -25, scale: 1.02, duration: 0.3 }, 0.2);
+      prodExit.to('.products .section-label', { opacity: 0, y: -10, duration: 0.15 }, 0.25);
+    });
+
+    // ─── CONTACT — Entrance ─────────────────────────────────
+    const contactTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.contact',
+        start: 'top 90%',
+        toggleActions: 'play none none reverse',
+      }
+    });
+    contactTl
+      .to('.contact__header', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' })
+      .to('.contact__form', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.5')
+      .to('.contact__info-row', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4');
+    // No exit for contact — it's the last section before footer
+
+  </script>
+
+  <!-- DEPLOY: actualizar action de todos los formularios con ID real de Formspree -->
+  <!-- Formularios: form-home (index), form-quienes-somos, form-productos, form-contacto-principal -->
+  <!-- TODO: sesión foto planta → reemplazar hero y about con imágenes de mayor resolución -->
+  <!-- TODO: sesión producto → reemplazar product cards con fotos sobre fondo neutro tipo catálogo -->
+  <!-- TODO: sesión corporativa → agregar foto equipo en sección contacto de contacto.html -->
+  <!-- TODO: ampliar categorías en productos.html con información enviada por Víctor -->
+
+  <!-- ============================================================
+       TRAVERSO CMS — Loaders de contenido dinámico
+  ============================================================ -->
+  <script src="../js/content-loader.js"></script>
+  <script src="../js/collections-loader.js"></script>
+  <script src="../js/seo-injector.js"></script>
+  <script src="../js/integraciones-loader.js"></script>
+  <script src="../js/form-handler.js"></script>
+  <script src="../js/lang-switcher.js"></script>
+</body>
+</html>

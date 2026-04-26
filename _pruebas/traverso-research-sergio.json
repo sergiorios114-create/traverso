@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "author": "Sergio",
+    "exportedAt": "2026-04-23T17:17:48.398Z",
+    "version": "traverso-research-v1",
+    "sourceDoc": "Research Traverso International Foods"
+  },
+  "entries": {
+    "sv-paleta-actual": {
+      "note": "quitar coral y verde agua ajustando 1a1a2e a complementar con c5a55a (los colors finales estan en la paleta llamada theme paleta colores traverso (escritorio axel)",
+      "author": "Sergio",
+      "state": "ok"
+    },
+    "sv-paleta-diag": {
+      "state": "ok",
+      "author": "Sergio",
+      "note": "los colores mencionados seran quitados de la peleta"
+    },
+    "sv-paleta-pauta": {
+      "note": "falta definir el gris de los textos para conseguir el mayor de los contrastes con cada uno de los colores (en busqueda del gris perfecto)",
+      "author": "Sergio",
+      "state": "ok"
+    },
+    "sv-tipo": {
+      "state": "ok",
+      "author": "Sergio"
+    },
+    "sv-foto-reglas": {
+      "state": "ok",
+      "author": "Sergio"
+    },
+    "sv-logo": {
+      "note": "no aporta en nada esto",
+      "author": "Sergio",
+      "state": "drop"
+    },
+    "home-hero-cinema": {
+      "state": "ok",
+      "author": "Sergio"
+    },
+    "home-hero-photo": {
+      "state": "drop",
+      "author": "Sergio"
+    },
+    "home-hero-modern": {
+      "state": "drop",
+      "author": "Sergio"
+    },
+    "home-hero-centered": {
+      "state": "drop",
+      "author": "Sergio"
+    },
+    "home-headline": {
+      "state": "ok",
+      "author": "Sergio"
+    },
+    "home-valor": {
+      "state": "ok",
+      "author": "Sergio"
+    }
+  }
+}

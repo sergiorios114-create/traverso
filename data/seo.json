@@ -1,0 +1,118 @@
+{
+  "global": {
+    "site_name": "Traverso International Foods",
+    "site_url": "https://traverso.cl",
+    "default_image": "assets/exterior-fabrica-portada.jpg",
+    "twitter_handle": "",
+    "organization": {
+      "name": "Traverso International Foods",
+      "legal_name": "Traverso S.A.",
+      "url": "https://traverso.cl",
+      "logo": "assets/logo-traverso.png",
+      "email": "e-commerce@traverso.cl",
+      "phone": "+56224370900",
+      "address_street": "Av. Vespucio 1313",
+      "address_locality": "La Cisterna",
+      "address_region": "Región Metropolitana",
+      "address_postal": "",
+      "address_country": "CL",
+      "founding_date": "1895",
+      "same_as": [
+        "https://www.facebook.com/TraversoChileSA",
+        "https://www.instagram.com/traversochile"
+      ]
+    }
+  },
+  "es": {
+    "index": {
+      "title": "Traverso International Foods — Exportación de Alimentos desde Chile",
+      "description": "Traverso International Foods — Exportación de alimentos de alta calidad desde Chile hacia mercados internacionales. BRC GS 'AA'. 130 años de trayectoria.",
+      "keywords": "exportación alimentos Chile, vinagres, jugo de limón, salsas, BRC, Traverso",
+      "robots": "index, follow",
+      "canonical": "https://traverso.cl/",
+      "og_title": "Traverso International Foods — Exportación desde Chile",
+      "og_description": "Vinagres, salsas y condimentos desde Chile. Más de 130 años de experiencia productiva con certificación BRC GS 'AA'.",
+      "og_image": "assets/exterior-fabrica-portada.jpg",
+      "schema_type": "WebSite"
+    },
+    "productos": {
+      "title": "Productos — Traverso International Foods",
+      "description": "Líneas de productos para exportación — Traverso International Foods. Vinagres, jugo de limón, salsas y aderezos. Granel, envasado y marca propia para mercados internacionales.",
+      "keywords": "vinagres exportación, jugo de limón Chile, salsas industriales, marca propia alimentos",
+      "robots": "index, follow",
+      "canonical": "https://traverso.cl/productos.html",
+      "og_title": "Productos — Traverso International Foods",
+      "og_description": "Vinagres, jugo de limón, salsas y aderezos para mercados internacionales.",
+      "og_image": "assets/producto-1.webp",
+      "schema_type": "CollectionPage"
+    },
+    "quienes_somos": {
+      "title": "Quiénes Somos — Traverso International Foods",
+      "description": "Quiénes somos — Traverso International Foods. La evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia en producción y comercialización de alimentos.",
+      "keywords": "Traverso Chile, historia Traverso, empresa alimentaria chilena",
+      "robots": "index, follow",
+      "canonical": "https://traverso.cl/quienes-somos.html",
+      "og_title": "Quiénes Somos — Traverso International Foods",
+      "og_description": "Más de 130 años de trayectoria productiva proyectados hacia mercados globales.",
+      "og_image": "assets/exterior-fabrica-1.jpg",
+      "schema_type": "AboutPage"
+    },
+    "contacto": {
+      "title": "Contacto — Traverso International Foods",
+      "description": "Contacto — Traverso International Foods. Estamos disponibles para generar nuevas oportunidades comerciales y alianzas estratégicas en mercados internacionales.",
+      "keywords": "contacto Traverso, distribuidor alimentos Chile, alianza comercial",
+      "robots": "index, follow",
+      "canonical": "https://traverso.cl/contacto.html",
+      "og_title": "Contacto — Traverso International Foods",
+      "og_description": "Conversemos sobre oportunidades comerciales en mercados internacionales.",
+      "og_image": "assets/exterior-fabrica-portada.jpg",
+      "schema_type": "ContactPage"
+    }
+  },
+  "en": {
+    "index": {
+      "title": "Traverso International Foods — Food Export from Chile",
+      "description": "Traverso International Foods — High-quality food export from Chile to international markets. BRC GS 'AA'. 130 years of experience.",
+      "keywords": "food export Chile, vinegars, lemon juice, sauces, BRC, Traverso",
+      "robots": "index, follow",
+      "canonical": "https://traverso.cl/?lang=en",
+      "og_title": "Traverso International Foods — Export from Chile",
+      "og_description": "Vinegars, sauces and condiments from Chile. Over 130 years of production experience with BRC GS 'AA' certification.",
+      "og_image": "assets/exterior-fabrica-portada.jpg",
+      "schema_type": "WebSite"
+    },
+    "productos": {
+      "title": "Products — Traverso International Foods",
+      "description": "Product lines for export — Traverso International Foods. Vinegars, lemon juice, sauces and dressings. Bulk, packaged and private label for international markets.",
+      "keywords": "vinegars export, lemon juice Chile, industrial sauces, private label food",
+      "robots": "index, follow",
+      "canonical": "https://traverso.cl/productos.html?lang=en",
+      "og_title": "Products — Traverso International Foods",
+      "og_description": "Vinegars, lemon juice, sauces and dressings for international markets.",
+      "og_image": "assets/producto-1.webp",
+      "schema_type": "CollectionPage"
+    },
+    "quienes_somos": {
+      "title": "About Us — Traverso International Foods",
+      "description": "About us — Traverso International Foods. The international evolution of Traverso S.A., a Chilean company with over 130 years of history in food production and commercialization.",
+      "keywords": "Traverso Chile, Traverso history, Chilean food company",
+      "robots": "index, follow",
+      "canonical": "https://traverso.cl/quienes-somos.html?lang=en",
+      "og_title": "About Us — Traverso International Foods",
+      "og_description": "Over 130 years of production experience projected to global markets.",
+      "og_image": "assets/exterior-fabrica-1.jpg",
+      "schema_type": "AboutPage"
+    },
+    "contacto": {
+      "title": "Contact — Traverso International Foods",
+      "description": "Contact — Traverso International Foods. We are available to generate new commercial opportunities and strategic alliances in international markets.",
+      "keywords": "contact Traverso, Chile food distributor, commercial partnership",
+      "robots": "index, follow",
+      "canonical": "https://traverso.cl/contacto.html?lang=en",
+      "og_title": "Contact — Traverso International Foods",
+      "og_description": "Let's talk about commercial opportunities in international markets.",
+      "og_image": "assets/exterior-fabrica-portada.jpg",
+      "schema_type": "ContactPage"
+    }
+  }
+}

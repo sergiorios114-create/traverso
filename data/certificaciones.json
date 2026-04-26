@@ -1,0 +1,38 @@
+[
+  {
+    "id": "cert_1",
+    "orden": 1,
+    "icono": "shield",
+    "titulo_es": "Certificación BRC GS \"AA\"",
+    "titulo_en": "BRC GS \"AA\" Certification",
+    "descripcion_es": "Nuestras plantas productivas operan bajo certificación BRC GS \"AA\", estándar reconocido internacionalmente en seguridad y calidad alimentaria.",
+    "descripcion_en": "Our production plants operate under BRC GS \"AA\" certification, an internationally recognized standard for food safety and quality."
+  },
+  {
+    "id": "cert_2",
+    "orden": 2,
+    "icono": "history",
+    "titulo_es": "Respaldo de una marca con trayectoria",
+    "titulo_en": "Backed by a company with a long history",
+    "descripcion_es": "Traverso es una empresa chilena con más de 130 años de historia. Proyectamos esa experiencia hacia mercados internacionales con seriedad y continuidad.",
+    "descripcion_en": "Traverso is a Chilean company with over 130 years of history. We project that experience towards international markets with seriousness and continuity."
+  },
+  {
+    "id": "cert_3",
+    "orden": 3,
+    "icono": "globe",
+    "titulo_es": "Enfoque en exportación y mercados globales",
+    "titulo_en": "Focus on export and global markets",
+    "descripcion_es": "Nuestra operación está estructurada para responder a los estándares, volúmenes y tiempos que exige el comercio internacional.",
+    "descripcion_en": "Our operation is structured to meet the standards, volumes and timelines required by international trade."
+  },
+  {
+    "id": "cert_4",
+    "orden": 4,
+    "icono": "process",
+    "titulo_es": "Procesos confiables y escalables",
+    "titulo_en": "Reliable and scalable processes",
+    "descripcion_es": "Contamos con procesos productivos y comerciales capaces de adaptarse a distintos requerimientos y volúmenes sin perder consistencia.",
+    "descripcion_en": "We have productive and commercial processes capable of adapting to different requirements and volumes without losing consistency."
+  }
+]

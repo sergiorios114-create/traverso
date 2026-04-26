@@ -1,0 +1,3202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Traverso International Foods — Exportación de alimentos de alta calidad desde Chile hacia mercados internacionales. BRC GS 'AA'. 130 años de trayectoria." />
+  <title>Traverso International Foods — Exportación de Alimentos desde Chile</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Anti-FOUC: aplicar .js-anim SÍNCRONAMENTE antes del CSS para que opacity:0 entre en efecto antes del primer paint -->
+  <script>
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('js-anim');
+    }
+  </script>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+
+  <style>
+    /* ============================================================
+       VARIABLES CSS — COLORES DE TRAVERSO
+    ============================================================ */
+    :root {
+      /* Colores oficiales Traverso — fuente: DESIGN.md */
+      --color-primary:          #0B1E6B;
+      --color-primary-dark:     #081450;
+      --color-accent:           #C5A55A;
+      --color-accent-saturated: #C9A227;
+
+      /* Fondos */
+      --color-bg:        #FBF9FA;
+      --color-bg-alt:    #F2F4F8;
+      --color-bg-dark:   var(--color-primary);
+      --color-bg-deeper: var(--color-primary-dark);
+
+      /* Textos */
+      --color-text:         #19212F;
+      --color-text-muted:   #4A5362;
+      --color-text-light:   #6B7280;
+      --color-text-on-dark: #FFFFFF;
+
+      /* Bordes */
+      --color-border:       #DDE2EC;
+      --color-border-light: #EEF0F5;
+
+      /* Tipografía */
+      --font-heading:        'Libre Baskerville', Georgia, serif;
+      --font-body:           'Source Sans 3', system-ui, sans-serif;
+
+      /* Tamaños de texto */
+      --text-xs:    clamp(0.75rem,  1vw,   0.875rem);
+      --text-sm:    clamp(0.875rem, 1.2vw, 1rem);
+      --text-base:  clamp(1rem,     1.5vw, 1.125rem);
+      --text-lg:    clamp(1.125rem, 1.8vw, 1.25rem);
+      --text-xl:    clamp(1.25rem,  2vw,   1.5rem);
+      --text-2xl:   clamp(1.5rem,   2.5vw, 2rem);
+      --text-3xl:   clamp(2rem,     3vw,   2.75rem);
+      --text-4xl:   clamp(2.5rem,   4vw,   3.5rem);
+      --text-5xl:   clamp(3rem,     5vw,   4.5rem);
+
+      /* Layout · 2 tiers de ancho consolidado 2026-04-26 */
+      --section-padding:        clamp(4rem, 8vw, 7rem) 0;
+      --container-width:        1200px;                    /* default · sitios estándar */
+      --container-institutional: min(1500px, 94vw);        /* polo institucional · módulos hero/pilares/productos/footer/about */
+      --container-padding:      0 clamp(1.5rem, 5vw, 3rem);
+
+      /* UI */
+      --border-radius:      4px;
+      --border-radius-lg:   8px;
+      --transition:         0.3s ease;
+      --transition-slow:    0.6s ease;
+
+      /* Sombras */
+      --shadow-sm:  0 1px 3px rgba(11,53,105,0.08);
+      --shadow-md:  0 4px 16px rgba(11,53,105,0.12);
+      --shadow-lg:  0 12px 40px rgba(11,53,105,0.16);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a   { color: inherit; text-decoration: none; }
+    ul  { list-style: none; }
+
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: var(--container-padding);
+    }
+
+    /* ── TIER 1: Primary CTA — compact 36px ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      height: 36px;
+      padding: 0 1.25rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      position: relative;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 120ms cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    .btn:active { transform: scale(0.97); }
+    .btn:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+
+    /* Gold (sobre fondo oscuro) */
+    .btn--gold {
+      background: var(--color-accent);
+      color: var(--color-primary-dark);
+    }
+    .btn--gold:hover {
+      background: #d4b96e;
+      box-shadow: 0 2px 8px rgba(197,165,90,0.3);
+    }
+
+    /* Dark (sobre fondo claro) */
+    .btn--primary {
+      background: var(--color-primary-dark);
+      color: white;
+    }
+    .btn--primary:hover {
+      background: #1a3a6b;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+
+    /* White outline (sobre fondo oscuro, secundario) */
+    .btn--outline {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.25);
+    }
+    .btn--outline:hover {
+      color: white;
+      box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* Ghost (cancel, dismiss) */
+    .btn--ghost {
+      background: transparent;
+      color: var(--color-text-muted);
+    }
+    .btn--ghost:hover {
+      background: rgba(0,0,0,0.04);
+      color: var(--color-primary-dark);
+    }
+
+    /* Slate (formularios neutros) */
+    .btn--slate {
+      background: #1e293b;
+      color: white;
+    }
+    .btn--slate:hover {
+      background: #334155;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+
+    /* ── TIER 2: Secondary — Underline elegant ── */
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      padding: 0.4rem 0;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .btn-secondary::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      transition: width 0.3s ease;
+    }
+
+    .btn-secondary:hover::after { width: 100%; }
+    .btn-secondary:focus-visible { outline: 2px solid #2563eb; outline-offset: 4px; }
+
+    /* Gold (sobre oscuro) */
+    .btn-secondary--gold { color: var(--color-accent); }
+    .btn-secondary--gold:hover { color: #d4b96e; }
+    .btn-secondary--gold::after { background: #d4b96e; }
+
+    /* Light (sobre oscuro, mas sutil) */
+    .btn-secondary--light { color: rgba(255,255,255,0.55); }
+    .btn-secondary--light:hover { color: white; }
+    .btn-secondary--light::after { background: var(--color-accent); }
+
+    /* Dark (sobre fondo claro) */
+    .btn-secondary--dark { color: var(--color-primary-dark); }
+    .btn-secondary--dark:hover { color: #1a3a6b; }
+    .btn-secondary--dark::after { background: var(--color-accent); }
+
+    .btn-secondary .arrow {
+      display: inline-block;
+      font-size: 0.9em;
+      transition: transform 0.2s ease;
+    }
+    .btn-secondary:hover .arrow { transform: translateX(3px); }
+
+    .section-label {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent-saturated);
+      margin-bottom: 1rem;
+    }
+
+    .section-label--light {
+      color: rgba(201,162,39,0.8);
+    }
+
+    /* ============================================================
+       HEADER · V19 — Heritage badge inline (Est. 1893 · 130 años)
+    ============================================================ */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: transparent;
+      transition: background 0.32s cubic-bezier(0.22,0.61,0.36,1), box-shadow 0.32s cubic-bezier(0.22,0.61,0.36,1);
+    }
+
+    /* Heritage badge inline · al lado del logo, separado por hairline (V19 exacto) */
+    .header__brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    /* V19 demo · scrolled state (header bg blanco) — colores definitivos:
+       border-left gris claro · "Est. 1893" mono gris · "130 años de oficio" italic gold */
+    .header__heritage {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: 0.65rem;
+      color: var(--color-accent-saturated);
+      border-left: 1px solid var(--color-border);
+      padding-left: 14px;
+      line-height: 1.2;
+      transition: border-left-color 0.6s cubic-bezier(0.4,0,0.2,1), color 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+    .header__heritage strong {
+      font-style: normal;
+      font-family: 'Courier New', monospace;
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-subtle);
+      display: block;
+      margin-bottom: 2px;
+      transition: color 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+    /* Mobile: ocultar badge para no saturar header chico */
+    @media (max-width: 900px) {
+      .header__heritage { display: none; }
+    }
+
+    .header.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header.scrolled .header__link {
+      color: var(--color-text);
+    }
+
+    .header.scrolled .header__link:hover {
+      color: var(--color-primary);
+    }
+
+    .header.scrolled .header__cta {
+      background: var(--color-primary-dark);
+      color: white;
+    }
+    .header.scrolled .header__cta:hover {
+      background: #1a3a6b;
+    }
+
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      max-width: 100%;
+      padding-left: clamp(1.5rem, 3vw, 2.5rem);
+      padding-right: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .header__logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .header__logo img {
+      height: 30px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      transition: filter 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .header.scrolled .header__logo img {
+      filter: none;
+    }
+
+    .header__nav {
+      display: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .header__list {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .header__link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.04em;
+      transition: color 0.6s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+    }
+
+    .header__link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-accent);
+      transition: width 0.3s ease;
+    }
+
+    .header__link:hover::after { width: 100%; }
+
+    .header__link--active::after { width: 100%; }
+    .header.scrolled .header__link--active { color: var(--color-primary); }
+
+    /* Dropdown */
+    .header__dropdown {
+      position: relative;
+    }
+
+    .header__dropdown-toggle {
+      cursor: pointer;
+    }
+
+    .header__dropdown-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(5,14,51,0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 6px;
+      padding: 0.5rem 0;
+      min-width: 160px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-50%) translateY(-6px);
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .header.scrolled .header__dropdown-menu {
+      background: rgba(255,255,255,0.97);
+      border-color: var(--color-border-light);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .header__dropdown:hover .header__dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .header__dropdown-item {
+      display: block;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .header__dropdown-item:hover {
+      background: rgba(255,255,255,0.08);
+      color: white;
+    }
+
+    .header.scrolled .header__dropdown-item {
+      color: var(--color-text-muted);
+    }
+
+    .header.scrolled .header__dropdown-item:hover {
+      background: var(--color-bg-alt);
+      color: var(--color-primary-dark);
+    }
+
+    .header__dropdown-item--active {
+      color: var(--color-accent-saturated);
+    }
+
+    .header.scrolled .header__dropdown-item--active {
+      color: var(--color-primary);
+    }
+
+    .header__cta {
+      display: none;
+      transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .header__burger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    .header__burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: white;
+      transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .header.scrolled .header__burger span {
+      background: var(--color-primary);
+    }
+
+    .header__burger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .header__burger.active span:nth-child(2) { opacity: 0; }
+    .header__burger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile menu */
+    .header__mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: min(320px, 85vw);
+      height: 100vh;
+      background: var(--color-primary-dark);
+      padding: 5rem 2rem 2rem;
+      transition: right 0.4s ease;
+      z-index: 99;
+    }
+
+    .header__mobile-menu.open { right: 0; }
+
+    .header__mobile-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .header__mobile-link {
+      font-size: var(--text-lg);
+      color: white;
+      font-weight: 400;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 1.5rem;
+      display: block;
+    }
+
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 98;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .mobile-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    @media (min-width: 850px) {
+      .header__nav  { display: flex; align-items: center; }
+      .header__cta  { display: inline-flex; opacity: 0; }
+      .header__burger { display: none; }
+    }
+
+    /* ============================================================
+       HERO — #40 Cinema Full Width
+    ============================================================ */
+    .hero {
+      min-height: 100vh;
+      background: var(--color-primary);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(6rem,10vw,9rem) 0 clamp(4rem,6vw,5rem);
+    }
+    .hero__top-text {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      width: 100%;
+      margin-bottom: -0.25rem;
+      padding: 0 var(--container-padding);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero__logo {
+      margin-bottom: 1.25rem;
+      /* opacity:0 + translateY → ahora vía gsap.set() en JS para evitar trap si CDN falla */
+    }
+    /* Si GSAP cargó (.js-anim en <html>), iniciar oculto antes de animar.
+       Si GSAP falla, contenido visible por defecto — bulletproof. */
+    .js-anim .hero__logo,
+    .js-anim .hero__eyebrow,
+    .js-anim .hero__title,
+    .js-anim .hero__cinema-frame,
+    .js-anim .hero__subtitle,
+    .js-anim .hero__certs,
+    .js-anim .hero__right-col,
+    /* Reveal targets fuera del hero — evitar FOUC + doble animación */
+    .js-anim .value-props__title,
+    .js-anim .value-item,
+    .js-anim .about__intro > *,
+    .js-anim .about__pillar,
+    .js-anim .trust__stamp,
+    .js-anim .trust__hero,
+    .js-anim .trust__item,
+    .js-anim .products__header > *,
+    .js-anim .product-card,
+    .js-anim .products__cta,
+    .js-anim .mini-contact__label,
+    .js-anim .mini-contact__title,
+    .js-anim .mini-contact__lead,
+    .js-anim .contact__form .form__row,
+    .js-anim .contact__form > .form__group,
+    .js-anim .form__submit,
+    .js-anim .mini-contact__aux,
+    .js-anim .footer__brand,
+    .js-anim .footer__right,
+    .js-anim .footer__trust-row .footer__trust-item,
+    .js-anim .footer__ctas > * {
+      opacity: 0;
+    }
+    /* Reduced motion: sin transform, fade rápido vía CSS si JS falla */
+    @media (prefers-reduced-motion: reduce) {
+      .js-anim .hero__logo,
+      .js-anim .hero__eyebrow,
+      .js-anim .hero__title,
+      .js-anim .hero__cinema-frame,
+      .js-anim .hero__subtitle,
+      .js-anim .hero__certs,
+      .js-anim .hero__right-col {
+        opacity: 1;
+        transform: none !important;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    .hero__logo img {
+      height: 53px;
+      filter: brightness(0) invert(1);
+    }
+    .hero__eyebrow {
+      font-family: 'Courier New', monospace;
+      font-size: 0.56rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-accent-saturated);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      /* opacity:0 → ahora condicional vía .js-anim */
+    }
+    .hero__eyebrow::before,
+    .hero__eyebrow::after {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: rgba(201,162,39,0.5);
+    }
+    .hero__title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      /* opacity:0 → ahora condicional vía .js-anim */
+    }
+    .hero__title span {
+      color: var(--color-accent-saturated);
+    }
+    .hero__cinema-frame {
+      position: relative;
+      width: 100%;
+      margin-bottom: 1.25rem;
+      aspect-ratio: 3.58 / 1;
+      overflow: hidden;
+      /* opacity:0 → ahora condicional vía .js-anim */
+    }
+    .hero__cinema-frame img,
+    .hero__cinema-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero__cinema-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(5,14,51,0.3) 0%, transparent 30%, transparent 70%, rgba(5,14,51,0.3) 100%);
+    }
+    .hero__bottom-row {
+      /* Ancho institucional · matches .value-props (UN-style platform) */
+      max-width: var(--container-institutional);
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 0 var(--container-padding);
+    }
+    .hero__subtitle {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+      max-width: 420px;
+      line-height: 1.7;
+      /* opacity:0 → ahora condicional vía .js-anim */
+    }
+    .hero__certs {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+      /* opacity:0 → ahora condicional vía .js-anim */
+    }
+    .hero__cert-pill {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero__right-col {
+      /* opacity:0 → ahora condicional vía .js-anim */
+    }
+    .hero__actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .hero__stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 0.75rem;
+    }
+    .hero__stat { text-align: center; }
+    .hero__stat-num {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-accent-saturated);
+      letter-spacing: 0.08em;
+    }
+    .hero__stat-label {
+      font-size: 0.5rem;
+      color: rgba(255,255,255,0.2);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    @media(max-width:640px){
+      .hero__cinema-frame { aspect-ratio: 2.09 / 1; margin-top: 1rem; }
+      .hero__bottom-row { flex-direction: column; }
+      /* Override negative margin para que título no se solape con video en mobile */
+      .hero__top-text { margin-bottom: 0; }
+      .hero__title { font-size: clamp(1.8rem, 7.5vw, 2.6rem); line-height: 1.15; }
+    }
+
+    /* ============================================================
+       PROPUESTA DE VALOR — Same layout as About
+    ============================================================ */
+    /* ============================================================
+       PROPUESTA DE VALOR · V16b — McKinsey style
+       Sticky sidebar + hairline + eyebrow tracked
+       Cards blancas minimal sin bordes (research 2026-04-26)
+    ============================================================ */
+    .value-props {
+      padding: var(--section-padding);
+      background: #fff;
+    }
+
+    /* Módulo de pilares · ancho institucional unificado */
+    .value-props .container {
+      max-width: var(--container-institutional);
+    }
+
+    .value-props__layout {
+      display: grid;
+      grid-template-columns: 400px 1fr; /* índice 10% más ancho que antes (360 → 400) */
+      gap: 5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 880px) {
+      .value-props__layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    .value-props__sidebar {
+      position: sticky;
+      top: 90px; /* justo bajo el header */
+    }
+
+    @media (max-width: 880px) {
+      .value-props__sidebar {
+        position: static;
+      }
+    }
+
+    .value-props__eyebrow {
+      display: block;
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      color: var(--color-accent-saturated);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .value-props__title {
+      /* Mismo tamaño que .about__title — heritage editorial */
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 2.2vw, 1.85rem);
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.15;
+      letter-spacing: -.015em;
+      margin: 0 0 0.6rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .value-props__title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-accent-saturated);
+    }
+
+    .value-props__lead {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin: 0 0 1.6rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(11, 30, 107, 0.18);
+      max-width: 320px;
+    }
+
+    .value-props__nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .value-props__nav a {
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      padding: 0.6rem 0;
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 0.6rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      align-items: baseline;
+      border-bottom: 1px dotted rgba(11, 30, 107, 0.10);
+    }
+
+    .value-props__nav a:last-child {
+      border-bottom: none;
+    }
+
+    .value-props__nav a span.num {
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: var(--color-accent-saturated);
+      letter-spacing: 0.05em;
+    }
+
+    .value-props__nav a:hover {
+      color: var(--color-primary-dark);
+      transform: translateX(3px);
+    }
+
+    .value-props__nav a.is-active {
+      color: var(--color-primary-dark);
+      font-weight: 600;
+    }
+
+    .value-props__nav a.is-active span.num {
+      color: var(--color-primary-dark);
+    }
+
+    @media (max-width: 880px) {
+      .value-props__title {
+        white-space: normal;
+        font-size: 1.65rem;
+      }
+      .value-props__lead {
+        max-width: 100%;
+      }
+    }
+
+    .value-props__grid {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .value-item {
+      padding: 3.5rem 0;
+      border-top: 1px solid rgba(11, 30, 107, 0.10);
+    }
+
+    .value-item:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .value-item__num {
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--color-accent-saturated);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .value-item__num::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(11, 30, 107, 0.12);
+      max-width: 60px;
+    }
+
+    .value-item__title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--color-primary-dark);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+      max-width: 580px;
+    }
+
+    .value-item__text {
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      font-size: 1rem;
+      color: var(--color-text);
+      line-height: 1.75;
+      max-width: 600px;
+      opacity: 0.82;
+    }
+
+    @media (max-width: 640px) {
+      .value-item {
+        padding: 2.5rem 0;
+      }
+      .value-item__title {
+        font-size: 1.3rem;
+      }
+    }
+
+    /* ============================================================
+       QUIÉNES SOMOS — V6 Text + Diffs Grid
+    ============================================================ */
+    .about {
+      padding: var(--section-padding);
+      background: var(--color-bg-alt);
+    }
+
+    /* Módulo About · ancho institucional unificado */
+    .about .container {
+      max-width: var(--container-institutional);
+    }
+
+    /* V12 layout · intro asimétrico arriba + panel abajo · concepto B2B editorial */
+    .about__layout {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+    /* Intro · 2 columnas asimétricas compactas B2B · jerarquía editorial sin volumen */
+    .about__intro {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 3rem;
+      align-items: start;
+      padding: 1.5rem 0 1.5rem;
+      border-top: 1px solid rgba(11,30,107,.18);
+      border-bottom: 1px solid rgba(11,30,107,.10);
+      position: relative;
+    }
+    .about__intro-head {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      position: sticky;
+      top: 80px;
+    }
+    .about__intro-head::before {
+      content: "§ Quiénes Somos · 130 años · BRC AA";
+      font-family: 'Courier New', monospace;
+      font-size: .6rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--color-accent-saturated);
+      display: block;
+    }
+    .about__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 2.2vw, 1.85rem);
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.15;
+      letter-spacing: -.015em;
+      margin: 0;
+      max-width: 22ch;
+    }
+    .about__title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-accent-saturated);
+    }
+    .about__intro-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .about__lead {
+      font-size: .8rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      margin: 0;
+      position: relative;
+    }
+    .about__lead::before {
+      content: "01";
+      font-family: 'Courier New', monospace;
+      font-size: .55rem;
+      letter-spacing: .18em;
+      color: var(--color-accent-saturated);
+      display: block;
+      margin-bottom: .4rem;
+    }
+    .about__lead:nth-of-type(2)::before {
+      content: "02";
+    }
+    /* CTAs · inline bajo el título (en .about__intro-head) · botones compactos */
+    .about__intro-cta {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+      align-items: center;
+    }
+    /* Override compacto solo para los botones de este intro (no global) */
+    .about__intro-cta .btn,
+    .about__intro-cta .btn-secondary {
+      font-size: .65rem;
+      letter-spacing: .14em;
+      padding: 8px 14px;
+    }
+    .about__intro-cta .btn-secondary--dark .arrow {
+      font-size: .85rem;
+      margin-left: .2rem;
+    }
+    @media (max-width: 900px) {
+      .about__intro { grid-template-columns: 1fr; gap: 1.5rem; }
+      .about__intro-head { position: static; }
+      .about__intro-body { grid-template-columns: 1fr; }
+    }
+
+    /* Las definiciones de .about__intro/title/lead/cta ya están arriba (V12 B2B intro) — no duplicar aquí */
+
+    /* ============================================================
+       V12 · Sidebar nav + main viewer (research-layouts-cards-b2b · L13)
+       Aplicado 2026-04-26 · backup en about-backup-pre-v12.html
+       Mecánica: hover en sidebar row N → viewer muestra pillar N · row N+1 (siguiente) bg bone
+       Regla cliente: números siempre visibles · recorrido § 01-05 trazable en sidebar
+    ============================================================ */
+    .about__panel {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0;
+      background: var(--color-border-light);
+      margin-top: 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      overflow: hidden;
+      min-height: 520px;
+    }
+    @media (max-width: 900px) {
+      .about__panel { grid-template-columns: 1fr; min-height: auto; }
+    }
+
+    /* Sidebar */
+    .about__sidebar {
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--color-border-light);
+    }
+    .about__sidebar-row {
+      padding: 1.1rem 1.3rem;
+      border-bottom: 1px solid var(--color-border-light);
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+      cursor: default;
+      transition: background .25s ease, color .25s ease, padding-left .25s ease;
+      position: relative;
+      flex: 1;
+      justify-content: center;
+    }
+    .about__sidebar-row:last-child { border-bottom: none; }
+    .about__sidebar-row .num {
+      font-family: 'Courier New', monospace;
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--color-accent-saturated);
+      transition: color .25s ease;
+    }
+    .about__sidebar-row .ttl {
+      font-family: var(--font-heading);
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      line-height: 1.25;
+      letter-spacing: -.01em;
+      transition: color .25s ease;
+    }
+
+    /* Viewer (right side) — 2 columnas: contenido texto + media (video delimitado) */
+    .about__viewer {
+      position: relative;
+      background: var(--color-primary-dark);
+      overflow: hidden;
+      min-height: 520px;
+    }
+    .about__viewer-panel {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity .5s ease;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 0;
+      align-items: center;
+      pointer-events: none;
+    }
+    .about__viewer-content {
+      padding: 2.5rem;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .about__viewer-media {
+      position: relative;
+      background: rgba(0,0,0,.2);
+      overflow: hidden;
+      margin: 2rem 2.5rem 2rem 0.5rem;
+      border-radius: 2px;
+      aspect-ratio: 16 / 10;
+      width: calc(100% - 3rem);
+      box-shadow: 0 8px 32px rgba(0,0,0,.18);
+    }
+    .about__viewer-media video,
+    .about__viewer-media .flat-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .about__viewer-media .flat-bg {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,.4);
+      font-family: 'Courier New', monospace;
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .about__viewer-num {
+      font-family: 'Courier New', monospace;
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--color-accent);
+      line-height: 1;
+    }
+    .about__viewer-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -.015em;
+      margin-top: .7rem;
+      color: #fff;
+    }
+    .about__viewer-desc {
+      font-size: .9rem;
+      color: rgba(255,255,255,.8);
+      line-height: 1.65;
+      margin-top: .8rem;
+      max-width: 100%;
+    }
+    .about__viewer-next {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,.15);
+      font-family: 'Courier New', monospace;
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.65);
+    }
+    .about__viewer-next b {
+      color: var(--color-accent);
+      font-weight: 400;
+      margin-right: .4rem;
+    }
+
+    /* Estados controlados por JS · is-active persiste al salir el cursor (no vuelve al default) */
+    .about__sidebar-row.is-active {
+      background: var(--color-primary-dark);
+    }
+    .about__sidebar-row.is-active .num { color: var(--color-accent); }
+    .about__sidebar-row.is-active .ttl { color: #fff; }
+    .about__sidebar-row.is-next {
+      background: var(--color-bone, #F4F2EE);
+    }
+    .about__viewer-panel.is-active { opacity: 1; }
+
+    /* Mobile: stack vertical sin viewer (cada row se vuelve card simple) */
+    @media (max-width: 900px) {
+      .about__sidebar { border-right: none; border-bottom: 1px solid var(--color-border-light); }
+      .about__viewer { min-height: 320px; }
+      .about__viewer-panel { grid-template-columns: 1fr; }
+      .about__viewer-content { padding: 1.5rem; }
+      .about__viewer-media { margin: 0 1.5rem 1.5rem; min-height: 140px; }
+      .about__viewer-num { font-size: 1.8rem; }
+      .about__viewer-title { font-size: 1.2rem; }
+    }
+
+    /* ============================================================
+       PRODUCTOS — Grid editorial 3 columnas (reconstruido 2026-04-24)
+       Reemplazo del carousel featured+slider por cards estáticas limpias.
+    ============================================================ */
+    /* ============================================================
+       PRODUCTOS · V02 — Sticky sidebar + grid 2×2 con fotografía
+       Estándar institucional plataforma multilateral (Open Society)
+       Aplicado 2026-04-26
+    ============================================================ */
+    .products {
+      padding: var(--section-padding);
+      background: #fff;
+    }
+
+    /* Ancho institucional unificado */
+    .products .container {
+      max-width: var(--container-institutional);
+    }
+
+    .products__layout {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 880px) {
+      .products__layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    .products__sidebar {
+      position: sticky;
+      top: 90px;
+    }
+
+    @media (max-width: 880px) {
+      .products__sidebar {
+        position: static;
+      }
+    }
+
+    .products__header {
+      max-width: none;
+      margin: 0 0 2rem;
+      text-align: left;
+      padding: 0;
+    }
+
+    .products__eyebrow {
+      display: block;
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      color: var(--color-accent-saturated);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .products__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 2.2vw, 1.85rem);
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.15;
+      letter-spacing: -.015em;
+      margin: 0 0 1.2rem;
+    }
+
+    .products__title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-accent-saturated);
+    }
+
+    .products__subtitle {
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      margin-bottom: 2rem;
+      max-width: 320px;
+    }
+
+    .products__sidebar-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      border-top: 1px solid rgba(11, 30, 107, 0.18);
+      padding-top: 1.5rem;
+    }
+
+    .products__sidebar-meta span {
+      display: flex;
+      gap: 0.6rem;
+      align-items: baseline;
+    }
+
+    .products__sidebar-meta strong {
+      color: var(--color-accent-saturated);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    /* Grid 2×2 con border-top + border-right hairlines compartidas */
+    .products__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-bottom: 0;
+    }
+
+    .product-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 2rem;
+      border-top: 1px solid rgba(11, 30, 107, 0.18);
+      border-right: 1px solid rgba(11, 30, 107, 0.18);
+      transition: background 0.3s ease;
+    }
+
+    .product-card:nth-child(2n) {
+      border-right: none;
+    }
+
+    .product-card:nth-last-child(-n+2) {
+      border-bottom: 1px solid rgba(11, 30, 107, 0.18);
+    }
+
+    .product-card:hover {
+      background: var(--color-bg-alt);
+    }
+
+    .product-card__img-wrap {
+      aspect-ratio: 5 / 3;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1f2a4a 0%, #0B1E6B 100%);
+      margin-bottom: 1.4rem;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+
+    .product-card__img-wrap[data-tone="warm"] {
+      background: linear-gradient(135deg, #3a3120 0%, #1a1610 100%);
+    }
+    .product-card__img-wrap[data-tone="amber"] {
+      background: linear-gradient(135deg, #8a7340 0%, #5a4628 100%);
+    }
+    .product-card__img-wrap[data-tone="paper"] {
+      background: linear-gradient(135deg, #fbf9fa 0%, #e2dfd9 100%);
+    }
+    .product-card__img-wrap[data-tone="steel"] {
+      background: linear-gradient(135deg, #19212F 0%, #3a4258 100%);
+    }
+
+    .product-card__caption {
+      font-family: 'Courier New', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: #fff;
+      opacity: 0.6;
+      text-transform: uppercase;
+    }
+    .product-card__img-wrap[data-tone="paper"] .product-card__caption {
+      color: var(--color-text-muted);
+    }
+
+    .product-card__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.9);
+      transition: filter 0.4s ease, transform 0.6s ease;
+    }
+
+    .product-card:hover .product-card__img {
+      filter: saturate(1);
+      transform: scale(1.03);
+    }
+
+    .product-card__body {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      flex: 1;
+    }
+
+    .product-card__num {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-accent-saturated);
+      margin-bottom: 0.2rem;
+    }
+
+    .product-card__title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--color-primary-dark);
+      line-height: 1.3;
+      letter-spacing: -0.005em;
+    }
+
+    .product-card__title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-accent-saturated);
+    }
+
+    .product-card__desc {
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      margin-bottom: auto;
+      opacity: 0.95;
+    }
+
+    .product-card__foot {
+      margin-top: 1rem;
+      padding-top: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .product-card__foot span {
+      color: var(--color-text-muted);
+    }
+
+    .product-card__foot a {
+      color: var(--color-primary-dark);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .product-card__foot a:hover {
+      color: var(--color-accent-saturated);
+    }
+
+    /* ── CTA ── */
+    .products__cta {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(11, 30, 107, 0.10);
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 600px) {
+      .products__grid { grid-template-columns: 1fr; }
+      .product-card { border-right: none !important; }
+    }
+
+    /* ============================================================
+       CERTIFICACIONES / TRUST BAR
+    ============================================================ */
+    /* ── V5-I: Underline Accent Numbers ── */
+    /* ── Trust bar: Badge postal minimal (V10 de prucert.html) ── */
+    .trust {
+      background: var(--color-primary-dark);
+      padding: clamp(3rem, 5vw, 4rem) 0;
+      color: #fff;
+    }
+
+    .trust__frame {
+      padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
+    }
+
+    .trust__stamp {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .trust__stamp::before,
+    .trust__stamp::after {
+      content: '';
+      flex: 0 0 clamp(40px, 10vw, 90px);
+      height: 1px;
+      background: rgba(197, 165, 90, 0.5);
+    }
+
+    .trust__stamp img {
+      height: clamp(28px, 3.5vw, 40px);
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+      display: block;
+    }
+    .trust__stamp-divider {
+      width: 1px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.22);
+    }
+    .trust__stamp-authorized {
+      font-family: 'Courier New', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .trust__hero {
+      text-align: center;
+      font-family: var(--font-heading);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: rgba(255, 255, 255, 0.92);
+      margin: 0 auto 2rem;
+      max-width: 760px;
+    }
+
+    .trust__items {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .trust__item {
+      text-align: center;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .trust__item:not(:last-child)::after {
+      content: '·';
+      position: absolute;
+      right: -0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.25);
+      font-size: 1.5rem;
+      line-height: 0;
+    }
+
+    .trust__item-n {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      font-weight: 700;
+      color: var(--color-accent);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .trust__item-t {
+      font-family: 'Courier New', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+      margin-top: 0.4rem;
+    }
+
+    .trust__item-s {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 0.15rem;
+      line-height: 1.3;
+    }
+
+    @media (max-width: 640px) {
+      .trust__items { grid-template-columns: 1fr 1fr; }
+      .trust__item:not(:last-child)::after { display: none; }
+    }
+
+    /* ============================================================
+       CONTACTO — V1 Navy Centered
+    ============================================================ */
+    .contact {
+      padding: var(--section-padding);
+      background: var(--color-primary);
+    }
+
+    .contact__header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .contact__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .contact__lead {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .contact__form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact__form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact__form label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.03em;
+    }
+
+    .contact__form input,
+    .contact__form textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      color: white;
+      transition: border-color 0.3s ease;
+      outline: none;
+    }
+
+    .contact__form input::placeholder,
+    .contact__form textarea::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+
+    .contact__form input:focus,
+    .contact__form textarea:focus {
+      border-color: rgba(201,162,39,0.4);
+    }
+
+    .contact__form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .contact__form-submit {
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .contact__info-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 600px) {
+      .contact__form-row { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    /* ════════════════════════════════════════════════════════════
+       MINI-CONTACT · F01 · Sticky sidebar + form right (institucional)
+       Aplicado 2026-04-26 · espejo del polo del index
+    ════════════════════════════════════════════════════════════ */
+    .mini-contact {
+      padding: clamp(5rem, 9vw, 8rem) 0;
+      background: var(--color-bg-alt); /* #F2F4F8 · tinte gris sutil para diferenciar del blanco general */
+    }
+    .mini-contact__inner {
+      max-width: var(--container-institutional);
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 3rem); /* idéntico a .about / .container default */
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 5rem;
+      align-items: start;
+      text-align: left;
+    }
+    @media (max-width: 880px) {
+      .mini-contact__inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    .mini-contact__sidebar {
+      position: sticky;
+      top: 90px;
+    }
+    @media (max-width: 880px) {
+      .mini-contact__sidebar {
+        position: static;
+      }
+    }
+
+    .mini-contact__label {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      color: var(--color-accent-saturated);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .mini-contact__label::before,
+    .mini-contact__label::after { content: none; }
+
+    .mini-contact__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 2.2vw, 1.85rem);
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.15;
+      letter-spacing: -.015em;
+      margin-bottom: 1rem;
+    }
+    .mini-contact__title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-accent-saturated);
+    }
+
+    .mini-contact__lead {
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      max-width: 320px;
+      margin: 0 0 1.8rem;
+      padding-bottom: 1.6rem;
+      border-bottom: 1px solid rgba(11, 30, 107, 0.08);
+    }
+
+    .mini-contact__meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+    }
+    .mini-contact__meta span {
+      display: flex;
+      gap: 0.6rem;
+      align-items: baseline;
+    }
+    .mini-contact__meta strong {
+      color: var(--color-accent-saturated);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    /* Form right · ocupa todo el ancho disponible (sin cap) · campos numerados 01-06 */
+    .contact__form {
+      max-width: none;
+      width: 100%;
+      margin: 0;
+      text-align: left;
+      background: transparent;
+      border: none;
+      padding: 0;
+      border-radius: 0;
+    }
+    .form__row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 3rem;
+      margin-bottom: 2rem;
+    }
+    .form__group {
+      display: block;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(11, 30, 107, 0.10);
+      transition: border-color .3s ease;
+      margin-bottom: 2.2rem;
+    }
+    .form__row .form__group { margin-bottom: 0; }
+    .form__group:focus-within { border-bottom-color: var(--color-primary); }
+    .form__group label {
+      display: block;
+      font-family: 'Courier New', monospace;
+      font-size: 0.62rem;
+      color: rgba(25, 33, 47, 0.5);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      transition: color .3s ease;
+    }
+    .form__group:focus-within label { color: var(--color-accent-saturated); }
+    .form__group input,
+    .form__group select,
+    .form__group textarea {
+      background: transparent;
+      border: none;
+      padding: 0.35rem 0;
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--color-text);
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form__group input::placeholder,
+    .form__group textarea::placeholder {
+      color: var(--color-text-light);
+    }
+    .form__group select {
+      cursor: pointer;
+      background-image: linear-gradient(45deg, transparent 50%, var(--color-accent-saturated) 50%),
+                        linear-gradient(135deg, var(--color-accent-saturated) 50%, transparent 50%);
+      background-position: calc(100% - 14px) 55%, calc(100% - 9px) 55%;
+      background-size: 5px 5px;
+      background-repeat: no-repeat;
+      padding-right: 28px;
+    }
+    .form__group select option { background: #fff; color: var(--color-text); }
+    .form__group textarea {
+      resize: vertical;
+      min-height: 60px;
+      line-height: 1.6;
+    }
+
+    /* Submit · CTA institucional sólido · contraste vs inputs minimal */
+    .form__submit {
+      margin-top: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--color-primary);
+      border: none;
+      padding: 1.1rem 2.4rem;
+      cursor: pointer;
+      transition: background .3s ease, gap .3s ease, transform .3s ease;
+    }
+    .form__submit:hover {
+      background: var(--color-accent-saturated);
+      gap: 1.1rem;
+    }
+    .form__submit svg {
+      width: 16px;
+      height: 16px;
+      transition: transform .3s ease;
+    }
+    .form__submit:hover svg { transform: translateX(3px); }
+
+    .mini-contact__aux {
+      margin-top: 2.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+    }
+    .mini-contact__aux a {
+      color: var(--color-primary-dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-accent);
+      padding-bottom: 2px;
+      transition: color .3s ease;
+    }
+    .mini-contact__aux a:hover { color: var(--color-accent-saturated); }
+
+    @media (max-width: 600px) {
+      .form__row { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    /* ── Footer: B2B Cinematográfico (v10 · copia exacta de prufoot2.html) ──
+       Reemplazo 2026-04-23. Respaldo del v09 Editorial Hybrid en
+       footer-backup-hybrid-editorial.html */
+    .footer {
+      background: var(--color-primary-dark);
+      color: var(--color-text-on-dark);
+      padding: clamp(4rem, 7vw, 5.5rem) 0 1.75rem;
+    }
+
+    /* Ancho institucional unificado · max 1500px o 94vw */
+    .footer .container {
+      max-width: var(--container-institutional);
+    }
+
+    /* Manifest + 3 columnas horizontales compactas tipo editorial Pentagram */
+    .footer__inner {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1fr 1fr;
+      gap: clamp(2rem, 4vw, 3.5rem) clamp(1.75rem, 3vw, 2.25rem);
+      align-items: start;
+    }
+
+    .footer__eyebrow {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .footer__manifest {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      color: var(--color-text-on-dark);
+    }
+
+    .footer__manifest em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-accent);
+    }
+
+    .footer__targets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.5rem;
+    }
+
+    .footer__target {
+      font-family: 'Courier New', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 20px;
+    }
+
+    /* Wrapper transparente — las 3 cols se vuelven items directos del grid padre */
+    .footer__right {
+      display: contents;
+    }
+
+    .footer__col {
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 0.85rem;
+    }
+
+    .footer__col-title {
+      font-family: 'Courier New', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 0.9rem;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      list-style: none;
+    }
+
+    .footer__link {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.72);
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      padding: 0.12rem 0;
+    }
+
+    .footer__link:hover {
+      color: var(--color-accent);
+    }
+
+    /* ── Trust row (4 stats B2B: AA / 130+ / 2 / MDD) ── */
+    .footer__trust-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin: clamp(2rem, 3vw, 2.5rem) 0 1.5rem;
+      padding: 1.25rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .footer__trust-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .footer__trust-n {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .footer__trust-t {
+      font-family: 'Courier New', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 4px;
+    }
+
+    .footer__trust-s {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ── Dual CTA (Contactar gold + Solicitar Catalogo ghost) ── */
+    .footer__ctas {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .footer__cta-gold,
+    .footer__cta-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.7rem;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      transition: background 0.2s, transform 0.15s, border-color 0.2s;
+      text-decoration: none;
+    }
+
+    .footer__cta-gold {
+      background: var(--color-accent);
+      color: var(--color-primary-dark);
+    }
+
+    .footer__cta-gold:hover {
+      background: #D4B96E;
+    }
+
+    .footer__cta-gold:active {
+      transform: scale(0.97);
+    }
+
+    .footer__cta-ghost {
+      background: transparent;
+      color: var(--color-text-on-dark);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .footer__cta-ghost:hover {
+      border-color: var(--color-accent);
+      background: rgba(197, 165, 90, 0.08);
+    }
+
+    .footer__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .footer__copy {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.65rem;
+    }
+
+    .footer__social {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* Pills de texto · v10 cinematográfico */
+    .footer__social-link {
+      display: inline-flex;
+      align-items: center;
+      font-family: 'Courier New', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      padding: 0.25rem 0.6rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      text-decoration: none;
+    }
+
+    .footer__social-link:hover {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+      background: rgba(197, 165, 90, 0.08);
+    }
+
+    /* Ocultamos el SVG del collections-loader y mostramos el aria-label como texto */
+    .footer__social-link svg { display: none; }
+    .footer__social-link::after {
+      content: attr(aria-label);
+    }
+
+    @media (max-width: 900px) {
+      .footer__inner {
+        grid-template-columns: 1fr;
+      }
+      .footer__trust-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .footer__trust-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <!-- V19 · Heritage badge inline -->
+      <div class="header__brand">
+        <a href="index.html" class="header__logo" aria-label="Traverso International Foods">
+          <img
+            src="assets/logo-traverso.png"
+            alt="Traverso International Foods"
+            width="180"
+            height="50"
+          />
+        </a>
+        <div class="header__heritage" aria-hidden="true">
+          <strong>Est. 1893</strong>
+          130 años de oficio
+        </div>
+      </div>
+
+      <nav class="header__nav" id="main-nav" aria-label="Navegación principal">
+        <ul class="header__list">
+          <li class="header__dropdown">
+            <a href="index.html" class="header__link header__link--active header__dropdown-toggle">Inicio</a>
+            <div class="header__dropdown-menu">
+              <a href="index.html"    class="header__dropdown-item header__dropdown-item--active">Inicio 1</a>
+              <a href="_pruebas/inicio1.html"  class="header__dropdown-item">Inicio 2</a>
+              <a href="_pruebas/inicio2.html"  class="header__dropdown-item">Inicio 3</a>
+              <a href="_pruebas/inicio3.html"  class="header__dropdown-item">Inicio 4</a>
+            </div>
+          </li>
+          <li><a href="quienes-somos.html" class="header__link">Quiénes Somos</a></li>
+          <li><a href="productos.html"     class="header__link">Productos</a></li>
+          <li><a href="contacto.html"      class="header__link">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <a href="contacto.html" class="btn btn--gold header__cta">Conversemos</a>
+
+      <button class="header__burger" id="burger-btn" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="header__mobile-menu" id="mobile-menu" aria-hidden="true">
+    <ul class="header__mobile-list">
+      <li><a href="index.html"         class="header__mobile-link">Inicio</a></li>
+      <li><a href="_pruebas/inicio1.html"      class="header__mobile-link">Inicio 2</a></li>
+      <li><a href="_pruebas/inicio2.html"      class="header__mobile-link">Inicio 3</a></li>
+      <li><a href="_pruebas/inicio3.html"      class="header__mobile-link">Inicio 4</a></li>
+      <li><a href="quienes-somos.html" class="header__mobile-link">Quiénes Somos</a></li>
+      <li><a href="productos.html"     class="header__mobile-link">Productos</a></li>
+      <li><a href="contacto.html"      class="header__mobile-link">Contacto</a></li>
+    </ul>
+  </div>
+  <div class="mobile-overlay" id="mobile-overlay"></div>
+
+  <!-- ============================================================
+       HERO — #40 Cinema Full Width
+  ============================================================ -->
+  <section class="hero" id="inicio">
+    <div class="hero__top-text">
+      <div class="hero__logo">
+        <img src="assets/logo-traverso.png" alt="Traverso International Foods" />
+      </div>
+      <div class="hero__eyebrow">Exportadores desde Chile · Est. 1893</div>
+      <h1 class="hero__title" data-content="index.hero_title">
+        Calidad que cruza <span>fronteras</span>
+      </h1>
+    </div>
+
+    <div class="hero__cinema-frame">
+      <video
+        id="hero-video"
+        src="assets/videos/video-hero.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-hidden="true"
+        poster="img/uploads/hero-poster.jpg"
+      ></video>
+      <div class="hero__cinema-overlay"></div>
+    </div>
+
+    <div class="hero__bottom-row">
+      <div>
+        <p class="hero__subtitle" data-content="index.hero_subtitle">
+          Vinagres, salsas y condimentos desde Chile. Más de 130 años de
+          experiencia productiva para la industria alimentaria global.
+        </p>
+        <div class="hero__certs">
+          <span class="hero__cert-pill">BRC AA</span>
+          <span class="hero__cert-pill">HACCP</span>
+          <span class="hero__cert-pill">Granel &amp; Envasado</span>
+        </div>
+      </div>
+      <div class="hero__right-col">
+        <div class="hero__actions">
+          <a href="productos.html" class="btn btn--gold" data-content="index.hero_cta1_text" data-content-attr-href="index.hero_cta1_link">Explorar Productos</a>
+          <a href="contacto.html" class="btn-secondary btn-secondary--light" data-content="index.hero_cta2_text" data-content-attr-href="index.hero_cta2_link">Contacto Comercial <span class="arrow">&rarr;</span></a>
+        </div>
+        <div class="hero__stats">
+          <div class="hero__stat"><div class="hero__stat-num">130+</div><div class="hero__stat-label">Años</div></div>
+          <div class="hero__stat"><div class="hero__stat-num">AA</div><div class="hero__stat-label">BRC</div></div>
+          <div class="hero__stat"><div class="hero__stat-num">MDD</div><div class="hero__stat-label">Disponible</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROPUESTA DE VALOR
+  ============================================================ -->
+  <section class="value-props" id="propuesta">
+    <div class="container">
+      <div class="value-props__layout">
+
+        <!-- Sticky sidebar · eyebrow + título compacto + lead + índice clickable -->
+        <aside class="value-props__sidebar">
+          <span class="value-props__eyebrow">Nuestra propuesta de valor</span>
+          <h2 class="value-props__title" data-content="index.values_title">
+            Seis pilares de <em>valor</em>
+          </h2>
+          <p class="value-props__lead" data-content="index.values_lead">Los diferenciales que ofrecemos como socio exportador confiable.</p>
+          <nav class="value-props__nav">
+            <a href="#pilar-1" data-pilar="1"><span class="num">01</span>Estándares internacionales</a>
+            <a href="#pilar-2" data-pilar="2"><span class="num">02</span>Marca con trayectoria</a>
+            <a href="#pilar-3" data-pilar="3"><span class="num">03</span>Vinagres a granel</a>
+            <a href="#pilar-4" data-pilar="4"><span class="num">04</span>Productos para terceros</a>
+            <a href="#pilar-5" data-pilar="5"><span class="num">05</span>Exportación global</a>
+            <a href="#pilar-6" data-pilar="6"><span class="num">06</span>Procesos escalables</a>
+          </nav>
+        </aside>
+
+        <!-- Pilares · hairline + eyebrow tracked + título serif regular -->
+        <div class="value-props__grid">
+          <article class="value-item" id="pilar-1">
+            <div class="value-item__num">01 · Pilar fundacional</div>
+            <h4 class="value-item__title">Estándares internacionales</h4>
+            <p class="value-item__text">Plantas productivas con certificación BRC GS "AA", garantizando procesos bajo altos estándares de inocuidad, calidad y trazabilidad, alineados con las exigencias de los mercados internacionales.</p>
+          </article>
+          <article class="value-item" id="pilar-2">
+            <div class="value-item__num">02 · Marca</div>
+            <h4 class="value-item__title">Respaldo de una marca con trayectoria</h4>
+            <p class="value-item__text">Traverso International Foods es la evolución internacional de Traverso S.A., empresa chilena con más de 130 años de historia productiva proyectada a mercados globales.</p>
+          </article>
+          <article class="value-item" id="pilar-3">
+            <div class="value-item__num">03 · Producto</div>
+            <h4 class="value-item__title">Especialización en vinagres a granel</h4>
+            <p class="value-item__text">Experiencia en la producción de vinagre de alcohol para uso industrial, utilizado como insumo productivo, preservante y agente de sanitización en múltiples industrias.</p>
+          </article>
+          <article class="value-item" id="pilar-4">
+            <div class="value-item__num">04 · Servicio</div>
+            <h4 class="value-item__title">Desarrollo de productos para terceros</h4>
+            <p class="value-item__text">Fabricamos productos envasados bajo marca privada (Private Label), adaptándonos a los estándares, requerimientos y objetivos comerciales de cada cliente.</p>
+          </article>
+          <article class="value-item" id="pilar-5">
+            <div class="value-item__num">05 · Mercado</div>
+            <h4 class="value-item__title">Enfoque en exportación y mercados globales</h4>
+            <p class="value-item__text">Visión internacional que adapta nuestra oferta a los requerimientos de distintos mercados, asegurando consistencia, cumplimiento y eficiencia logística con socios en diversos países.</p>
+          </article>
+          <article class="value-item" id="pilar-6">
+            <div class="value-item__num">06 · Operación</div>
+            <h4 class="value-item__title">Procesos confiables y escalables</h4>
+            <p class="value-item__text">Operación estandarizada y eficiente, con consistencia en calidad y cumplimiento en cada entrega, capaz de adaptarse a distintos niveles de demanda.</p>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Value props · scroll suave + active state en sidebar
+    (function valuePropsNav(){
+      const links = document.querySelectorAll('.value-props__nav a');
+      const items = document.querySelectorAll('.value-item');
+      if (!links.length || !items.length) return;
+
+      // Click suave con offset por header sticky
+      links.forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const id = link.getAttribute('href').slice(1);
+          const target = document.getElementById(id);
+          if (!target) return;
+          const headerH = document.getElementById('header')?.offsetHeight || 80;
+          const y = target.getBoundingClientRect().top + window.scrollY - headerH - 20;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        });
+      });
+
+      // Active state via IntersectionObserver
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            links.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === '#' + id));
+          }
+        });
+      }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+      items.forEach(it => observer.observe(it));
+    })();
+  </script>
+
+  <!-- ============================================================
+       TRUST BAR — CERTIFICACIONES · Badge postal minimal (V10 de prucert.html)
+       Reemplazo 2026-04-24. Respaldo del layout anterior (stats centered)
+       en trust-backup-stats-centered.html
+  ============================================================ -->
+  <section class="trust" id="trust">
+    <div class="container">
+      <div class="trust__frame">
+        <div class="trust__stamp">
+          <img src="assets/logo-traverso.png" alt="Traverso International Foods">
+        </div>
+        <h3 class="trust__hero">Certificaciones &amp; Estándares</h3>
+        <div class="trust__items">
+          <div class="trust__item">
+            <div class="trust__item-n">AA</div>
+            <div class="trust__item-t">BRC Global Standard</div>
+            <div class="trust__item-s">Certificación internacional</div>
+          </div>
+          <div class="trust__item">
+            <div class="trust__item-n" data-count="130" data-suffix="+">130+</div>
+            <div class="trust__item-t">Años de trayectoria</div>
+            <div class="trust__item-s">De trayectoria productiva</div>
+          </div>
+          <div class="trust__item">
+            <div class="trust__item-n" data-count="2">2</div>
+            <div class="trust__item-t">Formatos de exportación</div>
+            <div class="trust__item-s">Granel &amp; Envasado</div>
+          </div>
+          <div class="trust__item">
+            <div class="trust__item-n">MDD</div>
+            <div class="trust__item-t">Marca propia disponible</div>
+            <div class="trust__item-s">Para tu mercado</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       QUIÉNES SOMOS
+  ============================================================ -->
+  <section class="about" id="nosotros">
+    <div class="container">
+
+      <div class="about__layout">
+
+        <!-- Intro · 2 columnas asimétricas · CTAs inline bajo el título -->
+        <div class="about__intro">
+          <div class="about__intro-head">
+            <h2 class="about__title">
+              La evolución internacional de <em>Traverso</em>
+            </h2>
+            <div class="about__intro-cta">
+              <a href="#trust" class="btn btn--primary">Conocer certificaciones</a>
+              <a href="contacto.html" class="btn-secondary btn-secondary--dark">
+                Hablar con un ejecutivo <span class="arrow">→</span>
+              </a>
+            </div>
+          </div>
+          <div class="about__intro-body">
+            <p class="about__lead" data-content="index.about_lead">
+              Nos especializamos en la fabricación de vinagres, siendo líderes en el mercado, con variedades de Sidra de Manzana, Vino, Alcohol (con certificación kosher) y vinagres especiales como balsámicos o condimentos balsámicos. También producimos alimentos bajo marca de terceros (Marca Privada), apoyando a nuestros clientes en sus procesos productivos y en el desarrollo de negocios en distintos mercados.
+            </p>
+            <p class="about__lead">
+              Nuestra propuesta combina experiencia productiva, criterio comercial y una operación estructurada para responder con seriedad a los desafíos del comercio internacional.
+            </p>
+          </div>
+        </div>
+
+        <!-- V12 · Sidebar nav + main viewer (research-layouts-cards-b2b · L13) -->
+        <div class="about__panel">
+          <!-- Sidebar · 5 rows con números siempre visibles (recorrido § 01-05) · titles ORIGINALES -->
+          <div class="about__sidebar">
+            <div class="about__sidebar-row" data-row="1">
+              <span class="num">§ 01</span>
+              <span class="ttl">Experiencia en producción alimentaria</span>
+            </div>
+            <div class="about__sidebar-row" data-row="2">
+              <span class="num">§ 02</span>
+              <span class="ttl">Especialización en soluciones industriales</span>
+            </div>
+            <div class="about__sidebar-row" data-row="3">
+              <span class="num">§ 03</span>
+              <span class="ttl">Capacidad de desarrollo para terceros</span>
+            </div>
+            <div class="about__sidebar-row" data-row="4">
+              <span class="num">§ 04</span>
+              <span class="ttl">Flexibilidad y adaptación a distintos mercados</span>
+            </div>
+            <div class="about__sidebar-row" data-row="5">
+              <span class="num">§ 05</span>
+              <span class="ttl">Compromiso con el servicio y la continuidad operativa</span>
+            </div>
+          </div>
+
+          <!-- Viewer · un panel por pilar · 2 cols (texto izq + video delimitado der) -->
+          <div class="about__viewer">
+            <div class="about__viewer-panel" data-pillar="1">
+              <div class="about__viewer-content">
+                <div class="about__viewer-num">01</div>
+                <h4 class="about__viewer-title">Experiencia en producción alimentaria</h4>
+                <p class="about__viewer-desc">Contamos con una trayectoria consolidada en la fabricación de alimentos, lo que nos permite abordar distintos desafíos productivos con criterio, conocimiento técnico y eficiencia operativa.</p>
+                <div class="about__viewer-next"><b>→</b> Siguiente: § 02 Especialización en soluciones industriales</div>
+              </div>
+              <div class="about__viewer-media">
+                <video src="assets/videos/video-01card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+              </div>
+            </div>
+            <div class="about__viewer-panel" data-pillar="2">
+              <div class="about__viewer-content">
+                <div class="about__viewer-num">02</div>
+                <h4 class="about__viewer-title">Especialización en soluciones industriales</h4>
+                <p class="about__viewer-desc">Nos enfocamos en productos con aplicación directa en procesos productivos, como vinagres a granel, lo que nos posiciona como un proveedor relevante para distintas industrias.</p>
+                <div class="about__viewer-next"><b>→</b> Siguiente: § 03 Capacidad de desarrollo para terceros</div>
+              </div>
+              <div class="about__viewer-media">
+                <video src="assets/videos/video-02card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+              </div>
+            </div>
+            <div class="about__viewer-panel" data-pillar="3">
+              <div class="about__viewer-content">
+                <div class="about__viewer-num">03</div>
+                <h4 class="about__viewer-title">Capacidad de desarrollo para terceros</h4>
+                <p class="about__viewer-desc">Trabajamos en la fabricación de productos bajo marca privada, adaptándonos a requerimientos específicos de clientes, mercados y canales de distribución.</p>
+                <div class="about__viewer-next"><b>→</b> Siguiente: § 04 Flexibilidad y adaptación a distintos mercados</div>
+              </div>
+              <div class="about__viewer-media">
+                <video src="assets/videos/video-01card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+              </div>
+            </div>
+            <div class="about__viewer-panel" data-pillar="4">
+              <div class="about__viewer-content">
+                <div class="about__viewer-num">04</div>
+                <h4 class="about__viewer-title">Flexibilidad y adaptación a distintos mercados</h4>
+                <p class="about__viewer-desc">Entendemos las diferencias regulatorias, comerciales y operativas de cada país, lo que nos permite ajustar nuestra oferta según las necesidades de cada cliente.</p>
+                <div class="about__viewer-next"><b>→</b> Siguiente: § 05 Compromiso con el servicio y la continuidad operativa</div>
+              </div>
+              <div class="about__viewer-media">
+                <video src="assets/videos/video-02card-web.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+              </div>
+            </div>
+            <div class="about__viewer-panel" data-pillar="5">
+              <div class="about__viewer-content">
+                <div class="about__viewer-num">05</div>
+                <h4 class="about__viewer-title">Compromiso con el servicio y la continuidad operativa</h4>
+                <p class="about__viewer-desc">Priorizamos relaciones comerciales estables, con foco en cumplimiento, comunicación y confiabilidad en cada etapa del proceso.</p>
+                <div class="about__viewer-next"><b>↻</b> Volver al inicio: § 01 Experiencia en producción alimentaria</div>
+              </div>
+              <div class="about__viewer-media">
+                <div class="flat-bg">cierre · sin video</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.about__layout -->
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRODUCTOS
+  ============================================================ -->
+  <section class="products" id="productos">
+    <div class="container">
+      <div class="products__layout">
+
+        <!-- Sticky sidebar · eyebrow + título + lead + meta -->
+        <aside class="products__sidebar">
+          <div class="products__header">
+            <span class="products__eyebrow">Portafolio</span>
+            <h2 class="products__title" data-content="index.products_title">Líneas de productos para <em>exportación</em></h2>
+            <p class="products__subtitle">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+          </div>
+          <div class="products__sidebar-meta">
+            <span><strong>04</strong>Líneas activas</span>
+            <span><strong>BRC GS "AA"</strong>Certificación</span>
+            <span><strong>04</strong>Variedades vinagre</span>
+            <span><strong>Granel · MDD</strong>Formatos</span>
+          </div>
+        </aside>
+
+        <!-- Grid 2×2 con foto + número + título + texto + meta -->
+        <div class="products__grid">
+
+          <article class="product-card">
+            <div class="product-card__img-wrap" data-tone="amber">
+              <span class="product-card__caption">Vinagre · granel</span>
+            </div>
+            <div class="product-card__body">
+              <span class="product-card__num">§ 01 / Industrial</span>
+              <h3 class="product-card__title">Vinagres a granel para alimentos</h3>
+              <p class="product-card__desc">Alcohol, Manzana, Vino y Mosto de Vino bajo estándares internacionales BRC AA — uso como producto final, preservante o ingrediente.</p>
+              <div class="product-card__foot">
+                <span>4 variedades</span>
+                <a href="productos.html">Ver →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-card__img-wrap" data-tone="steel">
+              <span class="product-card__caption">Industrial · usos</span>
+            </div>
+            <div class="product-card__body">
+              <span class="product-card__num">§ 02 / Industrial</span>
+              <h3 class="product-card__title">Vinagres a granel usos productivos</h3>
+              <p class="product-card__desc">Vinagre de alcohol para uso industrial — preservante, insumo productivo y agente de sanitización.</p>
+              <div class="product-card__foot">
+                <span>Granel</span>
+                <a href="productos.html">Ver →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-card__img-wrap" data-tone="paper">
+              <span class="product-card__caption">Marca privada</span>
+            </div>
+            <div class="product-card__body">
+              <span class="product-card__num">§ 03 / Marca privada</span>
+              <h3 class="product-card__title">Desarrollo de productos <em>Private label</em></h3>
+              <p class="product-card__desc">Fabricación bajo marca privada, adaptada a especificaciones técnicas y requerimientos de cada cliente.</p>
+              <div class="product-card__foot">
+                <span>Custom</span>
+                <a href="productos.html">Ver →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-card__img-wrap" data-tone="warm">
+              <span class="product-card__caption">Marca Traverso</span>
+            </div>
+            <div class="product-card__body">
+              <span class="product-card__num">§ 04 / Marca Traverso</span>
+              <h3 class="product-card__title">Productos marca Traverso</h3>
+              <p class="product-card__desc">Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p>
+              <div class="product-card__foot">
+                <span>Línea propia</span>
+                <a href="productos.html">Ver →</a>
+              </div>
+            </div>
+          </article>
+
+          <div class="products__cta">
+            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+              Trabajamos con industriales, distribuidores, importadores, retail y canal HORECA,
+              ofreciendo soluciones adaptadas a cada tipo de cliente.
+            </p>
+            <a href="contacto.html" class="btn btn--primary" data-content="index.products_cta_text" data-content-attr-href="index.products_cta_link">Contactar Equipo Comercial</a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MINI CONTACT · Form editorial (portado de productos.html)
+       Nota: la sección "contact" antigua ("Generemos nuevas oportunidades...")
+       fue eliminada el 2026-04-24 · reemplazada por este form editorial.
+  ============================================================ -->
+  <section class="mini-contact">
+    <div class="mini-contact__inner">
+
+      <!-- Sticky sidebar · eyebrow + título compacto + lead + meta institucional -->
+      <aside class="mini-contact__sidebar">
+        <span class="mini-contact__label">Consulta comercial</span>
+        <h2 class="mini-contact__title" data-content="home.mini_contact_title">¿Necesitas información sobre <em>disponibilidad</em> o volúmenes?</h2>
+        <p class="mini-contact__lead" data-content="home.mini_contact_subtitle">Cuéntanos qué producto te interesa, el mercado destino y el tipo de cliente. Te respondemos con disponibilidad, formatos y condiciones comerciales.</p>
+        <div class="mini-contact__meta">
+          <span><strong>24-48 h</strong>Tiempo de respuesta</span>
+          <span><strong>EN · ES</strong>Idiomas</span>
+          <span><strong>Multi-mercado</strong>Cobertura</span>
+          <span><strong>BRC GS "AA"</strong>Estándares</span>
+        </div>
+      </aside>
+
+      <!-- Form right · 6 campos numerados (mantiene IDs y data-attrs admin) -->
+      <form class="contact__form" id="form-home" action="https://formspree.io/f/XXXX" method="POST">
+        <div class="form__row">
+          <div class="form__group">
+            <label for="h-nombre">01 · Nombre</label>
+            <input type="text" id="h-nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name" />
+          </div>
+          <div class="form__group">
+            <label for="h-empresa">02 · Empresa</label>
+            <input type="text" id="h-empresa" name="empresa" placeholder="Nombre de empresa" autocomplete="organization" />
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__group">
+            <label for="h-email">03 · Email</label>
+            <input type="email" id="h-email" name="email" placeholder="correo@empresa.com" required autocomplete="email" />
+          </div>
+          <div class="form__group">
+            <label for="h-pais">04 · País destino</label>
+            <input type="text" id="h-pais" name="pais" placeholder="País de destino" autocomplete="country-name" />
+          </div>
+        </div>
+        <div class="form__group">
+          <label for="h-producto">05 · Producto de interés</label>
+          <select id="h-producto" name="producto">
+            <option value="">Seleccionar...</option>
+            <option value="vinagres-granel">Vinagres a granel</option>
+            <option value="marca-privada">Marca privada (Private Label)</option>
+            <option value="marca-traverso">Productos marca Traverso</option>
+            <option value="otro">Otro / Consultar</option>
+          </select>
+        </div>
+        <div class="form__group">
+          <label for="h-mensaje">06 · Mensaje</label>
+          <textarea id="h-mensaje" name="mensaje" placeholder="Cuéntanos sobre tu consulta: volúmenes, formatos, mercado destino..." required></textarea>
+        </div>
+        <button type="submit" class="form__submit">
+          Consultar disponibilidad
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+
+        <div class="mini-contact__aux" style="margin-top:2.5rem">
+          ¿Prefieres otra vía? <a href="contacto.html">Ver página de contacto completa →</a>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+
+        <div class="footer__brand">
+          <span class="footer__eyebrow">— Traverso International Foods</span>
+          <h2 class="footer__manifest" data-content="footer.brand_tagline">
+            Conectando calidad chilena con mercados globales desde hace más de <em>130 años.</em>
+          </h2>
+          <div class="footer__targets">
+            <span class="footer__target">Industriales</span>
+            <span class="footer__target">Distribuidores</span>
+            <span class="footer__target">Importadores</span>
+            <span class="footer__target">Retail</span>
+            <span class="footer__target">HORECA</span>
+          </div>
+        </div>
+
+        <div class="footer__right">
+          <div class="footer__col">
+            <h4 class="footer__col-title" data-content="footer.nav_title">Navegación</h4>
+            <ul class="footer__links">
+              <li><a href="index.html"         class="footer__link">Inicio</a></li>
+              <li><a href="quienes-somos.html" class="footer__link">Quiénes somos</a></li>
+              <li><a href="productos.html"     class="footer__link">Productos</a></li>
+              <li><a href="contacto.html"      class="footer__link">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4 class="footer__col-title" data-content="footer.products_title">Productos</h4>
+            <ul class="footer__links">
+              <li><a href="productos.html" class="footer__link">Vinagres a granel</a></li>
+              <li><a href="productos.html" class="footer__link">Marca privada</a></li>
+              <li><a href="productos.html" class="footer__link">Marca Traverso</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4 class="footer__col-title">Contacto</h4>
+            <ul class="footer__links">
+              <li><a href="mailto:e-commerce@traverso.cl" class="footer__link">e-commerce@traverso.cl</a></li>
+              <li><a href="tel:+56224370900" class="footer__link">+56 2 24370900</a></li>
+              <li><a href="https://wa.me/56985150056" target="_blank" rel="noopener" class="footer__link">WhatsApp</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer__trust-row">
+        <div class="footer__trust-item">
+          <span class="footer__trust-n">AA</span>
+          <span class="footer__trust-t">BRC Global Standard</span>
+          <span class="footer__trust-s">Certificación internacional</span>
+        </div>
+        <div class="footer__trust-item">
+          <span class="footer__trust-n">130+</span>
+          <span class="footer__trust-t">Años de trayectoria</span>
+          <span class="footer__trust-s">De trayectoria productiva</span>
+        </div>
+        <div class="footer__trust-item">
+          <span class="footer__trust-n">2</span>
+          <span class="footer__trust-t">Formatos</span>
+          <span class="footer__trust-s">Granel &amp; Envasado</span>
+        </div>
+        <div class="footer__trust-item">
+          <span class="footer__trust-n">MDD</span>
+          <span class="footer__trust-t">Marca propia</span>
+          <span class="footer__trust-s">Para tu mercado</span>
+        </div>
+      </div>
+
+      <div class="footer__ctas">
+        <a href="contacto.html" class="footer__cta-gold">Contactar →</a>
+        <a href="productos.html" class="footer__cta-ghost">Solicitar Catalogo →</a>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy" data-content="footer.copyright">© 2026 Traverso International Foods. Todos los derechos reservados.</p>
+        <div class="footer__social" data-collection="redes_sociales">
+          <!-- Renderizado dinámico desde data/redes_sociales.json -->
+        </div>
+        <p class="footer__copy" data-content="footer.parent_company">Una empresa de Traverso S.A. · Chile</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // ═══════════════════════════════════════════════════════════
+    //  GSAP + Lenis · Sistema de animación B2B · refactor 2026-04-26
+    //  - bulletproof: si CDN GSAP falla, .js-anim no se aplica → contenido visible
+    //  - matchMedia: reduced-motion respetado
+    //  - autoAlpha en lugar de opacity para evitar clicks fantasma
+    //  - SplitText en hero title + counter trust + magnetic CTAs
+    // ═══════════════════════════════════════════════════════════
+
+    // .js-anim ya fue agregado en <head> antes del CSS (anti-FOUC).
+    // Si GSAP no cargó (CDN cae), removemos la clase para que el contenido sea visible.
+    if (typeof gsap === 'undefined') {
+      document.documentElement.classList.remove('js-anim');
+    } else {
+      gsap.registerPlugin(ScrollTrigger, SplitText);
+    }
+
+    // Defaults globales — tokens de motion
+    gsap.defaults({ duration: 0.7, ease: 'power2.out' });
+    const MOTION = {
+      dur: { fast: 0.3, base: 0.7, slow: 1.0 },
+      stagger: { tight: 0.04, base: 0.10, loose: 0.18 }
+    };
+
+    // ─── Smooth scroll: usar nativo (Lenis removido — causaba lock) ────
+
+    // ─── Header scroll state ──────────────────────────────────
+    const header = document.getElementById('header');
+    const heroLogo = document.querySelector('.hero__logo');
+    const headerBrand = document.querySelector('.header__brand'); // wrapper · logo + heritage badge
+    const headerCta = document.querySelector('.header__cta');
+
+    // Brand block (logo + Est. 1893 badge) + CTA inician ocultos
+    gsap.set(headerBrand, { autoAlpha: 0, y: -6 });
+    gsap.set(headerCta, { autoAlpha: 0, y: -6 });
+
+    ScrollTrigger.create({
+      start: 'top -80px',
+      onEnter: () => {
+        header.classList.add('scrolled');
+        // Reveal: timeline coreografiada, snappy y fluida
+        gsap.to([headerBrand, headerCta], {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.32,
+          ease: 'power3.out',
+          stagger: 0.05,
+          overwrite: 'auto'
+        });
+        if (heroLogo) gsap.to(heroLogo, {
+          autoAlpha: 0,
+          y: -12,
+          duration: 0.25,
+          ease: 'power2.in',
+          overwrite: 'auto'
+        });
+      },
+      onLeaveBack: () => {
+        header.classList.remove('scrolled');
+        gsap.to([headerBrand, headerCta], {
+          autoAlpha: 0,
+          y: -6,
+          duration: 0.22,
+          ease: 'power2.in',
+          stagger: 0.03,
+          overwrite: 'auto'
+        });
+        if (heroLogo) gsap.to(heroLogo, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.35,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      },
+    });
+
+    // ─── Mobile menu ──────────────────────────────────────────
+    const burgerBtn     = document.getElementById('burger-btn');
+    const mobileMenu    = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      mobileOverlay.classList.add('active');
+      burgerBtn.classList.add('active');
+      burgerBtn.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      mobileOverlay.classList.remove('active');
+      burgerBtn.classList.remove('active');
+      burgerBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    }
+
+    burgerBtn.addEventListener('click', () => {
+      mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    mobileOverlay.addEventListener('click', closeMenu);
+    document.querySelectorAll('.header__mobile-link').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // ─── HERO + scroll animations · wrap en matchMedia (a11y) ──
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      noMotion: '(prefers-reduced-motion: no-preference)',
+      reduce:   '(prefers-reduced-motion: reduce)'
+    }, (ctx) => {
+      const { noMotion, reduce } = ctx.conditions;
+
+      // ─────────────────────────────────────────────
+      // Reduced motion: solo fade in, sin movimientos
+      // ─────────────────────────────────────────────
+      if (reduce) {
+        gsap.to(['.hero__logo','.hero__eyebrow','.hero__title','.hero__cinema-frame','.hero__subtitle','.hero__certs','.hero__right-col'], {
+          autoAlpha: 1, duration: 0.3, stagger: 0.04
+        });
+        return;
+      }
+
+      // ─────────────────────────────────────────────
+      // Hero entrance · timeline editorial
+      // SplitText en title se aplica DESPUÉS de content-loader
+      // (sino el JSON loader sobrescribe innerHTML y rompe los splits)
+      // ─────────────────────────────────────────────
+
+      // Estado inicial vía gsap.set (no en CSS) — bulletproof
+      gsap.set(['.hero__logo','.hero__eyebrow','.hero__cinema-frame','.hero__subtitle','.hero__certs','.hero__right-col'], { y: 18 });
+      gsap.set('.hero__title', { y: 30 });
+
+      // Función que crea el timeline (defer hasta que content-loader termine)
+      function buildHeroTimeline() {
+        let titleSplit;
+        try {
+          // Sin mask:'lines' para evitar clipear descendentes ('p','g','y') con line-height tight
+          titleSplit = SplitText.create('.hero__title', { type: 'words' });
+        } catch (e) { /* fallback */ }
+
+        if (titleSplit) gsap.set(titleSplit.words, { y: 30 });
+
+        const heroTl = gsap.timeline({ delay: 0.15, defaults: { ease: 'expo.out' } });
+        heroTl
+          .to('.hero__logo', { autoAlpha: 1, y: 0, duration: 0.6 })
+          .to('.hero__eyebrow', { autoAlpha: 1, y: 0, duration: 0.7 }, '-=0.3');
+
+        if (titleSplit) {
+          gsap.set('.hero__title', { autoAlpha: 1 });
+          heroTl.to(titleSplit.words, { y: 0, autoAlpha: 1, duration: 0.9, stagger: MOTION.stagger.tight }, '-=0.4');
+          // Pre-set palabras invisibles para no ver el flash
+          gsap.set(titleSplit.words, { autoAlpha: 0 });
+        } else {
+          heroTl.to('.hero__title', { autoAlpha: 1, y: 0, duration: 1 }, '-=0.4');
+        }
+
+        heroTl
+          .to('.hero__cinema-frame', { autoAlpha: 1, y: 0, duration: 1 }, '-=0.5')
+          .to('.hero__subtitle', { autoAlpha: 1, y: 0, duration: 0.7 }, '-=0.5')
+          .to('.hero__certs', { autoAlpha: 1, duration: 0.5 }, '-=0.3')
+          .to('.hero__right-col', { autoAlpha: 1, y: 0, duration: 0.7 }, '-=0.4');
+
+        return heroTl;
+      }
+
+      // Si content-loader ya terminó, ejecutar inmediato. Sino, esperar.
+      let heroTl;
+      if (document.documentElement.classList.contains('content-loaded')) {
+        heroTl = buildHeroTimeline();
+      } else {
+        document.addEventListener('traverso:content-loaded', () => {
+          heroTl = buildHeroTimeline();
+          // Re-ejecutar el eventCallback exit con el nuevo heroTl
+          attachHeroExit(heroTl);
+        }, { once: true });
+      }
+
+      // ─── COUNTER · trust bar (130+, 2) ──────────
+      gsap.utils.toArray('[data-count]').forEach((el) => {
+        const end = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || '';
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: end,
+          duration: 1.6,
+          ease: 'power2.out',
+          onUpdate: () => { el.textContent = Math.round(obj.val) + suffix; },
+          scrollTrigger: { trigger: el, start: 'top 90%', once: true }
+        });
+      });
+
+      // ─── MAGNETIC · CTAs primarios (gold + primary) ──────────
+      const magneticBtns = document.querySelectorAll('.btn--gold, .btn--primary');
+      magneticBtns.forEach((btn) => {
+        const xTo = gsap.quickTo(btn, 'x', { duration: 0.4, ease: 'power3.out' });
+        const yTo = gsap.quickTo(btn, 'y', { duration: 0.4, ease: 'power3.out' });
+        btn.addEventListener('mousemove', (e) => {
+          const r = btn.getBoundingClientRect();
+          const dx = e.clientX - r.left - r.width / 2;
+          const dy = e.clientY - r.top - r.height / 2;
+          xTo(dx * 0.25);
+          yTo(dy * 0.25);
+        });
+        btn.addEventListener('mouseleave', () => { xTo(0); yTo(0); });
+      });
+
+      // ─── HERO EXIT scrub (función para ser llamada cuando heroTl esté listo) ──
+      function attachHeroExit(tl) {
+        tl.eventCallback('onComplete', () => {
+          const heroExit = gsap.timeline({
+            scrollTrigger: {
+              trigger: '.hero',
+              start: '20% top',
+              end: 'bottom top',
+              scrub: 0.6,
+            }
+          });
+          heroExit.to('.hero__right-col', { autoAlpha: 0, y: 30, duration: 0.2 }, 0);
+          heroExit.to('.hero__certs', { autoAlpha: 0, duration: 0.15 }, 0.05);
+          heroExit.to('.hero__subtitle', { autoAlpha: 0, y: 30, duration: 0.25 }, 0.1);
+          heroExit.to('.hero__cinema-frame', { scale: 1.22, duration: 0.85, ease: 'power2.in' }, 0);
+          heroExit.to('.hero__cinema-frame', { autoAlpha: 0, duration: 0.35, ease: 'power2.in' }, 0.5);
+          heroExit.to('.hero__title', { autoAlpha: 0, y: -40, duration: 0.35 }, 0.15);
+          heroExit.to('.hero__eyebrow', { autoAlpha: 0, y: -20, duration: 0.2 }, 0.2);
+        });
+      }
+      if (heroTl) attachHeroExit(heroTl);
+    });
+
+    /* ════════════════════════════════════════════════════════════
+       GSAP · entrada editorial B2B · consolidado 2026-04-24 (v2)
+       Patrón: ScrollTrigger.create({ onEnter }) → gsap.fromTo()
+       CSS siempre visible. JS solo activa animación cuando trigger dispara.
+       Si JS o trigger falla, elementos quedan visibles por CSS (bulletproof).
+    ════════════════════════════════════════════════════════════ */
+
+    // Helper · crea una entrada reveal para cualquier selector
+    // CSS .js-anim ya pre-oculta los elementos (anti-FOUC), solo animamos a visible
+    // A11y: si prefers-reduced-motion, sin movimiento + duración corta
+    var REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function enterFade(selector, opts) {
+      opts = opts || {};
+      var triggerEl = opts.trigger || selector;
+      var trigger = typeof triggerEl === 'string' ? document.querySelector(triggerEl) : triggerEl;
+      if (!trigger) return;
+
+      // Pre-set y inicial (CSS ya tiene opacity:0 vía .js-anim)
+      var yInit = REDUCE_MOTION ? 0 : (opts.y != null ? opts.y : 25);
+      gsap.set(selector, { y: yInit });
+
+      ScrollTrigger.create({
+        trigger: trigger,
+        start: opts.start || 'top 85%',
+        once: true,
+        onEnter: function() {
+          gsap.to(selector, {
+            autoAlpha: 1,
+            y: 0,
+            duration: REDUCE_MOTION ? 0.3 : (opts.duration || 0.9),
+            stagger: REDUCE_MOTION ? 0 : (opts.stagger || 0),
+            ease: opts.ease || 'power2.out',
+            clearProps: 'transform'
+          });
+        }
+      });
+    }
+
+    // ─── VALUE PROPS · propuesta ───
+    enterFade('.value-props__title', { trigger: '.value-props', y: 30, duration: 1.1 });
+
+    // ─── ABOUT · Quiénes somos ───
+    enterFade('.about__intro > *', { trigger: '.about', y: 25, duration: 1, stagger: 0.1 });
+
+    // V12 panel · sidebar interactiva · "última card hovereada queda activa al salir"
+    (function aboutV12Controller(){
+      const panel   = document.querySelector('.about__panel');
+      if (!panel) return;
+      const rows    = panel.querySelectorAll('.about__sidebar-row');
+      const viewers = panel.querySelectorAll('.about__viewer-panel');
+      if (!rows.length) return;
+
+      function setActive(idx){
+        const total = rows.length;
+        const nextIdx = (idx + 1) % total;
+        rows.forEach((r,i) => {
+          r.classList.toggle('is-active', i === idx);
+          r.classList.toggle('is-next',   i === nextIdx);
+        });
+        viewers.forEach((v,i) => v.classList.toggle('is-active', i === idx));
+      }
+
+      // Default: § 01 activo
+      setActive(0);
+
+      // Hover entra a una row → activa
+      rows.forEach((r, i) => {
+        r.addEventListener('mouseenter', () => setActive(i));
+        // Click también activa (mobile / click-to-pin)
+        r.addEventListener('click',      () => setActive(i));
+      });
+
+      // Mouseleave del PANEL completo: NO hacer nada · queda la última activa
+      // (solución a "no debería volver a la primera")
+    })();
+
+    // ─── TRUST · Badge postal (Certificaciones) ───
+    enterFade('.trust__stamp, .trust__hero', { trigger: '.trust', start: 'top 82%', y: 22, duration: 1, stagger: 0.15 });
+    enterFade('.trust__item', { trigger: '.trust__items', start: 'top 88%', y: 15, duration: 0.7, stagger: 0.08 });
+
+    // ─── PRODUCTS · Portafolio ───
+    enterFade('.products__header > *', { trigger: '.products', y: 25, duration: 1, stagger: 0.12 });
+    enterFade('.product-card', { trigger: '.products__grid', start: 'top 88%', y: 30, duration: 0.9, stagger: 0.12 });
+    enterFade('.products__cta', { trigger: '.products__cta', y: 20, duration: 0.9 });
+
+    // ─── MINI CONTACT · Form editorial ───
+    enterFade('.mini-contact__label, .mini-contact__title, .mini-contact__lead', { trigger: '.mini-contact', y: 25, duration: 1, stagger: 0.12 });
+    enterFade('.contact__form .form__row, .contact__form > .form__group', { trigger: '.contact__form', start: 'top 88%', y: 18, duration: 0.7, stagger: 0.08 });
+    enterFade('.form__submit, .mini-contact__aux', { trigger: '.form__submit', start: 'top 92%', y: 15, duration: 0.7, stagger: 0.15 });
+
+    // ─── FOOTER · entrada gentle ───
+    enterFade('.footer__brand, .footer__right', { trigger: '.footer', start: 'top 92%', y: 22, duration: 0.9, stagger: 0.1 });
+    enterFade('.footer__trust-row .footer__trust-item', { trigger: '.footer__trust-row', start: 'top 92%', y: 15, duration: 0.7, stagger: 0.08 });
+    enterFade('.footer__ctas > *', { trigger: '.footer__ctas', start: 'top 95%', y: 12, duration: 0.6, stagger: 0.1 });
+
+    // ─── ANIMACIONES DE COLECCIONES DINÁMICAS ─────────────────
+    // Se registran DESPUÉS que collections-loader.js renderiza los ítems
+    document.addEventListener('traverso:collections-loaded', function() {
+      ScrollTrigger.refresh();
+      // VALUE ITEMS · stagger elegante
+      enterFade('.value-item', { trigger: '.value-props__grid', start: 'top 88%', y: 25, duration: 0.85, stagger: 0.1 });
+      // Trust items, About pillars, Product cards son estáticos — ya tienen sus triggers arriba.
+    });
+
+  </script>
+
+  <!-- DEPLOY: actualizar action de todos los formularios con ID real de Formspree -->
+  <!-- Formularios: form-home (index), form-quienes-somos, form-productos, form-contacto-principal -->
+  <!-- TODO: sesión foto planta → reemplazar hero y about con imágenes de mayor resolución -->
+  <!-- TODO: sesión producto → reemplazar product cards con fotos sobre fondo neutro tipo catálogo -->
+  <!-- TODO: sesión corporativa → agregar foto equipo en sección contacto de contacto.html -->
+  <!-- TODO: ampliar categorías en productos.html con información enviada por Víctor -->
+
+  <!-- ============================================================
+       TRAVERSO CMS — Loaders de contenido dinámico
+  ============================================================ -->
+  <script src="js/content-loader.js"></script>
+  <script src="js/collections-loader.js?v=3"></script>
+  <script src="js/seo-injector.js"></script>
+  <script src="js/integraciones-loader.js"></script>
+  <script src="js/form-handler.js"></script>
+  <script src="js/lang-switcher.js"></script>
+</body>
+</html>

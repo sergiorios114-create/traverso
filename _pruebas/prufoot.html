@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Traverso — Pruebas de footer (10 variantes)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   TOKENS TRAVERSO (desde DESIGN.md)
+═══════════════════════════════════════════════════════════════ */
+:root{
+  --primary:#0B1E6B;
+  --primary-dark:#081450;
+  --primary-deepest:#050E33;
+  --accent:#C5A55A;
+  --accent-saturated:#C9A227;
+  --accent-hover:#D4B96E;
+  --neutral:#FBF9FA;
+  --neutral-alt:#F2F4F8;
+  --text:#19212F;
+  --text-muted:#4A5362;
+  --text-subtle:#6B7280;
+  --on-dark:#FFFFFF;
+  --border:#DDE2EC;
+  --border-light:#EEF0F5;
+
+  --ff-serif:"Libre Baskerville",Georgia,serif;
+  --ff-sans:"Source Sans 3",system-ui,sans-serif;
+  --ff-mono:"Courier New",ui-monospace,monospace;
+
+  --s-1:8px; --s-2:16px; --s-3:24px; --s-4:32px;
+  --s-6:48px; --s-8:64px; --s-12:96px; --s-16:128px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:68px}
+body{font-family:var(--ff-sans);background:#e9ecf3;color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+img{max-width:100%;display:block}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHELL: nav sticky + labels de variante
+═══════════════════════════════════════════════════════════════ */
+.shell-nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.shell-nav__inner{
+  max-width:1280px;margin:0 auto;padding:10px 24px;
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.shell-nav__brand{
+  font-family:var(--ff-serif);font-size:14px;font-weight:700;
+  color:var(--primary-dark);margin-right:auto;
+}
+.shell-nav__brand span{
+  font-family:var(--ff-mono);font-size:10px;font-weight:400;
+  color:var(--text-subtle);letter-spacing:.14em;text-transform:uppercase;
+  margin-left:12px;
+}
+.shell-nav__links{display:flex;gap:2px;flex-wrap:wrap}
+.shell-nav__link{
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-muted);
+  padding:5px 9px;border:1px solid transparent;border-radius:14px;
+  transition:all .15s;
+}
+.shell-nav__link:hover{background:var(--neutral-alt);color:var(--primary-dark);border-color:var(--border)}
+
+.variant-label{
+  max-width:1280px;margin:72px auto 18px;padding:0 32px;
+  display:flex;align-items:baseline;gap:14px;
+}
+.variant-label__n{
+  font-family:var(--ff-mono);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent-saturated);
+  border:1px solid var(--accent-saturated);padding:4px 10px;border-radius:3px;
+}
+.variant-label__t{font-family:var(--ff-serif);font-size:22px;font-weight:700;color:var(--primary-dark);letter-spacing:-.005em}
+.variant-label__d{font-family:var(--ff-sans);font-size:13px;color:var(--text-muted);margin-left:auto;max-width:420px;text-align:right}
+
+/* Full-bleed — sin frame ni padding, cada footer ocupa todo el viewport */
+.variant-frame{width:100%}
+.variant-frame__inner{width:100%;background:transparent;border:none;border-radius:0;box-shadow:none;overflow:visible}
+.variant-frame + .variant-label{margin-top:88px}
+
+/* shared container inside variants */
+.t-container{max-width:1200px;margin:0 auto;padding:0 clamp(24px,5vw,48px)}
+
+/* ═══════════════════════════════════════════════════════════════
+   V01 · EDITORIAL CLÁSICO  —  Pentagram / Work&Co
+═══════════════════════════════════════════════════════════════ */
+.v01{background:var(--primary-deepest);color:#fff;padding:80px 0 0;font-family:var(--ff-sans)}
+.v01 .t-container{padding-top:0}
+.v01__grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;
+  gap:48px;padding-bottom:56px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.v01__brand-logo{height:30px;filter:brightness(0) invert(1);margin-bottom:20px}
+.v01__manifest{font-family:var(--ff-serif);font-size:20px;line-height:1.35;color:rgba(255,255,255,.88);max-width:420px;letter-spacing:-.005em}
+.v01__manifest em{color:var(--accent);font-style:italic}
+.v01__eyebrow{
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent-saturated);
+  margin-bottom:16px;display:block;
+}
+.v01__links{display:flex;flex-direction:column;gap:10px}
+.v01__link{
+  font-size:14px;color:rgba(255,255,255,.72);
+  transition:color .2s;display:inline-flex;align-items:center;gap:6px;width:fit-content;
+}
+.v01__link:hover{color:var(--accent)}
+.v01__link::before{content:"→";opacity:0;transition:opacity .2s;color:var(--accent-saturated);font-family:var(--ff-mono)}
+.v01__link:hover::before{opacity:1}
+.v01__contact-line{font-size:14px;color:rgba(255,255,255,.72);margin-bottom:8px}
+.v01__contact-line strong{color:#fff;font-weight:500}
+.v01__bottom{
+  padding:22px 0;display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:12px;
+}
+.v01__copy{font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;color:rgba(255,255,255,.4);text-transform:uppercase}
+.v01__socials{display:flex;gap:18px}
+.v01__social{font-family:var(--ff-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);transition:color .2s}
+.v01__social:hover{color:var(--accent)}
+
+/* ═══════════════════════════════════════════════════════════════
+   V02 · DESPEDIDA MEMORABLE  —  hero tipográfico de cierre
+═══════════════════════════════════════════════════════════════ */
+.v02{background:var(--primary-dark);color:#fff;padding:96px 0 32px;position:relative;overflow:hidden}
+.v02::before{
+  content:"";position:absolute;inset:auto 0 0 0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(197,165,90,.3),transparent);
+}
+.v02__eyebrow{font-family:var(--ff-mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:18px}
+.v02__display{
+  font-family:var(--ff-serif);font-weight:700;
+  font-size:clamp(64px,12vw,180px);line-height:.9;
+  letter-spacing:-.035em;margin-bottom:18px;
+}
+.v02__display em{font-style:italic;font-weight:400;color:var(--accent)}
+.v02__mail{
+  font-family:var(--ff-serif);font-size:clamp(22px,3vw,38px);
+  font-weight:400;color:#fff;display:inline-block;
+  padding-bottom:6px;border-bottom:1px solid rgba(197,165,90,.5);
+  margin-bottom:48px;transition:border-color .25s,color .25s;
+}
+.v02__mail:hover{border-color:var(--accent);color:var(--accent)}
+.v02__grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;
+  padding-top:40px;border-top:1px solid rgba(255,255,255,.08);
+}
+.v02__col-label{font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px}
+.v02__mini{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7}
+.v02__mini a{color:rgba(255,255,255,.7);transition:color .2s;display:block;padding:2px 0}
+.v02__mini a:hover{color:var(--accent)}
+.v02__bottom{
+  padding:28px 0 0;margin-top:40px;
+  border-top:1px solid rgba(255,255,255,.08);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:rgba(255,255,255,.35);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   V03 · MARQUEE TIPOGRÁFICO  —  reemplazo de slider de logos
+═══════════════════════════════════════════════════════════════ */
+.v03{background:var(--primary-deepest);color:#fff;padding:0 0 32px}
+.v03__marquee{
+  border-top:1px solid rgba(255,255,255,.1);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  overflow:hidden;white-space:nowrap;padding:22px 0;
+  background:linear-gradient(180deg,rgba(197,165,90,.04),transparent);
+}
+.v03__marquee-track{
+  display:inline-flex;gap:42px;
+  font-family:var(--ff-serif);font-size:clamp(34px,5vw,58px);
+  font-weight:700;letter-spacing:-.015em;line-height:1;
+  color:rgba(255,255,255,.92);
+  animation:v03-scroll 38s linear infinite;
+  padding-right:42px;
+}
+.v03__marquee-track em{font-style:italic;color:var(--accent);font-weight:400}
+.v03__marquee-track span::after{content:" · ";color:var(--accent-saturated);margin:0 4px}
+@keyframes v03-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.v03__marquee-track{animation:none}}
+.v03__grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:40px;
+  padding:64px 0 40px;
+}
+.v03__logo{height:28px;filter:brightness(0) invert(1);margin-bottom:16px}
+.v03__tag{font-size:14px;color:rgba(255,255,255,.6);line-height:1.6;max-width:360px}
+.v03 .v01__eyebrow{font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:14px;display:block}
+.v03__list{display:flex;flex-direction:column;gap:8px}
+.v03__list a{font-size:14px;color:rgba(255,255,255,.7);transition:color .2s}
+.v03__list a:hover{color:var(--accent)}
+.v03__cta{
+  display:inline-block;margin-top:8px;padding:10px 22px;
+  background:var(--accent);color:var(--primary-dark);
+  font-family:var(--ff-sans);font-weight:600;font-size:12px;
+  letter-spacing:.08em;text-transform:uppercase;border-radius:3px;
+  transition:background .2s,transform .15s;
+}
+.v03__cta:hover{background:var(--accent-hover)}
+.v03__cta:active{transform:scale(.97)}
+.v03__bottom{
+  border-top:1px solid rgba(255,255,255,.06);padding-top:24px;
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.35);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   V04 · SWISS / BRUTALISMO EDITORIAL  —  numeración § + rules
+═══════════════════════════════════════════════════════════════ */
+.v04{background:var(--neutral);color:var(--text);padding:72px 0 28px;border-top:2px solid var(--primary-dark)}
+.v04__head{
+  display:grid;grid-template-columns:2fr 1fr;gap:40px;
+  padding-bottom:36px;margin-bottom:36px;
+  border-bottom:1px solid var(--primary-dark);
+}
+.v04__kicker{font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:14px}
+.v04__manifest{font-family:var(--ff-serif);font-size:clamp(28px,3.4vw,42px);font-weight:700;letter-spacing:-.02em;line-height:1.05;color:var(--primary-dark)}
+.v04__manifest sup{font-family:var(--ff-mono);font-size:13px;color:var(--accent-saturated);vertical-align:top;margin-right:6px;font-weight:400}
+.v04__manifest em{font-style:italic;font-weight:400}
+.v04__targets{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+.v04__target{
+  font-family:var(--ff-mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-muted);
+  padding:3px 0;border-bottom:1px solid var(--border-light);
+}
+.v04__target::before{content:"[ ";color:var(--accent-saturated)}
+.v04__target::after{content:" ]";color:var(--accent-saturated)}
+.v04__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding-bottom:32px}
+.v04__col-num{font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:4px}
+.v04__col-title{font-family:var(--ff-serif);font-size:16px;font-weight:700;color:var(--primary-dark);margin-bottom:14px;padding-top:8px;border-top:1px solid var(--primary-dark)}
+.v04__col-list{display:flex;flex-direction:column;gap:6px}
+.v04__col-list a{font-size:14px;color:var(--text);transition:color .2s;display:inline-flex;align-items:center;gap:6px}
+.v04__col-list a::after{content:"→";opacity:0;font-family:var(--ff-mono);color:var(--accent-saturated);transition:opacity .2s}
+.v04__col-list a:hover{color:var(--accent-saturated)}
+.v04__col-list a:hover::after{opacity:1}
+.v04__contact-line{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:4px}
+.v04__contact-line strong{color:var(--primary-dark);font-weight:600;display:block}
+.v04__foot{
+  border-top:1px solid var(--border);padding-top:18px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;color:var(--text-subtle);text-transform:uppercase;
+}
+.v04__foot sup{color:var(--accent-saturated)}
+
+/* ═══════════════════════════════════════════════════════════════
+   V05 · SPLIT-SCREEN  —  navy vs neutral
+═══════════════════════════════════════════════════════════════ */
+.v05{display:grid;grid-template-columns:1fr 1fr;min-height:520px}
+.v05__left{background:var(--primary-dark);color:#fff;padding:72px clamp(28px,4vw,56px);display:flex;flex-direction:column;justify-content:space-between}
+.v05__right{background:var(--neutral-alt);color:var(--text);padding:72px clamp(28px,4vw,56px);display:flex;flex-direction:column;justify-content:space-between}
+.v05__eyebrow{font-family:var(--ff-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:20px}
+.v05__left .v05__eyebrow{color:var(--accent-saturated)}
+.v05__right .v05__eyebrow{color:var(--accent-saturated)}
+.v05__left-title{font-family:var(--ff-serif);font-size:clamp(32px,3.6vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1;color:#fff}
+.v05__left-title em{font-style:italic;color:var(--accent);font-weight:400}
+.v05__left-sub{font-family:var(--ff-serif);font-size:17px;line-height:1.55;color:rgba(255,255,255,.75);max-width:420px;margin-top:22px}
+.v05__left-cta{
+  display:inline-block;margin-top:28px;padding:12px 24px;
+  background:var(--accent);color:var(--primary-dark);
+  font-family:var(--ff-sans);font-weight:700;font-size:12px;
+  letter-spacing:.08em;text-transform:uppercase;border-radius:3px;
+  transition:background .2s,transform .15s;width:fit-content;
+}
+.v05__left-cta:hover{background:var(--accent-hover)}
+.v05__left-cta:active{transform:scale(.97)}
+.v05__left-foot{font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:32px}
+.v05__right-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.v05__right-col-t{font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:12px}
+.v05__right-col-list{display:flex;flex-direction:column;gap:7px}
+.v05__right-col-list a{font-size:14px;color:var(--text);transition:color .2s}
+.v05__right-col-list a:hover{color:var(--accent-saturated)}
+.v05__right-contact{font-family:var(--ff-serif);font-size:17px;line-height:1.4;color:var(--primary-dark)}
+.v05__right-contact a{border-bottom:1px solid var(--accent-saturated);display:inline-block;margin-bottom:8px}
+.v05__right-contact small{display:block;font-family:var(--ff-sans);font-size:13px;color:var(--text-muted);margin-top:4px}
+.v05__right-foot{font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-subtle);margin-top:32px;padding-top:18px;border-top:1px solid var(--border)}
+@media (max-width:767px){.v05{grid-template-columns:1fr}}
+
+/* ═══════════════════════════════════════════════════════════════
+   V06 · CATÁLOGO EDITORIAL  —  sumario tipo libro
+═══════════════════════════════════════════════════════════════ */
+.v06{background:var(--neutral);color:var(--text);padding:72px 0 32px}
+.v06__top{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;padding-bottom:24px;margin-bottom:24px;border-bottom:2px solid var(--primary-dark)}
+.v06__logo{height:28px}
+.v06__title{font-family:var(--ff-serif);font-size:clamp(28px,3.2vw,40px);font-weight:700;letter-spacing:-.02em;color:var(--primary-dark);line-height:1}
+.v06__title em{font-style:italic;font-weight:400}
+.v06__index-label{font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated)}
+.v06__row{
+  display:grid;grid-template-columns:50px 1fr 2fr auto;gap:18px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--border-light);
+  transition:background .2s;cursor:pointer;
+}
+.v06__row:hover{background:rgba(197,165,90,.05)}
+.v06__row:hover .v06__row-arr{color:var(--accent-saturated);transform:translateX(4px)}
+.v06__row:hover .v06__row-dest{color:var(--accent-saturated)}
+.v06__row-n{font-family:var(--ff-mono);font-size:11px;color:var(--text-subtle);letter-spacing:.1em}
+.v06__row-cat{font-family:var(--ff-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted)}
+.v06__row-dest{font-family:var(--ff-serif);font-size:18px;font-weight:400;color:var(--primary-dark);transition:color .2s}
+.v06__row-dest em{font-style:italic}
+.v06__row-arr{font-family:var(--ff-mono);font-size:14px;color:var(--text-subtle);transition:all .2s}
+.v06__foot{
+  display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;
+  margin-top:36px;padding-top:24px;border-top:1px solid var(--border);
+}
+.v06__foot-block strong{font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);display:block;margin-bottom:6px;font-weight:400}
+.v06__foot-block p{font-family:var(--ff-serif);font-size:15px;line-height:1.5;color:var(--primary-dark)}
+.v06__foot-block p a{border-bottom:1px solid var(--accent-saturated)}
+.v06__foot-copy{
+  margin-top:28px;padding-top:18px;border-top:1px solid var(--border-light);
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-subtle);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   V07 · DARK PREMIUM DENSO  —  dashboard compacto
+═══════════════════════════════════════════════════════════════ */
+.v07{background:var(--primary-deepest);color:#fff;padding:64px 0 24px}
+.v07__top{
+  display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:24px;
+  padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.1);
+}
+.v07__brand-logo{height:26px;filter:brightness(0) invert(1);margin-bottom:12px}
+.v07__brand-tag{font-family:var(--ff-serif);font-size:14px;line-height:1.55;color:rgba(255,255,255,.75);font-style:italic}
+.v07__block-lbl{font-family:var(--ff-mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.1)}
+.v07__block-list{display:flex;flex-direction:column;gap:5px}
+.v07__block-list a{font-size:13px;color:rgba(255,255,255,.7);transition:color .2s}
+.v07__block-list a:hover{color:var(--accent)}
+.v07__stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:rgba(255,255,255,.06);margin:28px 0;
+  border:1px solid rgba(255,255,255,.08);
+}
+.v07__stat{background:var(--primary-deepest);padding:20px 22px}
+.v07__stat-n{font-family:var(--ff-serif);font-size:34px;font-weight:700;color:var(--accent);line-height:1;letter-spacing:-.02em}
+.v07__stat-l{font-family:var(--ff-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:6px}
+.v07__b2b{
+  display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;
+  padding:22px;border:1px solid rgba(197,165,90,.25);
+  background:rgba(197,165,90,.04);border-radius:4px;
+}
+.v07__b2b-t{font-family:var(--ff-serif);font-size:20px;color:var(--accent);font-weight:700;margin-bottom:4px}
+.v07__b2b-t em{font-style:italic;font-weight:400}
+.v07__b2b-d{font-size:13px;color:rgba(255,255,255,.65);max-width:520px;line-height:1.6}
+.v07__b2b-targets{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.v07__b2b-chip{font-family:var(--ff-mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:3px 9px;border:1px solid rgba(255,255,255,.15);border-radius:20px}
+.v07__b2b-actions{display:flex;gap:10px;flex-shrink:0}
+.v07__btn-gold{padding:10px 18px;background:var(--accent);color:var(--primary-dark);font-family:var(--ff-sans);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-radius:3px;transition:background .2s,transform .15s}
+.v07__btn-gold:hover{background:var(--accent-hover)}
+.v07__btn-gold:active{transform:scale(.96)}
+.v07__btn-ghost{padding:10px 18px;background:transparent;color:var(--accent);font-family:var(--ff-sans);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--accent);border-radius:3px;transition:background .2s}
+.v07__btn-ghost:hover{background:rgba(197,165,90,.1)}
+.v07__foot{
+  margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);
+}
+.v07__foot a{color:rgba(255,255,255,.55);margin-right:14px}
+.v07__foot a:hover{color:var(--accent)}
+
+/* ═══════════════════════════════════════════════════════════════
+   V08 · CINEMÁTICO FULL-BLEED  —  foto fábrica + overlay
+═══════════════════════════════════════════════════════════════ */
+.v08{position:relative;min-height:520px;overflow:hidden;color:#fff}
+.v08__bg{
+  position:absolute;inset:0;
+  background-image:url("assets/exterior-fabrica-portada.jpg");
+  background-size:cover;background-position:center;
+}
+.v08__bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(5,14,51,.4) 0%,rgba(8,20,80,.85) 60%,rgba(5,14,51,.98) 100%);
+}
+.v08__bg::before{
+  content:"";position:absolute;inset:0;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"/></filter><rect width="200" height="200" filter="url(%23n)" opacity="0.18"/></svg>');
+  mix-blend-mode:overlay;pointer-events:none;z-index:1;
+}
+.v08__inner{position:relative;z-index:2;padding:80px 0 28px}
+.v08__meta{font-family:var(--ff-mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:24px}
+.v08__display{font-family:var(--ff-serif);font-size:clamp(48px,8vw,108px);font-weight:700;letter-spacing:-.035em;line-height:.9;margin-bottom:20px}
+.v08__display em{font-style:italic;font-weight:400;color:var(--accent)}
+.v08__mail{font-family:var(--ff-serif);font-size:clamp(20px,2.6vw,32px);color:#fff;display:inline-block;border-bottom:1px solid rgba(197,165,90,.5);padding-bottom:4px;transition:color .25s,border-color .25s}
+.v08__mail:hover{color:var(--accent);border-color:var(--accent)}
+.v08__columns{display:grid;grid-template-columns:repeat(3,auto);gap:48px;margin-top:56px;margin-bottom:36px}
+.v08__col-t{font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:10px}
+.v08__col-list{display:flex;flex-direction:column;gap:6px;font-size:13px;color:rgba(255,255,255,.78)}
+.v08__col-list a{transition:color .2s}
+.v08__col-list a:hover{color:var(--accent)}
+.v08__foot{padding-top:22px;border-top:1px solid rgba(255,255,255,.15);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:var(--ff-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+
+/* ═══════════════════════════════════════════════════════════════
+   V09 · HYBRID MINIMALISTA  —  Instrument / Ueno
+═══════════════════════════════════════════════════════════════ */
+.v09{background:var(--neutral);color:var(--text);padding:80px 0 28px;border-top:1px solid var(--border)}
+.v09__top{display:grid;grid-template-columns:1.7fr 1fr;gap:64px;align-items:start}
+.v09__eyebrow{font-family:var(--ff-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:20px}
+.v09__manifest{font-family:var(--ff-serif);font-size:clamp(32px,4.2vw,54px);font-weight:700;line-height:1;letter-spacing:-.025em;color:var(--primary-dark)}
+.v09__manifest em{font-style:italic;font-weight:400;color:var(--accent-saturated)}
+.v09__targets{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px}
+.v09__target{font-family:var(--ff-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);padding:4px 12px;border:1px solid var(--border);border-radius:20px}
+.v09__right{display:flex;flex-direction:column;gap:24px}
+.v09__col{border-top:1px solid var(--primary-dark);padding-top:12px}
+.v09__col-t{font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:10px}
+.v09__col-list{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--text)}
+.v09__col-list a{transition:color .2s;display:inline-flex;align-items:center;gap:6px}
+.v09__col-list a:hover{color:var(--accent-saturated)}
+.v09__mid{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;margin:48px 0 28px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.v09__mid-text{font-family:var(--ff-serif);font-style:italic;font-size:17px;color:var(--primary-dark);line-height:1.5;max-width:520px}
+.v09__mid-cta{display:inline-block;padding:12px 24px;background:var(--primary-dark);color:#fff;font-family:var(--ff-sans);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-radius:3px;transition:background .2s}
+.v09__mid-cta:hover{background:var(--primary)}
+.v09__bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-subtle)}
+.v09__bottom a{color:var(--text-muted);margin-right:14px;transition:color .2s}
+.v09__bottom a:hover{color:var(--accent-saturated)}
+
+/* ═══════════════════════════════════════════════════════════════
+   V10 · RELOJ LOCAL  —  timestamp vivo Santiago
+═══════════════════════════════════════════════════════════════ */
+.v10{background:var(--primary-dark);color:#fff;padding:64px 0 28px;position:relative;overflow:hidden}
+.v10__ticker{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:24px;padding:14px 0;margin-bottom:40px;
+  border-top:1px solid rgba(255,255,255,.15);
+  border-bottom:1px solid rgba(255,255,255,.15);
+  font-family:var(--ff-mono);font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(255,255,255,.7);flex-wrap:wrap;
+}
+.v10__ticker-item{display:flex;align-items:center;gap:10px}
+.v10__ticker-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:v10-pulse 2s ease-in-out infinite}
+@keyframes v10-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.v10__ticker-dot{animation:none}}
+.v10__ticker-item strong{color:#fff;font-weight:400;letter-spacing:.08em}
+.v10__grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:24px}
+.v10__manifest{font-family:var(--ff-serif);font-size:28px;font-weight:700;line-height:1.1;letter-spacing:-.015em;color:#fff}
+.v10__manifest em{font-style:italic;font-weight:400;color:var(--accent)}
+.v10__mail-wrap{margin-top:22px;display:flex;align-items:baseline;gap:10px;font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.v10__mail{font-family:var(--ff-serif);font-style:italic;font-size:22px;color:var(--accent);text-transform:none;letter-spacing:-.01em;border-bottom:1px solid rgba(197,165,90,.4);padding-bottom:2px;transition:color .2s,border-color .2s}
+.v10__mail:hover{color:var(--accent-hover);border-color:var(--accent-hover)}
+.v10__col-t{font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:12px}
+.v10__col-list{display:flex;flex-direction:column;gap:6px;font-size:13px;color:rgba(255,255,255,.72)}
+.v10__col-list a{transition:color .2s}
+.v10__col-list a:hover{color:var(--accent)}
+.v10__bottom{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255,255,255,.35);
+}
+.v10__bottom a{color:rgba(255,255,255,.55);margin-right:14px}
+
+/* responsive safe for all variants */
+@media (max-width:900px){
+  .v01__grid,.v02__grid,.v03__grid,.v04__grid,.v07__top,.v10__grid{grid-template-columns:1fr 1fr}
+  .v07__stats{grid-template-columns:repeat(2,1fr)}
+  .v09__top{grid-template-columns:1fr}
+  .v06__row{grid-template-columns:40px 1fr 1fr auto;gap:10px}
+  .v06__foot{grid-template-columns:1fr}
+  .v08__columns{grid-template-columns:1fr 1fr}
+  .v07__b2b{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .v01__grid,.v02__grid,.v03__grid,.v04__grid,.v07__top,.v10__grid{grid-template-columns:1fr}
+  .v07__stats{grid-template-columns:1fr 1fr}
+  .v08__columns{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="shell-nav" aria-label="Variantes">
+  <div class="shell-nav__inner">
+    <div class="shell-nav__brand">Traverso <span>Pruebas footer · 10 variantes</span></div>
+    <div class="shell-nav__links">
+      <a href="#v01" class="shell-nav__link">01 Editorial</a>
+      <a href="#v02" class="shell-nav__link">02 Despedida</a>
+      <a href="#v03" class="shell-nav__link">03 Marquee</a>
+      <a href="#v04" class="shell-nav__link">04 Swiss</a>
+      <a href="#v05" class="shell-nav__link">05 Split</a>
+      <a href="#v06" class="shell-nav__link">06 Catálogo</a>
+      <a href="#v07" class="shell-nav__link">07 Denso</a>
+      <a href="#v08" class="shell-nav__link">08 Cinema</a>
+      <a href="#v09" class="shell-nav__link">09 Hybrid</a>
+      <a href="#v10" class="shell-nav__link">10 Reloj</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════ V01 · EDITORIAL CLÁSICO ══════════════════ -->
+<div class="variant-label" id="v01">
+  <span class="variant-label__n">01</span>
+  <span class="variant-label__t">Editorial clasico</span>
+  <span class="variant-label__d">Polo Pentagram / Work&Co. Grid 4-col sobrio, eyebrows en mono dorado, hover reveal con flecha.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="v01">
+  <div class="t-container">
+    <div class="v01__grid">
+      <div>
+        <img class="v01__brand-logo" src="../assets/logo-traverso.png" alt="Traverso International Foods">
+        <p class="v01__manifest">Conectando calidad chilena con mercados globales desde hace más de <em>130 años</em>.</p>
+      </div>
+      <div>
+        <span class="v01__eyebrow">— Navegación</span>
+        <ul class="v01__links">
+          <li><a class="v01__link" href="index.html">Inicio</a></li>
+          <li><a class="v01__link" href="quienes-somos.html">Quiénes somos</a></li>
+          <li><a class="v01__link" href="productos.html">Productos</a></li>
+          <li><a class="v01__link" href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="v01__eyebrow">— Productos</span>
+        <ul class="v01__links">
+          <li><a class="v01__link" href="productos.html">Vinagres a granel</a></li>
+          <li><a class="v01__link" href="productos.html">Marca privada</a></li>
+          <li><a class="v01__link" href="productos.html">Marca Traverso</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="v01__eyebrow">— Contacto</span>
+        <p class="v01__contact-line"><strong>Av. Vespucio 1313</strong><br>La Cisterna, Santiago, Chile</p>
+        <p class="v01__contact-line"><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a></p>
+        <p class="v01__contact-line"><a href="tel:+56224370900">+56 2 24370900</a></p>
+      </div>
+    </div>
+    <div class="v01__bottom">
+      <span class="v01__copy">© 2026 Traverso International Foods. Todos los derechos reservados. · Una empresa de Traverso S.A. · Chile</span>
+      <div class="v01__socials">
+        <a class="v01__social" href="https://www.facebook.com/TraversoChileSA" target="_blank" rel="noopener">Facebook</a>
+        <a class="v01__social" href="https://www.instagram.com/traversochile" target="_blank" rel="noopener">Instagram</a>
+        <a class="v01__social" href="https://wa.me/56985150056" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V02 · DESPEDIDA MEMORABLE ══════════════════ -->
+<div class="variant-label" id="v02">
+  <span class="variant-label__n">02</span>
+  <span class="variant-label__t">Despedida memorable</span>
+  <span class="variant-label__d">Hero tipografico de cierre — display serif gigante + mailto directo. Footer como "goodbye moment" del tier premium.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="v02">
+  <div class="t-container">
+    <p class="v02__eyebrow">— Exportación &amp; B2B</p>
+    <h2 class="v02__display">Conectando<br>calidad <em>chilena.</em></h2>
+    <a href="mailto:e-commerce@traverso.cl" class="v02__mail">e-commerce@traverso.cl →</a>
+    <div class="v02__grid">
+      <div>
+        <p class="v02__col-label">— Traverso</p>
+        <p class="v02__mini">Conectando calidad chilena con mercados globales desde hace más de 130 años. Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+      </div>
+      <div>
+        <p class="v02__col-label">— Navegación</p>
+        <div class="v02__mini">
+          <a href="index.html">Inicio</a>
+          <a href="quienes-somos.html">Quiénes somos</a>
+          <a href="productos.html">Productos</a>
+          <a href="contacto.html">Contacto</a>
+        </div>
+      </div>
+      <div>
+        <p class="v02__col-label">— Productos</p>
+        <div class="v02__mini">
+          <a href="productos.html">Vinagres a granel</a>
+          <a href="productos.html">Marca privada</a>
+          <a href="productos.html">Marca Traverso</a>
+        </div>
+      </div>
+      <div>
+        <p class="v02__col-label">— Contacto</p>
+        <div class="v02__mini">
+          Av. Vespucio 1313<br>La Cisterna, Santiago, Chile<br>
+          <a href="tel:+56224370900">+56 2 24370900</a>
+          <a href="https://wa.me/56985150056" target="_blank" rel="noopener">WhatsApp · +56 9 8515 0056</a>
+        </div>
+      </div>
+    </div>
+    <div class="v02__bottom">
+      <span>© 2026 Traverso International Foods. Todos los derechos reservados.</span>
+      <span>Una empresa de Traverso S.A. · Chile</span>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V03 · MARQUEE TIPOGRAFICO ══════════════════ -->
+<div class="variant-label" id="v03">
+  <span class="variant-label__n">03</span>
+  <span class="variant-label__t">Marquee tipografico</span>
+  <span class="variant-label__d">Strip superior con texto gigante en loop (reemplaza slider de logos, patron peak 2026). Bajo costo, alto impacto.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="v03">
+  <div class="v03__marquee" aria-hidden="true">
+    <div class="v03__marquee-track">
+      <span>Industriales</span><span>Distribuidores</span><span>Importadores</span><span>Retail</span><span>HORECA</span>
+      <span>Industriales</span><span>Distribuidores</span><span>Importadores</span><span>Retail</span><span>HORECA</span>
+    </div>
+  </div>
+  <div class="t-container">
+    <div class="v03__grid">
+      <div>
+        <img class="v03__logo" src="../assets/logo-traverso.png" alt="Traverso International Foods">
+        <p class="v03__tag">Conectando calidad chilena con mercados globales desde hace más de 130 años.</p>
+      </div>
+      <div>
+        <span class="v01__eyebrow">— Navegación</span>
+        <div class="v03__list">
+          <a href="index.html">Inicio</a>
+          <a href="quienes-somos.html">Quiénes somos</a>
+          <a href="productos.html">Productos</a>
+          <a href="contacto.html">Contacto</a>
+        </div>
+      </div>
+      <div>
+        <span class="v01__eyebrow">— Productos</span>
+        <div class="v03__list">
+          <a href="productos.html">Vinagres a granel</a>
+          <a href="productos.html">Marca privada</a>
+          <a href="productos.html">Marca Traverso</a>
+        </div>
+      </div>
+      <div>
+        <span class="v01__eyebrow">— Exportación &amp; B2B</span>
+        <div class="v03__list">
+          <a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a>
+          <a href="tel:+56224370900">+56 2 24370900</a>
+          <a href="https://wa.me/56985150056" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+        <a href="contacto.html" class="v03__cta">Solicitar Catalogo →</a>
+      </div>
+    </div>
+    <div class="v03__bottom">
+      <span>© 2026 Traverso International Foods. Todos los derechos reservados.</span>
+      <span>Una empresa de Traverso S.A. · Chile</span>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V04 · SWISS / BRUTALISMO EDITORIAL ══════════════════ -->
+<div class="variant-label" id="v04">
+  <span class="variant-label__n">04</span>
+  <span class="variant-label__t">Swiss · Brutalismo editorial</span>
+  <span class="variant-label__d">Retic­ula estricta, numeracion § 01-04, rules 1px, labels con brackets. Micro-patrones editoriales maximos sobre fondo claro.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="v04">
+  <div class="t-container">
+    <div class="v04__head">
+      <div>
+        <p class="v04__kicker">— Traverso International Foods</p>
+        <h2 class="v04__manifest"><sup>01</sup>Conectando calidad chilena con mercados globales<br>desde hace más de <em>130 años</em>.</h2>
+      </div>
+      <div>
+        <p class="v04__kicker">[ Exportación &amp; B2B ]</p>
+        <div class="v04__targets">
+          <span class="v04__target">Industriales</span>
+          <span class="v04__target">Distribuidores</span>
+          <span class="v04__target">Importadores</span>
+          <span class="v04__target">Retail</span>
+          <span class="v04__target">HORECA</span>
+        </div>
+      </div>
+    </div>
+    <div class="v04__grid">
+      <div>
+        <p class="v04__col-num">§ 01</p>
+        <h4 class="v04__col-title">Navegación</h4>
+        <div class="v04__col-list">
+          <a href="index.html">Inicio</a>
+          <a href="quienes-somos.html">Quiénes somos</a>
+          <a href="productos.html">Productos</a>
+          <a href="contacto.html">Contacto</a>
+        </div>
+      </div>
+      <div>
+        <p class="v04__col-num">§ 02</p>
+        <h4 class="v04__col-title">Productos</h4>
+        <div class="v04__col-list">
+          <a href="productos.html">Vinagres a granel</a>
+          <a href="productos.html">Marca privada</a>
+          <a href="productos.html">Marca Traverso</a>
+        </div>
+      </div>
+      <div>
+        <p class="v04__col-num">§ 03</p>
+        <h4 class="v04__col-title">Contacto</h4>
+        <p class="v04__contact-line"><strong>Av. Vespucio 1313</strong>La Cisterna, Santiago, Chile</p>
+        <p class="v04__contact-line"><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a></p>
+        <p class="v04__contact-line"><a href="tel:+56224370900">+56 2 24370900</a></p>
+      </div>
+      <div>
+        <p class="v04__col-num">§ 04</p>
+        <h4 class="v04__col-title">Canales</h4>
+        <div class="v04__col-list">
+          <a href="https://www.facebook.com/TraversoChileSA" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.instagram.com/traversochile" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://wa.me/56985150056" target="_blank" rel="noopener">WhatsApp · +56 9 8515 0056</a>
+        </div>
+      </div>
+    </div>
+    <div class="v04__foot">
+      <span>© 2026 Traverso International Foods. Todos los derechos reservados.</span>
+      <span>Una empresa de Traverso S.A. · Chile</span>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V05 · SPLIT-SCREEN ══════════════════ -->
+<div class="variant-label" id="v05">
+  <span class="variant-label__n">05</span>
+  <span class="variant-label__t">Split-screen · contraste</span>
+  <span class="variant-label__d">Dos realidades juntas — navy oscuro con manifesto + CTA a la izquierda, neutral claro con nav/contacto a la derecha. Patron D del research.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="v05">
+  <div class="v05__left">
+    <div>
+      <p class="v05__eyebrow">— Exportación &amp; B2B</p>
+      <h2 class="v05__left-title">Conectando calidad chilena con mercados <em>globales</em>.</h2>
+      <p class="v05__left-sub">Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+      <a href="contacto.html" class="v05__left-cta">Solicitar Catalogo →</a>
+    </div>
+    <div class="v05__left-foot">Industriales · Distribuidores · Importadores · Retail · HORECA</div>
+  </div>
+  <div class="v05__right">
+    <div>
+      <p class="v05__eyebrow">— Navegación &amp; contacto</p>
+      <div class="v05__right-grid">
+        <div>
+          <p class="v05__right-col-t">Navegación</p>
+          <div class="v05__right-col-list">
+            <a href="index.html">Inicio</a>
+            <a href="quienes-somos.html">Quiénes somos</a>
+            <a href="productos.html">Productos</a>
+            <a href="contacto.html">Contacto</a>
+          </div>
+        </div>
+        <div>
+          <p class="v05__right-col-t">Productos</p>
+          <div class="v05__right-col-list">
+            <a href="productos.html">Vinagres a granel</a>
+            <a href="productos.html">Marca privada</a>
+            <a href="productos.html">Marca Traverso</a>
+          </div>
+        </div>
+      </div>
+      <div class="v05__right-contact" style="margin-top:32px">
+        <a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a>
+        <small>Av. Vespucio 1313 · La Cisterna, Santiago, Chile</small>
+        <small>+56 2 24370900 · Lunes a Viernes, 9:00–18:00</small>
+      </div>
+    </div>
+    <div class="v05__right-foot">© 2026 Traverso International Foods. Todos los derechos reservados. · Una empresa de Traverso S.A. · Chile</div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V06 · CATALOGO EDITORIAL ══════════════════ -->
+<div class="variant-label" id="v06">
+  <span class="variant-label__n">06</span>
+  <span class="variant-label__t">Catalogo editorial · tabla de contenidos</span>
+  <span class="variant-label__d">Sumario tipo libro con filas serif — numero / categoria / destino / flecha. Hover sutil con underline dorado. Escaneable.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="v06">
+  <div class="t-container">
+    <div class="v06__top">
+      <div>
+        <img class="v06__logo" src="../assets/logo-traverso.png" alt="Traverso International Foods">
+        <h3 class="v06__title">Conectando calidad chilena con mercados <em>globales</em>.</h3>
+      </div>
+      <span class="v06__index-label">— § Sumario</span>
+    </div>
+
+    <a class="v06__row" href="index.html">
+      <span class="v06__row-n">01 —</span>
+      <span class="v06__row-cat">Navegación</span>
+      <span class="v06__row-dest">Inicio</span>
+      <span class="v06__row-arr">→</span>
+    </a>
+    <a class="v06__row" href="quienes-somos.html">
+      <span class="v06__row-n">02 —</span>
+      <span class="v06__row-cat">Navegación</span>
+      <span class="v06__row-dest"><em>Quiénes somos</em></span>
+      <span class="v06__row-arr">→</span>
+    </a>
+    <a class="v06__row" href="productos.html">
+      <span class="v06__row-n">03 —</span>
+      <span class="v06__row-cat">Productos</span>
+      <span class="v06__row-dest">Vinagres a granel</span>
+      <span class="v06__row-arr">→</span>
+    </a>
+    <a class="v06__row" href="productos.html">
+      <span class="v06__row-n">04 —</span>
+      <span class="v06__row-cat">Productos</span>
+      <span class="v06__row-dest">Marca privada</span>
+      <span class="v06__row-arr">→</span>
+    </a>
+    <a class="v06__row" href="productos.html">
+      <span class="v06__row-n">05 —</span>
+      <span class="v06__row-cat">Productos</span>
+      <span class="v06__row-dest">Marca Traverso</span>
+      <span class="v06__row-arr">→</span>
+    </a>
+    <a class="v06__row" href="contacto.html">
+      <span class="v06__row-n">06 —</span>
+      <span class="v06__row-cat">Exportación &amp; B2B</span>
+      <span class="v06__row-dest">Industriales · Distribuidores · Importadores · Retail · HORECA</span>
+      <span class="v06__row-arr">→</span>
+    </a>
+    <a class="v06__row" href="contacto.html">
+      <span class="v06__row-n">07 —</span>
+      <span class="v06__row-cat">Navegación</span>
+      <span class="v06__row-dest">Contacto</span>
+      <span class="v06__row-arr">→</span>
+    </a>
+
+    <div class="v06__foot">
+      <div class="v06__foot-block">
+        <strong>— Email</strong>
+        <p><a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a><br><small style="font-family:var(--ff-sans);font-size:12px;color:var(--text-muted)">Respondemos en 1–2 días hábiles</small></p>
+      </div>
+      <div class="v06__foot-block">
+        <strong>— Oficina</strong>
+        <p>Av. Vespucio 1313<br><small style="font-family:var(--ff-sans);font-size:12px;color:var(--text-muted)">La Cisterna, Santiago, Chile</small></p>
+      </div>
+      <div class="v06__foot-block">
+        <strong>— Canales</strong>
+        <p><a href="tel:+56224370900">+56 2 24370900</a><br><small style="font-family:var(--ff-sans);font-size:12px;color:var(--text-muted)">Facebook · Instagram · WhatsApp</small></p>
+      </div>
+    </div>
+    <div class="v06__foot-copy">
+      <span>© 2026 Traverso International Foods. Todos los derechos reservados.</span>
+      <span>Una empresa de Traverso S.A. · Chile</span>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V07 · DARK PREMIUM DENSO ══════════════════ -->
+<div class="variant-label" id="v07">
+  <span class="variant-label__n">07</span>
+  <span class="variant-label__t">Dark premium denso</span>
+  <span class="variant-label__d">Layout compacto — stats tipograficos grandes, columnas con rules, bloque B2B separado. Info-rich sin perder aire.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="v07">
+  <div class="t-container">
+    <div class="v07__top">
+      <div>
+        <img class="v07__brand-logo" src="../assets/logo-traverso.png" alt="Traverso International Foods">
+        <p class="v07__brand-tag">Conectando calidad chilena con mercados globales desde hace más de 130 años.</p>
+      </div>
+      <div>
+        <p class="v07__block-lbl">Navegación</p>
+        <div class="v07__block-list">
+          <a href="index.html">Inicio</a>
+          <a href="quienes-somos.html">Quiénes somos</a>
+          <a href="productos.html">Productos</a>
+          <a href="contacto.html">Contacto</a>
+        </div>
+      </div>
+      <div>
+        <p class="v07__block-lbl">Productos</p>
+        <div class="v07__block-list">
+          <a href="productos.html">Vinagres a granel</a>
+          <a href="productos.html">Marca privada</a>
+          <a href="productos.html">Marca Traverso</a>
+        </div>
+      </div>
+      <div>
+        <p class="v07__block-lbl">Contacto</p>
+        <div class="v07__block-list">
+          <a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a>
+          <a href="tel:+56224370900">+56 2 24370900</a>
+          <span>Av. Vespucio 1313</span>
+          <span>La Cisterna, Santiago, Chile</span>
+        </div>
+      </div>
+      <div>
+        <p class="v07__block-lbl">Canales</p>
+        <div class="v07__block-list">
+          <a href="https://www.facebook.com/TraversoChileSA" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.instagram.com/traversochile" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://wa.me/56985150056" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="v07__b2b" style="margin-top:28px">
+      <div>
+        <h3 class="v07__b2b-t">Exportación <em>&amp; B2B</em></h3>
+        <p class="v07__b2b-d">Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+        <div class="v07__b2b-targets">
+          <span class="v07__b2b-chip">Industriales</span>
+          <span class="v07__b2b-chip">Distribuidores</span>
+          <span class="v07__b2b-chip">Importadores</span>
+          <span class="v07__b2b-chip">Retail</span>
+          <span class="v07__b2b-chip">HORECA</span>
+        </div>
+      </div>
+      <div class="v07__b2b-actions">
+        <a href="contacto.html" class="v07__btn-gold">Contactar</a>
+        <a href="productos.html" class="v07__btn-ghost">Solicitar Catalogo →</a>
+      </div>
+    </div>
+
+    <div class="v07__foot">
+      <span>© 2026 Traverso International Foods. Todos los derechos reservados.</span>
+      <span>Una empresa de Traverso S.A. · Chile</span>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V08 · CINEMATICO FULL-BLEED ══════════════════ -->
+<div class="variant-label" id="v08">
+  <span class="variant-label__n">08</span>
+  <span class="variant-label__t">Cinematico full-bleed</span>
+  <span class="variant-label__d">Foto real de la fabrica con overlay navy + grain SVG (anti-stock). Tipografia encima minima. Patron C del research — requiere activo visual fuerte.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="v08">
+  <div class="v08__bg" aria-hidden="true"></div>
+  <div class="v08__inner">
+    <div class="t-container">
+      <p class="v08__meta">— Traverso International Foods</p>
+      <h2 class="v08__display">Calidad <em>chilena,</em><br>mercados globales.</h2>
+      <a href="mailto:e-commerce@traverso.cl" class="v08__mail">e-commerce@traverso.cl →</a>
+
+      <div class="v08__columns">
+        <div>
+          <p class="v08__col-t">— Navegación</p>
+          <div class="v08__col-list">
+            <a href="index.html">Inicio</a>
+            <a href="quienes-somos.html">Quiénes somos</a>
+            <a href="productos.html">Productos</a>
+            <a href="contacto.html">Contacto</a>
+          </div>
+        </div>
+        <div>
+          <p class="v08__col-t">— Productos</p>
+          <div class="v08__col-list">
+            <a href="productos.html">Vinagres a granel</a>
+            <a href="productos.html">Marca privada</a>
+            <a href="productos.html">Marca Traverso</a>
+          </div>
+        </div>
+        <div>
+          <p class="v08__col-t">— Exportación &amp; B2B</p>
+          <div class="v08__col-list">
+            <span>Industriales · Distribuidores</span>
+            <span>Importadores · Retail · HORECA</span>
+            <a href="tel:+56224370900">+56 2 24370900</a>
+            <a href="https://wa.me/56985150056" target="_blank" rel="noopener">WhatsApp · +56 9 8515 0056</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="v08__foot">
+        <span>© 2026 Traverso International Foods. Todos los derechos reservados. · Una empresa de Traverso S.A. · Chile</span>
+        <span>Facebook · Instagram · WhatsApp</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V09 · HYBRID MINIMALISTA ══════════════════ -->
+<div class="variant-label" id="v09">
+  <span class="variant-label__n">09</span>
+  <span class="variant-label__t">Hybrid minimalista · Instrument / Ueno</span>
+  <span class="variant-label__d">Manifesto grande a la izquierda + columnas compactas a la derecha. Voz "we make X", chips de targets, CTA central.</span>
+</div>
+<div class="variant-frame"><div class="variant-frame__inner">
+<footer class="v09">
+  <div class="t-container">
+    <div class="v09__top">
+      <div>
+        <p class="v09__eyebrow">— Traverso International Foods</p>
+        <h2 class="v09__manifest">Conectando calidad chilena con mercados globales desde hace más de <em>130 años.</em></h2>
+        <div class="v09__targets">
+          <span class="v09__target">Industriales</span>
+          <span class="v09__target">Distribuidores</span>
+          <span class="v09__target">Importadores</span>
+          <span class="v09__target">Retail</span>
+          <span class="v09__target">HORECA</span>
+        </div>
+      </div>
+      <div class="v09__right">
+        <div class="v09__col">
+          <p class="v09__col-t">Navegación</p>
+          <div class="v09__col-list">
+            <a href="index.html">Inicio</a>
+            <a href="quienes-somos.html">Quiénes somos</a>
+            <a href="productos.html">Productos</a>
+            <a href="contacto.html">Contacto</a>
+          </div>
+        </div>
+        <div class="v09__col">
+          <p class="v09__col-t">Productos</p>
+          <div class="v09__col-list">
+            <a href="productos.html">Vinagres a granel</a>
+            <a href="productos.html">Marca privada</a>
+            <a href="productos.html">Marca Traverso</a>
+          </div>
+        </div>
+        <div class="v09__col">
+          <p class="v09__col-t">Contacto</p>
+          <div class="v09__col-list">
+            <a href="mailto:e-commerce@traverso.cl">e-commerce@traverso.cl</a>
+            <a href="tel:+56224370900">+56 2 24370900</a>
+            <a href="https://wa.me/56985150056" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="v09__mid">
+      <p class="v09__mid-text">Soluciones para la industria alimentaria, distribuidores e importadores internacionales.</p>
+      <a href="contacto.html" class="v09__mid-cta">Contactar →</a>
+    </div>
+
+    <div class="v09__bottom">
+      <span>© 2026 Traverso International Foods. Todos los derechos reservados. · Una empresa de Traverso S.A. · Chile</span>
+      <span>
+        <a href="https://www.facebook.com/TraversoChileSA" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/traversochile" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/56985150056" target="_blank" rel="noopener">WhatsApp</a>
+      </span>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<!-- ══════════════════ V10 · RELOJ LOCAL ══════════════════ -->
+<div class="variant-label" id="v10">
+  <span class="variant-label__n">10</span>
+  <span class="variant-label__t">Reloj local · footer vivo</span>
+  <span class="variant-label__d">Ticker superior con hora de Santiago en vivo + indicador de disponibilidad. Patron footer.design 2026 — transmite "estamos aqui".</span>
+</div>
+<div class="variant-frame" style="margin-bottom:64px"><div class="variant-frame__inner">
+<footer class="v10">
+  <div class="t-container">
+    <div class="v10__ticker">
+      <div class="v10__ticker-item">
+        <span class="v10__ticker-dot" aria-hidden="true"></span>
+        <span>Santiago · <strong id="v10-clock">14:32</strong></span>
+      </div>
+      <div class="v10__ticker-item"><span>Lunes a Viernes · 9:00–18:00</span></div>
+      <div class="v10__ticker-item"><span>Respondemos en 1–2 días hábiles</span></div>
+    </div>
+
+    <div class="v10__grid">
+      <div>
+        <h3 class="v10__manifest">Conectando calidad chilena con mercados globales desde hace más de <em>130 años.</em></h3>
+        <div class="v10__mail-wrap">
+          <span>Email →</span>
+          <a href="mailto:e-commerce@traverso.cl" class="v10__mail">e-commerce@traverso.cl</a>
+        </div>
+      </div>
+      <div>
+        <p class="v10__col-t">Navegación</p>
+        <div class="v10__col-list">
+          <a href="index.html">Inicio</a>
+          <a href="quienes-somos.html">Quiénes somos</a>
+          <a href="productos.html">Productos</a>
+          <a href="contacto.html">Contacto</a>
+        </div>
+      </div>
+      <div>
+        <p class="v10__col-t">Productos</p>
+        <div class="v10__col-list">
+          <a href="productos.html">Vinagres a granel</a>
+          <a href="productos.html">Marca privada</a>
+          <a href="productos.html">Marca Traverso</a>
+        </div>
+      </div>
+      <div>
+        <p class="v10__col-t">Exportación &amp; B2B</p>
+        <div class="v10__col-list">
+          <span>Industriales · Distribuidores</span>
+          <span>Importadores · Retail · HORECA</span>
+          <a href="tel:+56224370900">+56 2 24370900</a>
+          <a href="https://wa.me/56985150056" target="_blank" rel="noopener">WhatsApp · +56 9 8515 0056</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="v10__bottom">
+      <span>© 2026 Traverso International Foods. Todos los derechos reservados. · Una empresa de Traverso S.A. · Chile</span>
+      <span>
+        <a href="https://www.facebook.com/TraversoChileSA" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/traversochile" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/56985150056" target="_blank" rel="noopener">WhatsApp</a>
+      </span>
+      <span>Av. Vespucio 1313 · La Cisterna, Santiago, Chile</span>
+    </div>
+  </div>
+</footer>
+</div></div>
+
+<script>
+// Reloj Santiago en vivo (v10)
+(function(){
+  const el = document.getElementById('v10-clock');
+  if(!el) return;
+  function tick(){
+    const now = new Date();
+    const fmt = new Intl.DateTimeFormat('es-CL',{timeZone:'America/Santiago',hour:'2-digit',minute:'2-digit',hour12:false}).format(now);
+    el.textContent = fmt;
+  }
+  tick();
+  setInterval(tick, 30000);
+})();
+</script>
+</body>
+</html>

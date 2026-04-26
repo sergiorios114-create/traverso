@@ -1,0 +1,26 @@
+[
+  {
+    "id": "red_1",
+    "orden": 1,
+    "plataforma": "facebook",
+    "label": "Facebook",
+    "url": "https://www.facebook.com/TraversoChileSA",
+    "icono": "facebook"
+  },
+  {
+    "id": "red_2",
+    "orden": 2,
+    "plataforma": "instagram",
+    "label": "Instagram",
+    "url": "https://www.instagram.com/traversochile",
+    "icono": "instagram"
+  },
+  {
+    "id": "red_3",
+    "orden": 3,
+    "plataforma": "whatsapp",
+    "label": "WhatsApp",
+    "url": "https://wa.me/56985150056",
+    "icono": "whatsapp"
+  }
+]

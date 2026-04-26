@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Traverso — Pruebas Módulo Productos (15 variantes B2B)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════ TOKENS TRAVERSO ═══════════════ */
+:root{
+  --primary:#0B1E6B;
+  --primary-dark:#081450;
+  --primary-deepest:#050E33;
+  --accent:#C5A55A;
+  --accent-saturated:#C9A227;
+  --neutral:#FBF9FA;
+  --neutral-alt:#F2F4F8;
+  --text:#19212F;
+  --text-muted:#4A5362;
+  --text-subtle:#6B7280;
+  --on-dark:#FFFFFF;
+  --border:#DDE2EC;
+  --border-light:#EEF0F5;
+  --ff-serif:"Libre Baskerville",Georgia,serif;
+  --ff-sans:"Source Sans 3",system-ui,sans-serif;
+  --ff-mono:"Courier New",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--ff-sans);background:#e9ecf3;color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+img{max-width:100%;display:block}
+em{font-style:italic}
+
+/* ═══════════════ SHELL ═══════════════ */
+.shell-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.shell-nav__inner{max-width:1400px;margin:0 auto;padding:10px 24px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.shell-nav__brand{font-family:var(--ff-serif);font-size:14px;font-weight:700;color:var(--primary-dark);margin-right:auto}
+.shell-nav__brand span{font-family:var(--ff-mono);font-size:10px;font-weight:400;color:var(--text-subtle);letter-spacing:.14em;text-transform:uppercase;margin-left:12px}
+.shell-nav__links{display:flex;gap:2px;flex-wrap:wrap}
+.shell-nav__link{font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);padding:5px 9px;border:1px solid transparent;border-radius:14px;transition:all .15s}
+.shell-nav__link:hover{background:var(--neutral-alt);color:var(--primary-dark);border-color:var(--border)}
+.variant-label{max-width:1400px;margin:80px auto 20px;padding:0 32px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.variant-label__n{font-family:var(--ff-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated);border:1px solid var(--accent-saturated);padding:4px 10px;border-radius:3px}
+.variant-label__t{font-family:var(--ff-serif);font-size:22px;font-weight:700;color:var(--primary-dark);letter-spacing:-.005em}
+.variant-label__d{font-family:var(--ff-sans);font-size:13px;color:var(--text-muted);margin-left:auto;max-width:460px;text-align:right}
+.t-container{max-width:1200px;margin:0 auto;padding:0 clamp(24px,5vw,48px)}
+.section-head{text-align:center;margin:0 auto clamp(2rem,4vw,3rem);max-width:640px}
+.section-head .eyebrow{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent-saturated);display:block;margin-bottom:.75rem}
+.section-head .title{font-family:var(--ff-serif);font-size:clamp(1.75rem,3vw,2.35rem);font-weight:700;color:var(--primary-dark);line-height:1.15;letter-spacing:-.015em;margin-bottom:.6rem}
+.section-head .title em{font-style:italic;font-weight:400;color:var(--accent-saturated)}
+.section-head .sub{font-size:.9rem;color:var(--text-muted);line-height:1.65}
+
+/* ═══════════════ V01 · SWISS GRID NUMERADO ═══════════════ */
+.v01{background:var(--neutral);padding:clamp(4rem,6vw,5rem) 0}
+.v01__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.25rem,2.5vw,2rem)}
+.v01__card{display:flex;flex-direction:column;gap:.6rem;padding-top:1rem;border-top:1px solid var(--primary-dark)}
+.v01__card-num{font-family:var(--ff-mono);font-size:.62rem;color:var(--accent-saturated);letter-spacing:.2em;text-transform:uppercase}
+.v01__card-img{aspect-ratio:4/3;object-fit:cover;width:100%;background:var(--neutral-alt);margin:.25rem 0 .6rem}
+.v01__card-tag{font-family:var(--ff-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted)}
+.v01__card-title{font-family:var(--ff-serif);font-size:1.25rem;font-weight:700;color:var(--primary-dark);line-height:1.2;letter-spacing:-.015em}
+.v01__card-desc{font-size:.82rem;color:var(--text-muted);line-height:1.6}
+.v01__card-foot{margin-top:auto;padding-top:.85rem;border-top:1px dashed var(--border);font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);display:flex;justify-content:space-between}
+.v01__card-foot a{color:var(--accent-saturated)}
+
+/* ═══════════════ V02 · DATASHEET TÉCNICO ═══════════════ */
+.v02{background:var(--neutral-alt);padding:clamp(4rem,6vw,5rem) 0}
+.v02__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.v02__card{background:#fff;border:1px solid var(--border);border-radius:2px;overflow:hidden;font-family:var(--ff-mono)}
+.v02__card-top{padding:1rem 1.25rem;background:var(--primary-dark);color:#fff;display:flex;justify-content:space-between;align-items:center;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase}
+.v02__card-top span:last-child{color:var(--accent)}
+.v02__card-img{aspect-ratio:16/9;object-fit:cover;width:100%}
+.v02__card-body{padding:1.25rem}
+.v02__card-title{font-family:var(--ff-serif);font-size:1.15rem;font-weight:700;color:var(--primary-dark);line-height:1.2;margin-bottom:.6rem;letter-spacing:-.01em}
+.v02__card-desc{font-family:var(--ff-sans);font-size:.8rem;color:var(--text-muted);line-height:1.6;margin-bottom:1rem}
+.v02__card-row{display:grid;grid-template-columns:80px 1fr;gap:.75rem;padding:.5rem 0;border-top:1px solid var(--border-light);font-size:.72rem;align-items:baseline}
+.v02__card-row strong{color:var(--text-subtle);font-weight:500;letter-spacing:.15em;text-transform:uppercase;font-size:.6rem}
+.v02__card-row span{font-family:var(--ff-sans);color:var(--text)}
+
+/* ═══════════════ V03 · CATÁLOGO EDITORIAL (sumario) ═══════════════ */
+.v03{background:var(--neutral);padding:clamp(4rem,6vw,5rem) 0}
+.v03__head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:.75rem;margin-bottom:0;border-bottom:2px solid var(--primary-dark);flex-wrap:wrap;gap:1rem}
+.v03__head h2{font-family:var(--ff-serif);font-size:clamp(1.5rem,2.2vw,1.9rem);font-weight:700;color:var(--primary-dark);letter-spacing:-.015em}
+.v03__head h2 em{font-style:italic;font-weight:400}
+.v03__head .meta{font-family:var(--ff-mono);font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-saturated)}
+.v03__row{display:grid;grid-template-columns:60px 160px 1fr 1.2fr 80px;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--border);align-items:baseline;transition:background .2s,padding-left .2s}
+.v03__row:hover{background:rgba(201,162,39,.04);padding-left:.5rem}
+.v03__row-n{font-family:var(--ff-mono);font-size:.7rem;color:var(--text-subtle)}
+.v03__row-cat{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted)}
+.v03__row-title{font-family:var(--ff-serif);font-size:1.1rem;color:var(--primary-dark);line-height:1.3;letter-spacing:-.01em}
+.v03__row-title em{font-style:italic}
+.v03__row-chips{display:flex;flex-wrap:wrap;gap:.25rem}
+.v03__row-chip{font-family:var(--ff-mono);font-size:.58rem;padding:.2rem .6rem;border:1px solid var(--border);border-radius:20px;color:var(--text-muted);white-space:nowrap}
+.v03__row-arr{font-family:var(--ff-mono);font-size:1rem;color:var(--accent-saturated);text-align:right;transition:transform .2s}
+.v03__row:hover .v03__row-arr{transform:translateX(5px)}
+
+/* ═══════════════ V04 · SPLIT HORIZONTAL POR PRODUCTO ═══════════════ */
+.v04{background:var(--neutral)}
+.v04__item{display:grid;grid-template-columns:1fr 1fr;min-height:320px;align-items:stretch;border-bottom:1px solid var(--border)}
+.v04__item:last-child{border-bottom:none}
+.v04__item:nth-child(even){direction:rtl}
+.v04__item:nth-child(even) .v04__item-body{direction:ltr}
+.v04__item-img{background:var(--neutral-alt);position:relative;overflow:hidden}
+.v04__item-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.v04__item-body{padding:clamp(2.5rem,5vw,4rem) clamp(2rem,4vw,3.5rem);display:flex;flex-direction:column;justify-content:center;gap:1rem}
+.v04__item-num{font-family:var(--ff-serif);font-size:clamp(3rem,6vw,5rem);font-weight:400;font-style:italic;color:var(--accent-saturated);line-height:.8;letter-spacing:-.03em}
+.v04__item-tag{font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-muted);margin-top:.25rem}
+.v04__item-title{font-family:var(--ff-serif);font-size:clamp(1.5rem,2.8vw,2.15rem);font-weight:700;color:var(--primary-dark);line-height:1.15;letter-spacing:-.015em}
+.v04__item-desc{font-size:.9rem;color:var(--text-muted);line-height:1.65;max-width:480px}
+.v04__item-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+.v04__item-chip{font-family:var(--ff-sans);font-size:.7rem;font-weight:500;padding:.25rem .75rem;border:1px solid var(--border);border-radius:20px;color:var(--text)}
+
+/* ═══════════════ V05 · BENTO ASIMÉTRICO ═══════════════ */
+.v05{background:var(--primary-dark);color:#fff;padding:clamp(4rem,6vw,5rem) 0}
+.v05 .section-head .eyebrow{color:var(--accent)}
+.v05 .section-head .title{color:#fff}
+.v05 .section-head .title em{color:var(--accent)}
+.v05 .section-head .sub{color:rgba(255,255,255,.7)}
+.v05__grid{display:grid;grid-template-columns:1.5fr 1fr;grid-template-rows:1fr 1fr;gap:1rem}
+.v05__cell{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);padding:1.5rem;display:flex;flex-direction:column;gap:.6rem;transition:border-color .2s}
+.v05__cell:hover{border-color:var(--accent)}
+.v05__cell-hero{grid-column:1;grid-row:1/-1;padding:2rem;position:relative;overflow:hidden}
+.v05__cell-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;z-index:0}
+.v05__cell-hero>*{position:relative;z-index:1}
+.v05__cell-num{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.v05__cell-tag{font-family:var(--ff-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.v05__cell-title{font-family:var(--ff-serif);font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.01em}
+.v05__cell-hero .v05__cell-title{font-size:clamp(1.6rem,3vw,2.2rem)}
+.v05__cell:not(.v05__cell-hero) .v05__cell-title{font-size:1.15rem}
+.v05__cell-desc{font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.55}
+.v05__cell-hero .v05__cell-desc{font-size:.9rem;max-width:420px;margin-top:.5rem}
+
+/* ═══════════════ V06 · MARQUEE + 3 CARDS ═══════════════ */
+.v06{background:var(--neutral)}
+.v06__marquee{background:var(--primary-dark);color:#fff;overflow:hidden;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.v06__marquee-track{display:inline-flex;gap:2.5rem;white-space:nowrap;font-family:var(--ff-serif);font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;animation:v06-scroll 38s linear infinite;padding-right:2.5rem}
+.v06__marquee-track em{font-style:italic;color:var(--accent);font-weight:400}
+.v06__marquee-track .d{color:var(--accent-saturated);margin:0 .4rem}
+@keyframes v06-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.v06__content{padding:clamp(3rem,5vw,4rem) 0}
+.v06__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.v06__card{background:#fff;border:1px solid var(--border-light);overflow:hidden}
+.v06__card-img{aspect-ratio:4/3;width:100%;object-fit:cover}
+.v06__card-body{padding:1.5rem}
+.v06__card-tag{font-family:var(--ff-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-saturated);margin-bottom:.5rem}
+.v06__card-title{font-family:var(--ff-serif);font-size:1.15rem;font-weight:700;color:var(--primary-dark);line-height:1.25;margin-bottom:.5rem}
+.v06__card-desc{font-size:.82rem;color:var(--text-muted);line-height:1.6}
+
+/* ═══════════════ V07 · ACCORDION EDITORIAL ═══════════════ */
+.v07{background:var(--neutral);padding:clamp(4rem,6vw,5rem) 0}
+.v07__item{border-bottom:1px solid var(--border)}
+.v07__item:first-child{border-top:1px solid var(--border)}
+.v07__item summary{display:grid;grid-template-columns:60px 180px 1fr 40px;gap:1rem;padding:1.5rem 0;cursor:pointer;align-items:baseline;list-style:none;transition:padding-left .2s}
+.v07__item summary::-webkit-details-marker{display:none}
+.v07__item[open] summary{padding-left:.5rem}
+.v07__item[open]{background:rgba(201,162,39,.04)}
+.v07__item-n{font-family:var(--ff-mono);font-size:.7rem;color:var(--text-subtle);letter-spacing:.1em}
+.v07__item-cat{font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-saturated)}
+.v07__item-title{font-family:var(--ff-serif);font-size:1.3rem;font-weight:700;color:var(--primary-dark);line-height:1.2;letter-spacing:-.01em}
+.v07__item-title em{font-style:italic}
+.v07__item-toggle{font-family:var(--ff-mono);font-size:1.2rem;color:var(--accent-saturated);text-align:right;transition:transform .3s}
+.v07__item[open] .v07__item-toggle{transform:rotate(45deg)}
+.v07__item-detail{display:grid;grid-template-columns:1.5fr 1fr;gap:2rem;padding:0 1rem 2rem 260px;align-items:start}
+.v07__item-desc{font-size:.95rem;color:var(--text-muted);line-height:1.75}
+.v07__item-img{aspect-ratio:4/3;width:100%;object-fit:cover}
+.v07__item-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1rem}
+.v07__item-chip{font-family:var(--ff-mono);font-size:.6rem;padding:.25rem .7rem;border:1px solid var(--border);border-radius:20px;color:var(--text-muted);letter-spacing:.05em}
+
+/* ═══════════════ V08 · HOVER REVEAL WIDE (Basic Agency) ═══════════════ */
+.v08{background:var(--neutral);padding:clamp(4rem,6vw,5rem) 0;position:relative}
+.v08__list{position:relative;z-index:1}
+.v08__item{display:grid;grid-template-columns:60px 200px 1fr auto;gap:1.5rem;padding:1.75rem 0;border-bottom:1px solid var(--border);align-items:baseline;cursor:pointer;position:relative;transition:padding-left .3s}
+.v08__item:first-child{border-top:1px solid var(--border)}
+.v08__item:hover{padding-left:1rem}
+.v08__item-n{font-family:var(--ff-mono);font-size:.7rem;color:var(--text-subtle);letter-spacing:.1em}
+.v08__item-cat{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-saturated)}
+.v08__item-title{font-family:var(--ff-serif);font-size:clamp(1.5rem,2.5vw,2rem);font-weight:400;color:var(--primary-dark);line-height:1.1;letter-spacing:-.02em;transition:color .3s}
+.v08__item-title em{font-style:italic}
+.v08__item:hover .v08__item-title{color:var(--accent-saturated)}
+.v08__item-arr{font-family:var(--ff-mono);font-size:1.1rem;color:var(--text-subtle);transition:transform .3s,color .3s}
+.v08__item:hover .v08__item-arr{transform:translateX(8px);color:var(--accent-saturated)}
+.v08__thumb{position:fixed;top:50%;left:75%;width:240px;height:180px;transform:translate(-50%,-50%) rotate(-3deg);pointer-events:none;opacity:0;transition:opacity .3s;z-index:10;box-shadow:0 12px 40px rgba(11,30,107,.2)}
+.v08__item:hover .v08__thumb{opacity:1}
+.v08__thumb img{width:100%;height:100%;object-fit:cover}
+
+/* ═══════════════ V09 · STACK MAGAZINE ═══════════════ */
+.v09{background:var(--neutral);padding:clamp(4rem,6vw,5rem) 0}
+.v09__article{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(2rem,4vw,4rem);padding:clamp(3rem,5vw,4rem) 0;border-top:1px solid var(--border);align-items:center}
+.v09__article:first-child{border-top:none;padding-top:0}
+.v09__article:nth-child(even) .v09__art-img{order:2}
+.v09__art-img{aspect-ratio:4/5;overflow:hidden;background:var(--neutral-alt)}
+.v09__art-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.v09__art-img:hover img{transform:scale(1.03)}
+.v09__art-body{display:flex;flex-direction:column;gap:1rem}
+.v09__art-meta{display:flex;gap:1rem;font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-subtle);padding-bottom:.5rem;border-bottom:1px solid var(--border-light)}
+.v09__art-meta strong{color:var(--accent-saturated);font-weight:500}
+.v09__art-title{font-family:var(--ff-serif);font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:700;color:var(--primary-dark);line-height:1.1;letter-spacing:-.02em}
+.v09__art-title em{font-style:italic;font-weight:400;color:var(--accent-saturated)}
+.v09__art-lead{font-family:var(--ff-serif);font-size:1rem;color:var(--text);line-height:1.55;font-style:italic}
+.v09__art-desc{font-size:.88rem;color:var(--text-muted);line-height:1.7}
+.v09__art-specs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.5rem;padding-top:1rem;border-top:1px solid var(--border-light)}
+.v09__art-spec-t{font-family:var(--ff-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:.35rem}
+.v09__art-spec-v{font-size:.85rem;color:var(--text);line-height:1.5}
+
+/* ═══════════════ V10 · INDEX + FEATURED HERO ═══════════════ */
+.v10{background:var(--neutral);padding:clamp(4rem,6vw,5rem) 0}
+.v10__hero{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,3rem);margin-bottom:clamp(2.5rem,4vw,3.5rem);padding-bottom:clamp(2.5rem,4vw,3.5rem);border-bottom:1px solid var(--border)}
+.v10__hero-img{aspect-ratio:4/3;background:var(--neutral-alt)}
+.v10__hero-img img{width:100%;height:100%;object-fit:cover}
+.v10__hero-body{display:flex;flex-direction:column;gap:1rem;justify-content:center}
+.v10__hero-featured{font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent-saturated)}
+.v10__hero-title{font-family:var(--ff-serif);font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:700;color:var(--primary-dark);line-height:1.15;letter-spacing:-.015em}
+.v10__hero-desc{font-size:.92rem;color:var(--text-muted);line-height:1.7}
+.v10__hero-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+.v10__hero-chip{font-family:var(--ff-mono);font-size:.6rem;padding:.25rem .7rem;background:var(--primary-dark);color:#fff;letter-spacing:.1em;border-radius:2px}
+.v10__list{display:flex;flex-direction:column}
+.v10__list-head{font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.75rem;padding-bottom:.75rem;border-bottom:1px solid var(--primary-dark)}
+.v10__list-row{display:grid;grid-template-columns:40px 150px 1fr auto;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border-light);align-items:baseline}
+.v10__list-n{font-family:var(--ff-mono);font-size:.65rem;color:var(--text-subtle);letter-spacing:.1em}
+.v10__list-cat{font-family:var(--ff-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted)}
+.v10__list-title{font-family:var(--ff-serif);font-size:.95rem;color:var(--primary-dark)}
+.v10__list-arr{font-family:var(--ff-mono);color:var(--accent-saturated)}
+
+/* ═══════════════ V11 · SWISS MINIMAL (no images) ═══════════════ */
+.v11{background:var(--neutral);padding:clamp(4rem,6vw,5rem) 0}
+.v11__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(2rem,3vw,3rem);margin-top:clamp(2rem,3vw,3rem);padding-top:clamp(2rem,3vw,3rem);border-top:2px solid var(--primary-dark)}
+.v11__col{display:flex;flex-direction:column;gap:1rem}
+.v11__col-n{font-family:var(--ff-serif);font-size:clamp(3.5rem,7vw,5rem);font-weight:400;font-style:italic;color:var(--accent-saturated);line-height:.85;letter-spacing:-.03em}
+.v11__col-tag{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted)}
+.v11__col-title{font-family:var(--ff-serif);font-size:1.35rem;font-weight:700;color:var(--primary-dark);line-height:1.2;letter-spacing:-.015em;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+.v11__col-title em{font-style:italic;font-weight:400}
+.v11__col-desc{font-size:.85rem;color:var(--text-muted);line-height:1.65}
+.v11__col-section{margin-top:.5rem}
+.v11__col-section-t{font-family:var(--ff-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:.35rem}
+.v11__col-list{font-family:var(--ff-serif);font-style:italic;font-size:.88rem;color:var(--primary-dark);line-height:1.5}
+
+/* ═══════════════ V12 · DARK CARDS CON ACENTO GOLD ═══════════════ */
+.v12{background:var(--primary-deepest);color:#fff;padding:clamp(4rem,6vw,5rem) 0}
+.v12 .section-head .eyebrow{color:var(--accent)}
+.v12 .section-head .title{color:#fff}
+.v12 .section-head .title em{color:var(--accent)}
+.v12 .section-head .sub{color:rgba(255,255,255,.7)}
+.v12__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.v12__card{background:rgba(255,255,255,.02);border-left:3px solid var(--accent);padding:1.75rem 1.5rem;transition:background .2s,border-color .2s}
+.v12__card:hover{background:rgba(197,165,90,.06);border-left-color:var(--accent-saturated)}
+.v12__card-n{font-family:var(--ff-serif);font-size:2.25rem;font-weight:400;font-style:italic;color:var(--accent);line-height:1;margin-bottom:.75rem;letter-spacing:-.02em}
+.v12__card-tag{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.5rem}
+.v12__card-title{font-family:var(--ff-serif);font-size:1.2rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:.75rem;letter-spacing:-.01em}
+.v12__card-title em{font-style:italic;font-weight:400;color:var(--accent)}
+.v12__card-desc{font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.65;margin-bottom:1.25rem}
+.v12__card-foot{padding-top:.85rem;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;gap:.3rem}
+.v12__card-chip{font-family:var(--ff-mono);font-size:.58rem;letter-spacing:.1em;padding:.2rem .55rem;background:rgba(255,255,255,.08);color:rgba(255,255,255,.75);border-radius:2px}
+
+/* ═══════════════ V13 · CINEMA FULL-BLEED ═══════════════ */
+.v13{background:var(--neutral)}
+.v13__scene{position:relative;min-height:380px;overflow:hidden;color:#fff;display:flex;align-items:flex-end;padding:clamp(2.5rem,5vw,4rem) 0}
+.v13__scene:nth-child(2n) .v13__body{margin-left:auto}
+.v13__scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.v13__scene::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(5,14,51,.85),rgba(8,20,80,.45));z-index:1}
+.v13__scene::after{content:"";position:absolute;inset:0;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"/></filter><rect width="200" height="200" filter="url(%23n)" opacity="0.18"/></svg>');mix-blend-mode:overlay;z-index:2}
+.v13__body{position:relative;z-index:3;max-width:540px;padding:0 clamp(1.5rem,5vw,3rem);display:flex;flex-direction:column;gap:.85rem}
+.v13__n{font-family:var(--ff-serif);font-size:clamp(3rem,6vw,5rem);font-weight:400;font-style:italic;color:var(--accent);line-height:.8;letter-spacing:-.03em}
+.v13__tag{font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.v13__title{font-family:var(--ff-serif);font-size:clamp(1.5rem,2.8vw,2.2rem);font-weight:700;line-height:1.15;letter-spacing:-.015em}
+.v13__desc{font-size:.88rem;color:rgba(255,255,255,.85);line-height:1.6;max-width:440px}
+
+/* ═══════════════ V14 · TABLE + VISUAL ═══════════════ */
+.v14{background:var(--neutral-alt);padding:clamp(4rem,6vw,5rem) 0}
+.v14__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,3rem);align-items:start}
+.v14__table{background:#fff;border:1px solid var(--border)}
+.v14__table-head{display:grid;grid-template-columns:40px 1fr 80px;gap:1rem;padding:.85rem 1.25rem;background:var(--primary-dark);color:#fff;font-family:var(--ff-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase}
+.v14__table-row{display:grid;grid-template-columns:40px 1fr 80px;gap:1rem;padding:1.2rem 1.25rem;border-bottom:1px solid var(--border-light);align-items:baseline;cursor:pointer;transition:background .2s}
+.v14__table-row:last-child{border-bottom:none}
+.v14__table-row.is-active{background:rgba(201,162,39,.06)}
+.v14__table-row:hover{background:rgba(201,162,39,.03)}
+.v14__table-n{font-family:var(--ff-mono);font-size:.7rem;color:var(--text-subtle)}
+.v14__table-title{font-family:var(--ff-serif);font-size:1rem;color:var(--primary-dark);line-height:1.3;letter-spacing:-.005em}
+.v14__table-title em{font-style:italic}
+.v14__table-title small{display:block;font-family:var(--ff-mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted);margin-top:.2rem}
+.v14__table-count{font-family:var(--ff-mono);font-size:.65rem;color:var(--accent-saturated);text-align:right;letter-spacing:.1em}
+.v14__visual{position:sticky;top:92px;aspect-ratio:4/5;overflow:hidden;background:var(--neutral-alt)}
+.v14__visual img{width:100%;height:100%;object-fit:cover}
+.v14__visual-caption{position:absolute;bottom:0;left:0;right:0;padding:1rem 1.25rem;background:linear-gradient(to top,rgba(5,14,51,.9),transparent);color:#fff;font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase}
+
+/* ═══════════════ V15 · DOSSIER CORPORATIVO ═══════════════ */
+.v15{background:var(--neutral);padding:clamp(4rem,6vw,5rem) 0;font-family:var(--ff-serif)}
+.v15__cover{text-align:center;padding-bottom:clamp(2rem,4vw,3rem);border-bottom:2px solid var(--primary-dark);margin-bottom:clamp(2.5rem,4vw,3.5rem)}
+.v15__cover-eyebrow{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent-saturated);display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.5rem}
+.v15__cover-eyebrow::before,.v15__cover-eyebrow::after{content:"";flex:0 0 40px;height:1px;background:rgba(201,162,39,.4)}
+.v15__cover-title{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;color:var(--primary-dark);line-height:1;letter-spacing:-.025em;margin-bottom:.75rem}
+.v15__cover-title em{font-style:italic;font-weight:400;color:var(--accent-saturated)}
+.v15__cover-meta{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted)}
+.v15__entry{display:grid;grid-template-columns:80px 1fr;gap:2rem;padding:2rem 0;border-bottom:1px dashed var(--border);align-items:start}
+.v15__entry:last-child{border-bottom:none}
+.v15__entry-folio{font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-subtle);padding-top:.35rem;border-top:1px solid var(--primary-dark)}
+.v15__entry-folio sup{color:var(--accent-saturated)}
+.v15__entry-body{display:grid;grid-template-columns:1.3fr 1fr;gap:2rem;align-items:start}
+.v15__entry-head{display:flex;flex-direction:column;gap:.75rem}
+.v15__entry-cat{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-saturated)}
+.v15__entry-title{font-size:clamp(1.5rem,2.8vw,2.1rem);font-weight:700;color:var(--primary-dark);line-height:1.1;letter-spacing:-.02em}
+.v15__entry-title em{font-style:italic;font-weight:400}
+.v15__entry-lead{font-style:italic;font-size:1rem;color:var(--text);line-height:1.55;font-weight:400}
+.v15__entry-specs{display:flex;flex-direction:column;gap:.8rem;font-family:var(--ff-sans)}
+.v15__entry-spec{padding-left:.75rem;border-left:1px solid var(--accent-saturated)}
+.v15__entry-spec strong{display:block;font-family:var(--ff-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:.2rem;font-weight:500}
+.v15__entry-spec span{font-family:var(--ff-sans);font-size:.85rem;color:var(--text);line-height:1.5}
+
+/* Responsive */
+@media (max-width:900px){
+  .v01__grid,.v02__grid,.v05__grid,.v06__grid,.v10__hero,.v11__grid,.v12__grid,.v14__grid{grid-template-columns:1fr 1fr}
+  .v04__item,.v09__article{grid-template-columns:1fr}
+  .v09__article:nth-child(even) .v09__art-img{order:0}
+  .v05__cell-hero{grid-column:1/-1;grid-row:auto}
+  .v03__row{grid-template-columns:40px 1fr auto;gap:.75rem}
+  .v03__row-cat,.v03__row-chips{display:none}
+  .v07__item summary{grid-template-columns:40px 120px 1fr 30px}
+  .v07__item-detail{grid-template-columns:1fr;padding-left:1rem}
+  .v08__thumb{display:none}
+  .v14__visual{position:static}
+  .v15__entry{grid-template-columns:1fr}
+  .v15__entry-body{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .v01__grid,.v02__grid,.v05__grid,.v06__grid,.v10__hero,.v11__grid,.v12__grid,.v14__grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="shell-nav">
+  <div class="shell-nav__inner">
+    <div class="shell-nav__brand">Traverso <span>Pruebas Productos · 15 variantes B2B</span></div>
+    <div class="shell-nav__links">
+      <a href="#v01" class="shell-nav__link">01 Swiss</a>
+      <a href="#v02" class="shell-nav__link">02 Datasheet</a>
+      <a href="#v03" class="shell-nav__link">03 Catálogo</a>
+      <a href="#v04" class="shell-nav__link">04 Split</a>
+      <a href="#v05" class="shell-nav__link">05 Bento</a>
+      <a href="#v06" class="shell-nav__link">06 Marquee</a>
+      <a href="#v07" class="shell-nav__link">07 Accordion</a>
+      <a href="#v08" class="shell-nav__link">08 Hover wide</a>
+      <a href="#v09" class="shell-nav__link">09 Magazine</a>
+      <a href="#v10" class="shell-nav__link">10 Index</a>
+      <a href="#v11" class="shell-nav__link">11 Minimal</a>
+      <a href="#v12" class="shell-nav__link">12 Dark</a>
+      <a href="#v13" class="shell-nav__link">13 Cinema</a>
+      <a href="#v14" class="shell-nav__link">14 Table</a>
+      <a href="#v15" class="shell-nav__link">15 Dossier</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═════════════ V01 · SWISS GRID NUMERADO ═════════════ -->
+<div class="variant-label" id="v01">
+  <span class="variant-label__n">01</span>
+  <span class="variant-label__t">Swiss grid numerado</span>
+  <span class="variant-label__d">Grid 3-col con § 01-03 + rules hairline. Editorial minimal tier premium (Koto / Work&Co).</span>
+</div>
+<section class="v01">
+  <div class="t-container">
+    <div class="section-head">
+      <span class="eyebrow">§ 01-03 Portafolio</span>
+      <h2 class="title">Líneas de productos para <em>exportación</em></h2>
+      <p class="sub">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+    </div>
+    <div class="v01__grid">
+      <article class="v01__card">
+        <span class="v01__card-num">§ 01 — Abastecimiento industrial</span>
+        <img class="v01__card-img" src="../assets/producto-1.webp" alt="Vinagres a granel">
+        <span class="v01__card-tag">Abastecimiento industrial</span>
+        <h3 class="v01__card-title">Vinagres a granel para alimentos</h3>
+        <p class="v01__card-desc">Vinagres de Alcohol, Manzana, Vino y de Mosto de Vino, producidos bajo estándares internacionales.</p>
+        <div class="v01__card-foot"><span>4 variedades</span><a href="#">ver ficha →</a></div>
+      </article>
+      <article class="v01__card">
+        <span class="v01__card-num">§ 02 — Marca privada</span>
+        <img class="v01__card-img" src="../assets/producto-2.webp" alt="Marca privada">
+        <span class="v01__card-tag">Marca privada</span>
+        <h3 class="v01__card-title">Desarrollo de productos <em>Private label</em></h3>
+        <p class="v01__card-desc">Fabricamos productos envasados bajo marca privada adaptándonos a especificaciones técnicas y formatos de cada cliente.</p>
+        <div class="v01__card-foot"><span>Custom specs</span><a href="#">ver ficha →</a></div>
+      </article>
+      <article class="v01__card">
+        <span class="v01__card-num">§ 03 — Marca Traverso</span>
+        <img class="v01__card-img" src="../assets/producto-3.webp" alt="Marca Traverso">
+        <span class="v01__card-tag">Marca Traverso</span>
+        <h3 class="v01__card-title">Productos marca Traverso</h3>
+        <p class="v01__card-desc">Línea propia Traverso cuya comercialización depende de condiciones regulatorias y oportunidades de mercado.</p>
+        <div class="v01__card-foot"><span>Línea propia</span><a href="#">ver ficha →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ V02 · DATASHEET TÉCNICO ═════════════ -->
+<div class="variant-label" id="v02">
+  <span class="variant-label__n">02</span>
+  <span class="variant-label__t">Datasheet técnico</span>
+  <span class="variant-label__d">Cards estilo ficha técnica industrial. Header navy + specs en filas alineadas. Muy B2B purista.</span>
+</div>
+<section class="v02">
+  <div class="t-container">
+    <div class="section-head">
+      <span class="eyebrow">— Product sheets · 2026</span>
+      <h2 class="title">Líneas de productos para <em>exportación</em></h2>
+    </div>
+    <div class="v02__grid">
+      <div class="v02__card">
+        <div class="v02__card-top"><span>Prod · 01</span><span>Abastecim.</span></div>
+        <img class="v02__card-img" src="../assets/producto-1.webp" alt="">
+        <div class="v02__card-body">
+          <h3 class="v02__card-title">Vinagres a granel para alimentos</h3>
+          <p class="v02__card-desc">Vinagres de Alcohol, Manzana, Vino y de Mosto de Vino, producidos bajo estándares internacionales.</p>
+          <div class="v02__card-row"><strong>Variedades</strong><span>Alcohol (kosher), Manzana, Vino, Mosto</span></div>
+          <div class="v02__card-row"><strong>Aplicación</strong><span>Producto final · preservante · ingrediente</span></div>
+          <div class="v02__card-row"><strong>Formato</strong><span>Granel · envasado en destino</span></div>
+        </div>
+      </div>
+      <div class="v02__card">
+        <div class="v02__card-top"><span>Prod · 02</span><span>Marca privada</span></div>
+        <img class="v02__card-img" src="../assets/producto-2.webp" alt="">
+        <div class="v02__card-body">
+          <h3 class="v02__card-title">Desarrollo Private label</h3>
+          <p class="v02__card-desc">Fabricación bajo marca privada adaptando especificaciones técnicas, formatos y requerimientos comerciales.</p>
+          <div class="v02__card-row"><strong>Canales</strong><span>Distribuidores, retail, food service</span></div>
+          <div class="v02__card-row"><strong>Especs</strong><span>A medida · diseño personalizado</span></div>
+          <div class="v02__card-row"><strong>Etiquetado</strong><span>Propio del cliente</span></div>
+        </div>
+      </div>
+      <div class="v02__card">
+        <div class="v02__card-top"><span>Prod · 03</span><span>Marca Traverso</span></div>
+        <img class="v02__card-img" src="../assets/producto-3.webp" alt="">
+        <div class="v02__card-body">
+          <h3 class="v02__card-title">Productos marca Traverso</h3>
+          <p class="v02__card-desc">Línea propia Traverso cuya comercialización internacional depende de condiciones regulatorias de mercado.</p>
+          <div class="v02__card-row"><strong>Tipo</strong><span>Línea propia · producto terminado</span></div>
+          <div class="v02__card-row"><strong>Formato</strong><span>Envasado · según mercado</span></div>
+          <div class="v02__card-row"><strong>Estado</strong><span>Sujeto a regulación</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ V03 · CATÁLOGO EDITORIAL SUMARIO ═════════════ -->
+<div class="variant-label" id="v03">
+  <span class="variant-label__n">03</span>
+  <span class="variant-label__t">Catálogo editorial · sumario</span>
+  <span class="variant-label__d">Tabla-índice estilo libro editorial. Filas escaneables con cat / título / chips / flecha. Patrón Pentagram.</span>
+</div>
+<section class="v03">
+  <div class="t-container">
+    <div class="v03__head">
+      <h2>Líneas de productos <em>para exportación</em></h2>
+      <span class="meta">— § Sumario · 03 líneas</span>
+    </div>
+    <a href="#" class="v03__row">
+      <span class="v03__row-n">01 —</span>
+      <span class="v03__row-cat">Abastecim. industrial</span>
+      <span class="v03__row-title">Vinagres a granel <em>para alimentos</em></span>
+      <span class="v03__row-chips"><span class="v03__row-chip">Alcohol kosher</span><span class="v03__row-chip">Manzana</span><span class="v03__row-chip">Vino</span><span class="v03__row-chip">Mosto</span></span>
+      <span class="v03__row-arr">→</span>
+    </a>
+    <a href="#" class="v03__row">
+      <span class="v03__row-n">02 —</span>
+      <span class="v03__row-cat">Marca privada</span>
+      <span class="v03__row-title">Desarrollo de productos · <em>Private label</em></span>
+      <span class="v03__row-chips"><span class="v03__row-chip">Distribuidores</span><span class="v03__row-chip">Retail</span><span class="v03__row-chip">Food service</span></span>
+      <span class="v03__row-arr">→</span>
+    </a>
+    <a href="#" class="v03__row">
+      <span class="v03__row-n">03 —</span>
+      <span class="v03__row-cat">Marca Traverso</span>
+      <span class="v03__row-title">Productos <em>marca Traverso</em></span>
+      <span class="v03__row-chips"><span class="v03__row-chip">Línea propia</span><span class="v03__row-chip">Producto terminado</span></span>
+      <span class="v03__row-arr">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ═════════════ V04 · SPLIT HORIZONTAL ═════════════ -->
+<div class="variant-label" id="v04">
+  <span class="variant-label__n">04</span>
+  <span class="variant-label__t">Split horizontal · alternado</span>
+  <span class="variant-label__d">3 filas full-width, cada producto ocupa su propio split imagen/texto alternando lado. Editorial magazine.</span>
+</div>
+<section class="v04">
+  <div class="v04__item">
+    <div class="v04__item-img"><img src="../assets/producto-1.webp" alt=""></div>
+    <div class="v04__item-body">
+      <div class="v04__item-num">01</div>
+      <span class="v04__item-tag">Abastecimiento industrial</span>
+      <h3 class="v04__item-title">Vinagres a granel para alimentos</h3>
+      <p class="v04__item-desc">Vinagres de Alcohol, Manzana, Vino y de Mosto de Vino, producidos bajo estándares internacionales. Abastecimiento consistente para uso como producto final, preservante o ingrediente industrial.</p>
+      <div class="v04__item-chips"><span class="v04__item-chip">Alcohol (kosher)</span><span class="v04__item-chip">Manzana</span><span class="v04__item-chip">Vino</span><span class="v04__item-chip">Mosto de Vino</span></div>
+    </div>
+  </div>
+  <div class="v04__item">
+    <div class="v04__item-img"><img src="../assets/producto-2.webp" alt=""></div>
+    <div class="v04__item-body">
+      <div class="v04__item-num">02</div>
+      <span class="v04__item-tag">Marca privada</span>
+      <h3 class="v04__item-title">Desarrollo de productos <em>Private label</em></h3>
+      <p class="v04__item-desc">Fabricamos productos envasados bajo marca privada, adaptándonos a especificaciones técnicas, formatos y requerimientos comerciales de cada cliente. Orientado a distribuidores, retail y food service.</p>
+      <div class="v04__item-chips"><span class="v04__item-chip">Distribuidores internacionales</span><span class="v04__item-chip">Retail</span><span class="v04__item-chip">Food service</span></div>
+    </div>
+  </div>
+  <div class="v04__item">
+    <div class="v04__item-img"><img src="../assets/producto-3.webp" alt=""></div>
+    <div class="v04__item-body">
+      <div class="v04__item-num">03</div>
+      <span class="v04__item-tag">Marca Traverso</span>
+      <h3 class="v04__item-title">Productos marca Traverso</h3>
+      <p class="v04__item-desc">Contamos con una línea de productos bajo marca Traverso, cuya comercialización internacional dependerá de las condiciones regulatorias y oportunidades específicas de cada mercado.</p>
+      <div class="v04__item-chips"><span class="v04__item-chip">Línea propia</span><span class="v04__item-chip">Producto terminado</span><span class="v04__item-chip">Según mercado</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ V05 · BENTO ASIMÉTRICO ═════════════ -->
+<div class="variant-label" id="v05">
+  <span class="variant-label__n">05</span>
+  <span class="variant-label__t">Bento asimétrico · dark</span>
+  <span class="variant-label__d">Celda hero grande + 2 menores. Navy profundo con imagen blend. Research: OK en capabilities, no en home.</span>
+</div>
+<section class="v05">
+  <div class="t-container">
+    <div class="section-head">
+      <span class="eyebrow">— Portafolio</span>
+      <h2 class="title">Líneas de <em>exportación</em></h2>
+    </div>
+    <div class="v05__grid">
+      <div class="v05__cell v05__cell-hero">
+        <img src="../assets/producto-1.webp" alt="">
+        <div class="v05__cell-num">§ 01 / hero</div>
+        <h3 class="v05__cell-title">Vinagres a granel para alimentos</h3>
+        <span class="v05__cell-tag">Abastecimiento industrial · 4 variedades</span>
+        <p class="v05__cell-desc">Alcohol (kosher), Manzana, Vino y Mosto de Vino. Producidos bajo estándares internacionales, abastecimiento consistente para uso como producto final, preservante o ingrediente.</p>
+      </div>
+      <div class="v05__cell">
+        <div class="v05__cell-num">§ 02</div>
+        <span class="v05__cell-tag">Marca privada</span>
+        <h3 class="v05__cell-title">Private label</h3>
+        <p class="v05__cell-desc">Fabricación a medida para distribuidores, retail y food service internacional.</p>
+      </div>
+      <div class="v05__cell">
+        <div class="v05__cell-num">§ 03</div>
+        <span class="v05__cell-tag">Marca Traverso</span>
+        <h3 class="v05__cell-title">Línea propia</h3>
+        <p class="v05__cell-desc">Productos marca Traverso según condiciones regulatorias de cada mercado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ V06 · MARQUEE + 3 CARDS ═════════════ -->
+<div class="variant-label" id="v06">
+  <span class="variant-label__n">06</span>
+  <span class="variant-label__t">Marquee + 3 cards</span>
+  <span class="variant-label__d">Franja tipográfica con variedades en loop + 3 cards abajo. Patrón peak research 2026 · bajo costo.</span>
+</div>
+<section class="v06">
+  <div class="v06__marquee" aria-hidden="true">
+    <div class="v06__marquee-track">
+      <span>Alcohol <em>kosher</em></span><span class="d">·</span>
+      <span>Manzana</span><span class="d">·</span>
+      <span>Vino</span><span class="d">·</span>
+      <span>Mosto de <em>Vino</em></span><span class="d">·</span>
+      <span>Marca privada</span><span class="d">·</span>
+      <span>Granel</span><span class="d">·</span>
+      <span>Envasado</span><span class="d">·</span>
+      <span>Alcohol <em>kosher</em></span><span class="d">·</span>
+      <span>Manzana</span><span class="d">·</span>
+      <span>Vino</span><span class="d">·</span>
+      <span>Mosto de <em>Vino</em></span><span class="d">·</span>
+      <span>Marca privada</span><span class="d">·</span>
+      <span>Granel</span><span class="d">·</span>
+      <span>Envasado</span><span class="d">·</span>
+    </div>
+  </div>
+  <div class="v06__content">
+    <div class="t-container">
+      <div class="section-head">
+        <span class="eyebrow">— 3 líneas de exportación</span>
+        <h2 class="title">Portafolio para <em>mercados globales</em></h2>
+      </div>
+      <div class="v06__grid">
+        <article class="v06__card">
+          <img class="v06__card-img" src="../assets/producto-1.webp" alt="">
+          <div class="v06__card-body">
+            <span class="v06__card-tag">— 01 Abastecimiento industrial</span>
+            <h3 class="v06__card-title">Vinagres a granel para alimentos</h3>
+            <p class="v06__card-desc">Alcohol (kosher), Manzana, Vino y Mosto de Vino. Estándares internacionales, volúmenes adaptables.</p>
+          </div>
+        </article>
+        <article class="v06__card">
+          <img class="v06__card-img" src="../assets/producto-2.webp" alt="">
+          <div class="v06__card-body">
+            <span class="v06__card-tag">— 02 Marca privada</span>
+            <h3 class="v06__card-title">Desarrollo Private label</h3>
+            <p class="v06__card-desc">Productos envasados bajo marca privada para distribuidores, retail y food service.</p>
+          </div>
+        </article>
+        <article class="v06__card">
+          <img class="v06__card-img" src="../assets/producto-3.webp" alt="">
+          <div class="v06__card-body">
+            <span class="v06__card-tag">— 03 Marca Traverso</span>
+            <h3 class="v06__card-title">Productos marca Traverso</h3>
+            <p class="v06__card-desc">Línea propia con comercialización según mercado destino y oportunidades regulatorias.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ V07 · ACCORDION EDITORIAL ═════════════ -->
+<div class="variant-label" id="v07">
+  <span class="variant-label__n">07</span>
+  <span class="variant-label__t">Accordion editorial · detalle inline</span>
+  <span class="variant-label__d">Listado expandible con detalle bajo cada producto. Permite profundidad sin salir de la página.</span>
+</div>
+<section class="v07">
+  <div class="t-container">
+    <div class="section-head">
+      <span class="eyebrow">— Portafolio · Expandir detalle</span>
+      <h2 class="title">Líneas de productos <em>para exportación</em></h2>
+    </div>
+    <details class="v07__item" open>
+      <summary>
+        <span class="v07__item-n">01 —</span>
+        <span class="v07__item-cat">Abastecim. industrial</span>
+        <span class="v07__item-title">Vinagres a granel <em>para alimentos</em></span>
+        <span class="v07__item-toggle">+</span>
+      </summary>
+      <div class="v07__item-detail">
+        <div>
+          <p class="v07__item-desc">Vinagres de Alcohol, Manzana, Vino y de Mosto de Vino, producidos bajo estándares internacionales. Nuestra capacidad productiva permite abastecer distintos volúmenes con consistencia y continuidad, para uso como producto final, preservante, ingrediente o insumo en procesos productivos.</p>
+          <div class="v07__item-chips"><span class="v07__item-chip">Alcohol (kosher)</span><span class="v07__item-chip">Manzana</span><span class="v07__item-chip">Vino</span><span class="v07__item-chip">Mosto de Vino</span></div>
+        </div>
+        <img class="v07__item-img" src="../assets/producto-1.webp" alt="">
+      </div>
+    </details>
+    <details class="v07__item">
+      <summary>
+        <span class="v07__item-n">02 —</span>
+        <span class="v07__item-cat">Marca privada</span>
+        <span class="v07__item-title">Desarrollo <em>Private label</em></span>
+        <span class="v07__item-toggle">+</span>
+      </summary>
+      <div class="v07__item-detail">
+        <div>
+          <p class="v07__item-desc">Fabricamos productos envasados bajo marca privada, adaptándonos a especificaciones técnicas, formatos y requerimientos comerciales. Orientado a distribuidores internacionales, cadenas de retail y operadores del canal food service.</p>
+          <div class="v07__item-chips"><span class="v07__item-chip">Distribuidores</span><span class="v07__item-chip">Retail</span><span class="v07__item-chip">Food service</span></div>
+        </div>
+        <img class="v07__item-img" src="../assets/producto-2.webp" alt="">
+      </div>
+    </details>
+    <details class="v07__item">
+      <summary>
+        <span class="v07__item-n">03 —</span>
+        <span class="v07__item-cat">Marca Traverso</span>
+        <span class="v07__item-title">Productos <em>marca Traverso</em></span>
+        <span class="v07__item-toggle">+</span>
+      </summary>
+      <div class="v07__item-detail">
+        <div>
+          <p class="v07__item-desc">Contamos con una línea de productos bajo marca Traverso, cuya comercialización internacional dependerá de las condiciones regulatorias y oportunidades específicas de cada mercado.</p>
+          <div class="v07__item-chips"><span class="v07__item-chip">Línea propia</span><span class="v07__item-chip">Producto terminado</span><span class="v07__item-chip">Según mercado</span></div>
+        </div>
+        <img class="v07__item-img" src="../assets/producto-3.webp" alt="">
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ═════════════ V08 · HOVER REVEAL WIDE ═════════════ -->
+<div class="variant-label" id="v08">
+  <span class="variant-label__n">08</span>
+  <span class="variant-label__t">Hover reveal wide · Basic Agency</span>
+  <span class="variant-label__d">Lista tipográfica grande. Hover muestra thumbnail flotante rotado. Desktop only · alta densidad editorial.</span>
+</div>
+<section class="v08">
+  <div class="t-container">
+    <div class="section-head">
+      <span class="eyebrow">— 03 Portafolio</span>
+      <h2 class="title">Líneas de productos <em>para exportación</em></h2>
+    </div>
+    <div class="v08__list">
+      <div class="v08__item">
+        <span class="v08__item-n">01 —</span>
+        <span class="v08__item-cat">Abastecim. industrial</span>
+        <span class="v08__item-title">Vinagres a granel para <em>alimentos</em></span>
+        <span class="v08__item-arr">→</span>
+        <div class="v08__thumb"><img src="../assets/producto-1.webp" alt=""></div>
+      </div>
+      <div class="v08__item">
+        <span class="v08__item-n">02 —</span>
+        <span class="v08__item-cat">Marca privada</span>
+        <span class="v08__item-title">Desarrollo <em>Private label</em></span>
+        <span class="v08__item-arr">→</span>
+        <div class="v08__thumb"><img src="../assets/producto-2.webp" alt=""></div>
+      </div>
+      <div class="v08__item">
+        <span class="v08__item-n">03 —</span>
+        <span class="v08__item-cat">Marca Traverso</span>
+        <span class="v08__item-title">Productos marca <em>Traverso</em></span>
+        <span class="v08__item-arr">→</span>
+        <div class="v08__thumb"><img src="../assets/producto-3.webp" alt=""></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ V09 · STACK MAGAZINE ═════════════ -->
+<div class="variant-label" id="v09">
+  <span class="variant-label__n">09</span>
+  <span class="variant-label__t">Stack magazine · editorial</span>
+  <span class="variant-label__d">Cada producto como página editorial — imagen 4:5 + lead serif italic + specs. Tono memoria corporativa.</span>
+</div>
+<section class="v09">
+  <div class="t-container">
+    <div class="section-head">
+      <span class="eyebrow">— Portafolio · 03 líneas</span>
+      <h2 class="title">Líneas de productos <em>para exportación</em></h2>
+    </div>
+    <article class="v09__article">
+      <div class="v09__art-img"><img src="../assets/producto-1.webp" alt=""></div>
+      <div class="v09__art-body">
+        <div class="v09__art-meta"><strong>§ 01</strong><span>Abastecimiento industrial</span></div>
+        <h3 class="v09__art-title">Vinagres a granel <em>para alimentos</em></h3>
+        <p class="v09__art-lead">Vinagres de Alcohol, Manzana, Vino y de Mosto de Vino, producidos bajo estándares internacionales.</p>
+        <p class="v09__art-desc">Nuestra capacidad productiva permite abastecer distintos volúmenes con consistencia y continuidad, para uso como producto final, preservante, ingrediente o insumo en procesos productivos de distintas industrias.</p>
+        <div class="v09__art-specs">
+          <div><div class="v09__art-spec-t">— Variedades</div><div class="v09__art-spec-v">Alcohol (kosher) · Manzana · Vino · Mosto de Vino</div></div>
+          <div><div class="v09__art-spec-t">— Formato</div><div class="v09__art-spec-v">Granel · Envasado en destino</div></div>
+        </div>
+      </div>
+    </article>
+    <article class="v09__article">
+      <div class="v09__art-img"><img src="../assets/producto-2.webp" alt=""></div>
+      <div class="v09__art-body">
+        <div class="v09__art-meta"><strong>§ 02</strong><span>Marca privada</span></div>
+        <h3 class="v09__art-title">Desarrollo de productos <em>Private label</em></h3>
+        <p class="v09__art-lead">Fabricamos productos envasados bajo marca privada, adaptándonos a requerimientos de cada cliente.</p>
+        <p class="v09__art-desc">Orientado a distribuidores internacionales, cadenas de retail y operadores del canal food service, con especificaciones técnicas, formatos y etiquetado a medida.</p>
+        <div class="v09__art-specs">
+          <div><div class="v09__art-spec-t">— Canales</div><div class="v09__art-spec-v">Distribuidores · Retail · Food service</div></div>
+          <div><div class="v09__art-spec-t">— Especs</div><div class="v09__art-spec-v">A medida · Diseño personalizado</div></div>
+        </div>
+      </div>
+    </article>
+    <article class="v09__article">
+      <div class="v09__art-img"><img src="../assets/producto-3.webp" alt=""></div>
+      <div class="v09__art-body">
+        <div class="v09__art-meta"><strong>§ 03</strong><span>Marca Traverso</span></div>
+        <h3 class="v09__art-title">Productos marca <em>Traverso</em></h3>
+        <p class="v09__art-lead">Contamos con una línea de productos bajo marca Traverso.</p>
+        <p class="v09__art-desc">Su comercialización internacional dependerá de las condiciones regulatorias y oportunidades específicas de cada mercado destino.</p>
+        <div class="v09__art-specs">
+          <div><div class="v09__art-spec-t">— Tipo</div><div class="v09__art-spec-v">Línea propia · Producto terminado</div></div>
+          <div><div class="v09__art-spec-t">— Formato</div><div class="v09__art-spec-v">Envasado según mercado</div></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ═════════════ V10 · INDEX + FEATURED HERO ═════════════ -->
+<div class="variant-label" id="v10">
+  <span class="variant-label__n">10</span>
+  <span class="variant-label__t">Index + hero featured</span>
+  <span class="variant-label__d">Producto estrella en hero arriba + los otros 2 listados tipo directorio abajo. Jerarquía clara.</span>
+</div>
+<section class="v10">
+  <div class="t-container">
+    <div class="section-head">
+      <span class="eyebrow">— Portafolio · Destacado + listado</span>
+      <h2 class="title">Líneas de productos <em>para exportación</em></h2>
+    </div>
+    <div class="v10__hero">
+      <div class="v10__hero-img"><img src="../assets/producto-1.webp" alt=""></div>
+      <div class="v10__hero-body">
+        <span class="v10__hero-featured">— § 01 Destacado · Abastecimiento industrial</span>
+        <h3 class="v10__hero-title">Vinagres a granel para alimentos</h3>
+        <p class="v10__hero-desc">Vinagres de Alcohol, Manzana, Vino y de Mosto de Vino, producidos bajo estándares internacionales. Abastecimiento consistente para uso como producto final, preservante, ingrediente o insumo industrial.</p>
+        <div class="v10__hero-chips">
+          <span class="v10__hero-chip">Alcohol kosher</span>
+          <span class="v10__hero-chip">Manzana</span>
+          <span class="v10__hero-chip">Vino</span>
+          <span class="v10__hero-chip">Mosto</span>
+        </div>
+      </div>
+    </div>
+    <div class="v10__list">
+      <div class="v10__list-head">— Otras líneas · 02 adicionales</div>
+      <a href="#" class="v10__list-row">
+        <span class="v10__list-n">02 —</span>
+        <span class="v10__list-cat">Marca privada</span>
+        <span class="v10__list-title">Desarrollo de productos · Private label</span>
+        <span class="v10__list-arr">→</span>
+      </a>
+      <a href="#" class="v10__list-row">
+        <span class="v10__list-n">03 —</span>
+        <span class="v10__list-cat">Marca Traverso</span>
+        <span class="v10__list-title">Productos marca Traverso</span>
+        <span class="v10__list-arr">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ V11 · SWISS MINIMAL (no images) ═════════════ -->
+<div class="variant-label" id="v11">
+  <span class="variant-label__n">11</span>
+  <span class="variant-label__t">Swiss minimal · sin imágenes</span>
+  <span class="variant-label__d">Solo tipografía, numeración italic gigante + secciones por producto. Max editorial, min decoración.</span>
+</div>
+<section class="v11">
+  <div class="t-container">
+    <div class="section-head">
+      <span class="eyebrow">— Portafolio · 03 líneas</span>
+      <h2 class="title">Líneas de productos <em>para exportación</em></h2>
+    </div>
+    <div class="v11__grid">
+      <div class="v11__col">
+        <div class="v11__col-n">01</div>
+        <span class="v11__col-tag">Abastecim. industrial</span>
+        <h3 class="v11__col-title">Vinagres a granel <em>para alimentos</em></h3>
+        <p class="v11__col-desc">Vinagres producidos bajo estándares internacionales. Abastecimiento consistente para uso como producto final, preservante o ingrediente industrial.</p>
+        <div class="v11__col-section">
+          <div class="v11__col-section-t">— Variedades</div>
+          <div class="v11__col-list"><em>Alcohol</em> (kosher) · <em>Manzana</em> · <em>Vino</em> · <em>Mosto de Vino</em></div>
+        </div>
+      </div>
+      <div class="v11__col">
+        <div class="v11__col-n">02</div>
+        <span class="v11__col-tag">Marca privada</span>
+        <h3 class="v11__col-title">Desarrollo <em>Private label</em></h3>
+        <p class="v11__col-desc">Fabricación bajo marca privada, adaptándonos a especificaciones técnicas, formatos y requerimientos comerciales de cada cliente.</p>
+        <div class="v11__col-section">
+          <div class="v11__col-section-t">— Canales</div>
+          <div class="v11__col-list"><em>Distribuidores</em> internacionales · <em>Retail</em> · <em>Food service</em></div>
+        </div>
+      </div>
+      <div class="v11__col">
+        <div class="v11__col-n">03</div>
+        <span class="v11__col-tag">Marca Traverso</span>
+        <h3 class="v11__col-title">Productos <em>marca Traverso</em></h3>
+        <p class="v11__col-desc">Línea propia Traverso cuya comercialización depende de condiciones regulatorias y oportunidades de cada mercado.</p>
+        <div class="v11__col-section">
+          <div class="v11__col-section-t">— Tipo</div>
+          <div class="v11__col-list"><em>Línea propia</em> · <em>Producto terminado</em> · <em>Según mercado</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ V12 · DARK CARDS ACENTO GOLD ═════════════ -->
+<div class="variant-label" id="v12">
+  <span class="variant-label__n">12</span>
+  <span class="variant-label__t">Dark cards · acento gold</span>
+  <span class="variant-label__d">Fondo navy profundo, cards con border-left dorado. Premium sobre dark, textura editorial corporativa.</span>
+</div>
+<section class="v12">
+  <div class="t-container">
+    <div class="section-head">
+      <span class="eyebrow">— Portafolio</span>
+      <h2 class="title">Líneas de productos <em>para exportación</em></h2>
+    </div>
+    <div class="v12__grid">
+      <article class="v12__card">
+        <div class="v12__card-n">01</div>
+        <div class="v12__card-tag">Abastecim. industrial</div>
+        <h3 class="v12__card-title">Vinagres a granel <em>para alimentos</em></h3>
+        <p class="v12__card-desc">Alcohol, Manzana, Vino y Mosto de Vino. Producidos bajo estándares internacionales para abastecimiento consistente.</p>
+        <div class="v12__card-foot">
+          <span class="v12__card-chip">Alcohol kosher</span>
+          <span class="v12__card-chip">Manzana</span>
+          <span class="v12__card-chip">Vino</span>
+          <span class="v12__card-chip">Mosto</span>
+        </div>
+      </article>
+      <article class="v12__card">
+        <div class="v12__card-n">02</div>
+        <div class="v12__card-tag">Marca privada</div>
+        <h3 class="v12__card-title">Desarrollo <em>Private label</em></h3>
+        <p class="v12__card-desc">Fabricación bajo marca privada adaptándonos a especificaciones técnicas, formatos y requerimientos comerciales.</p>
+        <div class="v12__card-foot">
+          <span class="v12__card-chip">Distribuidores</span>
+          <span class="v12__card-chip">Retail</span>
+          <span class="v12__card-chip">Food service</span>
+        </div>
+      </article>
+      <article class="v12__card">
+        <div class="v12__card-n">03</div>
+        <div class="v12__card-tag">Marca Traverso</div>
+        <h3 class="v12__card-title">Productos <em>marca Traverso</em></h3>
+        <p class="v12__card-desc">Línea propia Traverso con comercialización internacional según condiciones regulatorias de cada mercado.</p>
+        <div class="v12__card-foot">
+          <span class="v12__card-chip">Línea propia</span>
+          <span class="v12__card-chip">Terminado</span>
+          <span class="v12__card-chip">Según mercado</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ V13 · CINEMA FULL-BLEED ═════════════ -->
+<div class="variant-label" id="v13">
+  <span class="variant-label__n">13</span>
+  <span class="variant-label__t">Cinema full-bleed · escenas</span>
+  <span class="variant-label__d">3 escenas cinematográficas wide con imagen de fondo + overlay + texto. Tier premium Awwwards-style pero corporate.</span>
+</div>
+<section class="v13">
+  <div class="v13__scene">
+    <img src="../assets/producto-1.webp" alt="">
+    <div class="v13__body">
+      <div class="v13__n">01</div>
+      <span class="v13__tag">— Abastecimiento industrial</span>
+      <h3 class="v13__title">Vinagres a granel para alimentos</h3>
+      <p class="v13__desc">Alcohol, Manzana, Vino y Mosto de Vino. Producidos bajo estándares internacionales para abastecimiento consistente en industrias globales.</p>
+    </div>
+  </div>
+  <div class="v13__scene">
+    <img src="../assets/producto-2.webp" alt="">
+    <div class="v13__body">
+      <div class="v13__n">02</div>
+      <span class="v13__tag">— Marca privada</span>
+      <h3 class="v13__title">Desarrollo Private label</h3>
+      <p class="v13__desc">Fabricación envasada bajo marca privada, adaptando especificaciones y formatos a cada distribuidor, retail o food service.</p>
+    </div>
+  </div>
+  <div class="v13__scene">
+    <img src="../assets/producto-3.webp" alt="">
+    <div class="v13__body">
+      <div class="v13__n">03</div>
+      <span class="v13__tag">— Marca Traverso</span>
+      <h3 class="v13__title">Productos marca Traverso</h3>
+      <p class="v13__desc">Línea propia Traverso cuya comercialización depende de condiciones regulatorias y oportunidades de cada mercado destino.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ V14 · TABLE + VISUAL ═════════════ -->
+<div class="variant-label" id="v14">
+  <span class="variant-label__n">14</span>
+  <span class="variant-label__t">Tabla técnica + visual sticky</span>
+  <span class="variant-label__d">Tabla editorial a la izquierda + imagen sticky del producto seleccionado a la derecha. UX B2B avanzada.</span>
+</div>
+<section class="v14">
+  <div class="t-container">
+    <div class="section-head">
+      <span class="eyebrow">— Portafolio · Tabla técnica</span>
+      <h2 class="title">Líneas de productos <em>para exportación</em></h2>
+    </div>
+    <div class="v14__grid">
+      <div class="v14__table">
+        <div class="v14__table-head">
+          <span>#</span><span>Producto</span><span>Var.</span>
+        </div>
+        <div class="v14__table-row is-active">
+          <span class="v14__table-n">01</span>
+          <span class="v14__table-title">Vinagres a granel <em>para alimentos</em><small>Abastecimiento industrial</small></span>
+          <span class="v14__table-count">04 →</span>
+        </div>
+        <div class="v14__table-row">
+          <span class="v14__table-n">02</span>
+          <span class="v14__table-title">Desarrollo <em>Private label</em><small>Marca privada</small></span>
+          <span class="v14__table-count">03 →</span>
+        </div>
+        <div class="v14__table-row">
+          <span class="v14__table-n">03</span>
+          <span class="v14__table-title">Productos <em>marca Traverso</em><small>Línea propia</small></span>
+          <span class="v14__table-count">02 →</span>
+        </div>
+      </div>
+      <div class="v14__visual">
+        <img src="../assets/producto-1.webp" alt="Vinagres a granel">
+        <div class="v14__visual-caption">§ 01 · Vinagres a granel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ V15 · DOSSIER CORPORATIVO ═════════════ -->
+<div class="variant-label" id="v15">
+  <span class="variant-label__n">15</span>
+  <span class="variant-label__t">Dossier corporativo · memoria anual</span>
+  <span class="variant-label__d">Estilo reporte/memoria anual con folio numerado + entradas editoriales + specs alineados. Max peso institucional.</span>
+</div>
+<section class="v15">
+  <div class="t-container">
+    <div class="v15__cover">
+      <div class="v15__cover-eyebrow">Dossier · Portafolio 2026</div>
+      <h2 class="v15__cover-title">Líneas de productos <em>para exportación</em></h2>
+      <div class="v15__cover-meta">Traverso International Foods · Santiago · Chile · 03 entradas</div>
+    </div>
+
+    <article class="v15__entry">
+      <div class="v15__entry-folio"><sup>§</sup> Folio 01 / 03<br>— Abastecim.<br>industrial</div>
+      <div class="v15__entry-body">
+        <div class="v15__entry-head">
+          <span class="v15__entry-cat">— Categoría · Abastecimiento industrial</span>
+          <h3 class="v15__entry-title">Vinagres a granel <em>para alimentos</em></h3>
+          <p class="v15__entry-lead">Vinagres de Alcohol, Manzana, Vino y de Mosto de Vino, producidos bajo estándares internacionales.</p>
+        </div>
+        <div class="v15__entry-specs">
+          <div class="v15__entry-spec"><strong>— Variedades</strong><span>Alcohol (kosher) · Manzana · Vino · Mosto de Vino</span></div>
+          <div class="v15__entry-spec"><strong>— Aplicaciones</strong><span>Producto final · Preservante · Ingrediente industrial · Envasado en destino</span></div>
+          <div class="v15__entry-spec"><strong>— Formato</strong><span>Granel</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="v15__entry">
+      <div class="v15__entry-folio"><sup>§</sup> Folio 02 / 03<br>— Marca<br>privada</div>
+      <div class="v15__entry-body">
+        <div class="v15__entry-head">
+          <span class="v15__entry-cat">— Categoría · Marca privada</span>
+          <h3 class="v15__entry-title">Desarrollo de productos <em>Private label</em></h3>
+          <p class="v15__entry-lead">Fabricación bajo marca privada adaptándonos a especificaciones técnicas, formatos y requerimientos comerciales.</p>
+        </div>
+        <div class="v15__entry-specs">
+          <div class="v15__entry-spec"><strong>— Canales</strong><span>Distribuidores internacionales · Cadenas de retail · Canal food service</span></div>
+          <div class="v15__entry-spec"><strong>— Especificaciones</strong><span>A medida · Diseño personalizado · Etiquetado propio</span></div>
+          <div class="v15__entry-spec"><strong>— Formato</strong><span>Envasado</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="v15__entry">
+      <div class="v15__entry-folio"><sup>§</sup> Folio 03 / 03<br>— Marca<br>Traverso</div>
+      <div class="v15__entry-body">
+        <div class="v15__entry-head">
+          <span class="v15__entry-cat">— Categoría · Marca Traverso</span>
+          <h3 class="v15__entry-title">Productos marca <em>Traverso</em></h3>
+          <p class="v15__entry-lead">Línea propia Traverso cuya comercialización depende de condiciones regulatorias y oportunidades de cada mercado.</p>
+        </div>
+        <div class="v15__entry-specs">
+          <div class="v15__entry-spec"><strong>— Tipo</strong><span>Línea propia · Producto terminado</span></div>
+          <div class="v15__entry-spec"><strong>— Formato</strong><span>Envasado según mercado destino</span></div>
+          <div class="v15__entry-spec"><strong>— Estado</strong><span>Sujeto a condiciones regulatorias</span></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div style="height:80px"></div>
+
+</body>
+</html>

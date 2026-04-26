@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pruprod 3 · Productos · estándar institucional — Traverso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1E6B; --navy-dark:#081450; --gold:#C5A55A; --gold-sat:#C9A227;
+    --neutral:#FBF9FA; --neutral-alt:#F2F4F8; --text:#19212F;
+    --line-soft:rgba(11,30,107,.10); --line:rgba(11,30,107,.18);
+    --muted:rgba(25,33,47,.6);
+    --serif:'Libre Baskerville',Georgia,serif;
+    --sans:'Source Sans 3',system-ui,sans-serif;
+    --mono:'Courier New',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--text);background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased}
+  em{font-style:italic;color:var(--gold-sat)}
+
+  .page-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft);padding:.85rem 1.5rem;display:flex;gap:.4rem;align-items:center;overflow-x:auto;white-space:nowrap;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em}
+  .page-nav__brand{font-family:var(--serif);font-weight:700;color:var(--navy);margin-right:1rem;font-size:.95rem;letter-spacing:0;flex-shrink:0}
+  .page-nav a{color:var(--muted);text-decoration:none;padding:.3rem .55rem;border-radius:2px;flex-shrink:0}
+  .page-nav a:hover{background:var(--navy);color:#fff}
+
+  /* Header común a todas las variantes — left-align institucional */
+  .vp-header{margin:0 0 4rem;max-width:780px}
+  .vp-eyebrow{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-sat);margin-bottom:1.2rem}
+  .vp-title{font-family:var(--serif);font-size:clamp(1.65rem,2.6vw,2.2rem);font-weight:400;line-height:1.18;color:var(--navy);margin-bottom:1rem;letter-spacing:-.015em}
+  .vp-title em{font-style:italic;color:var(--gold-sat)}
+  .vp-lead{font-size:1rem;color:var(--text);opacity:.78;max-width:580px;line-height:1.7}
+
+  .variant{padding:6rem 2rem;border-bottom:1px solid var(--line-soft)}
+  .variant:nth-child(even){background:var(--neutral)}
+  .variant__tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem;display:block}
+  .variant__container{max-width:min(1400px,94vw);margin:0 auto}
+
+  /* Photo placeholder · navy gradient (representa fotografía documental) */
+  .photo{background:linear-gradient(135deg,#1f2a4a 0%,#0B1E6B 100%);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:1rem}
+  .photo[data-tone="warm"]{background:linear-gradient(135deg,#3a3120 0%,#1a1610 100%)}
+  .photo[data-tone="amber"]{background:linear-gradient(135deg,#8a7340 0%,#5a4628 100%)}
+  .photo[data-tone="paper"]{background:linear-gradient(135deg,#fbf9fa 0%,#e2dfd9 100%)}
+  .photo[data-tone="steel"]{background:linear-gradient(135deg,#19212F 0%,#3a4258 100%)}
+  .photo__cap{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;color:#fff;opacity:.6;text-transform:uppercase}
+  .photo[data-tone="paper"] .photo__cap{color:var(--muted)}
+
+  /* ═══ V01 · Sticky sidebar + stack vertical (UN/McKinsey) ═══ */
+  .v01-grid{display:grid;grid-template-columns:400px 1fr;gap:5rem;align-items:start}
+  .v01-side{position:sticky;top:6rem}
+  .v01-side h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--navy);line-height:1.2;letter-spacing:-.01em;margin-bottom:.6rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .v01-side h3 em{font-style:italic;font-weight:400;color:var(--gold-sat)}
+  .v01-side .lead{font-size:.88rem;color:var(--muted);line-height:1.6;margin:1rem 0 1.6rem;padding-bottom:1.5rem;border-bottom:1px solid var(--line);max-width:320px}
+  .v01-side nav a{font-family:var(--sans);font-size:.88rem;color:var(--muted);padding:.6rem 0;display:grid;grid-template-columns:38px 1fr;gap:.6rem;text-decoration:none;border-bottom:1px dotted var(--line-soft);align-items:baseline;transition:.3s}
+  .v01-side nav a:last-child{border-bottom:none}
+  .v01-side nav a:hover{color:var(--navy);transform:translateX(3px)}
+  .v01-side nav a span{font-family:var(--mono);font-size:.78rem;color:var(--gold-sat)}
+  .v01-content article{padding:3.5rem 0;border-top:1px solid var(--line-soft)}
+  .v01-content article:first-child{padding-top:0;border-top:none}
+  .v01-content .num{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem}
+  .v01-content .num::after{content:"";flex:1;height:1px;background:var(--line-soft);max-width:60px}
+  .v01-content h4{font-family:var(--serif);font-size:1.5rem;font-weight:400;color:var(--navy);line-height:1.25;letter-spacing:-.01em;margin-bottom:1rem;max-width:600px}
+  .v01-content p{font-size:1rem;color:var(--text);opacity:.82;line-height:1.75;max-width:600px}
+  .v01-content .meta{margin-top:1rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+
+  /* ═══ V02 · Sticky sidebar + grid 2x2 con foto ═══ */
+  .v02-grid{display:grid;grid-template-columns:340px 1fr;gap:4rem;align-items:start}
+  .v02-side{position:sticky;top:6rem}
+  .v02-side h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--navy);line-height:1.2;letter-spacing:-.01em;margin-bottom:1.4rem}
+  .v02-side h3 em{font-style:italic;font-weight:400;color:var(--gold-sat)}
+  .v02-side .lead{font-size:.88rem;color:var(--muted);line-height:1.6;margin-bottom:2rem}
+  .v02-side .meta{display:flex;flex-direction:column;gap:.7rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;border-top:1px solid var(--line-soft);padding-top:1.5rem}
+  .v02-side .meta strong{color:var(--gold-sat);font-weight:400}
+  .v02-cards{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .v02-cards article{padding:2rem;border-top:1px solid var(--line);border-right:1px solid var(--line)}
+  .v02-cards article:nth-child(2n){border-right:none}
+  .v02-cards article:nth-last-child(-n+2){border-bottom:1px solid var(--line)}
+  .v02-cards .photo{aspect-ratio:5/3;margin-bottom:1.4rem}
+  .v02-cards .num{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:.8rem}
+  .v02-cards h4{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--navy);line-height:1.3;margin-bottom:.7rem}
+  .v02-cards p{font-size:.92rem;color:var(--text);opacity:.8;line-height:1.65}
+  .v02-cards .foot{margin-top:1rem;display:flex;justify-content:space-between;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+  .v02-cards .foot a{color:var(--navy);text-decoration:none}
+
+  /* ═══ V03 · Sticky sidebar + lista larga 1-N estilo GOV.UK ═══ */
+  .v03-grid{display:grid;grid-template-columns:340px 1fr;gap:5rem;align-items:start}
+  .v03-side{position:sticky;top:6rem}
+  .v03-side h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:1.2rem}
+  .v03-side h3 em{font-style:italic;font-weight:400;color:var(--gold-sat)}
+  .v03-side .lead{font-size:.88rem;color:var(--muted);line-height:1.6;margin-bottom:1rem}
+  .v03-side .ref{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--gold-sat);text-transform:uppercase;border-top:1px solid var(--line);padding-top:1rem;margin-top:1.5rem}
+  .v03-content article{padding:2.5rem 0;border-top:1px solid var(--line);display:grid;grid-template-columns:60px 140px 1fr;gap:1.5rem;align-items:start}
+  .v03-content article:first-child{border-top:2px solid var(--text)}
+  .v03-content article:last-child{border-bottom:1px solid var(--line)}
+  .v03-content .n{font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--navy);line-height:1}
+  .v03-content .photo{aspect-ratio:1/1;width:140px}
+  .v03-content h4{font-family:var(--serif);font-size:1.25rem;font-weight:400;color:var(--navy);line-height:1.3;margin-bottom:.6rem}
+  .v03-content p{font-size:.95rem;color:var(--text);opacity:.82;line-height:1.7;max-width:560px}
+  .v03-content a{color:var(--gold-sat);font-family:var(--sans);font-size:.85rem;text-decoration:underline;text-underline-offset:3px;margin-top:.6rem;display:inline-block}
+
+  /* ═══ V04 · Stack vertical 4 items con número display gigante ═══ */
+  .v04-list{display:flex;flex-direction:column}
+  .v04-item{padding:5rem 0;border-top:1px solid var(--line-soft);display:grid;grid-template-columns:200px 1fr;gap:3.5rem;align-items:start}
+  .v04-item:last-child{border-bottom:1px solid var(--line-soft)}
+  .v04-num{font-family:var(--serif);font-size:6rem;font-weight:400;font-style:italic;color:var(--gold);line-height:.9;letter-spacing:-.04em}
+  .v04-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:1rem;display:block}
+  .v04-ttl{font-family:var(--serif);font-size:1.85rem;font-weight:400;color:var(--navy);line-height:1.2;letter-spacing:-.015em;margin-bottom:1rem;max-width:680px}
+  .v04-ttl em{font-style:italic;color:var(--gold-sat)}
+  .v04-txt{font-size:1.05rem;color:var(--text);opacity:.82;line-height:1.8;max-width:680px}
+  .v04-meta{margin-top:1.2rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;display:flex;gap:1.5rem;flex-wrap:wrap}
+  .v04-meta a{color:var(--gold-sat);text-decoration:none}
+
+  /* ═══ V05 · Pentagram · alternado foto / contenido ═══ */
+  .v05-list{display:flex;flex-direction:column;gap:0}
+  .v05-item{display:grid;grid-template-columns:1fr 1fr;gap:4rem;padding:5rem 0;border-top:1px solid var(--line-soft);align-items:center}
+  .v05-item:nth-child(even){direction:rtl}
+  .v05-item:nth-child(even)>*{direction:ltr}
+  .v05-item:last-child{border-bottom:1px solid var(--line-soft)}
+  .v05-item .photo{aspect-ratio:4/5}
+  .v05-item .body{padding:1rem}
+  .v05-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:1.2rem;display:block}
+  .v05-ttl{font-family:var(--serif);font-size:2rem;font-weight:400;color:var(--navy);line-height:1.18;letter-spacing:-.02em;margin-bottom:1.2rem}
+  .v05-ttl em{font-style:italic;color:var(--gold-sat)}
+  .v05-txt{font-size:1.05rem;color:var(--text);opacity:.82;line-height:1.8;max-width:540px}
+  .v05-foot{margin-top:1.6rem;padding-top:1.2rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+  .v05-foot a{color:var(--gold-sat);text-decoration:none}
+
+  /* ═══ V06 · Mucho · grid asimétrico 2-2-3-5 ═══ */
+  .v06-list{display:flex;flex-direction:column}
+  .v06-item{display:grid;grid-template-columns:80px 80px 1fr 2fr;gap:2.5rem;padding:4rem 0;border-top:1px solid var(--line-soft);align-items:start}
+  .v06-item:last-child{border-bottom:1px solid var(--line-soft)}
+  .v06-roman{font-family:var(--serif);font-size:1.6rem;color:var(--gold);font-style:italic;font-weight:400;letter-spacing:.04em}
+  .v06-tag{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;padding-top:.6rem}
+  .v06-ttl{font-family:var(--serif);font-size:1.55rem;font-weight:400;color:var(--navy);line-height:1.25;letter-spacing:-.01em}
+  .v06-ttl em{font-style:italic;color:var(--gold-sat)}
+  .v06-body p{font-size:1rem;color:var(--text);opacity:.82;line-height:1.75;max-width:540px}
+  .v06-body .meta{margin-top:1rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+
+  /* ═══ V07 · Tabla prospecto institucional ═══ */
+  .v07-table{display:flex;flex-direction:column}
+  .v07-row{display:grid;grid-template-columns:80px 1fr 2fr 100px;gap:2rem;padding:2.4rem 0;border-top:1px solid var(--line);align-items:center}
+  .v07-row:first-child{border-top:2px solid var(--text);padding:1rem 0;font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;color:var(--gold-sat);text-transform:uppercase;font-weight:400}
+  .v07-row:last-child{border-bottom:1px solid var(--line)}
+  .v07-n{font-family:var(--mono);font-size:.85rem;color:var(--gold-sat);letter-spacing:.1em}
+  .v07-name{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--navy);line-height:1.3}
+  .v07-name em{font-style:italic;color:var(--gold-sat)}
+  .v07-desc{font-size:.95rem;color:var(--text);opacity:.78;line-height:1.6;max-width:560px}
+  .v07-action{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--gold-sat);text-transform:uppercase;text-decoration:none;text-align:right}
+
+  /* ═══ V08 · Tabla 2-col con foto pequeña ═══ */
+  .v08-list{display:flex;flex-direction:column}
+  .v08-item{display:grid;grid-template-columns:200px 100px 1fr 90px;gap:2.5rem;padding:2.5rem 0;border-top:1px solid var(--line);align-items:center}
+  .v08-item:first-child{border-top:2px solid var(--text)}
+  .v08-item:last-child{border-bottom:1px solid var(--line)}
+  .v08-item .photo{aspect-ratio:1/1;width:200px}
+  .v08-num{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;color:var(--gold-sat);text-transform:uppercase}
+  .v08-body h4{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--navy);line-height:1.3;margin-bottom:.6rem}
+  .v08-body h4 em{font-style:italic;color:var(--gold-sat)}
+  .v08-body p{font-size:.92rem;color:var(--text);opacity:.8;line-height:1.65;max-width:520px}
+  .v08-arrow{font-family:var(--mono);color:var(--navy);font-size:1.4rem;text-decoration:none;text-align:right;transition:.3s}
+  .v08-arrow:hover{color:var(--gold-sat);transform:translateX(4px)}
+
+  /* ═══ V09 · Lista item con eyebrow + título + foto + meta tracked ═══ */
+  .v09-list{display:flex;flex-direction:column}
+  .v09-item{padding:4rem 0;border-top:1px solid var(--line-soft)}
+  .v09-item:last-child{border-bottom:1px solid var(--line-soft)}
+  .v09-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
+  .v09-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase}
+  .v09-counter{font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.18em}
+  .v09-body{display:grid;grid-template-columns:1fr 240px;gap:3rem;align-items:start}
+  .v09-body .photo{aspect-ratio:5/3}
+  .v09-body h4{font-family:var(--serif);font-size:1.85rem;font-weight:400;color:var(--navy);line-height:1.2;letter-spacing:-.015em;margin-bottom:1.2rem}
+  .v09-body h4 em{font-style:italic;color:var(--gold-sat)}
+  .v09-body p{font-size:1rem;color:var(--text);opacity:.82;line-height:1.75;max-width:600px}
+
+  /* ═══ V10 · Grid 4-col rejilla CSS hairlines (Vercel) ═══ */
+  .v10-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+  .v10-grid article{padding:2.4rem 1.8rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column}
+  .v10-grid .photo{aspect-ratio:4/3;margin-bottom:1.4rem}
+  .v10-num{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:.85rem}
+  .v10-grid h4{font-family:var(--serif);font-size:1.15rem;font-weight:400;color:var(--navy);line-height:1.3;margin-bottom:.75rem;flex-grow:0}
+  .v10-grid h4 em{font-style:italic;color:var(--gold-sat)}
+  .v10-grid p{font-size:.9rem;color:var(--text);opacity:.78;line-height:1.65;flex-grow:1}
+  .v10-grid .foot{margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--line-soft);font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;display:flex;justify-content:space-between}
+  .v10-grid .foot a{color:var(--gold-sat);text-decoration:none}
+
+  /* ═══ V11 · Grid 2x2 foto-as-hero (Stripe) ═══ */
+  .v11-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem 5rem}
+  .v11-grid article{display:flex;flex-direction:column}
+  .v11-grid .photo{aspect-ratio:16/10;margin-bottom:1.8rem}
+  .v11-num{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:1rem}
+  .v11-grid h4{font-family:var(--serif);font-size:1.65rem;font-weight:400;color:var(--navy);line-height:1.2;letter-spacing:-.01em;margin-bottom:1rem;max-width:520px}
+  .v11-grid h4 em{font-style:italic;color:var(--gold-sat)}
+  .v11-grid p{font-size:1rem;color:var(--text);opacity:.82;line-height:1.75;max-width:520px;flex-grow:1}
+  .v11-grid .foot{margin-top:1.4rem;padding-top:1rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+  .v11-grid .foot a{color:var(--gold-sat);text-decoration:none}
+
+  /* ═══ V12 · Grid 4 minimal con número display arriba (Goldman) ═══ */
+  .v12-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3rem 2.5rem}
+  .v12-grid article{display:flex;flex-direction:column}
+  .v12-num{font-family:var(--serif);font-size:3.2rem;font-style:italic;font-weight:400;color:var(--gold);line-height:.9;letter-spacing:-.03em;margin-bottom:1.4rem}
+  .v12-tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:.9rem;padding-top:1rem;border-top:1px solid var(--line)}
+  .v12-grid h4{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--navy);line-height:1.3;margin-bottom:.85rem}
+  .v12-grid h4 em{font-style:italic;color:var(--gold-sat)}
+  .v12-grid p{font-size:.92rem;color:var(--text);opacity:.78;line-height:1.65;flex-grow:1}
+  .v12-grid .arrow{margin-top:1.4rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--gold-sat);text-transform:uppercase;text-decoration:none}
+
+  /* ═══ V13 · Numéricas display gigantes (Tate scale) ═══ */
+  .v13-list{display:flex;flex-direction:column}
+  .v13-item{padding:5rem 0;border-top:1px solid var(--line-soft);display:grid;grid-template-columns:240px 1fr;gap:4rem;align-items:start}
+  .v13-item:last-child{border-bottom:1px solid var(--line-soft)}
+  .v13-num{font-family:var(--serif);font-size:8rem;font-weight:400;font-style:italic;color:var(--navy);line-height:.85;letter-spacing:-.05em;opacity:.95}
+  .v13-num em{color:var(--gold);font-style:italic}
+  .v13-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:1.2rem;display:block}
+  .v13-ttl{font-family:var(--serif);font-size:2.2rem;font-weight:400;color:var(--navy);line-height:1.15;letter-spacing:-.02em;margin-bottom:1.2rem;max-width:680px}
+  .v13-ttl em{font-style:italic;color:var(--gold-sat)}
+  .v13-txt{font-size:1.05rem;color:var(--text);opacity:.82;line-height:1.8;max-width:660px}
+
+  /* ═══ V14 · Stat institucional + foto al lado (Cosentino style) ═══ */
+  .v14-list{display:flex;flex-direction:column}
+  .v14-item{padding:5rem 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+  .v14-item:last-child{border-bottom:1px solid var(--line)}
+  .v14-item .photo{aspect-ratio:4/5}
+  .v14-stat{font-family:var(--serif);font-size:6rem;font-weight:400;color:var(--navy);line-height:.9;letter-spacing:-.04em;margin-bottom:1rem}
+  .v14-stat em{font-style:italic;color:var(--gold-sat);font-size:.45em;display:inline-block;vertical-align:top;margin-top:1.2em;letter-spacing:.05em}
+  .v14-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--gold-sat);text-transform:uppercase;margin-bottom:1rem;display:block;padding-top:.6rem;border-top:1px solid var(--line)}
+  .v14-ttl{font-family:var(--serif);font-size:1.7rem;font-weight:400;color:var(--navy);line-height:1.2;letter-spacing:-.015em;margin-bottom:1.2rem;max-width:520px}
+  .v14-ttl em{font-style:italic;color:var(--gold-sat)}
+  .v14-txt{font-size:1rem;color:var(--text);opacity:.82;line-height:1.75;max-width:520px}
+
+  /* ═══ V15 · Polaroid postal · sello + foto + texto (Aman/postal) ═══ */
+  .v15-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+  .v15-grid article{display:flex;flex-direction:column;background:#fff;padding:1.4rem 1.4rem 1.6rem}
+  .v15-grid .photo{aspect-ratio:1/1;margin-bottom:1.2rem;position:relative}
+  .v15-grid .photo::before{content:attr(data-stamp);position:absolute;top:.6rem;right:.6rem;width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;font-family:var(--mono);font-size:.55rem;letter-spacing:.05em;color:var(--gold);text-align:center;line-height:1.1;padding-top:.95rem;background:rgba(255,255,255,.92);text-transform:uppercase}
+  .v15-num{font-family:var(--serif);font-size:1.5rem;font-style:italic;font-weight:400;color:var(--navy);line-height:1;margin-bottom:.7rem;letter-spacing:-.02em}
+  .v15-grid h4{font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--navy);line-height:1.3;margin-bottom:.75rem;min-height:2.6em}
+  .v15-grid h4 em{font-style:italic;color:var(--gold-sat)}
+  .v15-grid p{font-size:.86rem;color:var(--text);opacity:.78;line-height:1.6;flex-grow:1;margin-bottom:1.2rem}
+  .v15-foot{padding-top:.9rem;border-top:1px dotted var(--line);display:flex;justify-content:space-between;font-family:var(--mono);font-size:.65rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+  .v15-foot a{color:var(--gold-sat);text-decoration:none}
+
+  /* Mobile basics */
+  @media(max-width:880px){
+    .v01-grid,.v02-grid,.v03-grid{grid-template-columns:1fr;gap:3rem}
+    .v01-side,.v02-side,.v03-side{position:static}
+    .v04-item,.v05-item,.v09-body{grid-template-columns:1fr}
+    .v07-row,.v08-item{grid-template-columns:1fr}
+    .v10-grid,.v11-grid,.v12-grid,.v15-grid{grid-template-columns:1fr 1fr}
+    .v13-item,.v14-item{grid-template-columns:1fr}
+    .v06-item{grid-template-columns:1fr 3fr}
+  }
+</style>
+</head>
+<body>
+
+<nav class="page-nav">
+  <span class="page-nav__brand">Pruprod 3 · estándar institucional</span>
+  <a href="#v01">V01</a><a href="#v02">V02</a><a href="#v03">V03</a><a href="#v04">V04</a><a href="#v05">V05</a>
+  <a href="#v06">V06</a><a href="#v07">V07</a><a href="#v08">V08</a><a href="#v09">V09</a><a href="#v10">V10</a>
+  <a href="#v11">V11</a><a href="#v12">V12</a><a href="#v13">V13</a><a href="#v14">V14</a><a href="#v15">V15</a>
+</nav>
+
+<!-- ═══ V01 · Sticky sidebar + stack vertical (UN/McKinsey · matches value-props del index) ═══ -->
+<section class="variant" id="v01">
+  <div class="variant__container">
+    <span class="variant__tag">V01 · Sticky sidebar + stack vertical · UN/McKinsey · espejo del módulo Pilares</span>
+    <div class="v01-grid">
+      <aside class="v01-side">
+        <span class="vp-eyebrow">Portafolio</span>
+        <h3>Líneas de productos para <em>exportación</em></h3>
+        <p class="lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+        <nav>
+          <a href="#v01-1"><span>01</span>Vinagres a granel para alimentos</a>
+          <a href="#v01-2"><span>02</span>Vinagres a granel usos productivos</a>
+          <a href="#v01-3"><span>03</span>Private label</a>
+          <a href="#v01-4"><span>04</span>Marca Traverso</a>
+        </nav>
+      </aside>
+      <div class="v01-content">
+        <article id="v01-1"><div class="num">01 · Industrial</div><h4>Vinagres a granel para alimentos</h4><p>Alcohol, Manzana, Vino y Mosto de Vino bajo estándares internacionales BRC AA — uso como producto final, preservante o ingrediente.</p><div class="meta">4 variedades · BRC AA · Granel</div></article>
+        <article id="v01-2"><div class="num">02 · Industrial</div><h4>Vinagres a granel usos productivos</h4><p>Vinagre de alcohol para uso industrial — preservante, insumo productivo y agente de sanitización.</p><div class="meta">Granel · Sanitización · Insumo</div></article>
+        <article id="v01-3"><div class="num">03 · Marca privada</div><h4>Desarrollo de productos <em>Private label</em></h4><p>Fabricación bajo marca privada, adaptada a especificaciones técnicas y requerimientos de cada cliente.</p><div class="meta">Custom · Private Label · MDD</div></article>
+        <article id="v01-4"><div class="num">04 · Marca Traverso</div><h4>Productos marca Traverso</h4><p>Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p><div class="meta">Línea propia · Multi-mercado</div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V02 · Sticky sidebar + grid 2x2 con foto (Open Society) ═══ -->
+<section class="variant" id="v02">
+  <div class="variant__container">
+    <span class="variant__tag">V02 · Sticky sidebar + grid 2×2 con fotografía documental</span>
+    <div class="v02-grid">
+      <aside class="v02-side">
+        <span class="vp-eyebrow">Portafolio</span>
+        <h3>Líneas de productos para <em>exportación</em></h3>
+        <p class="lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+        <div class="meta"><span><strong>04</strong> Líneas activas</span><span><strong>BRC GS</strong> "AA" · 2026</span><span><strong>4</strong> Variedades vinagre</span></div>
+      </aside>
+      <div class="v02-cards">
+        <article><div class="photo" data-tone="amber"><span class="photo__cap">Vinagre · granel</span></div><div class="num">§ 01 / Industrial</div><h4>Vinagres a granel para alimentos</h4><p>Alcohol, Manzana, Vino y Mosto de Vino bajo BRC AA — uso como producto final, preservante o ingrediente.</p><div class="foot"><span>4 variedades</span><a href="productos.html">Ver →</a></div></article>
+        <article><div class="photo" data-tone="steel"><span class="photo__cap">Industrial · usos</span></div><div class="num">§ 02 / Industrial</div><h4>Vinagres a granel usos productivos</h4><p>Vinagre de alcohol para uso industrial — preservante, insumo productivo y agente de sanitización.</p><div class="foot"><span>Granel</span><a href="productos.html">Ver →</a></div></article>
+        <article><div class="photo" data-tone="paper"><span class="photo__cap">Marca privada</span></div><div class="num">§ 03 / Marca privada</div><h4>Desarrollo de productos <em>Private label</em></h4><p>Fabricación bajo marca privada, adaptada a especificaciones técnicas y requerimientos de cada cliente.</p><div class="foot"><span>Custom</span><a href="productos.html">Ver →</a></div></article>
+        <article><div class="photo" data-tone="warm"><span class="photo__cap">Marca Traverso</span></div><div class="num">§ 04 / Marca Traverso</div><h4>Productos marca Traverso</h4><p>Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p><div class="foot"><span>Línea propia</span><a href="productos.html">Ver →</a></div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V03 · Sticky sidebar + lista numerada larga estilo GOV.UK ═══ -->
+<section class="variant" id="v03">
+  <div class="variant__container">
+    <span class="variant__tag">V03 · Sticky sidebar + lista numerada institucional · GOV.UK</span>
+    <div class="v03-grid">
+      <aside class="v03-side">
+        <span class="vp-eyebrow">Portafolio</span>
+        <h3>Líneas de productos para <em>exportación</em></h3>
+        <p class="lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+        <div class="ref">Ref · TIF/EXP/2026 · 04 Líneas</div>
+      </aside>
+      <div class="v03-content">
+        <article><div class="n">1.</div><div class="photo" data-tone="amber"><span class="photo__cap">01</span></div><div><h4>Vinagres a granel para alimentos</h4><p>Alcohol, Manzana, Vino y Mosto de Vino bajo estándares internacionales BRC AA — uso como producto final, preservante o ingrediente.</p><a href="productos.html">Ver detalle de la línea →</a></div></article>
+        <article><div class="n">2.</div><div class="photo" data-tone="steel"><span class="photo__cap">02</span></div><div><h4>Vinagres a granel usos productivos</h4><p>Vinagre de alcohol para uso industrial — preservante, insumo productivo y agente de sanitización.</p><a href="productos.html">Ver detalle de la línea →</a></div></article>
+        <article><div class="n">3.</div><div class="photo" data-tone="paper"><span class="photo__cap">03</span></div><div><h4>Desarrollo de productos Private label</h4><p>Fabricación bajo marca privada, adaptada a especificaciones técnicas y requerimientos de cada cliente.</p><a href="productos.html">Ver detalle de la línea →</a></div></article>
+        <article><div class="n">4.</div><div class="photo" data-tone="warm"><span class="photo__cap">04</span></div><div><h4>Productos marca Traverso</h4><p>Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p><a href="productos.html">Ver detalle de la línea →</a></div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V04 · Stack vertical 4 items con número display gigante (Tate/Ford) ═══ -->
+<section class="variant" id="v04">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Portafolio</span>
+      <h2 class="vp-title">Líneas de productos para <em>exportación</em></h2>
+      <p class="vp-lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+    </header>
+    <span class="variant__tag">V04 · Stack vertical · número display gigante · Tate/Ford</span>
+    <div class="v04-list">
+      <article class="v04-item"><div class="v04-num">01</div><div><span class="v04-eyebrow">Línea Industrial · Granel alimentos</span><h4 class="v04-ttl">Vinagres a granel para alimentos</h4><p class="v04-txt">Alcohol, Manzana, Vino y Mosto de Vino bajo estándares internacionales BRC AA — uso como producto final, preservante o ingrediente para industrias alimentarias en distintos mercados.</p><div class="v04-meta"><span>4 variedades</span><span>BRC AA</span><span>Granel</span><a href="productos.html">Ver línea →</a></div></div></article>
+      <article class="v04-item"><div class="v04-num">02</div><div><span class="v04-eyebrow">Línea Industrial · Usos productivos</span><h4 class="v04-ttl">Vinagres a granel usos productivos</h4><p class="v04-txt">Vinagre de alcohol para uso industrial — preservante, insumo productivo y agente de sanitización en operaciones de múltiples industrias.</p><div class="v04-meta"><span>Granel</span><span>Sanitización</span><span>Insumo</span><a href="productos.html">Ver línea →</a></div></div></article>
+      <article class="v04-item"><div class="v04-num">03</div><div><span class="v04-eyebrow">Marca privada · Private Label</span><h4 class="v04-ttl">Desarrollo de productos <em>Private label</em></h4><p class="v04-txt">Fabricación bajo marca privada, adaptada a especificaciones técnicas y requerimientos de cada cliente. Acompañamiento en formulación, envasado y certificación.</p><div class="v04-meta"><span>Custom</span><span>MDD</span><span>Multi-formato</span><a href="productos.html">Ver línea →</a></div></div></article>
+      <article class="v04-item"><div class="v04-num">04</div><div><span class="v04-eyebrow">Marca Traverso · Línea propia</span><h4 class="v04-ttl">Productos marca Traverso</h4><p class="v04-txt">Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p><div class="v04-meta"><span>Línea propia</span><span>Multi-mercado</span><a href="productos.html">Ver línea →</a></div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V05 · Pentagram · alternado foto / contenido ═══ -->
+<section class="variant" id="v05">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Portafolio</span>
+      <h2 class="vp-title">Líneas de productos para <em>exportación</em></h2>
+      <p class="vp-lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+    </header>
+    <span class="variant__tag">V05 · Pentagram · alternado foto/contenido · ritmo editorial</span>
+    <div class="v05-list">
+      <article class="v05-item"><div class="photo" data-tone="amber"><span class="photo__cap">Vinagres · granel · alimentos</span></div><div class="body"><span class="v05-eyebrow">§ 01 · Industrial · Granel</span><h4 class="v05-ttl">Vinagres a granel para alimentos</h4><p class="v05-txt">Alcohol, Manzana, Vino y Mosto de Vino bajo estándares internacionales BRC AA — uso como producto final, preservante o ingrediente.</p><div class="v05-foot"><span>4 variedades · BRC AA</span><a href="productos.html">Ver línea →</a></div></div></article>
+      <article class="v05-item"><div class="photo" data-tone="steel"><span class="photo__cap">Industrial · usos productivos</span></div><div class="body"><span class="v05-eyebrow">§ 02 · Industrial · Productivos</span><h4 class="v05-ttl">Vinagres a granel usos productivos</h4><p class="v05-txt">Vinagre de alcohol para uso industrial — preservante, insumo productivo y agente de sanitización.</p><div class="v05-foot"><span>Granel · Industrial</span><a href="productos.html">Ver línea →</a></div></div></article>
+      <article class="v05-item"><div class="photo" data-tone="paper"><span class="photo__cap">Marca privada · Private Label</span></div><div class="body"><span class="v05-eyebrow">§ 03 · Marca privada</span><h4 class="v05-ttl">Desarrollo de productos <em>Private label</em></h4><p class="v05-txt">Fabricación bajo marca privada, adaptada a especificaciones técnicas y requerimientos de cada cliente.</p><div class="v05-foot"><span>Custom · Multi-formato</span><a href="productos.html">Ver línea →</a></div></div></article>
+      <article class="v05-item"><div class="photo" data-tone="warm"><span class="photo__cap">Marca Traverso · línea propia</span></div><div class="body"><span class="v05-eyebrow">§ 04 · Marca Traverso</span><h4 class="v05-ttl">Productos marca Traverso</h4><p class="v05-txt">Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p><div class="v05-foot"><span>Línea propia · Export</span><a href="productos.html">Ver línea →</a></div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V06 · Mucho · grid asimétrico 2-2-3-5 ═══ -->
+<section class="variant" id="v06">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Portafolio</span>
+      <h2 class="vp-title">Líneas de productos para <em>exportación</em></h2>
+      <p class="vp-lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+    </header>
+    <span class="variant__tag">V06 · Mucho · grid asimétrico 2-2-3-5 + numeración romana</span>
+    <div class="v06-list">
+      <article class="v06-item"><span class="v06-roman">I.</span><span class="v06-tag">Industrial</span><h4 class="v06-ttl">Vinagres a granel para alimentos</h4><div class="v06-body"><p>Alcohol, Manzana, Vino y Mosto de Vino bajo estándares internacionales BRC AA — uso como producto final, preservante o ingrediente.</p><div class="meta">4 variedades · BRC AA · Granel</div></div></article>
+      <article class="v06-item"><span class="v06-roman">II.</span><span class="v06-tag">Industrial</span><h4 class="v06-ttl">Vinagres a granel usos productivos</h4><div class="v06-body"><p>Vinagre de alcohol para uso industrial — preservante, insumo productivo y agente de sanitización.</p><div class="meta">Granel · Industrial</div></div></article>
+      <article class="v06-item"><span class="v06-roman">III.</span><span class="v06-tag">Marca privada</span><h4 class="v06-ttl">Desarrollo de productos <em>Private label</em></h4><div class="v06-body"><p>Fabricación bajo marca privada, adaptada a especificaciones técnicas y requerimientos de cada cliente.</p><div class="meta">Custom · MDD</div></div></article>
+      <article class="v06-item"><span class="v06-roman">IV.</span><span class="v06-tag">Marca</span><h4 class="v06-ttl">Productos marca Traverso</h4><div class="v06-body"><p>Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p><div class="meta">Línea propia · Export</div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V07 · Tabla prospecto institucional ═══ -->
+<section class="variant" id="v07">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Portafolio</span>
+      <h2 class="vp-title">Líneas de productos para <em>exportación</em></h2>
+      <p class="vp-lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+    </header>
+    <span class="variant__tag">V07 · Tabla prospecto · sin imagen · catálogo institucional puro</span>
+    <div class="v07-table">
+      <div class="v07-row"><span>N°</span><span>Línea</span><span>Descripción</span><span>Acceso</span></div>
+      <div class="v07-row"><span class="v07-n">01</span><h4 class="v07-name">Vinagres a granel para alimentos</h4><p class="v07-desc">Alcohol, Manzana, Vino y Mosto de Vino bajo estándares internacionales BRC AA — uso como producto final, preservante o ingrediente.</p><a href="productos.html" class="v07-action">Ver →</a></div>
+      <div class="v07-row"><span class="v07-n">02</span><h4 class="v07-name">Vinagres a granel usos productivos</h4><p class="v07-desc">Vinagre de alcohol para uso industrial — preservante, insumo productivo y agente de sanitización.</p><a href="productos.html" class="v07-action">Ver →</a></div>
+      <div class="v07-row"><span class="v07-n">03</span><h4 class="v07-name">Desarrollo de productos <em>Private label</em></h4><p class="v07-desc">Fabricación bajo marca privada, adaptada a especificaciones técnicas y requerimientos de cada cliente.</p><a href="productos.html" class="v07-action">Ver →</a></div>
+      <div class="v07-row"><span class="v07-n">04</span><h4 class="v07-name">Productos marca Traverso</h4><p class="v07-desc">Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p><a href="productos.html" class="v07-action">Ver →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V08 · Tabla 2-col con foto pequeña (Cargill style) ═══ -->
+<section class="variant" id="v08">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Portafolio</span>
+      <h2 class="vp-title">Líneas de productos para <em>exportación</em></h2>
+      <p class="vp-lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+    </header>
+    <span class="variant__tag">V08 · Cargill style · tabla 4-col foto pequeña + meta</span>
+    <div class="v08-list">
+      <article class="v08-item"><div class="photo" data-tone="amber"><span class="photo__cap">01 · Granel</span></div><span class="v08-num">§ 01 / Industrial</span><div class="v08-body"><h4>Vinagres a granel para alimentos</h4><p>Alcohol, Manzana, Vino y Mosto de Vino bajo estándares internacionales BRC AA — uso como producto final, preservante o ingrediente.</p></div><a href="productos.html" class="v08-arrow">→</a></article>
+      <article class="v08-item"><div class="photo" data-tone="steel"><span class="photo__cap">02 · Industrial</span></div><span class="v08-num">§ 02 / Industrial</span><div class="v08-body"><h4>Vinagres a granel usos productivos</h4><p>Vinagre de alcohol para uso industrial — preservante, insumo productivo y agente de sanitización.</p></div><a href="productos.html" class="v08-arrow">→</a></article>
+      <article class="v08-item"><div class="photo" data-tone="paper"><span class="photo__cap">03 · MDD</span></div><span class="v08-num">§ 03 / Marca privada</span><div class="v08-body"><h4>Desarrollo de productos <em>Private label</em></h4><p>Fabricación bajo marca privada, adaptada a especificaciones técnicas y requerimientos de cada cliente.</p></div><a href="productos.html" class="v08-arrow">→</a></article>
+      <article class="v08-item"><div class="photo" data-tone="warm"><span class="photo__cap">04 · Marca</span></div><span class="v08-num">§ 04 / Marca Traverso</span><div class="v08-body"><h4>Productos marca Traverso</h4><p>Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p></div><a href="productos.html" class="v08-arrow">→</a></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V09 · Lista item con eyebrow + título + foto + meta tracked ═══ -->
+<section class="variant" id="v09">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Portafolio</span>
+      <h2 class="vp-title">Líneas de productos para <em>exportación</em></h2>
+      <p class="vp-lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+    </header>
+    <span class="variant__tag">V09 · Open Society · capítulos editoriales con foto</span>
+    <div class="v09-list">
+      <article class="v09-item"><div class="v09-head"><span class="v09-eyebrow">Capítulo 01 · Industrial · Granel alimentos</span><span class="v09-counter">01 / 04</span></div><div class="v09-body"><div><h4>Vinagres a granel para alimentos</h4><p>Alcohol, Manzana, Vino y Mosto de Vino bajo estándares internacionales BRC AA — uso como producto final, preservante o ingrediente.</p></div><div class="photo" data-tone="amber"><span class="photo__cap">Vinagre · granel</span></div></div></article>
+      <article class="v09-item"><div class="v09-head"><span class="v09-eyebrow">Capítulo 02 · Industrial · Productivos</span><span class="v09-counter">02 / 04</span></div><div class="v09-body"><div><h4>Vinagres a granel usos productivos</h4><p>Vinagre de alcohol para uso industrial — preservante, insumo productivo y agente de sanitización.</p></div><div class="photo" data-tone="steel"><span class="photo__cap">Industrial</span></div></div></article>
+      <article class="v09-item"><div class="v09-head"><span class="v09-eyebrow">Capítulo 03 · Marca privada</span><span class="v09-counter">03 / 04</span></div><div class="v09-body"><div><h4>Desarrollo de productos <em>Private label</em></h4><p>Fabricación bajo marca privada, adaptada a especificaciones técnicas y requerimientos de cada cliente.</p></div><div class="photo" data-tone="paper"><span class="photo__cap">MDD</span></div></div></article>
+      <article class="v09-item"><div class="v09-head"><span class="v09-eyebrow">Capítulo 04 · Marca Traverso</span><span class="v09-counter">04 / 04</span></div><div class="v09-body"><div><h4>Productos marca Traverso</h4><p>Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p></div><div class="photo" data-tone="warm"><span class="photo__cap">Marca</span></div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V10 · Vercel · grid 4-col rejilla CSS hairlines ═══ -->
+<section class="variant" id="v10">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Portafolio</span>
+      <h2 class="vp-title">Líneas de productos para <em>exportación</em></h2>
+      <p class="vp-lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+    </header>
+    <span class="variant__tag">V10 · Vercel · grid 4-col rejilla CSS hairline compartida</span>
+    <div class="v10-grid">
+      <article><div class="photo" data-tone="amber"><span class="photo__cap">Granel</span></div><span class="v10-num">§ 01 / Industrial</span><h4>Vinagres a granel para alimentos</h4><p>Alcohol, Manzana, Vino y Mosto de Vino bajo BRC AA — uso como producto final, preservante o ingrediente.</p><div class="foot"><span>4 variedades</span><a href="productos.html">→</a></div></article>
+      <article><div class="photo" data-tone="steel"><span class="photo__cap">Industrial</span></div><span class="v10-num">§ 02 / Industrial</span><h4>Vinagres a granel usos productivos</h4><p>Vinagre de alcohol industrial — preservante, insumo productivo y agente de sanitización.</p><div class="foot"><span>Granel</span><a href="productos.html">→</a></div></article>
+      <article><div class="photo" data-tone="paper"><span class="photo__cap">MDD</span></div><span class="v10-num">§ 03 / Marca privada</span><h4>Desarrollo de productos <em>Private label</em></h4><p>Fabricación bajo marca privada, adaptada a especificaciones y requerimientos de cada cliente.</p><div class="foot"><span>Custom</span><a href="productos.html">→</a></div></article>
+      <article><div class="photo" data-tone="warm"><span class="photo__cap">Marca</span></div><span class="v10-num">§ 04 / Marca Traverso</span><h4>Productos marca Traverso</h4><p>Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p><div class="foot"><span>Línea propia</span><a href="productos.html">→</a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V11 · Stripe · grid 2x2 foto-as-hero ═══ -->
+<section class="variant" id="v11">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Portafolio</span>
+      <h2 class="vp-title">Líneas de productos para <em>exportación</em></h2>
+      <p class="vp-lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+    </header>
+    <span class="variant__tag">V11 · Stripe · grid 2×2 foto-as-hero · whitespace 80px</span>
+    <div class="v11-grid">
+      <article><div class="photo" data-tone="amber"><span class="photo__cap">Granel · alimentos</span></div><span class="v11-num">§ 01 · Industrial · Granel alimentos</span><h4>Vinagres a granel para alimentos</h4><p>Alcohol, Manzana, Vino y Mosto de Vino bajo estándares internacionales BRC AA — uso como producto final, preservante o ingrediente.</p><div class="foot"><span>4 variedades · BRC AA</span><a href="productos.html">Ver línea →</a></div></article>
+      <article><div class="photo" data-tone="steel"><span class="photo__cap">Industrial · usos productivos</span></div><span class="v11-num">§ 02 · Industrial · Productivos</span><h4>Vinagres a granel usos productivos</h4><p>Vinagre de alcohol para uso industrial — preservante, insumo productivo y agente de sanitización.</p><div class="foot"><span>Granel · Insumo</span><a href="productos.html">Ver línea →</a></div></article>
+      <article><div class="photo" data-tone="paper"><span class="photo__cap">Marca privada</span></div><span class="v11-num">§ 03 · Marca privada · MDD</span><h4>Desarrollo de productos <em>Private label</em></h4><p>Fabricación bajo marca privada, adaptada a especificaciones técnicas y requerimientos de cada cliente.</p><div class="foot"><span>Custom · MDD</span><a href="productos.html">Ver línea →</a></div></article>
+      <article><div class="photo" data-tone="warm"><span class="photo__cap">Marca Traverso</span></div><span class="v11-num">§ 04 · Marca Traverso</span><h4>Productos marca Traverso</h4><p>Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p><div class="foot"><span>Línea propia</span><a href="productos.html">Ver línea →</a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V12 · Goldman · grid 4-col número display arriba ═══ -->
+<section class="variant" id="v12">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Portafolio</span>
+      <h2 class="vp-title">Líneas de productos para <em>exportación</em></h2>
+      <p class="vp-lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+    </header>
+    <span class="variant__tag">V12 · Goldman · grid 4-col número serif italic display arriba</span>
+    <div class="v12-grid">
+      <article><div class="v12-num">01</div><span class="v12-tag">Industrial · Granel</span><h4>Vinagres a granel para alimentos</h4><p>Alcohol, Manzana, Vino y Mosto de Vino bajo BRC AA — uso como producto final, preservante o ingrediente.</p><a href="productos.html" class="arrow">Ver línea →</a></article>
+      <article><div class="v12-num">02</div><span class="v12-tag">Industrial · Productivos</span><h4>Vinagres a granel usos productivos</h4><p>Vinagre de alcohol industrial — preservante, insumo productivo y agente de sanitización.</p><a href="productos.html" class="arrow">Ver línea →</a></article>
+      <article><div class="v12-num">03</div><span class="v12-tag">Marca privada</span><h4>Desarrollo de productos <em>Private label</em></h4><p>Fabricación bajo marca privada, adaptada a especificaciones y requerimientos de cada cliente.</p><a href="productos.html" class="arrow">Ver línea →</a></article>
+      <article><div class="v12-num">04</div><span class="v12-tag">Marca Traverso</span><h4>Productos marca Traverso</h4><p>Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p><a href="productos.html" class="arrow">Ver línea →</a></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V13 · Tate · numéricas display gigantes 8rem ═══ -->
+<section class="variant" id="v13">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Portafolio</span>
+      <h2 class="vp-title">Líneas de productos para <em>exportación</em></h2>
+      <p class="vp-lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+    </header>
+    <span class="variant__tag">V13 · Tate · numéricas display gigantes serif italic 8rem</span>
+    <div class="v13-list">
+      <article class="v13-item"><div class="v13-num"><em>01</em></div><div><span class="v13-eyebrow">Industrial · Granel · BRC AA</span><h4 class="v13-ttl">Vinagres a granel para alimentos</h4><p class="v13-txt">Alcohol, Manzana, Vino y Mosto de Vino bajo estándares internacionales BRC AA — uso como producto final, preservante o ingrediente para industrias alimentarias en distintos mercados.</p></div></article>
+      <article class="v13-item"><div class="v13-num"><em>02</em></div><div><span class="v13-eyebrow">Industrial · Usos productivos</span><h4 class="v13-ttl">Vinagres a granel usos productivos</h4><p class="v13-txt">Vinagre de alcohol para uso industrial — preservante, insumo productivo y agente de sanitización en operaciones de múltiples industrias.</p></div></article>
+      <article class="v13-item"><div class="v13-num"><em>03</em></div><div><span class="v13-eyebrow">Marca privada · Private Label</span><h4 class="v13-ttl">Desarrollo de productos <em>Private label</em></h4><p class="v13-txt">Fabricación bajo marca privada, adaptada a especificaciones técnicas y requerimientos de cada cliente. Acompañamiento en formulación, envasado y certificación.</p></div></article>
+      <article class="v13-item"><div class="v13-num"><em>04</em></div><div><span class="v13-eyebrow">Marca Traverso · Línea propia</span><h4 class="v13-ttl">Productos marca Traverso</h4><p class="v13-txt">Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V14 · Cosentino · stat institucional + foto al lado ═══ -->
+<section class="variant" id="v14">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Portafolio</span>
+      <h2 class="vp-title">Líneas de productos para <em>exportación</em></h2>
+      <p class="vp-lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+    </header>
+    <span class="variant__tag">V14 · Cosentino (Mucho) · stat display 6rem + fotografía mosaico</span>
+    <div class="v14-list">
+      <article class="v14-item"><div><div class="v14-stat">01<em>· LÍNEA</em></div><span class="v14-eyebrow">Industrial · Granel · BRC AA</span><h4 class="v14-ttl">Vinagres a granel para alimentos</h4><p class="v14-txt">Alcohol, Manzana, Vino y Mosto de Vino bajo estándares internacionales BRC AA — uso como producto final, preservante o ingrediente.</p></div><div class="photo" data-tone="amber"><span class="photo__cap">Vinagre · granel · alimentos</span></div></article>
+      <article class="v14-item"><div class="photo" data-tone="steel"><span class="photo__cap">Industrial · usos productivos</span></div><div><div class="v14-stat">02<em>· LÍNEA</em></div><span class="v14-eyebrow">Industrial · Usos productivos</span><h4 class="v14-ttl">Vinagres a granel usos productivos</h4><p class="v14-txt">Vinagre de alcohol para uso industrial — preservante, insumo productivo y agente de sanitización.</p></div></article>
+      <article class="v14-item"><div><div class="v14-stat">03<em>· LÍNEA</em></div><span class="v14-eyebrow">Marca privada · Private Label</span><h4 class="v14-ttl">Desarrollo de productos <em>Private label</em></h4><p class="v14-txt">Fabricación bajo marca privada, adaptada a especificaciones técnicas y requerimientos de cada cliente.</p></div><div class="photo" data-tone="paper"><span class="photo__cap">Marca privada</span></div></article>
+      <article class="v14-item"><div class="photo" data-tone="warm"><span class="photo__cap">Marca Traverso · línea propia</span></div><div><div class="v14-stat">04<em>· LÍNEA</em></div><span class="v14-eyebrow">Marca Traverso · Línea propia</span><h4 class="v14-ttl">Productos marca Traverso</h4><p class="v14-txt">Línea propia con comercialización según condiciones regulatorias y oportunidades específicas de cada mercado destino.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ V15 · Polaroid postal · sello + foto + texto ═══ -->
+<section class="variant" id="v15">
+  <div class="variant__container">
+    <header class="vp-header">
+      <span class="vp-eyebrow">Portafolio</span>
+      <h2 class="vp-title">Líneas de productos para <em>exportación</em></h2>
+      <p class="vp-lead">Portafolio diseñado para responder a las necesidades de distintos mercados internacionales con estándares consistentes.</p>
+    </header>
+    <span class="variant__tag">V15 · Postal Aman/heritage · sello dorado + foto cuadrada + meta archivo</span>
+    <div class="v15-grid">
+      <article><div class="photo" data-tone="amber" data-stamp="TIF · 01"><span class="photo__cap">Granel</span></div><div class="v15-num">01</div><h4>Vinagres a granel para alimentos</h4><p>Alcohol, Manzana, Vino y Mosto de Vino bajo BRC AA — uso final, preservante o ingrediente.</p><div class="v15-foot"><span>4 var. · BRC AA</span><a href="productos.html">→</a></div></article>
+      <article><div class="photo" data-tone="steel" data-stamp="TIF · 02"><span class="photo__cap">Industrial</span></div><div class="v15-num">02</div><h4>Vinagres granel productivos</h4><p>Vinagre de alcohol industrial — preservante, insumo y agente de sanitización.</p><div class="v15-foot"><span>Granel</span><a href="productos.html">→</a></div></article>
+      <article><div class="photo" data-tone="paper" data-stamp="TIF · 03"><span class="photo__cap">MDD</span></div><div class="v15-num">03</div><h4>Desarrollo <em>Private label</em></h4><p>Fabricación bajo marca privada, adaptada a especificaciones de cada cliente.</p><div class="v15-foot"><span>Custom</span><a href="productos.html">→</a></div></article>
+      <article><div class="photo" data-tone="warm" data-stamp="TIF · 04"><span class="photo__cap">Marca</span></div><div class="v15-num">04</div><h4>Productos <em>marca Traverso</em></h4><p>Línea propia según condiciones regulatorias y oportunidades de cada mercado.</p><div class="v15-foot"><span>Línea propia</span><a href="productos.html">→</a></div></article>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:3rem 2rem;text-align:center;background:var(--navy);color:rgba(255,255,255,.6);font-family:var(--mono);font-size:.78rem;letter-spacing:.1em">
+  15 propuestas · Productos · estándar institucional plataforma multilateral · Traverso · 2026-04-26
+</footer>
+
+</body>
+</html>

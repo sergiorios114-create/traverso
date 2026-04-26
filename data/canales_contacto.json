@@ -1,0 +1,50 @@
+[
+  {
+    "id": "canal_1",
+    "orden": 1,
+    "tipo": "direccion",
+    "icono": "map-pin",
+    "label_es": "Dirección",
+    "label_en": "Address",
+    "valor": "Av. Vespucio 1313",
+    "subtitulo_es": "La Cisterna, Santiago, Chile",
+    "subtitulo_en": "La Cisterna, Santiago, Chile",
+    "link": ""
+  },
+  {
+    "id": "canal_2",
+    "orden": 2,
+    "tipo": "email",
+    "icono": "mail",
+    "label_es": "Email",
+    "label_en": "Email",
+    "valor": "e-commerce@traverso.cl",
+    "subtitulo_es": "Respondemos en 1–2 días hábiles",
+    "subtitulo_en": "We respond within 1–2 business days",
+    "link": "mailto:e-commerce@traverso.cl"
+  },
+  {
+    "id": "canal_3",
+    "orden": 3,
+    "tipo": "telefono",
+    "icono": "phone",
+    "label_es": "Teléfono",
+    "label_en": "Phone",
+    "valor": "+56 2 24370900",
+    "subtitulo_es": "Lunes a Viernes, 9:00–18:00",
+    "subtitulo_en": "Monday to Friday, 9:00–18:00",
+    "link": "tel:+56224370900"
+  },
+  {
+    "id": "canal_4",
+    "orden": 4,
+    "tipo": "whatsapp",
+    "icono": "message-circle",
+    "label_es": "WhatsApp",
+    "label_en": "WhatsApp",
+    "valor": "+56 9 8515 0056",
+    "subtitulo_es": "Respuesta rápida disponible",
+    "subtitulo_en": "Quick response available",
+    "link": "https://wa.me/56985150056"
+  }
+]
