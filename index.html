@@ -1521,6 +1521,11 @@
       color: #fff;
     }
 
+    /* Trust con mismo estándar de ancho institucional · evita "baile" entre módulos */
+    .trust .container {
+      max-width: var(--container-institutional);
+    }
+
     .trust__frame {
       padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
     }
@@ -1750,7 +1755,47 @@
     @media (max-width: 880px) {
       .mini-contact__inner {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 2.5rem;
+      }
+    }
+
+    /* — Mobile minimal: ocultar meta institucional, simplificar labels, submit full-width — */
+    @media (max-width: 640px) {
+      .mini-contact {
+        padding: clamp(3.5rem, 7vw, 5rem) 0;
+      }
+      .mini-contact__inner {
+        gap: 2rem;
+      }
+      .mini-contact__lead {
+        max-width: none;
+        padding-bottom: 0;
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+      .mini-contact__meta {
+        display: none !important; /* meta institucional ya está en footer · liberar pantalla */
+      }
+      .form__row {
+        gap: 1.6rem !important;
+        margin-bottom: 1.6rem !important;
+      }
+      .form__group {
+        margin-bottom: 1.6rem !important;
+      }
+      /* Numeración 01· 02· removida en mobile · solo nombre del campo */
+      .form__group label {
+        font-size: 0.6rem;
+      }
+      .form__group label .num { display: none; }
+      .form__submit {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+      }
+      .mini-contact__aux {
+        margin-top: 2rem !important;
+        font-size: 0.7rem;
       }
     }
 
@@ -2706,26 +2751,26 @@
       <form class="contact__form" id="form-home" action="https://formspree.io/f/XXXX" method="POST">
         <div class="form__row">
           <div class="form__group">
-            <label for="h-nombre">01 · Nombre</label>
+            <label for="h-nombre"><span class="num">01 · </span>Nombre</label>
             <input type="text" id="h-nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name" />
           </div>
           <div class="form__group">
-            <label for="h-empresa">02 · Empresa</label>
+            <label for="h-empresa"><span class="num">02 · </span>Empresa</label>
             <input type="text" id="h-empresa" name="empresa" placeholder="Nombre de empresa" autocomplete="organization" />
           </div>
         </div>
         <div class="form__row">
           <div class="form__group">
-            <label for="h-email">03 · Email</label>
+            <label for="h-email"><span class="num">03 · </span>Email</label>
             <input type="email" id="h-email" name="email" placeholder="correo@empresa.com" required autocomplete="email" />
           </div>
           <div class="form__group">
-            <label for="h-pais">04 · País destino</label>
+            <label for="h-pais"><span class="num">04 · </span>País destino</label>
             <input type="text" id="h-pais" name="pais" placeholder="País de destino" autocomplete="country-name" />
           </div>
         </div>
         <div class="form__group">
-          <label for="h-producto">05 · Producto de interés</label>
+          <label for="h-producto"><span class="num">05 · </span>Producto de interés</label>
           <select id="h-producto" name="producto">
             <option value="">Seleccionar...</option>
             <option value="vinagres-granel">Vinagres a granel</option>
@@ -2735,7 +2780,7 @@
           </select>
         </div>
         <div class="form__group">
-          <label for="h-mensaje">06 · Mensaje</label>
+          <label for="h-mensaje"><span class="num">06 · </span>Mensaje</label>
           <textarea id="h-mensaje" name="mensaje" placeholder="Cuéntanos sobre tu consulta: volúmenes, formatos, mercado destino..." required></textarea>
         </div>
         <button type="submit" class="form__submit">
